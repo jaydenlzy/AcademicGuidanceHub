@@ -8,12 +8,12 @@ package academicguidancehubgui;
  *
  * @author Lzy
  */
-public class ProjectManagerDashboardGUI extends javax.swing.JFrame {
+public class testGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form ProjectManagerDashboardGUI
+     * Creates new form testGUI
      */
-    public ProjectManagerDashboardGUI() {
+    public testGUI() {
         initComponents();
     }
 
@@ -59,20 +59,20 @@ public class ProjectManagerDashboardGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProjectManagerDashboardGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(testGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProjectManagerDashboardGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(testGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProjectManagerDashboardGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(testGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProjectManagerDashboardGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(testGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProjectManagerDashboardGUI().setVisible(true);
+                new testGUI().setVisible(true);
             }
         });
     }
