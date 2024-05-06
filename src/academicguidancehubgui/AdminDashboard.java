@@ -29,10 +29,8 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -40,13 +38,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
@@ -55,7 +51,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         edit = new javax.swing.JPanel();
-        jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
@@ -101,9 +96,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 80));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/degree_assignment/List.png.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel3.setText("Academic Guidance Hub (AGH)");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
@@ -112,9 +104,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/user.png"))); // NOI18N
         jLabel4.setText("  Hello, Admin");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, -1, -1));
-
-        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/degree_assignment/List.png.png"))); // NOI18N
-        jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/List.png"))); // NOI18N
         jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
@@ -175,10 +164,6 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(51, 51, 255));
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/degree_assignment/edit_PM.png.png"))); // NOI18N
-
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Allot Project Manager");
@@ -196,9 +181,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,7 +192,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,22 +200,15 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9))
-                            .addComponent(jLabel42, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel39))
-                    .addComponent(jLabel7)))
+                        .addComponent(jLabel9))
+                    .addComponent(jLabel42, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel39))
         );
 
         jPanel6.setBackground(new java.awt.Color(51, 51, 255));
-
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/degree_assignment/Amend.png.png"))); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -250,15 +226,12 @@ public class AdminDashboard extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
+                .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)))
-                    .addComponent(jLabel10))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,8 +243,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12))
                     .addComponent(jLabel41))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel10))
+                .addGap(18, 18, 18))
         );
 
         jPanel7.setBackground(new java.awt.Color(51, 102, 255));
@@ -305,10 +277,6 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         edit.setBackground(new java.awt.Color(51, 51, 255));
 
-        jLabel27.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/degree_assignment/Edir_remove.png"))); // NOI18N
-
         jLabel28.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setText("Edit/Remove Project");
@@ -323,12 +291,8 @@ public class AdminDashboard extends javax.swing.JFrame {
         edit.setLayout(editLayout);
         editLayout.setHorizontalGroup(
             editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(editLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel27)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,8 +312,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                         .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel29)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel27))
+                .addGap(6, 6, 6))
         );
 
         jLabel30.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -657,7 +620,6 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel edit;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -667,7 +629,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -675,13 +636,11 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -695,7 +654,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
