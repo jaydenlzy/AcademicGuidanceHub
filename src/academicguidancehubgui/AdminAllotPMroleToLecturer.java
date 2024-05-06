@@ -11,11 +11,11 @@ package academicguidancehubgui;
 public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
 
     /**
-     * Creates new form AllotPMroleToLecturer
+     * Creates new form AdminAllotPMroleToLecturer
      */
     public AdminAllotPMroleToLecturer() {
         initComponents();
-        setSize(900,640);
+        setSize(910,640);
         setResizable(false);
     }
 
@@ -30,7 +30,6 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -46,6 +45,8 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -74,9 +75,6 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/AllotPMRole.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 180, 510));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Assessments/Projects Available:");
@@ -122,11 +120,11 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(204, 0, 0));
         jLabel6.setText("Allot to ->");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 460, 160, 40));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 460, 160, 40));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel7.setText("Lecturer Name:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 470, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 470, -1, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel8.setText("Assessment/Project:");
@@ -142,6 +140,23 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setText("Cancel");
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 530, 100, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/AllotPMRole.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 180, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -172,9 +187,6 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AdminAllotPMroleToLecturer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -198,6 +210,7 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
