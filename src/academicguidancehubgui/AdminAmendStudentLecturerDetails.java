@@ -148,7 +148,7 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
         jButton4.setText("Confirm");
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 510, 100, 30));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/edit_backgrd.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/edit_backgrnd.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
