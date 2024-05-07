@@ -15,7 +15,7 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
      */
     public AdminAllotPMroleToLecturer() {
         initComponents();
-        setSize(910,640);
+        setSize(910, 640);
         setResizable(false);
     }
 
