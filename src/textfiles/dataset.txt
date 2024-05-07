@@ -1,0 +1,8 @@
+ST123456;CHAN XIN ZHE;ST123456@CXZ;chanxinzhe@gmail.com;0176879562;create_date;Student
+ST987654;MARVIN LEE JIA HAO;ST987654@MLJH;marvinleejiahao@gmail.com;0196549562;create_date;Student
+LC741852;Nor Firdaus Md Yusof;LC741852#Nor;norfirdausmdyusof@gmail.com;0136549874;create_date;Lecturer
+LC963852;Veeramani Vijai Indrian;LC963852#Veeramani;veeramanivijaiindrian@gmail.com;0146549562;create_date;Lecturer
+LC852741;Minnu Helen Joseph;LC852741#Minnu;minnuhelenjoseph@gmail.com;0179856230;create_date;Project Manager
+LC951753;Kanagi Rajandran;LC951753#Kanagi;kanagirajandran@gmail.com;0136489532;create_date;Project Manager
+AD012345;EDWIN SAK HONG MIN;AD012345$EDWIN;edwinsakhongmin@gmail.com;0116535895;create_date;Admin
+AD036985;FAROUK ELOUAZZANI;AD036985$FAROUK;faroukelouazzani@gmail.com;0103256846;create_date;Admin
