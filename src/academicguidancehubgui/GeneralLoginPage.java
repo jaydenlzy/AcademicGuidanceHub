@@ -4,20 +4,21 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.User;
+import academicguidancehub.ReadOperations;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author New HP
- */
 public class GeneralLoginPage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login_Page
-     */
+    private ArrayList<User> userList;
+    
     public GeneralLoginPage() {
         initComponents();
         setSize(700,625);
         setResizable(false);
+        ReadOperations reader = new ReadOperations();
+        userList = reader.readUserData("userdataset.txt");
     }
 
     /**
@@ -35,14 +36,14 @@ public class GeneralLoginPage extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        loginB = new javax.swing.JButton();
+        cancelB = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        userID = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        forgetPw = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        password = new javax.swing.JPasswordField();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
@@ -95,34 +96,40 @@ public class GeneralLoginPage extends javax.swing.JFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 153), 3));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        loginB.setText("Login");
+        loginB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginBActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 80, 30));
+        jPanel6.add(loginB, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 80, 30));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("Cancel");
-        jPanel6.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 80, 30));
+        cancelB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cancelB.setText("Cancel");
+        jPanel6.add(cancelB, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 80, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("User ID");
         jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
-        jPanel6.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 200, 30));
+
+        userID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userIDActionPerformed(evt);
+            }
+        });
+        jPanel6.add(userID, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 200, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Password");
         jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel6.setText("Forget Password");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
+        forgetPw.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        forgetPw.setForeground(new java.awt.Color(255, 51, 51));
+        forgetPw.setText("Forget Password");
+        jPanel6.add(forgetPw, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
         jPanel6.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 190, 30));
-        jPanel6.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 200, 30));
+        jPanel6.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 200, 30));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 450, 230));
 
@@ -153,9 +160,44 @@ public class GeneralLoginPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loginBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBActionPerformed
+        String enteredID = userID.getText();
+        String enteredPassword = new String(password.getPassword());
+
+        User user = findUserByID(enteredID);
+
+        if (user != null) {
+            if (enteredPassword.equals(user.getUserPassword())) {
+                switch (user.getRole()) {
+                    case "Student":
+                        JOptionPane.showMessageDialog(null, "Welcome to Student Page.", "Student Page", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    case "Lecturer":
+                        JOptionPane.showMessageDialog(null, "Welcome to Lecturer Page.", "Lecturer Page", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    case "Project Manager":
+                        JOptionPane.showMessageDialog(null, "Welcome to Project manager Page.", "PM Page", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    case "Admin":
+                        AdminDashboard adD = new AdminDashboard();
+                        adD.setVisible(true);
+                        this.dispose();
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Error in programming code! Please check.", "Login Error", JOptionPane.ERROR_MESSAGE);
+                        break;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Incorrect password", "Login Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "User not found", "Login Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_loginBActionPerformed
+
+    private void userIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_userIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,13 +236,12 @@ public class GeneralLoginPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelB;
+    private javax.swing.JLabel forgetPw;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -209,8 +250,18 @@ public class GeneralLoginPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton loginB;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JTextField userID;
     // End of variables declaration//GEN-END:variables
+
+    private User findUserByID(String enteredID) {
+        for (User user : userList) {
+            if (user.getUserId().equals(userID)) {
+                return user;
+            }
+        }
+        return null; // User not found
+    }
 }
