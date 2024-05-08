@@ -862,23 +862,31 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     private void updateCounts() {
         try {
-            // Read numbers from text files using FileHandler class
-            String numOfLecturerCount = FileHandler.readCountFromFile("src/textfiles/Lecturers.txt");
-            String numOfProjectManagerCount = FileHandler.readCountFromFile("src/textfiles/ProjectManager.txt");
-            String numOfStudentCount = FileHandler.readCountFromFile("src/textfiles/Students.txt");
-            String numOfIntakeCount = FileHandler.readCountFromFile("src/textfiles/intakesType.txt");
-            String numOfSupervisorCount = FileHandler.readCountFromFile("src/textfiles/Supervisors.txt");
-            String numOfSecondMarkerCount = FileHandler.readCountFromFile("src/textfiles/SecondMarker.txt");
+            String numOfLecturerCountStr = FileHandler.readCountFromFile("src/textfiles/Lecturers.txt");
+            String numOfProjectManagerCountStr = FileHandler.readCountFromFile("src/textfiles/ProjectManager.txt");
+            String numOfStudentCountStr = FileHandler.readCountFromFile("src/textfiles/Students.txt");
+            String numOfIntakeCountStr = FileHandler.readCountFromFile("src/textfiles/intakesType.txt");
+            String numOfSupervisorCountStr = FileHandler.readCountFromFile("src/textfiles/Supervisors.txt");
+            String numOfSecondMarkerCountStr = FileHandler.readCountFromFile("src/textfiles/SecondMarker.txt");
 
-            // Update labels with the read numbers
-            numOfLecturer.setText(numOfLecturerCount);
-            numOfProjectManager.setText(numOfProjectManagerCount);
-            numOfStudent.setText(numOfStudentCount);
-            numOfIntake.setText(numOfIntakeCount);
-            numOfSupervisor.setText(numOfSupervisorCount);
-            numOfSecondMarker.setText(numOfSecondMarkerCount);
+            int numOfLecturerCount = Integer.parseInt(numOfLecturerCountStr);
+            int numOfProjectManagerCount = Integer.parseInt(numOfProjectManagerCountStr);
+            int numOfStudentCount = Integer.parseInt(numOfStudentCountStr);
+            int numOfIntakeCount = Integer.parseInt(numOfIntakeCountStr);
+            int numOfSupervisorCount = Integer.parseInt(numOfSupervisorCountStr);
+            int numOfSecondMarkerCount = Integer.parseInt(numOfSecondMarkerCountStr);
+
+            numOfLecturer.setText(String.valueOf(numOfLecturerCount));
+            numOfProjectManager.setText(String.valueOf(numOfProjectManagerCount));
+            numOfStudent.setText(String.valueOf(numOfStudentCount));
+            numOfIntake.setText(String.valueOf(numOfIntakeCount));
+            numOfSupervisor.setText(String.valueOf(numOfSupervisorCount));
+            numOfSecondMarker.setText(String.valueOf(numOfSecondMarkerCount));
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error: Unable to parse counts from file.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
