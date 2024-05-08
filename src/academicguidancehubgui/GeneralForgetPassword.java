@@ -4,15 +4,22 @@
  */
 package academicguidancehubgui;
 
-/**
- *
- * @author New HP
- */
+import academicguidancehub.User;
+import academicguidancehub.ReadOperations;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 public class GeneralForgetPassword extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ForgetPassword
-     */
+    private ArrayList<User> userList;
+    
     public GeneralForgetPassword() {
         initComponents();
         setSize(500,500);
@@ -34,11 +41,11 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        userID = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        newPw = new javax.swing.JTextField();
+        resetBt = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -48,6 +55,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/ForgetPassword.png"))); // NOI18N
+        jLabel2.setText("ForgetPassword.png");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 115));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -61,25 +69,140 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 3, 16)); // NOI18N
         jLabel4.setText("User ID:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 180, 40));
+        getContentPane().add(userID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 180, 40));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 3, 16)); // NOI18N
         jLabel5.setText("New Password:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, -1, -1));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 180, 40));
+        getContentPane().add(newPw, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 180, 40));
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Reset");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 110, 40));
+        resetBt.setBackground(new java.awt.Color(255, 51, 51));
+        resetBt.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        resetBt.setForeground(new java.awt.Color(255, 255, 255));
+        resetBt.setText("Reset");
+        resetBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resetBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(resetBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 110, 40));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Cancel");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 393, 100, 40));
+        cancel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cancel.setText("Cancel");
+        cancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 393, 100, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseClicked
+        dispose();
+        GeneralLoginPage obj = new GeneralLoginPage();
+        obj.setVisible(true);
+    }//GEN-LAST:event_cancelMouseClicked
+
+    private void resetBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetBtMouseClicked
+        String enteredID = userID.getText();
+        String enteredPassword = newPw.getText();
+        
+        User user = findUserByID(enteredID);
+        
+        if (user != null) {
+            if (enteredID.startsWith("ST")) {
+                ArrayList<String> studentIDs = new ArrayList();
+                String rec;
+                BufferedReader br;
+                try {
+                    br = new BufferedReader(new FileReader("src/textfiles/Students.txt"));
+                    while ((rec = br.readLine()) != null) {
+                        String[] record = rec.strip().split(";");
+                        System.out.println("" + record[0]);
+                        studentIDs.add(record[0]);
+                    }
+
+                } catch (Exception ex) {
+                    Logger.getLogger(GeneralForgetPassword.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
+                for(int i = 0; i< studentIDs.size(); i++){
+                    if(enteredID.equals(studentIDs.get(i))){
+                        UpdatePasswordStudent(enteredID, enteredPassword);
+                        break;
+                    }
+                }  
+                
+                //Message 
+                JOptionPane.showMessageDialog(null, "Password reset successfully!", "PASSWORD RESET SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                GeneralLoginPage obj = new GeneralLoginPage();
+                obj.setVisible(true);
+
+            } else if (enteredID.startsWith("LC")) {
+                ArrayList<String> staffIDs = new ArrayList();
+                String rec;
+                BufferedReader br;
+                try {
+                    br = new BufferedReader(new FileReader("src/textfiles/Staff.txt"));
+                    while ((rec = br.readLine()) != null) {
+                        String[] record = rec.strip().split(";");
+                        System.out.println("" + record[0]);
+                        staffIDs.add(record[0]);
+                    }
+
+                } catch (Exception ex) {
+                    Logger.getLogger(GeneralForgetPassword.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
+                for(int i = 0; i< staffIDs.size(); i++){
+                    if(enteredID.equals(staffIDs.get(i))){
+                        UpdatePasswordStaff(enteredID, enteredPassword);
+                        break;
+                    }
+                }  
+                //Message
+                JOptionPane.showMessageDialog(null, "Password reset successfully!", "PASSWORD RESET SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                GeneralLoginPage obj = new GeneralLoginPage();
+                obj.setVisible(true);
+            } else if (enteredID.startsWith("AD")) {
+                ArrayList<String> adminIDs = new ArrayList();
+                String rec;
+                BufferedReader br;
+                try {
+                    br = new BufferedReader(new FileReader("src/textfiles/Admin.txt"));
+                    while ((rec = br.readLine()) != null) {
+                        String[] record = rec.strip().split(";");
+                        System.out.println("" + record[0]);
+                        adminIDs.add(record[0]);
+                    }
+
+                } catch (Exception ex) {
+                    Logger.getLogger(GeneralForgetPassword.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
+                for(int i = 0; i< adminIDs.size(); i++){
+                    if(enteredID.equals(adminIDs.get(i))){
+                        UpdatePasswordAdmin(enteredID, enteredPassword);
+                        break;
+                    }
+                }  
+                //Message
+                JOptionPane.showMessageDialog(null, "Password reset successfully!", "PASSWORD RESET SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                GeneralLoginPage obj = new GeneralLoginPage();
+                obj.setVisible(true);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "User not found", "Login Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_resetBtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -118,8 +241,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -127,7 +249,244 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField newPw;
+    private javax.swing.JButton resetBt;
+    private javax.swing.JTextField userID;
     // End of variables declaration//GEN-END:variables
+
+    private User findUserByID(String enteredID) {
+        ReadOperations reader = new ReadOperations();
+        if (enteredID.startsWith("ST")) {
+            userList = reader.readUserData("src/textfiles/Students.txt");
+            System.out.println("User List Size: " + userList.size()); // Debugging
+            for (User user : userList) {
+                System.out.println("User ID: " + user.getUserId()); // Debugging
+                if (user.getUserId().equals(enteredID)) {
+                    System.out.println("User Found!"); // Debugging
+                    return user;
+                }
+            }
+        } else if (enteredID.startsWith("LC")) {
+            userList = reader.readUserData("src/textfiles/Staff.txt");
+            System.out.println("User List Size: " + userList.size()); // Debugging
+            for (User user : userList) {
+                System.out.println("User ID: " + user.getUserId()); // Debugging
+                if (user.getUserId().equals(enteredID)) {
+                    System.out.println("User Found!"); // Debugging
+                    return user;
+                }
+            }
+        } else if (enteredID.startsWith("AD")) {
+            userList = reader.readUserData("src/textfiles/Admin.txt");
+            System.out.println("User List Size: " + userList.size()); // Debugging
+            for (User user : userList) {
+                System.out.println("User ID: " + user.getUserId()); // Debugging
+                if (user.getUserId().equals(enteredID)) {
+                    System.out.println("User Found!"); // Debugging
+                    return user;
+                }
+            }
+        }
+        System.out.println("User Not Found!"); // Debugging
+        return null;
+    }
+
+    private void UpdatePasswordStudent(String enteredID, String enteredPassword) {
+        String filePath = "src/textfiles/Students.txt";
+        try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
+            String currentLine;
+            ArrayList<String> updatedLines = new ArrayList<>();
+
+            // Read and update lines
+            while ((currentLine = buffer.readLine()) != null) {
+                String[] data = currentLine.split(";");
+                if (data.length >= 2 && enteredID.equals(data[0].trim())) {
+                    data[2] = enteredPassword;
+                    
+                    //Update intake text file
+                    String intake = data[7];
+                    ArrayList<String> intakeIDs = new ArrayList();
+                    String recc;
+                    BufferedReader brr;
+                    try {
+                        brr = new BufferedReader(new FileReader("src/textfiles/Student"+intake+".txt"));
+                        while ((recc = brr.readLine()) != null) {
+                            String[] record = recc.strip().split(";");
+                            System.out.println("" + record[0]);
+                            intakeIDs.add(record[0]);
+                        }
+
+                    } catch (Exception ex) {
+                        Logger.getLogger(GeneralForgetPassword.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+
+                    for(int i = 0; i< intakeIDs.size(); i++){
+                        if(enteredID.equals(intakeIDs.get(i))){
+                            UpdatePasswordIntake(enteredID, enteredPassword, intake);
+                            break;
+                        }
+                    }  
+                }
+                updatedLines.add(String.join(";", data));
+            }
+
+            // Write the updated data back to the file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                for (String updatedLine : updatedLines) {
+                    writer.write(updatedLine);
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void UpdatePasswordStaff(String enteredID, String enteredPassword) {
+        String filePath = "src/textfiles/Staff.txt";
+        try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
+            String currentLine;
+            ArrayList<String> updatedLines = new ArrayList<>();
+
+            // Read and update lines
+            while ((currentLine = buffer.readLine()) != null) {
+                String[] data = currentLine.split(";");
+                if (data.length >= 2 && enteredID.equals(data[0].trim())) {
+                    // Found the user, update the password
+                    data[2] = enteredPassword;
+                    
+                    //Update Staff Role Text File
+                    String role = data[6];
+                    ArrayList<String> stIDs = new ArrayList();
+                    String recc;
+                    BufferedReader brr;
+                    try {
+                        brr = new BufferedReader(new FileReader("src/textfiles/"+role+".txt"));
+                        while ((recc = brr.readLine()) != null) {
+                            String[] record = recc.strip().split(";");
+                            System.out.println("" + record[0]);
+                            stIDs.add(record[0]);
+                        }
+
+                    } catch (Exception ex) {
+                        Logger.getLogger(GeneralForgetPassword.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+
+                    for(int i = 0; i< stIDs.size(); i++){
+                        if(enteredID.equals(stIDs.get(i))){
+                            UpdatePasswordRole(enteredID, enteredPassword, role);
+                            break;
+                        }
+                    }
+                }
+                updatedLines.add(String.join(";", data));
+            }
+
+            // Write the updated data back to the file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                for (String updatedLine : updatedLines) {
+                    writer.write(updatedLine);
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void UpdatePasswordAdmin(String enteredID, String enteredPassword) {
+        String filePath = "src/textfiles/Admin.txt";
+        try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
+            String currentLine;
+            ArrayList<String> updatedLines = new ArrayList<>();
+
+            // Read and update lines
+            while ((currentLine = buffer.readLine()) != null) {
+                String[] data = currentLine.split(";");
+                if (data.length >= 2 && enteredID.equals(data[0].trim())) {
+                    // Found the user, update the password
+                    data[2] = enteredPassword;
+                }
+                updatedLines.add(String.join(";", data));
+            }
+
+            // Write the updated data back to the file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                for (String updatedLine : updatedLines) {
+                    writer.write(updatedLine);
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void UpdatePasswordIntake(String enteredID, String enteredPassword, String intake) {
+        String filePath = "src/textfiles/Student"+intake+".txt";
+        try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
+            String currentLine;
+            ArrayList<String> updatedLines = new ArrayList<>();
+
+            // Read and update lines
+            while ((currentLine = buffer.readLine()) != null) {
+                String[] data = currentLine.split(";");
+                if (data.length >= 2 && enteredID.equals(data[0].trim())) {
+                    // Found the user, update the password
+                    data[2] = enteredPassword;
+                }
+                updatedLines.add(String.join(";", data));
+            }
+
+            // Write the updated data back to the file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                for (String updatedLine : updatedLines) {
+                    writer.write(updatedLine);
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void UpdatePasswordRole(String enteredID, String enteredPassword, String role) {
+        String filePath = "src/textfiles/"+role+".txt";
+        try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
+            String currentLine;
+            ArrayList<String> updatedLines = new ArrayList<>();
+
+            // Read and update lines
+            while ((currentLine = buffer.readLine()) != null) {
+                String[] data = currentLine.split(";");
+                if (data.length >= 2 && enteredID.equals(data[0].trim())) {
+                    // Found the user, update the password
+                    data[2] = enteredPassword;
+                }
+                updatedLines.add(String.join(";", data));
+            }
+
+            // Write the updated data back to the file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                for (String updatedLine : updatedLines) {
+                    writer.write(updatedLine);
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

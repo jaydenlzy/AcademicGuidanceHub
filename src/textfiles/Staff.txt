@@ -1,8 +1,8 @@
 LC000001;Nor Firdaus Md Yusof;LC000001#Nor;norfirdausmdyusof@gmail.com;0136549874;create_date;Lecturer
 LC000002;Veeramani Vijai Indrian;LC000002#Veeramani;veeramanivijaiindrian@gmail.com;0389961000;create_date;Lecturer
-LC000003;Minnu Helen Joseph;LC000003#Minnu;minnuhelenjoseph@gmail.com;0179856230;create_date;Project Manager
-LC000006;CHANG ZHENG FANG;LC000006#Chang;changzhengfang@gmail.com;0189808878;create_date;Project Manager
-LC000005;Vishnu Ram A/L Rajan;LC000005#Vishnu;vishnuramalrajan@gmail.com;0101111000;create_date;Second Marker
-LC000008;Nor Firdaus Md Yusof;LC000008#Nor;norfirdausmdyusof@gmail.com;0389961000;create_date;Second Marker
+LC000003;Minnu Helen Joseph;LC000003#Minnu;minnuhelenjoseph@gmail.com;0179856230;create_date;ProjectManager
+LC000006;CHANG ZHENG FANG;LC000006#Chang;changzhengfang@gmail.com;0189808878;create_date;ProjectManager
+LC000005;Vishnu Ram A/L Rajan;LC000005#Vishnu;vishnuramalrajan@gmail.com;0101111000;create_date;SecondMarker
+LC000008;Nor Firdaus Md Yusof;LC000008#Nor;norfirdausmdyusof@gmail.com;0389961000;create_date;SecondMarker
 LC000004;Kanagi Rajandran;LC000004#Kanagi;kanagirajandran@gmail.com;0136489532;create_date;Supervisor
 LC000007;Preethi Subramanian;LC000007#Preethi;preethisubramanian@gmail.com;0389961000;create_date;Supervisor

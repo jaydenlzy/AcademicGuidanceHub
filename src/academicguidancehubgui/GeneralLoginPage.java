@@ -131,6 +131,11 @@ public class GeneralLoginPage extends javax.swing.JFrame {
         forgetPw.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         forgetPw.setForeground(new java.awt.Color(255, 51, 51));
         forgetPw.setText("Forget Password");
+        forgetPw.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                forgetPwMouseClicked(evt);
+            }
+        });
         jPanel6.add(forgetPw, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
         jPanel6.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 190, 30));
         jPanel6.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 200, 30));
@@ -210,6 +215,12 @@ public class GeneralLoginPage extends javax.swing.JFrame {
     private void cancelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelBActionPerformed
+
+    private void forgetPwMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgetPwMouseClicked
+        dispose();
+        GeneralForgetPassword obj = new GeneralForgetPassword();
+        obj.setVisible(true);
+    }//GEN-LAST:event_forgetPwMouseClicked
 
     /**
      * @param args the command line arguments
