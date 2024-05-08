@@ -18,8 +18,6 @@ public class GeneralLoginPage extends javax.swing.JFrame {
         setSize(700,625);
         setResizable(false);
         forgetPw.setVisible(false);
-        ReadOperations reader = new ReadOperations();
-        userList = reader.readUserData("userdataset.txt");
     }
 
     /**
@@ -108,6 +106,11 @@ public class GeneralLoginPage extends javax.swing.JFrame {
 
         cancelB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cancelB.setText("Cancel");
+        cancelB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBActionPerformed(evt);
+            }
+        });
         jPanel6.add(cancelB, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 80, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -178,7 +181,7 @@ public class GeneralLoginPage extends javax.swing.JFrame {
         User user = findUserByID(enteredID);
 
         if (user != null) {
-            if (enteredPassword.equals(user.getUserPassword())) {
+            if (enteredPassword.equals(user.getPassword())) {
                 switch (user.getRole()) {
                     case "Student":
                         JOptionPane.showMessageDialog(null, "Welcome to Student Page.", "Student Page", JOptionPane.INFORMATION_MESSAGE);
@@ -209,6 +212,10 @@ public class GeneralLoginPage extends javax.swing.JFrame {
     private void userIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_userIDActionPerformed
+
+    private void cancelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,11 +275,39 @@ public class GeneralLoginPage extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private User findUserByID(String enteredID) {
-        for (User user : userList) {
-            if (user.getUserId().equals(userID)) {
-                return user;
+        ReadOperations reader = new ReadOperations();
+        if (enteredID.startsWith("ST")) {
+            userList = reader.readUserData("src/textfiles/Students.txt");
+            System.out.println("User List Size: " + userList.size()); // Debugging
+            for (User user : userList) {
+                System.out.println("User ID: " + user.getUserId()); // Debugging
+                if (user.getUserId().equals(enteredID)) {
+                    System.out.println("User Found!"); // Debugging
+                    return user;
+                }
+            }
+        } else if (enteredID.startsWith("LC")) {
+            userList = reader.readUserData("src/textfiles/Staff.txt");
+            System.out.println("User List Size: " + userList.size()); // Debugging
+            for (User user : userList) {
+                System.out.println("User ID: " + user.getUserId()); // Debugging
+                if (user.getUserId().equals(enteredID)) {
+                    System.out.println("User Found!"); // Debugging
+                    return user;
+                }
+            }
+        } else if (enteredID.startsWith("AD")) {
+            userList = reader.readUserData("src/textfiles/Admin.txt");
+            System.out.println("User List Size: " + userList.size()); // Debugging
+            for (User user : userList) {
+                System.out.println("User ID: " + user.getUserId()); // Debugging
+                if (user.getUserId().equals(enteredID)) {
+                    System.out.println("User Found!"); // Debugging
+                    return user;
+                }
             }
         }
-        return null; // User not found
+        System.out.println("User Not Found!"); // Debugging
+        return null;
     }
 }

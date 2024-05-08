@@ -11,27 +11,47 @@ package academicguidancehub;
 public class User {
     private String UserId;
     private String name;
+    private String password;
     private String email;
+    private String contact;
+    private String createDate;
     private String role;
-    private String UserPassword;
 
-    public User(String userId, String name, String email, String role, String password) {
+    public User(String userId, String name, String password, String email, String contact, String createDate, String role) {
         this.UserId = userId;
         this.name = name;
+        this.password = password;
         this.email = email;
+        this.contact = contact;
+        this.createDate = createDate;
         this.role = role;
-        this.UserPassword = password;
     }
 
     public String getUserId() {
         return UserId;
     }
 
-    public String getUserPassword() {
-        return UserPassword;
+    public String getName() {
+        return name;
     }
-    
-    public String getRole(){
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public String getRole() {
         return role;
     }
 }
