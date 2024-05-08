@@ -39,15 +39,15 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel38 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        registerStudentPanel = new javax.swing.JPanel();
+        registerStudentLabel = new javax.swing.JLabel();
+        registerLecturerPanel = new javax.swing.JPanel();
+        registerLecturerLabel = new javax.swing.JLabel();
+        allotPMrole2Lec = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        amendSnLPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
@@ -55,15 +55,15 @@ public class AdminDashboard extends javax.swing.JFrame {
         logoutLabel = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        edit = new javax.swing.JPanel();
+        editRemovePMrole = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel31 = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel36 = new javax.swing.JLabel();
+        removeIntakePanel = new javax.swing.JPanel();
+        removeIntakelabel = new javax.swing.JLabel();
+        createIntakePanel = new javax.swing.JPanel();
+        createIntakeLabel = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         numOfIntake = new javax.swing.JLabel();
@@ -131,56 +131,81 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 102, 255));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel3.setBackground(new java.awt.Color(51, 51, 255));
+        registerStudentPanel.setBackground(new java.awt.Color(51, 51, 255));
+        registerStudentPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registerStudentPanelMouseClicked(evt);
+            }
+        });
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Register_student.png"))); // NOI18N
-        jLabel5.setText("  Register Student");
+        registerStudentLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        registerStudentLabel.setForeground(new java.awt.Color(255, 255, 255));
+        registerStudentLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Register_student.png"))); // NOI18N
+        registerStudentLabel.setText("  Register Student");
+        registerStudentLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registerStudentLabelMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout registerStudentPanelLayout = new javax.swing.GroupLayout(registerStudentPanel);
+        registerStudentPanel.setLayout(registerStudentPanelLayout);
+        registerStudentPanelLayout.setHorizontalGroup(
+            registerStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerStudentPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addComponent(registerStudentLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        registerStudentPanelLayout.setVerticalGroup(
+            registerStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerStudentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
+                .addComponent(registerStudentLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(51, 51, 255));
-        jPanel4.setPreferredSize(new java.awt.Dimension(0, 80));
+        registerLecturerPanel.setBackground(new java.awt.Color(51, 51, 255));
+        registerLecturerPanel.setPreferredSize(new java.awt.Dimension(0, 80));
+        registerLecturerPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registerLecturerPanelMouseClicked(evt);
+            }
+        });
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/register_lecturer.png"))); // NOI18N
-        jLabel6.setText("  Register Lecturer");
+        registerLecturerLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        registerLecturerLabel.setForeground(new java.awt.Color(255, 255, 255));
+        registerLecturerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/register_lecturer.png"))); // NOI18N
+        registerLecturerLabel.setText("  Register Lecturer");
+        registerLecturerLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registerLecturerLabelMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout registerLecturerPanelLayout = new javax.swing.GroupLayout(registerLecturerPanel);
+        registerLecturerPanel.setLayout(registerLecturerPanelLayout);
+        registerLecturerPanelLayout.setHorizontalGroup(
+            registerLecturerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerLecturerPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel6)
+                .addComponent(registerLecturerLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        registerLecturerPanelLayout.setVerticalGroup(
+            registerLecturerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerLecturerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
+                .addComponent(registerLecturerLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.setBackground(new java.awt.Color(51, 51, 255));
+        allotPMrole2Lec.setBackground(new java.awt.Color(51, 51, 255));
+        allotPMrole2Lec.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                allotPMrole2LecMouseClicked(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -192,27 +217,27 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/edit_PM.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout allotPMrole2LecLayout = new javax.swing.GroupLayout(allotPMrole2Lec);
+        allotPMrole2Lec.setLayout(allotPMrole2LecLayout);
+        allotPMrole2LecLayout.setHorizontalGroup(
+            allotPMrole2LecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(allotPMrole2LecLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(allotPMrole2LecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(allotPMrole2LecLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel9)))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        allotPMrole2LecLayout.setVerticalGroup(
+            allotPMrole2LecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(allotPMrole2LecLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(allotPMrole2LecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(allotPMrole2LecLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9))
@@ -220,7 +245,12 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGap(6, 6, 6))
         );
 
-        jPanel6.setBackground(new java.awt.Color(51, 51, 255));
+        amendSnLPanel.setBackground(new java.awt.Color(51, 51, 255));
+        amendSnLPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                amendSnLPanelMouseClicked(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -232,25 +262,25 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Amend.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout amendSnLPanelLayout = new javax.swing.GroupLayout(amendSnLPanel);
+        amendSnLPanel.setLayout(amendSnLPanelLayout);
+        amendSnLPanelLayout.setHorizontalGroup(
+            amendSnLPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(amendSnLPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(amendSnLPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(jLabel12))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        amendSnLPanelLayout.setVerticalGroup(
+            amendSnLPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(amendSnLPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(amendSnLPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(amendSnLPanelLayout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12))
@@ -297,7 +327,12 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Lecturer & Student");
 
-        edit.setBackground(new java.awt.Color(51, 51, 255));
+        editRemovePMrole.setBackground(new java.awt.Color(51, 51, 255));
+        editRemovePMrole.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editRemovePMroleMouseClicked(evt);
+            }
+        });
 
         jLabel28.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
@@ -309,28 +344,28 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Edir_remove.png"))); // NOI18N
 
-        javax.swing.GroupLayout editLayout = new javax.swing.GroupLayout(edit);
-        edit.setLayout(editLayout);
-        editLayout.setHorizontalGroup(
-            editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editLayout.createSequentialGroup()
+        javax.swing.GroupLayout editRemovePMroleLayout = new javax.swing.GroupLayout(editRemovePMrole);
+        editRemovePMrole.setLayout(editRemovePMroleLayout);
+        editRemovePMroleLayout.setHorizontalGroup(
+            editRemovePMroleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editRemovePMroleLayout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(editRemovePMroleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel29)
-                    .addGroup(editLayout.createSequentialGroup()
+                    .addGroup(editRemovePMroleLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jLabel28)))
                 .addGap(38, 38, 38))
         );
-        editLayout.setVerticalGroup(
-            editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(editLayout.createSequentialGroup()
+        editRemovePMroleLayout.setVerticalGroup(
+            editRemovePMroleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editRemovePMroleLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(editRemovePMroleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel40)
-                    .addGroup(editLayout.createSequentialGroup()
+                    .addGroup(editRemovePMroleLayout.createSequentialGroup()
                         .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel29)))
@@ -341,53 +376,73 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel30.setForeground(new java.awt.Color(255, 255, 255));
         jLabel30.setText("Intake");
 
-        jPanel12.setBackground(new java.awt.Color(51, 51, 255));
-        jPanel12.setPreferredSize(new java.awt.Dimension(0, 80));
+        removeIntakePanel.setBackground(new java.awt.Color(51, 51, 255));
+        removeIntakePanel.setPreferredSize(new java.awt.Dimension(0, 80));
+        removeIntakePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeIntakePanelMouseClicked(evt);
+            }
+        });
 
-        jLabel31.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editItake.png"))); // NOI18N
-        jLabel31.setText("Remove Intake");
+        removeIntakelabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        removeIntakelabel.setForeground(new java.awt.Color(255, 255, 255));
+        removeIntakelabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editItake.png"))); // NOI18N
+        removeIntakelabel.setText("Remove Intake");
+        removeIntakelabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeIntakelabelMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+        javax.swing.GroupLayout removeIntakePanelLayout = new javax.swing.GroupLayout(removeIntakePanel);
+        removeIntakePanel.setLayout(removeIntakePanelLayout);
+        removeIntakePanelLayout.setHorizontalGroup(
+            removeIntakePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(removeIntakePanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel31)
+                .addComponent(removeIntakelabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+        removeIntakePanelLayout.setVerticalGroup(
+            removeIntakePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(removeIntakePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel31)
+                .addComponent(removeIntakelabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel13.setBackground(new java.awt.Color(51, 51, 255));
-        jPanel13.setPreferredSize(new java.awt.Dimension(0, 80));
+        createIntakePanel.setBackground(new java.awt.Color(51, 51, 255));
+        createIntakePanel.setPreferredSize(new java.awt.Dimension(0, 80));
+        createIntakePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                createIntakePanelMouseClicked(evt);
+            }
+        });
 
-        jLabel36.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/addNewIntake.png"))); // NOI18N
-        jLabel36.setText("Create New Intake");
+        createIntakeLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        createIntakeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        createIntakeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/addNewIntake.png"))); // NOI18N
+        createIntakeLabel.setText("Create New Intake");
+        createIntakeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                createIntakeLabelMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        javax.swing.GroupLayout createIntakePanelLayout = new javax.swing.GroupLayout(createIntakePanel);
+        createIntakePanel.setLayout(createIntakePanelLayout);
+        createIntakePanelLayout.setHorizontalGroup(
+            createIntakePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createIntakePanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel36)
+                .addComponent(createIntakeLabel)
                 .addContainerGap(65, Short.MAX_VALUE))
         );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        createIntakePanelLayout.setVerticalGroup(
+            createIntakePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createIntakePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel36)
+                .addComponent(createIntakeLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -395,14 +450,14 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(registerStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(registerLecturerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+            .addComponent(amendSnLPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(edit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+            .addComponent(allotPMrole2Lec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(editRemovePMrole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(removeIntakePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+            .addComponent(createIntakePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,23 +472,23 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(registerStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(registerLecturerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(amendSnLPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(allotPMrole2Lec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editRemovePMrole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel30)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(createIntakePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(removeIntakePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(90, Short.MAX_VALUE))
@@ -633,6 +688,72 @@ public class AdminDashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_logoutLabelMouseClicked
 
+    private void registerStudentPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerStudentPanelMouseClicked
+        dispose();
+        AdminRegisterStudents obj = new AdminRegisterStudents();
+        obj.setVisible(true);
+    }//GEN-LAST:event_registerStudentPanelMouseClicked
+
+    private void registerStudentLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerStudentLabelMouseClicked
+        dispose();
+        AdminRegisterStudents obj = new AdminRegisterStudents();
+        obj.setVisible(true);
+    }//GEN-LAST:event_registerStudentLabelMouseClicked
+
+    private void registerLecturerPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerLecturerPanelMouseClicked
+        dispose();
+        AdminRegisterLecturer obj = new AdminRegisterLecturer();
+        obj.setVisible(true);
+    }//GEN-LAST:event_registerLecturerPanelMouseClicked
+
+    private void registerLecturerLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerLecturerLabelMouseClicked
+        dispose();
+        AdminRegisterLecturer obj = new AdminRegisterLecturer();
+        obj.setVisible(true);
+    }//GEN-LAST:event_registerLecturerLabelMouseClicked
+
+    private void amendSnLPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_amendSnLPanelMouseClicked
+        dispose();
+        AdminAmendStudentLecturerDetails obj = new AdminAmendStudentLecturerDetails();
+        obj.setVisible(true);
+    }//GEN-LAST:event_amendSnLPanelMouseClicked
+
+    private void allotPMrole2LecMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allotPMrole2LecMouseClicked
+        dispose();
+        AdminAllotPMroleToLecturer obj = new AdminAllotPMroleToLecturer();
+        obj.setVisible(true);
+    }//GEN-LAST:event_allotPMrole2LecMouseClicked
+
+    private void editRemovePMroleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editRemovePMroleMouseClicked
+        dispose();
+        AdminEditRemoveProjectManager obj = new AdminEditRemoveProjectManager();
+        obj.setVisible(true);
+    }//GEN-LAST:event_editRemovePMroleMouseClicked
+
+    private void createIntakePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createIntakePanelMouseClicked
+        dispose();
+        AdminCreateNewIntake obj = new AdminCreateNewIntake();
+        obj.setVisible(true);
+    }//GEN-LAST:event_createIntakePanelMouseClicked
+
+    private void createIntakeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createIntakeLabelMouseClicked
+        dispose();
+        AdminCreateNewIntake obj = new AdminCreateNewIntake();
+        obj.setVisible(true);
+    }//GEN-LAST:event_createIntakeLabelMouseClicked
+
+    private void removeIntakePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeIntakePanelMouseClicked
+        dispose();
+        AdminRemoveIntake obj = new AdminRemoveIntake();
+        obj.setVisible(true);
+    }//GEN-LAST:event_removeIntakePanelMouseClicked
+
+    private void removeIntakelabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeIntakelabelMouseClicked
+        dispose();
+        AdminRemoveIntake obj = new AdminRemoveIntake();
+        obj.setVisible(true);
+    }//GEN-LAST:event_removeIntakelabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -670,7 +791,11 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel edit;
+    private javax.swing.JPanel allotPMrole2Lec;
+    private javax.swing.JPanel amendSnLPanel;
+    private javax.swing.JLabel createIntakeLabel;
+    private javax.swing.JPanel createIntakePanel;
+    private javax.swing.JPanel editRemovePMrole;
     private javax.swing.JTable intakeTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -691,12 +816,10 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
@@ -704,23 +827,15 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -736,18 +851,24 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel numOfStudent;
     private javax.swing.JLabel numOfSupervisor;
     private javax.swing.JTable pmTable;
+    private javax.swing.JLabel registerLecturerLabel;
+    private javax.swing.JPanel registerLecturerPanel;
+    private javax.swing.JLabel registerStudentLabel;
+    private javax.swing.JPanel registerStudentPanel;
+    private javax.swing.JPanel removeIntakePanel;
+    private javax.swing.JLabel removeIntakelabel;
     private javax.swing.JTable studentTable;
     // End of variables declaration//GEN-END:variables
 
     private void updateCounts() {
         try {
             // Read numbers from text files using FileHandler class
-            int numOfLecturerCount = FileHandler.readCountFromFile("Lecturers.txt");
-            int numOfProjectManagerCount = FileHandler.readCountFromFile("ProjectManager.txt");
-            int numOfStudentCount = FileHandler.readCountFromFile("Students.txt");
-            int numOfIntakeCount = FileHandler.readCountFromFile("intakesType.txt");
-            int numOfSupervisorCount = FileHandler.readCountFromFile("Supervisors.txt");
-            int numOfSecondMarkerCount = FileHandler.readCountFromFile("SecondMarker.txt");
+            int numOfLecturerCount = FileHandler.readCountFromFile("src/textfiles/Lecturers.txt");
+            int numOfProjectManagerCount = FileHandler.readCountFromFile("src/textfiles/ProjectManager.txt");
+            int numOfStudentCount = FileHandler.readCountFromFile("src/textfiles/Students.txt");
+            int numOfIntakeCount = FileHandler.readCountFromFile("src/textfiles/intakesType.txt");
+            int numOfSupervisorCount = FileHandler.readCountFromFile("src/textfiles/Supervisors.txt");
+            int numOfSecondMarkerCount = FileHandler.readCountFromFile("src/textfiles/SecondMarker.txt");
 
             // Update labels with the read numbers
             numOfLecturer.setText(Integer.toString(numOfLecturerCount));
@@ -762,7 +883,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     private void lecturerTableContent() {
-        String filePathClassType = "Lecturers.txt";
+        String filePathClassType = "src/textfiles/Lecturers.txt";
         String delimiter = ";";
         int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
         String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
@@ -785,7 +906,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     private void studentTableContent() {
-        String filePathClassType = "Students.txt";
+        String filePathClassType = "src/textfiles/Students.txt";
         String delimiter = ";";
         int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 7};
         String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
@@ -809,7 +930,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     private void intakesTableContent() {
-        String filePathClassType = "intakesType.txt";
+        String filePathClassType = "src/textfiles/intakesType.txt";
         String delimiter = ";";
         int[] classTypeColumnIndices = {0, 1, 2, 3};
         String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
@@ -830,7 +951,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     private void pManagerTableContent() {
-        String filePathClassType = "ProjectManager.txt";
+        String filePathClassType = "src/textfiles/ProjectManager.txt";
         String delimiter = ";";
         int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
         String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
