@@ -863,20 +863,20 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void updateCounts() {
         try {
             // Read numbers from text files using FileHandler class
-            int numOfLecturerCount = FileHandler.readCountFromFile("src/textfiles/Lecturers.txt");
-            int numOfProjectManagerCount = FileHandler.readCountFromFile("src/textfiles/ProjectManager.txt");
-            int numOfStudentCount = FileHandler.readCountFromFile("src/textfiles/Students.txt");
-            int numOfIntakeCount = FileHandler.readCountFromFile("src/textfiles/intakesType.txt");
-            int numOfSupervisorCount = FileHandler.readCountFromFile("src/textfiles/Supervisors.txt");
-            int numOfSecondMarkerCount = FileHandler.readCountFromFile("src/textfiles/SecondMarker.txt");
+            String numOfLecturerCount = FileHandler.readCountFromFile("src/textfiles/Lecturers.txt");
+            String numOfProjectManagerCount = FileHandler.readCountFromFile("src/textfiles/ProjectManager.txt");
+            String numOfStudentCount = FileHandler.readCountFromFile("src/textfiles/Students.txt");
+            String numOfIntakeCount = FileHandler.readCountFromFile("src/textfiles/intakesType.txt");
+            String numOfSupervisorCount = FileHandler.readCountFromFile("src/textfiles/Supervisors.txt");
+            String numOfSecondMarkerCount = FileHandler.readCountFromFile("src/textfiles/SecondMarker.txt");
 
             // Update labels with the read numbers
-            numOfLecturer.setText(Integer.toString(numOfLecturerCount));
-            numOfProjectManager.setText(Integer.toString(numOfProjectManagerCount));
-            numOfStudent.setText(Integer.toString(numOfStudentCount));
-            numOfIntake.setText(Integer.toString(numOfIntakeCount));
-            numOfSupervisor.setText(Integer.toString(numOfSupervisorCount));
-            numOfSecondMarker.setText(Integer.toString(numOfSecondMarkerCount));
+            numOfLecturer.setText(numOfLecturerCount);
+            numOfProjectManager.setText(numOfProjectManagerCount);
+            numOfStudent.setText(numOfStudentCount);
+            numOfIntake.setText(numOfIntakeCount);
+            numOfSupervisor.setText(numOfSupervisorCount);
+            numOfSecondMarker.setText(numOfSecondMarkerCount);
         } catch (IOException e) {
             e.printStackTrace();
         }
