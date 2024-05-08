@@ -13,9 +13,12 @@ import java.io.IOException;
  * @author New HP
  */
 public class FileHandler {
-    public static String readCountFromFile(String fileName) throws IOException {
+    public static int countRecords(String fileName) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        String count = reader.readLine();
+        int count = 0;
+        while (reader.readLine() != null) {
+            count++;
+        }
         reader.close();
         return count;
     }
