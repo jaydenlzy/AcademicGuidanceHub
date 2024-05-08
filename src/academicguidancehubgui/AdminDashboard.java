@@ -4,19 +4,24 @@
  */
 package academicguidancehubgui;
 
-/**
- *
- * @author New HP
- */
+import academicguidancehub.FileHandler;
+import java.io.IOException;
+import academicguidancehub.FileReaderUtils;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class AdminDashboard extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Dashboard
-     */
+
     public AdminDashboard() {
         initComponents();
         setSize(1180,815);
         setResizable(false);
+        updateCounts();
+        lecturerTableContent();
+        studentTableContent();
+        intakesTableContent();
+        pManagerTableContent();
     }
 
     /**
@@ -46,8 +51,8 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        logout = new javax.swing.JPanel();
+        logoutLabel = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         edit = new javax.swing.JPanel();
@@ -59,35 +64,42 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        numOfIntake = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        numOfSecondMarker = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        studentTable = new javax.swing.JTable();
         jLabel23 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        lecturerTable = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
+        numOfStudent = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        pmTable = new javax.swing.JTable();
         jLabel37 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        intakeTable = new javax.swing.JTable();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        numOfLecturer = new javax.swing.JLabel();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        numOfProjectManager = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        numOfSupervisor = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -246,25 +258,35 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        jPanel7.setBackground(new java.awt.Color(51, 102, 255));
+        logout.setBackground(new java.awt.Color(51, 102, 255));
+        logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutMouseClicked(evt);
+            }
+        });
 
-        jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/logout.png"))); // NOI18N
-        jLabel13.setText("      LOGOUT");
+        logoutLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        logoutLabel.setForeground(new java.awt.Color(255, 255, 255));
+        logoutLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/logout.png"))); // NOI18N
+        logoutLabel.setText("      LOGOUT");
+        logoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutLabelMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout logoutLayout = new javax.swing.GroupLayout(logout);
+        logout.setLayout(logoutLayout);
+        logoutLayout.setHorizontalGroup(
+            logoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logoutLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabel13)
+                .addComponent(logoutLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
+        logoutLayout.setVerticalGroup(
+            logoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(logoutLabel, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         jLabel25.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -376,7 +398,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(edit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
@@ -413,26 +435,11 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(90, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, -1, 770));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 580, 400, 190));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel8.setPreferredSize(new java.awt.Dimension(300, 40));
@@ -442,25 +449,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel14.setText("Total number of intake : ");
         jPanel8.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 8, -1, -1));
 
-        jLabel15.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel15.setText("Null");
-        jPanel8.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 109, -1));
+        numOfIntake.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jPanel8.add(numOfIntake, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 109, -1));
 
         getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 400, -1));
-
-        jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel9.setPreferredSize(new java.awt.Dimension(300, 40));
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel16.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel16.setText("Total number of lecturer : ");
-        jPanel9.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 8, -1, -1));
-
-        jLabel17.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel17.setText("Null");
-        jPanel9.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 107, -1));
-
-        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 400, -1));
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel10.setPreferredSize(new java.awt.Dimension(300, 35));
@@ -470,36 +462,28 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel18.setText("Total number of ");
         jPanel10.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 7, -1, -1));
 
-        jLabel19.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel19.setText("Null");
-        jPanel10.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 100, -1));
+        numOfSecondMarker.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jPanel10.add(numOfSecondMarker, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 100, -1));
 
         jLabel20.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel20.setText("project manager");
+        jLabel20.setText("second marker");
         jPanel10.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 32, -1, -1));
 
         jLabel21.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         jLabel21.setText(":");
         jPanel10.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 10, -1));
 
-        getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 400, 58));
+        getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 450, 400, 58));
 
-        jLabel22.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
-        jLabel22.setText("Assessments/Projects Table");
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 560, -1, -1));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        studentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(studentTable);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, 400, 190));
 
@@ -507,18 +491,15 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel23.setText("Lecturers Table");
         getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 100, -1, -1));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        lecturerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(lecturerTable);
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 120, 400, 190));
 
@@ -534,53 +515,123 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel33.setText("Total number of student : ");
         jPanel11.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 8, -1, -1));
 
-        jLabel34.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel34.setText("Null");
-        jPanel11.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 109, -1));
+        numOfStudent.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jPanel11.add(numOfStudent, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 109, -1));
 
-        getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 400, -1));
+        getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 400, -1));
 
         jLabel35.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jLabel35.setText("Students Table");
         getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 330, -1, -1));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        pmTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(pmTable);
 
         getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 580, 400, 190));
 
         jLabel37.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jLabel37.setText("Intakes Table");
-        getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, -1, -1));
+        getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 560, -1, -1));
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        intakeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(intakeTable);
 
-        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, 400, 190));
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 580, 400, 190));
+
+        jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel17.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jLabel17.setText("Total number of lecturer : ");
+        jPanel14.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 8, -1, -1));
+
+        numOfLecturer.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jPanel14.add(numOfLecturer, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 107, -1));
+
+        getContentPane().add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 400, -1));
+
+        jPanel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel15.setPreferredSize(new java.awt.Dimension(300, 35));
+        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel19.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jLabel19.setText("Total number of ");
+        jPanel15.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 7, -1, -1));
+
+        numOfProjectManager.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jPanel15.add(numOfProjectManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 100, -1));
+
+        jLabel27.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jLabel27.setText("project manager");
+        jPanel15.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 32, -1, -1));
+
+        jLabel32.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jLabel32.setText(":");
+        jPanel15.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 10, -1));
+
+        getContentPane().add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 400, 58));
+
+        jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel16.setPreferredSize(new java.awt.Dimension(300, 35));
+        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel22.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jLabel22.setText("Total number of ");
+        jPanel16.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 7, -1, -1));
+
+        numOfSupervisor.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jPanel16.add(numOfSupervisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 100, -1));
+
+        jLabel34.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jLabel34.setText("supervisor");
+        jPanel16.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 32, -1, -1));
+
+        jLabel39.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jLabel39.setText(":");
+        jPanel16.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 10, -1));
+
+        getContentPane().add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 400, 58));
 
         setSize(new java.awt.Dimension(1179, 807));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
+        int ans = JOptionPane.showConfirmDialog(null, "Confirm to logout?","Are you sure?",JOptionPane.YES_NO_CANCEL_OPTION);
+        if (ans == JOptionPane.YES_OPTION){
+            dispose();
+            GeneralLoginPage obj = new GeneralLoginPage();
+            obj.setVisible(true);
+        } else{
+            this.setVisible(true);
+        }
+    }//GEN-LAST:event_logoutMouseClicked
+
+    private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
+        int ans = JOptionPane.showConfirmDialog(null, "Confirm to logout?","Are you sure?",JOptionPane.YES_NO_CANCEL_OPTION);
+        if (ans == JOptionPane.YES_OPTION){
+            dispose();
+            GeneralLoginPage obj = new GeneralLoginPage();
+            obj.setVisible(true);
+        } else{
+            this.setVisible(true);
+        }
+    }//GEN-LAST:event_logoutLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -620,13 +671,11 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel edit;
+    private javax.swing.JTable intakeTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -637,17 +686,20 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
@@ -661,23 +713,142 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
+    private javax.swing.JTable lecturerTable;
+    private javax.swing.JPanel logout;
+    private javax.swing.JLabel logoutLabel;
+    private javax.swing.JLabel numOfIntake;
+    private javax.swing.JLabel numOfLecturer;
+    private javax.swing.JLabel numOfProjectManager;
+    private javax.swing.JLabel numOfSecondMarker;
+    private javax.swing.JLabel numOfStudent;
+    private javax.swing.JLabel numOfSupervisor;
+    private javax.swing.JTable pmTable;
+    private javax.swing.JTable studentTable;
     // End of variables declaration//GEN-END:variables
+
+    private void updateCounts() {
+        try {
+            // Read numbers from text files using FileHandler class
+            int numOfLecturerCount = FileHandler.readCountFromFile("Lecturers.txt");
+            int numOfProjectManagerCount = FileHandler.readCountFromFile("ProjectManager.txt");
+            int numOfStudentCount = FileHandler.readCountFromFile("Students.txt");
+            int numOfIntakeCount = FileHandler.readCountFromFile("intakesType.txt");
+            int numOfSupervisorCount = FileHandler.readCountFromFile("Supervisors.txt");
+            int numOfSecondMarkerCount = FileHandler.readCountFromFile("SecondMarker.txt");
+
+            // Update labels with the read numbers
+            numOfLecturer.setText(Integer.toString(numOfLecturerCount));
+            numOfProjectManager.setText(Integer.toString(numOfProjectManagerCount));
+            numOfStudent.setText(Integer.toString(numOfStudentCount));
+            numOfIntake.setText(Integer.toString(numOfIntakeCount));
+            numOfSupervisor.setText(Integer.toString(numOfSupervisorCount));
+            numOfSecondMarker.setText(Integer.toString(numOfSecondMarkerCount));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void lecturerTableContent() {
+        String filePathClassType = "Lecturers.txt";
+        String delimiter = ";";
+        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
+        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+        if (classTypeData != null) {
+            DefaultTableModel classTypeTableModel = new DefaultTableModel();
+            classTypeTableModel.addColumn("Lecturer ID");
+            classTypeTableModel.addColumn("Name");
+            classTypeTableModel.addColumn("Password");
+            classTypeTableModel.addColumn("Email");
+            classTypeTableModel.addColumn("Contact");
+            classTypeTableModel.addColumn("Create Date");
+
+            for (String[] row : classTypeData) {
+                classTypeTableModel.addRow(row);
+            }
+
+            lecturerTable.setModel(classTypeTableModel);
+        }
+    }
+
+    private void studentTableContent() {
+        String filePathClassType = "Students.txt";
+        String delimiter = ";";
+        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 7};
+        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+        if (classTypeData != null) {
+            DefaultTableModel classTypeTableModel = new DefaultTableModel();
+            classTypeTableModel.addColumn("Student ID");
+            classTypeTableModel.addColumn("Name");
+            classTypeTableModel.addColumn("Password");
+            classTypeTableModel.addColumn("Email");
+            classTypeTableModel.addColumn("Contact");
+            classTypeTableModel.addColumn("Create Date");
+            classTypeTableModel.addColumn("Intake Code");
+
+            for (String[] row : classTypeData) {
+                classTypeTableModel.addRow(row);
+            }
+
+            studentTable.setModel(classTypeTableModel);
+        }
+    }
+
+    private void intakesTableContent() {
+        String filePathClassType = "intakesType.txt";
+        String delimiter = ";";
+        int[] classTypeColumnIndices = {0, 1, 2, 3};
+        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+        if (classTypeData != null) {
+            DefaultTableModel classTypeTableModel = new DefaultTableModel();
+            classTypeTableModel.addColumn("Intake Code");
+            classTypeTableModel.addColumn("Name");
+            classTypeTableModel.addColumn("Start Date");
+            classTypeTableModel.addColumn("Create Date");
+
+            for (String[] row : classTypeData) {
+                classTypeTableModel.addRow(row);
+            }
+
+            intakeTable.setModel(classTypeTableModel);
+        }
+    }
+
+    private void pManagerTableContent() {
+        String filePathClassType = "ProjectManager.txt";
+        String delimiter = ";";
+        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
+        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+        if (classTypeData != null) {
+            DefaultTableModel classTypeTableModel = new DefaultTableModel();
+            classTypeTableModel.addColumn("PM ID");
+            classTypeTableModel.addColumn("Name");
+            classTypeTableModel.addColumn("Password");
+            classTypeTableModel.addColumn("Email");
+            classTypeTableModel.addColumn("Contact");
+            classTypeTableModel.addColumn("Create Date");
+
+            for (String[] row : classTypeData) {
+                classTypeTableModel.addRow(row);
+            }
+
+            pmTable.setModel(classTypeTableModel);
+        }
+    }
 }
