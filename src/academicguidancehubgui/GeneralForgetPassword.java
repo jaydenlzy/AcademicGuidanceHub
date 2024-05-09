@@ -94,6 +94,11 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                 cancelMouseClicked(evt);
             }
         });
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
         getContentPane().add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 393, 100, 40));
 
         pack();
@@ -203,6 +208,12 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "User not found", "Login Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_resetBtMouseClicked
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        this.dispose();
+        GeneralLoginPage bj = new GeneralLoginPage();
+        bj.setVisible(true);
+    }//GEN-LAST:event_cancelActionPerformed
 
     /**
      * @param args the command line arguments

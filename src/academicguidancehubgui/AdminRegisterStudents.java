@@ -4,6 +4,14 @@
  */
 package academicguidancehubgui;
 
+import javax.swing.JOptionPane;
+import academicguidancehub.RegisterNewStudent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 /**
  *
  * @author New HP
@@ -17,6 +25,25 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
         initComponents();
         setSize(900,620);
         setResizable(false);
+        
+        ArrayList<String[]> intakesdataList = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/intakesType.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(";");
+                intakeCB.addItem(values[0]);
+                intakesdataList.add(values);
+            }
+
+            // Convert ArrayList to a 2D String array
+            String[][] data = new String[intakesdataList.size()][];
+            for (int i = 0; i < intakesdataList.size(); i++) {
+                data[i] = intakesdataList.get(i);
+            }
+            //return data;
+        } catch (IOException e) {
+            //return null;
+        }
     }
 
     /**
@@ -30,10 +57,16 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        registerBt = new javax.swing.JButton();
+        cancelBt = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        studentName = new javax.swing.JTextField();
+        studentContact = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        intakeCB = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,21 +84,37 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 30)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 32)); // NOI18N
         jLabel2.setText("Register Student Page");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(102, 102, 0));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Register");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 470, 110, 40));
+        registerBt.setBackground(new java.awt.Color(102, 102, 0));
+        registerBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        registerBt.setForeground(new java.awt.Color(255, 255, 255));
+        registerBt.setText("Register");
+        registerBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registerBtMouseClicked(evt);
+            }
+        });
+        registerBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerBtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(registerBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 440, 110, 40));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton2.setText("Cancel");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, 90, 40));
+        cancelBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        cancelBt.setText("Cancel");
+        cancelBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, 90, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/register_student_Background.png"))); // NOI18N
+        jLabel3.setText("register_student_Background.png");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -82,8 +131,61 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 600));
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel1.setText("Intake:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel4.setText("Student Name:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, -1, -1));
+
+        studentName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(studentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 170, 40));
+
+        studentContact.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(studentContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 250, 170, 40));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        jLabel5.setText("Contact Number:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, -1, -1));
+
+        intakeCB.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        getContentPane().add(intakeCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 340, 170, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancelBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtMouseClicked
+        this.dispose();
+        AdminDashboard obj = new AdminDashboard();
+        obj.setVisible(true);
+    }//GEN-LAST:event_cancelBtMouseClicked
+
+    private void registerBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtMouseClicked
+        String name = studentName.getText().toUpperCase();
+        String contact = studentContact.getText();
+        String intake = (String)intakeCB.getSelectedItem();
+        
+        if (name.isEmpty() || contact.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        RegisterNewStudent.registerStudent(name,contact,intake);
+        
+        JOptionPane.showMessageDialog(this, "Student registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+    
+        studentName.setText("");
+        studentContact.setText("");
+        
+        this.dispose();
+        AdminDashboard obj = new AdminDashboard();
+        obj.setVisible(true);
+    }//GEN-LAST:event_registerBtMouseClicked
+
+    private void registerBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registerBtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,11 +224,17 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelBt;
+    private javax.swing.JComboBox<String> intakeCB;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton registerBt;
+    private javax.swing.JTextField studentContact;
+    private javax.swing.JTextField studentName;
     // End of variables declaration//GEN-END:variables
 }

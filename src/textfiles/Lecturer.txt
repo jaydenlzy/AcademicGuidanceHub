@@ -1,2 +1,3 @@
 LC000001;Nor Firdaus Md Yusof;LC000001#Nor;norfirdausmdyusof@gmail.com;0136549874;create_date;Lecturer
 LC000002;Veeramani Vijai Indrian;LC000002#Veeramani;veeramanivijaiindrian@gmail.com;0389961000;create_date;Lecturer
+LC000009;Samira Ali;LC000009#Samira;samiraali@gmail.com;0117953613;2024-05-09;Lecturer

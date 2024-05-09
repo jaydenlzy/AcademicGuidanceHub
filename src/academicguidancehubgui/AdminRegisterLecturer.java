@@ -4,10 +4,10 @@
  */
 package academicguidancehubgui;
 
-/**
- *
- * @author New HP
- */
+import academicguidancehub.RegisterNewLecturer;
+import academicguidancehub.RegisterNewStudent;
+import javax.swing.JOptionPane;
+
 public class AdminRegisterLecturer extends javax.swing.JFrame {
 
     /**
@@ -31,14 +31,12 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cancelBt = new javax.swing.JButton();
+        registerBt = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        lecturerContact = new javax.swing.JTextField();
+        lecturerName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -46,6 +44,7 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/register_background.png"))); // NOI18N
+        jLabel6.setText("register_background.png");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -64,43 +63,75 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 600));
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 30)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 32)); // NOI18N
         jLabel2.setText("Register Lecturer Page");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton1.setText("Cancel");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, 90, 40));
+        cancelBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        cancelBt.setText("Cancel");
+        cancelBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 450, 90, 40));
 
-        jButton2.setBackground(new java.awt.Color(0, 102, 102));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Register");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 500, 110, 40));
+        registerBt.setBackground(new java.awt.Color(0, 102, 102));
+        registerBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        registerBt.setForeground(new java.awt.Color(255, 255, 255));
+        registerBt.setText("Register");
+        registerBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registerBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(registerBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 450, 110, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Password");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, -1, -1));
+        jLabel3.setText("Contact");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Full Name");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 440, 30));
+        lecturerContact.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        getContentPane().add(lecturerContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 440, 40));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Email");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, -1, -1));
-
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 440, 30));
-
-        jPasswordField1.setText("jPasswordField1");
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 440, 30));
+        lecturerName.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        getContentPane().add(lecturerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 440, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancelBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtMouseClicked
+        this.dispose();
+        AdminDashboard obj = new AdminDashboard();
+        obj.setVisible(true);
+    }//GEN-LAST:event_cancelBtMouseClicked
+
+    private void registerBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtMouseClicked
+        String name = lecturerName.getText();
+        String contact = lecturerContact.getText();
+        
+        if (name.isEmpty() || contact.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String capitalizedName = capitalizeInitials(name);
+        
+        RegisterNewLecturer.registerLecturer(capitalizedName,contact);
+        
+        JOptionPane.showMessageDialog(this, "Lecturer registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+    
+        lecturerName.setText("");
+        lecturerContact.setText("");
+        
+        this.dispose();
+        AdminDashboard obj = new AdminDashboard();
+        obj.setVisible(true);
+    }//GEN-LAST:event_registerBtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -139,16 +170,27 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelBt;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField lecturerContact;
+    private javax.swing.JTextField lecturerName;
+    private javax.swing.JButton registerBt;
     // End of variables declaration//GEN-END:variables
+
+    private String capitalizeInitials(String name) {
+        StringBuilder capitalized = new StringBuilder();
+        String[] parts = name.split(" ");
+        for (String part : parts) {
+            if (!part.isEmpty()) {
+                capitalized.append(Character.toUpperCase(part.charAt(0))); // Capitalize the first character
+                capitalized.append(part.substring(1).toLowerCase()); // Convert the rest of the string to lowercase
+                capitalized.append(" "); // Add a space between parts
+            }
+        }
+        return capitalized.toString().trim();
+    }
 }

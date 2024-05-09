@@ -4,10 +4,10 @@
  */
 package academicguidancehubgui;
 
-/**
- *
- * @author New HP
- */
+import academicguidancehub.CreateNewIntake;
+import javax.swing.JOptionPane;
+
+
 public class AdminCreateNewIntake extends javax.swing.JFrame {
 
     /**
@@ -17,6 +17,8 @@ public class AdminCreateNewIntake extends javax.swing.JFrame {
         initComponents();
         setSize(800,600);
         setResizable(false);
+        
+        
     }
 
     /**
@@ -34,17 +36,17 @@ public class AdminCreateNewIntake extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        startDate = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        createBt = new javax.swing.JButton();
+        cancelBt = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        intakeName = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        intakeCode1 = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -61,6 +63,7 @@ public class AdminCreateNewIntake extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/CreateNewIntake1.png"))); // NOI18N
+        jLabel8.setText("CreateNewIntake1.png");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,35 +109,41 @@ public class AdminCreateNewIntake extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel4.setText("Intake Code:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 190, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, -1, -1));
+
+        startDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(startDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 210, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel5.setText("Intake Name:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, 190, 40));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel6.setText("Start Date:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 190, 40));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jLabel7.setText("End Date:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, -1, 20));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 190, 40));
+        createBt.setBackground(new java.awt.Color(255, 51, 51));
+        createBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        createBt.setForeground(new java.awt.Color(255, 255, 255));
+        createBt.setText("Create");
+        createBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                createBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(createBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 480, 110, 40));
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Create");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 500, 110, 40));
-
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton2.setText("Cancel");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, 100, 40));
+        cancelBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        cancelBt.setText("Cancel");
+        cancelBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 480, 100, 40));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/CreateNewIntake2.png"))); // NOI18N
+        jLabel9.setText("CreateNewIntake2.png");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -151,8 +160,50 @@ public class AdminCreateNewIntake extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 160, 600));
 
+        intakeName.setColumns(20);
+        intakeName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        intakeName.setRows(5);
+        jScrollPane1.setViewportView(intakeName);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, 210, 100));
+
+        jLabel1.setText("Example: (9 May 2024)");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, -1, -1));
+
+        intakeCode1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(intakeCode1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 210, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void createBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createBtMouseClicked
+        String intakeC = intakeCode1.getText().toUpperCase();
+        String intakeN = intakeName.getText().toUpperCase();
+        String intakeD = startDate.getText();
+        
+        if (intakeC.isEmpty() || intakeN.isEmpty() || intakeD.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        CreateNewIntake.createNewIntake(intakeC,intakeN,intakeD);
+        
+        JOptionPane.showMessageDialog(this, "New intake created successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+    
+        intakeCode1.setText("");
+        intakeName.setText("");
+        startDate.setText("");
+        
+        this.dispose();
+        AdminDashboard obj = new AdminDashboard();
+        obj.setVisible(true);
+    }//GEN-LAST:event_createBtMouseClicked
+
+    private void cancelBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtMouseClicked
+        this.dispose();
+        AdminDashboard obj = new AdminDashboard();
+        obj.setVisible(true);
+    }//GEN-LAST:event_cancelBtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -193,22 +244,22 @@ public class AdminCreateNewIntake extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelBt;
+    private javax.swing.JButton createBt;
+    private javax.swing.JTextField intakeCode1;
+    private javax.swing.JTextArea intakeName;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField startDate;
     // End of variables declaration//GEN-END:variables
 }
