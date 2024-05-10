@@ -4,6 +4,20 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileReaderUtils;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.Line;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author New HP
@@ -15,8 +29,37 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
      */
     public AdminAmendStudentLecturerDetails() {
         initComponents();
-        setSize(1000,600);
+        setSize(1000,630);
         setResizable(false);
+        editStudentBt.setVisible(false);
+        editLecturerBt.setVisible(false);
+        studentIntake.setVisible(false);
+        intakeCb.setVisible(false);
+        searchLabel.setVisible(false);
+        searchTf.setVisible(false);
+        
+        ArrayList<String[]> intakesdataList = new ArrayList<>();
+        
+        String[] allOption = {"All"};
+        intakeCb.addItem("All");
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/intakesType.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(";");
+                intakeCb.addItem(values[0]);
+                intakesdataList.add(values);
+            }
+
+            // Convert ArrayList to a 2D String array
+            String[][] data = new String[intakesdataList.size()][];
+            for (int i = 0; i < intakesdataList.size(); i++) {
+                data[i] = intakesdataList.get(i);
+            }
+            //return data;
+        } catch (IOException e) {
+            //return null;
+        }
     }
 
     /**
@@ -33,20 +76,22 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
+        roleCb = new javax.swing.JComboBox<>();
+        searchLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton4 = new javax.swing.JButton();
+        infoTb = new javax.swing.JTable();
+        backBt = new javax.swing.JButton();
+        removeBt = new javax.swing.JButton();
+        editLecturerBt = new javax.swing.JButton();
+        studentIntake = new javax.swing.JLabel();
+        intakeCb = new javax.swing.JComboBox<>();
+        editStudentBt = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        searchTf = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -99,62 +144,87 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 170, 30));
+        roleCb.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        roleCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<null>", "Student", "All Staff", "Lecturer", "Supervisor", "Second Marker" }));
+        roleCb.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                roleCbItemStateChanged(evt);
+            }
+        });
+        roleCb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                roleCbMouseClicked(evt);
+            }
+        });
+        getContentPane().add(roleCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 170, 30));
 
-        jLabel5.setText("Search Role:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, -1, -1));
+        searchLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchLabel.setText("Search:");
+        getContentPane().add(searchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        infoTb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(infoTb);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 750, 280));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 750, 260));
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 51, 51));
-        jButton1.setText("Back");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 510, 80, 30));
+        backBt.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        backBt.setForeground(new java.awt.Color(255, 51, 51));
+        backBt.setText("Back");
+        backBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(backBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 540, 90, 30));
 
-        jButton2.setBackground(new java.awt.Color(102, 102, 0));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 102));
-        jButton2.setText("Remove");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 510, 100, 30));
+        removeBt.setBackground(new java.awt.Color(102, 102, 0));
+        removeBt.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        removeBt.setForeground(new java.awt.Color(255, 255, 102));
+        removeBt.setText("Remove");
+        getContentPane().add(removeBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 540, 100, 30));
 
-        jButton3.setBackground(new java.awt.Color(153, 153, 0));
-        jButton3.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 204));
-        jButton3.setText("Edit");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 510, 100, 30));
+        editLecturerBt.setBackground(new java.awt.Color(153, 153, 0));
+        editLecturerBt.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        editLecturerBt.setForeground(new java.awt.Color(255, 255, 204));
+        editLecturerBt.setText("Edit");
+        getContentPane().add(editLecturerBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 540, 100, 30));
 
-        jLabel6.setText("Intake:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, -1, -1));
+        studentIntake.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        studentIntake.setText("Student Intake:");
+        getContentPane().add(studentIntake, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 200, 30));
+        intakeCb.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        intakeCb.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                intakeCbItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(intakeCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 200, 30));
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 204));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setText("Confirm");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 510, 100, 30));
+        editStudentBt.setBackground(new java.awt.Color(255, 255, 204));
+        editStudentBt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editStudentBt.setText("Edit");
+        editStudentBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editStudentBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(editStudentBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, 100, 30));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/edit_backgrnd.png"))); // NOI18N
+        jLabel7.setText("edit_backgrnd.png");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,25 +235,309 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, 550));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/edit2_bckgrd.png"))); // NOI18N
+        jLabel3.setText("edit2_bckgrd.png");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel3)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGap(0, 604, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 100, -1, 620));
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setText("Search Role:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, -1, -1));
+
+        searchTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchTf.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                searchTfCaretUpdate(evt);
+            }
+        });
+        getContentPane().add(searchTf, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 202, 270, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtMouseClicked
+        this.dispose();
+        AdminDashboard obj = new AdminDashboard();
+        obj.setVisible(true);
+    }//GEN-LAST:event_backBtMouseClicked
+
+    private void editStudentBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editStudentBtMouseClicked
+        this.dispose();
+        AdminEditStudentLecturer obj = new AdminEditStudentLecturer();
+        obj.setVisible(true);
+    }//GEN-LAST:event_editStudentBtMouseClicked
+
+    private void roleCbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roleCbMouseClicked
+        
+    }//GEN-LAST:event_roleCbMouseClicked
+
+    private void roleCbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_roleCbItemStateChanged
+        String searchText = searchTf.getText().trim();
+        String selectedRole = roleCb.getSelectedItem().toString();
+        
+        if(!searchText.isEmpty()){
+            if (selectedRole.equals("Student")) {
+                studentIntake.setVisible(true);
+                intakeCb.setVisible(true);
+
+
+                searchLabel.setVisible(true);
+                searchTf.setVisible(true);
+
+                String filePathClassType = "src/textfiles/Students.txt";
+                String delimiter = ";";
+                int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 7};
+                String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+                if (classTypeData != null) {
+                    DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                    classTypeTableModel.addColumn("Student ID");
+                    classTypeTableModel.addColumn("Name");
+                    classTypeTableModel.addColumn("Password");
+                    classTypeTableModel.addColumn("Email");
+                    classTypeTableModel.addColumn("Contact");
+                    classTypeTableModel.addColumn("Create Date");
+                    classTypeTableModel.addColumn("Intake Code");
+
+                    for (String[] row : classTypeData) {
+                        classTypeTableModel.addRow(row);
+                    }
+
+                    infoTb.setModel(classTypeTableModel);
+                }
+            } else if (selectedRole.equals("Lecturer")) {
+                studentIntake.setVisible(false);
+                intakeCb.setVisible(false);
+
+                searchLabel.setVisible(true);
+                searchTf.setVisible(true);
+
+                String filePathClassType = "src/textfiles/Lecturer.txt";
+                String delimiter = ";";
+                int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
+                String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+                if (classTypeData != null) {
+                    DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                    classTypeTableModel.addColumn("Lecturer ID");
+                    classTypeTableModel.addColumn("Name");
+                    classTypeTableModel.addColumn("Password");
+                    classTypeTableModel.addColumn("Email");
+                    classTypeTableModel.addColumn("Contact");
+                    classTypeTableModel.addColumn("Create Date");
+
+                    for (String[] row : classTypeData) {
+                        classTypeTableModel.addRow(row);
+                    }
+
+                    infoTb.setModel(classTypeTableModel);
+                }
+            } else if (selectedRole.equals("Supervisor")) {
+                studentIntake.setVisible(false);
+                intakeCb.setVisible(false);
+
+                searchLabel.setVisible(true);
+                searchTf.setVisible(true);
+
+                String filePathClassType = "src/textfiles/Supervisor.txt";
+                String delimiter = ";";
+                int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
+                String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+                if (classTypeData != null) {
+                    DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                    classTypeTableModel.addColumn("Supervisor ID");
+                    classTypeTableModel.addColumn("Name");
+                    classTypeTableModel.addColumn("Password");
+                    classTypeTableModel.addColumn("Email");
+                    classTypeTableModel.addColumn("Contact");
+                    classTypeTableModel.addColumn("Create Date");
+
+                    for (String[] row : classTypeData) {
+                        classTypeTableModel.addRow(row);
+                    }
+
+                    infoTb.setModel(classTypeTableModel);
+                }
+            } else if (selectedRole.equals("Second Marker")) {
+                studentIntake.setVisible(false);
+                intakeCb.setVisible(false);
+
+                searchLabel.setVisible(true);
+                searchTf.setVisible(true);
+
+                String filePathClassType = "src/textfiles/SecondMarker.txt";
+                String delimiter = ";";
+                int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
+                String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+                if (classTypeData != null) {
+                    DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                    classTypeTableModel.addColumn("Second Marker ID");
+                    classTypeTableModel.addColumn("Name");
+                    classTypeTableModel.addColumn("Password");
+                    classTypeTableModel.addColumn("Email");
+                    classTypeTableModel.addColumn("Contact");
+                    classTypeTableModel.addColumn("Create Date");
+
+                    for (String[] row : classTypeData) {
+                        classTypeTableModel.addRow(row);
+                    }
+
+                    infoTb.setModel(classTypeTableModel);
+                }
+            } else if (selectedRole.equals("All Staff")){
+                studentIntake.setVisible(false);
+                intakeCb.setVisible(false);
+
+                searchLabel.setVisible(true);
+                searchTf.setVisible(true);
+
+                String filePathClassType = "src/textfiles/Staff.txt";
+                String delimiter = ";";
+                int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 6};
+                String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+                if (classTypeData != null) {
+                    DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                    classTypeTableModel.addColumn("Staff ID");
+                    classTypeTableModel.addColumn("Name");
+                    classTypeTableModel.addColumn("Password");
+                    classTypeTableModel.addColumn("Email");
+                    classTypeTableModel.addColumn("Contact");
+                    classTypeTableModel.addColumn("Create Date");
+                    classTypeTableModel.addColumn("Role");
+
+                    for (String[] row : classTypeData) {
+                        classTypeTableModel.addRow(row);
+                    }
+
+                    infoTb.setModel(classTypeTableModel);
+                }
+            } else if (selectedRole.equals("<null>")){
+                studentIntake.setVisible(false);
+                intakeCb.setVisible(false);
+
+                searchLabel.setVisible(false);
+                searchTf.setVisible(false);
+
+                DefaultTableModel model = new DefaultTableModel();
+                infoTb.setModel(model);
+            }
+        } else{
+            roleCbItemStateChanged(null);
+        }
+    }//GEN-LAST:event_roleCbItemStateChanged
+
+    private void intakeCbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_intakeCbItemStateChanged
+        String selectedIntake = intakeCb.getSelectedItem().toString();
+        
+        String selectedRole = roleCb.getSelectedItem().toString();
+        if (selectedRole.equals("Student")) {
+            if(selectedIntake.equals("All")){
+                String filePathClassType = "src/textfiles/Students.txt";
+                String delimiter = ";";
+                int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 7};
+                String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+                if (classTypeData != null) {
+                    DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                    classTypeTableModel.addColumn("Student ID");
+                    classTypeTableModel.addColumn("Name");
+                    classTypeTableModel.addColumn("Password");
+                    classTypeTableModel.addColumn("Email");
+                    classTypeTableModel.addColumn("Contact");
+                    classTypeTableModel.addColumn("Create Date");
+                    classTypeTableModel.addColumn("Intake Code");
+
+                    for (String[] row : classTypeData) {
+                        classTypeTableModel.addRow(row);
+                    }
+
+                    infoTb.setModel(classTypeTableModel);
+                }
+            } else{
+                String filePathClassType = "src/textfiles/Student"+selectedIntake+".txt";
+                String delimiter = ";";
+                int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 7};
+                String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+                if (classTypeData != null) {
+                    DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                    classTypeTableModel.addColumn("Student ID");
+                    classTypeTableModel.addColumn("Name");
+                    classTypeTableModel.addColumn("Password");
+                    classTypeTableModel.addColumn("Email");
+                    classTypeTableModel.addColumn("Contact");
+                    classTypeTableModel.addColumn("Create Date");
+                    classTypeTableModel.addColumn("Intake Code");
+
+                    for (String[] row : classTypeData) {
+                        classTypeTableModel.addRow(row);
+                    }
+
+                    infoTb.setModel(classTypeTableModel);
+                }
+            }
+        }
+    }//GEN-LAST:event_intakeCbItemStateChanged
+
+    private void searchTfCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_searchTfCaretUpdate
+//        DefaultTableModel model = new DefaultTableModel();
+//        infoTb.setModel(model);
+//        
+//        String selectedRole = roleCb.getSelectedItem().toString();
+//        String searchText = searchTf.getText().trim();
+//        
+//        if (selectedRole.equals("Student")) {
+//            String selectedIntake = intakeCb.getSelectedItem().toString();
+//            if(selectedIntake.equals("All")){
+//                String filePath = "src/textfiles/Students.txt";
+//                int[] columnIndices = {0, 1, 2, 3, 4, 5, 7};
+//                studentPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+//            } else {
+//                String filePath = "src/textfiles/Student"+selectedIntake+".txt";
+//                int[] columnIndices = {0, 1, 2, 3, 4, 5, 7};
+//                studentPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+//            }
+//        } else if (selectedRole.equals("Lecturer")){
+//            String filePath = "src/textfiles/Lecturer.txt";
+//            int[] columnIndices = {0, 1, 2, 3, 4, 5};
+//            lecsupsecPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+//        } else if (selectedRole.equals("Supervisor")){
+//            String filePath = "src/textfiles/Supervisor.txt";
+//            int[] columnIndices = {0, 1, 2, 3, 4, 5};
+//            lecsupsecPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+//        } else if (selectedRole.equals("Second Marker")) {
+//            String filePath = "src/textfiles/SecondMarker.txt";
+//            int[] columnIndices = {0, 1, 2, 3, 4, 5};
+//            lecsupsecPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+//        } else if (selectedRole.equals("All Staff")){
+//            String filePath = "src/textfiles/Staff.txt";
+//            int[] columnIndices = {0, 1, 2, 3, 4, 5, 6};
+//            staffPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+//        } else {
+//            studentIntake.setVisible(false);
+//            intakeCb.setVisible(false);
+//            
+//            searchLabel.setVisible(false);
+//            searchTf.setVisible(false);
+//            
+//            infoTb.setModel(model);
+//        }
+    }//GEN-LAST:event_searchTfCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -213,7 +567,6 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -224,24 +577,101 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton backBt;
+    private javax.swing.JButton editLecturerBt;
+    private javax.swing.JButton editStudentBt;
+    private javax.swing.JTable infoTb;
+    private javax.swing.JComboBox<String> intakeCb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton removeBt;
+    private javax.swing.JComboBox<String> roleCb;
+    private javax.swing.JLabel searchLabel;
+    private javax.swing.JTextField searchTf;
+    private javax.swing.JLabel studentIntake;
     // End of variables declaration//GEN-END:variables
+
+    private void staffPerformSearchAndUpdateTable(String searchText, String filePath, int[] columnIndices) {
+        DefaultTableModel model = new DefaultTableModel();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            model.setColumnIdentifiers(new Object[]{"Staff ID","Name","Password","Email","Contact","Create Date","Role"});
+
+            while ((line = reader.readLine()) != null) {
+                String[] rowData = line.split(";");
+
+                for (int columnIndex : columnIndices) {
+                    if (rowData[columnIndex].toLowerCase().contains(searchText.toLowerCase())) {
+                        model.addRow(rowData);
+                        break; 
+                    }
+                }
+            }
+
+            infoTb.setModel(model);
+        } catch (IOException e) {
+            e.printStackTrace(); 
+        }
+    }
+
+    private void studentPerformSearchAndUpdateTable(String searchText, String filePath, int[] columnIndices) {
+        DefaultTableModel model = new DefaultTableModel();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            model.setColumnIdentifiers(new Object[]{"Student ID","Name","Password","Email","Contact","Create Date","Intake Code"});
+
+            while ((line = reader.readLine()) != null) {
+                String[] rowData = line.split(";");
+
+                for (int columnIndex : columnIndices) {
+                    if (rowData[columnIndex].toLowerCase().contains(searchText.toLowerCase())) {
+                        model.addRow(rowData);
+                        break; 
+                    }
+                }
+            }
+
+            infoTb.setModel(model);
+        } catch (IOException e) {
+            e.printStackTrace(); 
+        }
+    }
+
+    private void lecsupsecPerformSearchAndUpdateTable(String searchText, String filePath, int[] columnIndices) {
+        DefaultTableModel model = new DefaultTableModel();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            model.setColumnIdentifiers(new Object[]{"Staff ID","Name","Password","Email","Contact","Create Date"});
+
+            while ((line = reader.readLine()) != null) {
+                String[] rowData = line.split(";");
+
+                for (int columnIndex : columnIndices) {
+                    if (rowData[columnIndex].toLowerCase().contains(searchText.toLowerCase())) {
+                        model.addRow(rowData);
+                        break; 
+                    }
+                }
+            }
+
+            infoTb.setModel(model);
+        } catch (IOException e) {
+            e.printStackTrace(); 
+        }
+    }
 }
