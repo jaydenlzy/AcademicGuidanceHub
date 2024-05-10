@@ -40,9 +40,11 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
         
         ArrayList<String[]> intakesdataList = new ArrayList<>();
         
+        // Add "All" option
         String[] allOption = {"All"};
         intakeCb.addItem("All");
         
+        // Read items from the text file and populate combo box
         try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/intakesType.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -50,15 +52,8 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
                 intakeCb.addItem(values[0]);
                 intakesdataList.add(values);
             }
-
-            // Convert ArrayList to a 2D String array
-            String[][] data = new String[intakesdataList.size()][];
-            for (int i = 0; i < intakesdataList.size(); i++) {
-                data[i] = intakesdataList.get(i);
-            }
-            //return data;
         } catch (IOException e) {
-            //return null;
+            e.printStackTrace();
         }
     }
 
@@ -284,161 +279,158 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_roleCbMouseClicked
 
     private void roleCbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_roleCbItemStateChanged
-        String searchText = searchTf.getText().trim();
+        searchLabel.setVisible(true);
+        searchTf.setVisible(true);
+        
         String selectedRole = roleCb.getSelectedItem().toString();
         
-        if(!searchText.isEmpty()){
-            if (selectedRole.equals("Student")) {
-                studentIntake.setVisible(true);
-                intakeCb.setVisible(true);
+        if (selectedRole.equals("Student")) {
+            studentIntake.setVisible(true);
+            intakeCb.setVisible(true);
 
+            searchLabel.setVisible(true);
+            searchTf.setVisible(true);
 
-                searchLabel.setVisible(true);
-                searchTf.setVisible(true);
+            String filePathClassType = "src/textfiles/Students.txt";
+            String delimiter = ";";
+            int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 7};
+            String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
 
-                String filePathClassType = "src/textfiles/Students.txt";
-                String delimiter = ";";
-                int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 7};
-                String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+            if (classTypeData != null) {
+                DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                classTypeTableModel.addColumn("Student ID");
+                classTypeTableModel.addColumn("Name");
+                classTypeTableModel.addColumn("Password");
+                classTypeTableModel.addColumn("Email");
+                classTypeTableModel.addColumn("Contact");
+                classTypeTableModel.addColumn("Create Date");
+                classTypeTableModel.addColumn("Intake Code");
 
-                if (classTypeData != null) {
-                    DefaultTableModel classTypeTableModel = new DefaultTableModel();
-                    classTypeTableModel.addColumn("Student ID");
-                    classTypeTableModel.addColumn("Name");
-                    classTypeTableModel.addColumn("Password");
-                    classTypeTableModel.addColumn("Email");
-                    classTypeTableModel.addColumn("Contact");
-                    classTypeTableModel.addColumn("Create Date");
-                    classTypeTableModel.addColumn("Intake Code");
-
-                    for (String[] row : classTypeData) {
-                        classTypeTableModel.addRow(row);
-                    }
-
-                    infoTb.setModel(classTypeTableModel);
+                for (String[] row : classTypeData) {
+                    classTypeTableModel.addRow(row);
                 }
-            } else if (selectedRole.equals("Lecturer")) {
-                studentIntake.setVisible(false);
-                intakeCb.setVisible(false);
 
-                searchLabel.setVisible(true);
-                searchTf.setVisible(true);
-
-                String filePathClassType = "src/textfiles/Lecturer.txt";
-                String delimiter = ";";
-                int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
-                String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
-
-                if (classTypeData != null) {
-                    DefaultTableModel classTypeTableModel = new DefaultTableModel();
-                    classTypeTableModel.addColumn("Lecturer ID");
-                    classTypeTableModel.addColumn("Name");
-                    classTypeTableModel.addColumn("Password");
-                    classTypeTableModel.addColumn("Email");
-                    classTypeTableModel.addColumn("Contact");
-                    classTypeTableModel.addColumn("Create Date");
-
-                    for (String[] row : classTypeData) {
-                        classTypeTableModel.addRow(row);
-                    }
-
-                    infoTb.setModel(classTypeTableModel);
-                }
-            } else if (selectedRole.equals("Supervisor")) {
-                studentIntake.setVisible(false);
-                intakeCb.setVisible(false);
-
-                searchLabel.setVisible(true);
-                searchTf.setVisible(true);
-
-                String filePathClassType = "src/textfiles/Supervisor.txt";
-                String delimiter = ";";
-                int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
-                String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
-
-                if (classTypeData != null) {
-                    DefaultTableModel classTypeTableModel = new DefaultTableModel();
-                    classTypeTableModel.addColumn("Supervisor ID");
-                    classTypeTableModel.addColumn("Name");
-                    classTypeTableModel.addColumn("Password");
-                    classTypeTableModel.addColumn("Email");
-                    classTypeTableModel.addColumn("Contact");
-                    classTypeTableModel.addColumn("Create Date");
-
-                    for (String[] row : classTypeData) {
-                        classTypeTableModel.addRow(row);
-                    }
-
-                    infoTb.setModel(classTypeTableModel);
-                }
-            } else if (selectedRole.equals("Second Marker")) {
-                studentIntake.setVisible(false);
-                intakeCb.setVisible(false);
-
-                searchLabel.setVisible(true);
-                searchTf.setVisible(true);
-
-                String filePathClassType = "src/textfiles/SecondMarker.txt";
-                String delimiter = ";";
-                int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
-                String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
-
-                if (classTypeData != null) {
-                    DefaultTableModel classTypeTableModel = new DefaultTableModel();
-                    classTypeTableModel.addColumn("Second Marker ID");
-                    classTypeTableModel.addColumn("Name");
-                    classTypeTableModel.addColumn("Password");
-                    classTypeTableModel.addColumn("Email");
-                    classTypeTableModel.addColumn("Contact");
-                    classTypeTableModel.addColumn("Create Date");
-
-                    for (String[] row : classTypeData) {
-                        classTypeTableModel.addRow(row);
-                    }
-
-                    infoTb.setModel(classTypeTableModel);
-                }
-            } else if (selectedRole.equals("All Staff")){
-                studentIntake.setVisible(false);
-                intakeCb.setVisible(false);
-
-                searchLabel.setVisible(true);
-                searchTf.setVisible(true);
-
-                String filePathClassType = "src/textfiles/Staff.txt";
-                String delimiter = ";";
-                int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 6};
-                String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
-
-                if (classTypeData != null) {
-                    DefaultTableModel classTypeTableModel = new DefaultTableModel();
-                    classTypeTableModel.addColumn("Staff ID");
-                    classTypeTableModel.addColumn("Name");
-                    classTypeTableModel.addColumn("Password");
-                    classTypeTableModel.addColumn("Email");
-                    classTypeTableModel.addColumn("Contact");
-                    classTypeTableModel.addColumn("Create Date");
-                    classTypeTableModel.addColumn("Role");
-
-                    for (String[] row : classTypeData) {
-                        classTypeTableModel.addRow(row);
-                    }
-
-                    infoTb.setModel(classTypeTableModel);
-                }
-            } else if (selectedRole.equals("<null>")){
-                studentIntake.setVisible(false);
-                intakeCb.setVisible(false);
-
-                searchLabel.setVisible(false);
-                searchTf.setVisible(false);
-
-                DefaultTableModel model = new DefaultTableModel();
-                infoTb.setModel(model);
+                infoTb.setModel(classTypeTableModel);
             }
-        } else{
-            roleCbItemStateChanged(null);
-        }
+        } else if (selectedRole.equals("Lecturer")) {
+            studentIntake.setVisible(false);
+            intakeCb.setVisible(false);
+
+            searchLabel.setVisible(true);
+            searchTf.setVisible(true);
+
+            String filePathClassType = "src/textfiles/Lecturer.txt";
+            String delimiter = ";";
+            int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
+            String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+            if (classTypeData != null) {
+                DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                classTypeTableModel.addColumn("Lecturer ID");
+                classTypeTableModel.addColumn("Name");
+                classTypeTableModel.addColumn("Password");
+                classTypeTableModel.addColumn("Email");
+                classTypeTableModel.addColumn("Contact");
+                classTypeTableModel.addColumn("Create Date");
+
+                for (String[] row : classTypeData) {
+                    classTypeTableModel.addRow(row);
+                }
+
+                infoTb.setModel(classTypeTableModel);
+            }
+        } else if (selectedRole.equals("Supervisor")) {
+            studentIntake.setVisible(false);
+            intakeCb.setVisible(false);
+
+            searchLabel.setVisible(true);
+            searchTf.setVisible(true);
+
+            String filePathClassType = "src/textfiles/Supervisor.txt";
+            String delimiter = ";";
+            int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
+            String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+            if (classTypeData != null) {
+                DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                classTypeTableModel.addColumn("Supervisor ID");
+                classTypeTableModel.addColumn("Name");
+                classTypeTableModel.addColumn("Password");
+                classTypeTableModel.addColumn("Email");
+                classTypeTableModel.addColumn("Contact");
+                classTypeTableModel.addColumn("Create Date");
+
+                for (String[] row : classTypeData) {
+                    classTypeTableModel.addRow(row);
+                }
+
+                infoTb.setModel(classTypeTableModel);
+            }
+        } else if (selectedRole.equals("Second Marker")) {
+            studentIntake.setVisible(false);
+            intakeCb.setVisible(false);
+
+            searchLabel.setVisible(true);
+            searchTf.setVisible(true);
+
+            String filePathClassType = "src/textfiles/SecondMarker.txt";
+            String delimiter = ";";
+            int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
+            String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+            if (classTypeData != null) {
+                DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                classTypeTableModel.addColumn("Second Marker ID");
+                classTypeTableModel.addColumn("Name");
+                classTypeTableModel.addColumn("Password");
+                classTypeTableModel.addColumn("Email");
+                classTypeTableModel.addColumn("Contact");
+                classTypeTableModel.addColumn("Create Date");
+
+                for (String[] row : classTypeData) {
+                    classTypeTableModel.addRow(row);
+                }
+
+                infoTb.setModel(classTypeTableModel);
+            }
+        } else if (selectedRole.equals("All Staff")){
+            studentIntake.setVisible(false);
+            intakeCb.setVisible(false);
+
+            searchLabel.setVisible(true);
+            searchTf.setVisible(true);
+
+            String filePathClassType = "src/textfiles/Staff.txt";
+            String delimiter = ";";
+            int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 6};
+            String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+            if (classTypeData != null) {
+                DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                classTypeTableModel.addColumn("Staff ID");
+                classTypeTableModel.addColumn("Name");
+                classTypeTableModel.addColumn("Password");
+                classTypeTableModel.addColumn("Email");
+                classTypeTableModel.addColumn("Contact");
+                classTypeTableModel.addColumn("Create Date");
+                classTypeTableModel.addColumn("Role");
+
+                for (String[] row : classTypeData) {
+                    classTypeTableModel.addRow(row);
+                }
+
+                infoTb.setModel(classTypeTableModel);
+            }
+        } else if (selectedRole.equals("<null>")){
+            studentIntake.setVisible(false);
+            intakeCb.setVisible(false);
+
+            searchLabel.setVisible(false);
+            searchTf.setVisible(false);
+
+            DefaultTableModel model = new DefaultTableModel();
+            infoTb.setModel(model);
+        }        
     }//GEN-LAST:event_roleCbItemStateChanged
 
     private void intakeCbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_intakeCbItemStateChanged
@@ -495,48 +487,112 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_intakeCbItemStateChanged
 
     private void searchTfCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_searchTfCaretUpdate
-//        DefaultTableModel model = new DefaultTableModel();
-//        infoTb.setModel(model);
-//        
-//        String selectedRole = roleCb.getSelectedItem().toString();
-//        String searchText = searchTf.getText().trim();
-//        
-//        if (selectedRole.equals("Student")) {
-//            String selectedIntake = intakeCb.getSelectedItem().toString();
-//            if(selectedIntake.equals("All")){
-//                String filePath = "src/textfiles/Students.txt";
-//                int[] columnIndices = {0, 1, 2, 3, 4, 5, 7};
-//                studentPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
-//            } else {
-//                String filePath = "src/textfiles/Student"+selectedIntake+".txt";
-//                int[] columnIndices = {0, 1, 2, 3, 4, 5, 7};
-//                studentPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
-//            }
-//        } else if (selectedRole.equals("Lecturer")){
-//            String filePath = "src/textfiles/Lecturer.txt";
-//            int[] columnIndices = {0, 1, 2, 3, 4, 5};
-//            lecsupsecPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
-//        } else if (selectedRole.equals("Supervisor")){
-//            String filePath = "src/textfiles/Supervisor.txt";
-//            int[] columnIndices = {0, 1, 2, 3, 4, 5};
-//            lecsupsecPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
-//        } else if (selectedRole.equals("Second Marker")) {
-//            String filePath = "src/textfiles/SecondMarker.txt";
-//            int[] columnIndices = {0, 1, 2, 3, 4, 5};
-//            lecsupsecPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
-//        } else if (selectedRole.equals("All Staff")){
-//            String filePath = "src/textfiles/Staff.txt";
-//            int[] columnIndices = {0, 1, 2, 3, 4, 5, 6};
-//            staffPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
-//        } else {
-//            studentIntake.setVisible(false);
-//            intakeCb.setVisible(false);
-//            
-//            searchLabel.setVisible(false);
-//            searchTf.setVisible(false);
-//            
-//            infoTb.setModel(model);
-//        }
+        String searchText = searchTf.getText().trim();
+        DefaultTableModel model = new DefaultTableModel();
+        infoTb.setModel(model);
+        String selectedRole = roleCb.getSelectedItem().toString();
+        
+        
+            if (selectedRole.equals("Student")) {
+                String selectedIntake = intakeCb.getSelectedItem().toString();
+                if(searchText.isEmpty()){
+                    if(selectedIntake.equals("All")){
+                        String filePathClassType = "src/textfiles/Students.txt";
+                        String delimiter = ";";
+                        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 7};
+                        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+                        if (classTypeData != null) {
+                            DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                            classTypeTableModel.addColumn("Student ID");
+                            classTypeTableModel.addColumn("Name");
+                            classTypeTableModel.addColumn("Password");
+                            classTypeTableModel.addColumn("Email");
+                            classTypeTableModel.addColumn("Contact");
+                            classTypeTableModel.addColumn("Create Date");
+                            classTypeTableModel.addColumn("Intake Code");
+
+                            for (String[] row : classTypeData) {
+                                classTypeTableModel.addRow(row);
+                            }
+
+                            infoTb.setModel(classTypeTableModel);
+                        }
+                    } else{
+                        String filePathClassType = "src/textfiles/Student"+selectedIntake+".txt";
+                        String delimiter = ";";
+                        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 7};
+                        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+                        if (classTypeData != null) {
+                            DefaultTableModel classTypeTableModel = new DefaultTableModel();
+                            classTypeTableModel.addColumn("Student ID");
+                            classTypeTableModel.addColumn("Name");
+                            classTypeTableModel.addColumn("Password");
+                            classTypeTableModel.addColumn("Email");
+                            classTypeTableModel.addColumn("Contact");
+                            classTypeTableModel.addColumn("Create Date");
+                            classTypeTableModel.addColumn("Intake Code");
+
+                            for (String[] row : classTypeData) {
+                                classTypeTableModel.addRow(row);
+                            }
+
+                            infoTb.setModel(classTypeTableModel);
+                        }
+                    }
+                } else{
+                    if(selectedIntake.equals("All")){
+                        String filePath = "src/textfiles/Students.txt";
+                        int[] columnIndices = {0, 1, 2, 3, 4, 5, 7};
+                        studentPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+                    } else {
+                        String filePath = "src/textfiles/Student"+selectedIntake+".txt";
+                        int[] columnIndices = {0, 1, 2, 3, 4, 5, 7};
+                        studentPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+                    }
+                }
+            } else if (selectedRole.equals("Lecturer")){
+                String filePath = "src/textfiles/Lecturer.txt";
+                int[] columnIndices = {0, 1, 2, 3, 4, 5};
+                if(!searchText.isEmpty()){
+                    lecsupsecPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+                }else{
+                    roleCbItemStateChanged(null);
+                }
+            } else if (selectedRole.equals("Supervisor")){
+                String filePath = "src/textfiles/Supervisor.txt";
+                int[] columnIndices = {0, 1, 2, 3, 4, 5};
+                if(!searchText.isEmpty()){
+                    lecsupsecPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+                }else{
+                    roleCbItemStateChanged(null);
+                }
+            } else if (selectedRole.equals("Second Marker")) {
+                String filePath = "src/textfiles/SecondMarker.txt";
+                int[] columnIndices = {0, 1, 2, 3, 4, 5};
+                if(!searchText.isEmpty()){
+                    lecsupsecPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+                }else{
+                    roleCbItemStateChanged(null);
+                }
+            } else if (selectedRole.equals("All Staff")){
+                String filePath = "src/textfiles/Staff.txt";
+                int[] columnIndices = {0, 1, 2, 3, 4, 5, 6};
+                if(!searchText.isEmpty()){
+                    staffPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+                }else{
+                    roleCbItemStateChanged(null);
+                }
+            } else {
+                studentIntake.setVisible(false);
+                intakeCb.setVisible(false);
+
+                searchLabel.setVisible(false);
+                searchTf.setVisible(false);
+
+                infoTb.setModel(model);
+            }
     }//GEN-LAST:event_searchTfCaretUpdate
 
     /**
@@ -631,7 +687,7 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
 
-            model.setColumnIdentifiers(new Object[]{"Student ID","Name","Password","Email","Contact","Create Date","Intake Code"});
+            model.setColumnIdentifiers(new Object[]{"Student ID","Name","Password","Email","Contact","Create Date","Role","Intake Code"});
 
             while ((line = reader.readLine()) != null) {
                 String[] rowData = line.split(";");
@@ -643,7 +699,7 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
                     }
                 }
             }
-
+            
             infoTb.setModel(model);
         } catch (IOException e) {
             e.printStackTrace(); 
