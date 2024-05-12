@@ -1,2 +1,2 @@
-LC000003;Minnu Helen Joseph;LC000003#Minnu;minnuhelenjoseph@gmail.com;0179856230;create_date;Project Manager
-LC000006;CHANG ZHENG FANG;LC000006#Chang;changzhengfang@gmail.com;0189808878;create_date;Project Manager
+LC000003;Minnu Helen Joseph;LC000003#Minnu;minnuhelenjoseph@gmail.com;0179856230;Project Manager
+LC000006;CHANG ZHENG FANG;LC000006#Chang;changzhengfang@gmail.com;0189808878;Project Manager

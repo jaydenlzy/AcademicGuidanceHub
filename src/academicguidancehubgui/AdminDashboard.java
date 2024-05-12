@@ -7,6 +7,7 @@ package academicguidancehubgui;
 import academicguidancehub.FileHandler;
 import java.io.IOException;
 import academicguidancehub.FileReaderUtils;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -60,18 +61,17 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        removeIntakePanel = new javax.swing.JPanel();
-        removeIntakelabel = new javax.swing.JLabel();
-        createIntakePanel = new javax.swing.JPanel();
-        createIntakeLabel = new javax.swing.JLabel();
+        SchoolWises = new javax.swing.JPanel();
+        SchoolWise = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        Intake = new javax.swing.JPanel();
+        Intakes = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         numOfIntake = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        numOfSecondMarker = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         studentTable = new javax.swing.JTable();
         jLabel23 = new javax.swing.JLabel();
@@ -97,7 +97,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        numOfSupervisor = new javax.swing.JLabel();
+        numOfSchoolWiseList = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
 
@@ -136,6 +136,12 @@ public class AdminDashboard extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 registerStudentPanelMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                registerStudentPanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                registerStudentPanelMouseExited(evt);
+            }
         });
 
         registerStudentLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -171,6 +177,9 @@ public class AdminDashboard extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 registerLecturerPanelMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                registerLecturerPanelMouseEntered(evt);
+            }
         });
 
         registerLecturerLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -204,6 +213,9 @@ public class AdminDashboard extends javax.swing.JFrame {
         allotPMrole2Lec.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 allotPMrole2LecMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                allotPMrole2LecMouseEntered(evt);
             }
         });
 
@@ -250,6 +262,9 @@ public class AdminDashboard extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 amendSnLPanelMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                amendSnLPanelMouseEntered(evt);
+            }
         });
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
@@ -293,6 +308,9 @@ public class AdminDashboard extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logoutMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                logoutMouseEntered(evt);
+            }
         });
 
         logoutLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -331,6 +349,9 @@ public class AdminDashboard extends javax.swing.JFrame {
         editRemovePMrole.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 editRemovePMroleMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                editRemovePMroleMouseEntered(evt);
             }
         });
 
@@ -374,75 +395,119 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jLabel30.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel30.setText("Intake");
+        jLabel30.setText("Others");
 
-        removeIntakePanel.setBackground(new java.awt.Color(51, 51, 255));
-        removeIntakePanel.setPreferredSize(new java.awt.Dimension(0, 80));
-        removeIntakePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        SchoolWises.setBackground(new java.awt.Color(51, 51, 255));
+        SchoolWises.setPreferredSize(new java.awt.Dimension(0, 80));
+        SchoolWises.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                removeIntakePanelMouseClicked(evt);
+                SchoolWisesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SchoolWisesMouseEntered(evt);
             }
         });
 
-        removeIntakelabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        removeIntakelabel.setForeground(new java.awt.Color(255, 255, 255));
-        removeIntakelabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editItake.png"))); // NOI18N
-        removeIntakelabel.setText("Remove Intake");
-        removeIntakelabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        SchoolWise.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        SchoolWise.setForeground(new java.awt.Color(255, 255, 255));
+        SchoolWise.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editItake.png"))); // NOI18N
+        SchoolWise.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                removeIntakelabelMouseClicked(evt);
+                SchoolWiseMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout removeIntakePanelLayout = new javax.swing.GroupLayout(removeIntakePanel);
-        removeIntakePanel.setLayout(removeIntakePanelLayout);
-        removeIntakePanelLayout.setHorizontalGroup(
-            removeIntakePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(removeIntakePanelLayout.createSequentialGroup()
+        jLabel43.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel43.setText("Create New School Wise /");
+
+        jLabel44.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel44.setText("Remove Edit School Wise");
+
+        javax.swing.GroupLayout SchoolWisesLayout = new javax.swing.GroupLayout(SchoolWises);
+        SchoolWises.setLayout(SchoolWisesLayout);
+        SchoolWisesLayout.setHorizontalGroup(
+            SchoolWisesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SchoolWisesLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(removeIntakelabel)
+                .addComponent(SchoolWise)
+                .addGap(18, 18, 18)
+                .addGroup(SchoolWisesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel43)
+                    .addComponent(jLabel44))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        removeIntakePanelLayout.setVerticalGroup(
-            removeIntakePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(removeIntakePanelLayout.createSequentialGroup()
+        SchoolWisesLayout.setVerticalGroup(
+            SchoolWisesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SchoolWisesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(removeIntakelabel)
+                .addGroup(SchoolWisesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SchoolWisesLayout.createSequentialGroup()
+                        .addComponent(jLabel43)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel44))
+                    .addComponent(SchoolWise))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        createIntakePanel.setBackground(new java.awt.Color(51, 51, 255));
-        createIntakePanel.setPreferredSize(new java.awt.Dimension(0, 80));
-        createIntakePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        Intake.setBackground(new java.awt.Color(51, 51, 255));
+        Intake.setPreferredSize(new java.awt.Dimension(0, 80));
+        Intake.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                createIntakePanelMouseClicked(evt);
+                IntakeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                IntakeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                IntakeMouseExited(evt);
             }
         });
 
-        createIntakeLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        createIntakeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        createIntakeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/addNewIntake.png"))); // NOI18N
-        createIntakeLabel.setText("Create New Intake");
-        createIntakeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        Intakes.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Intakes.setForeground(new java.awt.Color(255, 255, 255));
+        Intakes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/addNewIntake.png"))); // NOI18N
+        Intakes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                createIntakeLabelMouseClicked(evt);
+                IntakesMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout createIntakePanelLayout = new javax.swing.GroupLayout(createIntakePanel);
-        createIntakePanel.setLayout(createIntakePanelLayout);
-        createIntakePanelLayout.setHorizontalGroup(
-            createIntakePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createIntakePanelLayout.createSequentialGroup()
+        jLabel31.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setText("Create New Intake /");
+
+        jLabel36.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setText("Remove Intake");
+
+        javax.swing.GroupLayout IntakeLayout = new javax.swing.GroupLayout(Intake);
+        Intake.setLayout(IntakeLayout);
+        IntakeLayout.setHorizontalGroup(
+            IntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IntakeLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(createIntakeLabel)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addComponent(Intakes)
+                .addGroup(IntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(IntakeLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel31))
+                    .addGroup(IntakeLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel36)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        createIntakePanelLayout.setVerticalGroup(
-            createIntakePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createIntakePanelLayout.createSequentialGroup()
+        IntakeLayout.setVerticalGroup(
+            IntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IntakeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(createIntakeLabel)
+                .addGroup(IntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(IntakeLayout.createSequentialGroup()
+                        .addComponent(jLabel31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel36))
+                    .addComponent(Intakes))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -456,8 +521,8 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(allotPMrole2Lec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(editRemovePMrole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(removeIntakePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-            .addComponent(createIntakePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+            .addComponent(SchoolWises, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+            .addComponent(Intake, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,9 +551,9 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel30)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createIntakePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Intake, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(removeIntakePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SchoolWises, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(90, Short.MAX_VALUE))
@@ -509,27 +574,6 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 400, -1));
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel10.setPreferredSize(new java.awt.Dimension(300, 35));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel18.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel18.setText("Total number of ");
-        jPanel10.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 7, -1, -1));
-
-        numOfSecondMarker.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jPanel10.add(numOfSecondMarker, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 100, -1));
-
-        jLabel20.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel20.setText("second marker");
-        jPanel10.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 32, -1, -1));
-
-        jLabel21.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel21.setText(":");
-        jPanel10.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 10, -1));
-
-        getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 450, 400, 58));
-
         studentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -540,11 +584,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(studentTable);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, 400, 190));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 400, 300));
 
         jLabel23.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jLabel23.setText("Lecturers Table");
-        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 100, -1, -1));
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, -1, -1));
 
         lecturerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -560,7 +604,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jLabel24.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jLabel24.setText("Project Manager Table");
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 560, -1, -1));
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 330, -1, -1));
 
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel11.setPreferredSize(new java.awt.Dimension(300, 40));
@@ -577,7 +621,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jLabel35.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jLabel35.setText("Students Table");
-        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 330, -1, -1));
+        getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 450, -1, -1));
 
         pmTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -589,11 +633,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(pmTable);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 580, 400, 190));
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, 400, 190));
 
         jLabel37.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jLabel37.setText("Intakes Table");
-        getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 560, -1, -1));
+        getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 560, -1, -1));
 
         intakeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -605,7 +649,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(intakeTable);
 
-        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 580, 400, 190));
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 580, 400, 190));
 
         jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel14.setPreferredSize(new java.awt.Dimension(300, 40));
@@ -649,11 +693,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel22.setText("Total number of ");
         jPanel16.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 7, -1, -1));
 
-        numOfSupervisor.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jPanel16.add(numOfSupervisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 100, -1));
+        numOfSchoolWiseList.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jPanel16.add(numOfSchoolWiseList, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 100, -1));
 
         jLabel34.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel34.setText("supervisor");
+        jLabel34.setText("school wise list");
         jPanel16.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 32, -1, -1));
 
         jLabel39.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
@@ -730,29 +774,96 @@ public class AdminDashboard extends javax.swing.JFrame {
         obj.setVisible(true);
     }//GEN-LAST:event_editRemovePMroleMouseClicked
 
-    private void createIntakePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createIntakePanelMouseClicked
-        dispose();
-        AdminCreateNewIntake obj = new AdminCreateNewIntake();
-        obj.setVisible(true);
-    }//GEN-LAST:event_createIntakePanelMouseClicked
+    private void IntakeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IntakeMouseClicked
+        String[] options = { "Create New Intake", "Remove Intake", "Cancel" };
+        var ans = JOptionPane.showOptionDialog(null, "Proceed to create new intake or remove intake page?","Choose your move.",0,3,null,options,options[0]);
+        if (ans == 0){
+            dispose();
+            AdminCreateNewIntake obj = new AdminCreateNewIntake();
+            obj.setVisible(true);
+        } 
+        if(ans == 1){
+            dispose();
+            AdminRemoveIntake obj = new AdminRemoveIntake();
+            obj.setVisible(true);
+        } 
+    }//GEN-LAST:event_IntakeMouseClicked
 
-    private void createIntakeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createIntakeLabelMouseClicked
-        dispose();
-        AdminCreateNewIntake obj = new AdminCreateNewIntake();
-        obj.setVisible(true);
-    }//GEN-LAST:event_createIntakeLabelMouseClicked
+    private void IntakesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IntakesMouseClicked
+        String[] options = { "Create New Intake", "Remove Intake", "Cancel" };
+        var ans = JOptionPane.showOptionDialog(null, "Proceed to create new intake or remove intake page?","Choose your move.",0,3,null,options,options[0]);
+        if (ans == 0){
+            dispose();
+            AdminCreateNewIntake obj = new AdminCreateNewIntake();
+            obj.setVisible(true);
+        } 
+        if(ans == 1){
+            dispose();
+            AdminRemoveIntake obj = new AdminRemoveIntake();
+            obj.setVisible(true);
+        } 
+    }//GEN-LAST:event_IntakesMouseClicked
 
-    private void removeIntakePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeIntakePanelMouseClicked
+    private void SchoolWisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SchoolWisesMouseClicked
+        String[] options = { "Create New School Wise", "Edit/Remove School Wise", "Cancel" };
+        var ans = JOptionPane.showOptionDialog(null, "Proceed to create new school wise or edit/remove school wise page?","Choose your move.",0,3,null,options,options[0]);
+        if (ans == 0){
+            dispose();
+            AdminCreateNewSchoolWise obj = new AdminCreateNewSchoolWise();
+            obj.setVisible(true);
+        } 
+        if(ans == 1){
+            dispose();
+            AdminRemoveEditSchoolWise obj = new AdminRemoveEditSchoolWise();
+            obj.setVisible(true);
+        } 
+    }//GEN-LAST:event_SchoolWisesMouseClicked
+
+    private void SchoolWiseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SchoolWiseMouseClicked
         dispose();
         AdminRemoveIntake obj = new AdminRemoveIntake();
         obj.setVisible(true);
-    }//GEN-LAST:event_removeIntakePanelMouseClicked
+    }//GEN-LAST:event_SchoolWiseMouseClicked
 
-    private void removeIntakelabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeIntakelabelMouseClicked
-        dispose();
-        AdminRemoveIntake obj = new AdminRemoveIntake();
-        obj.setVisible(true);
-    }//GEN-LAST:event_removeIntakelabelMouseClicked
+    private void IntakeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IntakeMouseEntered
+        Intake.setBackground(Color.BLUE);
+    }//GEN-LAST:event_IntakeMouseEntered
+
+    private void registerStudentPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerStudentPanelMouseEntered
+        registerStudentPanel.setBackground(Color.BLUE); 
+    }//GEN-LAST:event_registerStudentPanelMouseEntered
+
+    private void registerStudentPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerStudentPanelMouseExited
+        
+    }//GEN-LAST:event_registerStudentPanelMouseExited
+
+    private void registerLecturerPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerLecturerPanelMouseEntered
+        registerLecturerPanel.setBackground(Color.BLUE); 
+    }//GEN-LAST:event_registerLecturerPanelMouseEntered
+
+    private void amendSnLPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_amendSnLPanelMouseEntered
+        amendSnLPanel.setBackground(Color.BLUE); 
+    }//GEN-LAST:event_amendSnLPanelMouseEntered
+
+    private void allotPMrole2LecMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allotPMrole2LecMouseEntered
+        allotPMrole2Lec.setBackground(Color.BLUE);
+    }//GEN-LAST:event_allotPMrole2LecMouseEntered
+
+    private void editRemovePMroleMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editRemovePMroleMouseEntered
+        editRemovePMrole.setBackground(Color.BLUE);
+    }//GEN-LAST:event_editRemovePMroleMouseEntered
+
+    private void IntakeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IntakeMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IntakeMouseExited
+
+    private void SchoolWisesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SchoolWisesMouseEntered
+        SchoolWises.setBackground(Color.BLUE);
+    }//GEN-LAST:event_SchoolWisesMouseEntered
+
+    private void logoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseEntered
+        logout.setBackground(Color.DARK_GRAY);
+    }//GEN-LAST:event_logoutMouseEntered
 
     /**
      * @param args the command line arguments
@@ -791,10 +902,12 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Intake;
+    private javax.swing.JLabel Intakes;
+    private javax.swing.JLabel SchoolWise;
+    private javax.swing.JPanel SchoolWises;
     private javax.swing.JPanel allotPMrole2Lec;
     private javax.swing.JPanel amendSnLPanel;
-    private javax.swing.JLabel createIntakeLabel;
-    private javax.swing.JPanel createIntakePanel;
     private javax.swing.JPanel editRemovePMrole;
     private javax.swing.JTable intakeTable;
     private javax.swing.JLabel jLabel1;
@@ -802,10 +915,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -816,10 +926,12 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
@@ -827,10 +939,11 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
@@ -847,41 +960,36 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel numOfIntake;
     private javax.swing.JLabel numOfLecturer;
     private javax.swing.JLabel numOfProjectManager;
-    private javax.swing.JLabel numOfSecondMarker;
+    private javax.swing.JLabel numOfSchoolWiseList;
     private javax.swing.JLabel numOfStudent;
-    private javax.swing.JLabel numOfSupervisor;
     private javax.swing.JTable pmTable;
     private javax.swing.JLabel registerLecturerLabel;
     private javax.swing.JPanel registerLecturerPanel;
     private javax.swing.JLabel registerStudentLabel;
     private javax.swing.JPanel registerStudentPanel;
-    private javax.swing.JPanel removeIntakePanel;
-    private javax.swing.JLabel removeIntakelabel;
     private javax.swing.JTable studentTable;
     // End of variables declaration//GEN-END:variables
 
     private void updateCounts() {
         try {
-            int numOfLecturerCount = FileHandler.countRecords("src/textfiles/Lecturers.txt");
+            int numOfLecturerCount = FileHandler.countRecords("src/textfiles/Lecturer.txt");
             int numOfProjectManagerCount = FileHandler.countRecords("src/textfiles/ProjectManager.txt");
             int numOfStudentCount = FileHandler.countRecords("src/textfiles/Students.txt");
             int numOfIntakeCount = FileHandler.countRecords("src/textfiles/intakesType.txt");
-            int numOfSupervisorCount = FileHandler.countRecords("src/textfiles/Supervisors.txt");
-            int numOfSecondMarkerCount = FileHandler.countRecords("src/textfiles/SecondMarker.txt");
+            int numOfSchoolWiseListCount = FileHandler.countRecords("src/textfiles/SchoolWiseList.txt");
 
             numOfLecturer.setText(Integer.toString(numOfLecturerCount));
             numOfProjectManager.setText(Integer.toString(numOfProjectManagerCount));
             numOfStudent.setText(Integer.toString(numOfStudentCount));
             numOfIntake.setText(Integer.toString(numOfIntakeCount));
-            numOfSupervisor.setText(Integer.toString(numOfSupervisorCount));
-            numOfSecondMarker.setText(Integer.toString(numOfSecondMarkerCount));
+            numOfSchoolWiseList.setText(Integer.toString(numOfSchoolWiseListCount));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void lecturerTableContent() {
-        String filePathClassType = "src/textfiles/Lecturers.txt";
+        String filePathClassType = "src/textfiles/Lecturer.txt";
         String delimiter = ";";
         int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
         String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
@@ -893,7 +1001,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             classTypeTableModel.addColumn("Password");
             classTypeTableModel.addColumn("Email");
             classTypeTableModel.addColumn("Contact");
-            classTypeTableModel.addColumn("Create Date");
+            classTypeTableModel.addColumn("Role");
 
             for (String[] row : classTypeData) {
                 classTypeTableModel.addRow(row);
@@ -906,7 +1014,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void studentTableContent() {
         String filePathClassType = "src/textfiles/Students.txt";
         String delimiter = ";";
-        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 7};
+        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 6};
         String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
 
         if (classTypeData != null) {
@@ -916,7 +1024,6 @@ public class AdminDashboard extends javax.swing.JFrame {
             classTypeTableModel.addColumn("Password");
             classTypeTableModel.addColumn("Email");
             classTypeTableModel.addColumn("Contact");
-            classTypeTableModel.addColumn("Create Date");
             classTypeTableModel.addColumn("Intake Code");
 
             for (String[] row : classTypeData) {
@@ -930,7 +1037,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void intakesTableContent() {
         String filePathClassType = "src/textfiles/intakesType.txt";
         String delimiter = ";";
-        int[] classTypeColumnIndices = {0, 1, 2, 3};
+        int[] classTypeColumnIndices = {0, 1, 2};
         String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
 
         if (classTypeData != null) {
@@ -938,7 +1045,6 @@ public class AdminDashboard extends javax.swing.JFrame {
             classTypeTableModel.addColumn("Intake Code");
             classTypeTableModel.addColumn("Name");
             classTypeTableModel.addColumn("Start Date");
-            classTypeTableModel.addColumn("Create Date");
 
             for (String[] row : classTypeData) {
                 classTypeTableModel.addRow(row);
@@ -951,7 +1057,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void pManagerTableContent() {
         String filePathClassType = "src/textfiles/ProjectManager.txt";
         String delimiter = ";";
-        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
+        int[] classTypeColumnIndices = {0, 1, 2, 3, 4};
         String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
 
         if (classTypeData != null) {
@@ -961,7 +1067,6 @@ public class AdminDashboard extends javax.swing.JFrame {
             classTypeTableModel.addColumn("Password");
             classTypeTableModel.addColumn("Email");
             classTypeTableModel.addColumn("Contact");
-            classTypeTableModel.addColumn("Create Date");
 
             for (String[] row : classTypeData) {
                 classTypeTableModel.addRow(row);

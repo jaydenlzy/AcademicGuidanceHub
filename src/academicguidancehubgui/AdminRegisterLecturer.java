@@ -4,8 +4,11 @@
  */
 package academicguidancehubgui;
 
-import academicguidancehub.RegisterNewLecturer;
-import academicguidancehub.RegisterNewStudent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 public class AdminRegisterLecturer extends javax.swing.JFrame {
@@ -121,7 +124,7 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         
         String capitalizedName = capitalizeInitials(name);
         
-        RegisterNewLecturer.registerLecturer(capitalizedName,contact);
+        registerLecturer(capitalizedName,contact);
         
         JOptionPane.showMessageDialog(this, "Lecturer registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
     
@@ -192,5 +195,58 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
             }
         }
         return capitalized.toString().trim();
+    }
+
+    private void registerLecturer(String Name, String contact) {
+        String lecturerRecordfile = "src/textfiles/Lecturer.txt";
+        
+        var lecturerID = generateLecturerID();
+        var password = generatePassword(lecturerID, Name);
+        var email = generateEmail(Name);
+        String role = "Lecturer";
+        
+        String lecturerRecord = lecturerID + ";" + Name + ";" + password + ";" + email + ";" + contact + ";" + role;
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(lecturerRecordfile, true))) {
+            writer.write(lecturerRecord);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    private String generateLecturerID() {
+        return "LC" + String.format("%06d", getNextLecturerID());
+    }
+
+    private String generatePassword(String lecturerID, String Name) {
+        String[] parts = Name.split(" "); 
+        String firstName = parts[0]; 
+        return lecturerID + "#" + firstName;
+    }
+
+    private String generateEmail(String Name) {
+        return Name.toLowerCase().replace(" ", "") + "@gmail.com";
+    }
+
+    private int getNextLecturerID() {
+        int nextID = 0;
+        String lecturerRecordfile = "src/textfiles/Lecturer.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(lecturerRecordfile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                String lecturerID = parts[0].trim(); 
+                String number = lecturerID.substring(2); 
+                int id = Integer.parseInt(number);
+                if (id > nextID) {
+                    nextID = id;
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return nextID + 1;
     }
 }

@@ -1,2 +1,0 @@
-ST000001;CHAN XIN ZHE;ST000001@CXZ;chanxinzhe@gmail.com;0176879562;create_date;Student;UCDF2111ICT(DI)
-ST000003;KEE TING JUN;ST000003@KTJ;keetingjun@gmail.com;0182684427;create_date;Student;UCDF2111ICT(DI)

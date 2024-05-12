@@ -188,6 +188,12 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                     case "Lecturer":
                         JOptionPane.showMessageDialog(null, "Welcome to Lecturer Page.", "Lecturer Page", JOptionPane.INFORMATION_MESSAGE);
                         break;
+                    case "Supervisor":
+                        JOptionPane.showMessageDialog(null, "Welcome to Lecturer Page.", "Lecturer Page", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+                    case "SecondMarker":
+                        JOptionPane.showMessageDialog(null, "Welcome to Lecturer Page.", "Lecturer Page", JOptionPane.INFORMATION_MESSAGE);
+                        break;
                     case "Project Manager":
                         JOptionPane.showMessageDialog(null, "Welcome to Project manager Page.", "PM Page", JOptionPane.INFORMATION_MESSAGE);
                         break;
@@ -292,13 +298,23 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                 }
             }
         } else if (enteredID.startsWith("LC")) {
-            userList = reader.readUserData("src/textfiles/Staff.txt");
+            userList = reader.readUserData("src/textfiles/Lecturer.txt");
             System.out.println("User List Size: " + userList.size()); // Debugging
             for (User user : userList) {
                 System.out.println("User ID: " + user.getUserId()); // Debugging
                 if (user.getUserId().equals(enteredID)) {
                     System.out.println("User Found!"); // Debugging
                     return user;
+                } else{
+                    userList = reader.readUserData("src/textfiles/ProjectManager.txt");
+                    System.out.println("User List Size: " + userList.size()); // Debugging
+                    for (User pm : userList) {
+                        System.out.println("User ID: " + pm.getUserId()); // Debugging
+                        if (pm.getUserId().equals(enteredID)) {
+                            System.out.println("User Found!"); // Debugging
+                            return pm;
+                        }
+                    }
                 }
             }
         } else if (enteredID.startsWith("AD")) {
@@ -312,6 +328,7 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                 }
             }
         }
+        
         System.out.println("User Not Found!"); // Debugging
         return null;
     }

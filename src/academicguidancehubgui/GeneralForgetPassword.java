@@ -8,6 +8,7 @@ import academicguidancehub.User;
 import academicguidancehub.ReadOperations;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -152,7 +153,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                 String rec;
                 BufferedReader br;
                 try {
-                    br = new BufferedReader(new FileReader("src/textfiles/Staff.txt"));
+                    br = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"));
                     while ((rec = br.readLine()) != null) {
                         String[] record = rec.strip().split(";");
                         System.out.println("" + record[0]);
@@ -166,8 +167,36 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
 
                 for(int i = 0; i< staffIDs.size(); i++){
                     if(enteredID.equals(staffIDs.get(i))){
-                        UpdatePasswordStaff(enteredID, enteredPassword);
+                        UpdatePasswordLecturer(enteredID, enteredPassword);
                         break;
+                    } else{
+                        //Project Manager Part
+                        ArrayList<String> pmIDs = new ArrayList();
+                        String recc;
+                        BufferedReader brr;
+                        try {
+                            brr = new BufferedReader(new FileReader("src/textfiles/ProjectManager.txt"));
+                            while ((recc = brr.readLine()) != null) {
+                                String[] record = recc.strip().split(";");
+                                System.out.println("" + record[0]);
+                                pmIDs.add(record[0]);
+                            }
+                        } catch (FileNotFoundException ex) {
+                            Logger.getLogger(GeneralForgetPassword.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IOException ex) {
+                            Logger.getLogger(GeneralForgetPassword.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                        for(int ii = 0; ii< pmIDs.size(); ii++){
+                            if(enteredID.equals(pmIDs.get(ii))){
+                                UpdatePasswordProjectManager(enteredID, enteredPassword);
+                                break;
+                            }
+                        }
+                        JOptionPane.showMessageDialog(null, "Password reset successfully!", "PASSWORD RESET SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                        dispose();
+                        GeneralLoginPage obj = new GeneralLoginPage();
+                        obj.setVisible(true);
                     }
                 }  
                 //Message
@@ -278,13 +307,23 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                 }
             }
         } else if (enteredID.startsWith("LC")) {
-            userList = reader.readUserData("src/textfiles/Staff.txt");
+            userList = reader.readUserData("src/textfiles/Lecturer.txt");
             System.out.println("User List Size: " + userList.size()); // Debugging
             for (User user : userList) {
                 System.out.println("User ID: " + user.getUserId()); // Debugging
                 if (user.getUserId().equals(enteredID)) {
                     System.out.println("User Found!"); // Debugging
                     return user;
+                } else{
+                    userList = reader.readUserData("src/textfiles/ProjectManager.txt");
+                    System.out.println("User List Size: " + userList.size()); // Debugging
+                    for (User pm : userList) {
+                        System.out.println("User ID: " + pm.getUserId()); // Debugging
+                        if (pm.getUserId().equals(enteredID)) {
+                            System.out.println("User Found!"); // Debugging
+                            return pm;
+                        }
+                    }
                 }
             }
         } else if (enteredID.startsWith("AD")) {
@@ -298,6 +337,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                 }
             }
         }
+        
         System.out.println("User Not Found!"); // Debugging
         return null;
     }
@@ -313,31 +353,6 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                 String[] data = currentLine.split(";");
                 if (data.length >= 2 && enteredID.equals(data[0].trim())) {
                     data[2] = enteredPassword;
-                    
-                    //Update intake text file
-                    String intake = data[7];
-                    ArrayList<String> intakeIDs = new ArrayList();
-                    String recc;
-                    BufferedReader brr;
-                    try {
-                        brr = new BufferedReader(new FileReader("src/textfiles/Student"+intake+".txt"));
-                        while ((recc = brr.readLine()) != null) {
-                            String[] record = recc.strip().split(";");
-                            System.out.println("" + record[0]);
-                            intakeIDs.add(record[0]);
-                        }
-
-                    } catch (Exception ex) {
-                        Logger.getLogger(GeneralForgetPassword.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-
-                    for(int i = 0; i< intakeIDs.size(); i++){
-                        if(enteredID.equals(intakeIDs.get(i))){
-                            UpdatePasswordIntake(enteredID, enteredPassword, intake);
-                            break;
-                        }
-                    }  
                 }
                 updatedLines.add(String.join(";", data));
             }
@@ -356,8 +371,8 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
         }
     }
 
-    private void UpdatePasswordStaff(String enteredID, String enteredPassword) {
-        String filePath = "src/textfiles/Staff.txt";
+    private void UpdatePasswordLecturer(String enteredID, String enteredPassword) {
+        String filePath = "src/textfiles/Lecturer.txt";
         try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
             String currentLine;
             ArrayList<String> updatedLines = new ArrayList<>();
@@ -368,31 +383,6 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                 if (data.length >= 2 && enteredID.equals(data[0].trim())) {
                     // Found the user, update the password
                     data[2] = enteredPassword;
-                    
-                    //Update Staff Role Text File
-                    String role = data[6];
-                    ArrayList<String> stIDs = new ArrayList();
-                    String recc;
-                    BufferedReader brr;
-                    try {
-                        brr = new BufferedReader(new FileReader("src/textfiles/"+role+".txt"));
-                        while ((recc = brr.readLine()) != null) {
-                            String[] record = recc.strip().split(";");
-                            System.out.println("" + record[0]);
-                            stIDs.add(record[0]);
-                        }
-
-                    } catch (Exception ex) {
-                        Logger.getLogger(GeneralForgetPassword.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-
-                    for(int i = 0; i< stIDs.size(); i++){
-                        if(enteredID.equals(stIDs.get(i))){
-                            UpdatePasswordRole(enteredID, enteredPassword, role);
-                            break;
-                        }
-                    }
                 }
                 updatedLines.add(String.join(";", data));
             }
@@ -441,38 +431,8 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
         }
     }
 
-    private void UpdatePasswordIntake(String enteredID, String enteredPassword, String intake) {
-        String filePath = "src/textfiles/Student"+intake+".txt";
-        try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
-            String currentLine;
-            ArrayList<String> updatedLines = new ArrayList<>();
-
-            // Read and update lines
-            while ((currentLine = buffer.readLine()) != null) {
-                String[] data = currentLine.split(";");
-                if (data.length >= 2 && enteredID.equals(data[0].trim())) {
-                    // Found the user, update the password
-                    data[2] = enteredPassword;
-                }
-                updatedLines.add(String.join(";", data));
-            }
-
-            // Write the updated data back to the file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-                for (String updatedLine : updatedLines) {
-                    writer.write(updatedLine);
-                    writer.newLine();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void UpdatePasswordRole(String enteredID, String enteredPassword, String role) {
-        String filePath = "src/textfiles/"+role+".txt";
+    private void UpdatePasswordProjectManager(String enteredID, String enteredPassword) {
+        String filePath = "src/textfiles/ProjectManager.txt";
         try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
             String currentLine;
             ArrayList<String> updatedLines = new ArrayList<>();

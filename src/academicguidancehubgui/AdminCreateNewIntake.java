@@ -4,7 +4,10 @@
  */
 package academicguidancehubgui;
 
-import academicguidancehub.CreateNewIntake;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 
@@ -17,8 +20,6 @@ public class AdminCreateNewIntake extends javax.swing.JFrame {
         initComponents();
         setSize(800,600);
         setResizable(false);
-        
-        
     }
 
     /**
@@ -186,7 +187,7 @@ public class AdminCreateNewIntake extends javax.swing.JFrame {
             return;
         }
         
-        CreateNewIntake.createNewIntake(intakeC,intakeN,intakeD);
+        createNewIntake(intakeC,intakeN,intakeD);
         
         JOptionPane.showMessageDialog(this, "New intake created successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
     
@@ -262,4 +263,17 @@ public class AdminCreateNewIntake extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField startDate;
     // End of variables declaration//GEN-END:variables
+
+    private void createNewIntake(String intakeC, String intakeN, String intakeD) {
+        String intakeRecordfile = "src/textfiles/intakesType.txt";
+        
+        String intakeRecord = intakeC + ";" + intakeN + ";" + intakeD;
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(intakeRecordfile, true))) {
+            writer.write(intakeRecord);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

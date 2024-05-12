@@ -5,11 +5,12 @@
 package academicguidancehubgui;
 
 import javax.swing.JOptionPane;
-import academicguidancehub.RegisterNewStudent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 /**
@@ -171,7 +172,7 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
             return;
         }
         
-        RegisterNewStudent.registerStudent(name,contact,intake);
+        registerStudent(name,contact,intake);
         
         JOptionPane.showMessageDialog(this, "Student registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
     
@@ -237,4 +238,64 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
     private javax.swing.JTextField studentContact;
     private javax.swing.JTextField studentName;
     // End of variables declaration//GEN-END:variables
+
+    private void registerStudent(String name, String contact, String intake) {
+        String studentRecordfile = "src/textfiles/Students.txt";
+        
+        String studentID = generateStudentID();
+        String password = generatePassword(studentID, name);
+        String email = generateEmail(name);
+        String role = "Student";
+        
+        String studentRecord = studentID + ";" + name + ";" + password + ";" + email + ";" + contact + ";" + role + ";" + intake;
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(studentRecordfile, true))) {
+            writer.write(studentRecord);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    private String generateStudentID() {
+        return "ST" + String.format("%06d", getNextStudentID());
+    }
+
+    private String generatePassword(String studentID, String name) {
+        return studentID + "@" + getInitials(name);
+    }
+
+    private String generateEmail(String name) {
+        return name.toLowerCase().replace(" ", "") + "@gmail.com";
+    }
+
+    private int getNextStudentID() {
+        int nextID = 0;
+        String studentRecordfile = "src/textfiles/Students.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(studentRecordfile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                String studentID = parts[0].trim(); // Extract student ID from each line
+                String number = studentID.substring(2); // Remove the "ST" prefix
+                int id = Integer.parseInt(number);
+                if (id > nextID) {
+                    nextID = id;
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return nextID + 1;
+    }
+
+    private String getInitials(String name) {
+        StringBuilder initials = new StringBuilder();
+        String[] parts = name.split(" ");
+        for (String part : parts) {
+            initials.append(part.charAt(0));
+        }
+        return initials.toString().toUpperCase();
+    }
 }

@@ -20,10 +20,9 @@ public class ReadOperations {
                 String name = parts[1];
                 String email = parts[3];
                 String contact = parts[4];
-                String createDate = parts[5];
-                String role = parts[6];
+                String role = parts[5];
                 String UserPassword = parts[2]; 
-                userList.add(new User(UserId,name,UserPassword,email,contact,createDate,role));
+                userList.add(new User(UserId,name,UserPassword,email,contact,role));
             }
         } catch (IOException e) {
             e.printStackTrace();
