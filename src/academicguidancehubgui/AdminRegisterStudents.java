@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 /**
  *
  * @author New HP
@@ -68,6 +69,8 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
         studentContact = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         intakeCB = new javax.swing.JComboBox<>();
+        linkTxtfile = new javax.swing.JButton();
+        fileLinkLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -87,7 +90,7 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 32)); // NOI18N
         jLabel2.setText("Register Student Page");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, -1, -1));
 
         registerBt.setBackground(new java.awt.Color(102, 102, 0));
         registerBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -103,7 +106,7 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
                 registerBtActionPerformed(evt);
             }
         });
-        getContentPane().add(registerBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 440, 110, 40));
+        getContentPane().add(registerBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, 110, 40));
 
         cancelBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         cancelBt.setText("Cancel");
@@ -112,9 +115,8 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
                 cancelBtMouseClicked(evt);
             }
         });
-        getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, 90, 40));
+        getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, 90, 40));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/register_student_Background.png"))); // NOI18N
         jLabel3.setText("register_student_Background.png");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -134,24 +136,37 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         jLabel1.setText("Intake:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         jLabel4.setText("Student Name:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 150, -1, -1));
 
         studentName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        getContentPane().add(studentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 170, 40));
+        getContentPane().add(studentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 140, 220, 40));
 
         studentContact.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        getContentPane().add(studentContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 250, 170, 40));
+        getContentPane().add(studentContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 230, 220, 40));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         jLabel5.setText("Contact Number:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, -1, -1));
 
         intakeCB.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        getContentPane().add(intakeCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 340, 170, 40));
+        getContentPane().add(intakeCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, 220, 40));
+
+        linkTxtfile.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        linkTxtfile.setForeground(new java.awt.Color(255, 153, 0));
+        linkTxtfile.setText("Register for an intake");
+        linkTxtfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                linkTxtfileMouseClicked(evt);
+            }
+        });
+        getContentPane().add(linkTxtfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, -1, 30));
+
+        fileLinkLabel.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        getContentPane().add(fileLinkLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 380, -1, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -166,13 +181,25 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
         String name = studentName.getText().toUpperCase();
         String contact = studentContact.getText();
         String intake = (String)intakeCB.getSelectedItem();
-        
-        if (name.isEmpty() || contact.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
+        String filePath = fileLinkLabel.getText();
+
+        if (name.isEmpty() && contact.isEmpty() && filePath.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields or select a file", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        registerStudent(name,contact,intake);
+        if ((name.isEmpty() || contact.isEmpty()) && filePath.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields or select a file", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (filePath.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a text file", "Error", JOptionPane.ERROR_MESSAGE);
+            registerStudent(name,contact,intake);
+            return;
+        } 
+        
+        registerStudentsFromFile(filePath,intake);
         
         JOptionPane.showMessageDialog(this, "Student registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
     
@@ -187,6 +214,17 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
     private void registerBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_registerBtActionPerformed
+
+    private void linkTxtfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkTxtfileMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            java.io.File selectedFile = fileChooser.getSelectedFile();
+            String filePath = selectedFile.getAbsolutePath();
+            fileLinkLabel.setText(filePath);
+        }
+    }//GEN-LAST:event_linkTxtfileMouseClicked
 
     /**
      * @param args the command line arguments
@@ -226,6 +264,7 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBt;
+    private javax.swing.JLabel fileLinkLabel;
     private javax.swing.JComboBox<String> intakeCB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -234,6 +273,7 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton linkTxtfile;
     private javax.swing.JButton registerBt;
     private javax.swing.JTextField studentContact;
     private javax.swing.JTextField studentName;
@@ -297,5 +337,22 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
             initials.append(part.charAt(0));
         }
         return initials.toString().toUpperCase();
+    }
+
+    private void registerStudentsFromFile(String filePath, String intake) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Assuming each line contains student name and contact separated by a delimiter, like ","
+                String[] parts = line.split(",");
+                String name = parts[0].toUpperCase();
+                String contact = parts[1];
+
+                // Register the student under the selected intake
+                registerStudent(name, contact, intake);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

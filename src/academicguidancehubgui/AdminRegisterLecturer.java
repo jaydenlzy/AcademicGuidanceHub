@@ -9,6 +9,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class AdminRegisterLecturer extends javax.swing.JFrame {
@@ -20,6 +22,23 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         initComponents();
         setSize(900,620);
         setResizable(false);
+        
+        ArrayList<String[]> schoolwisedataList = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/SchoolWiseList.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(";");
+                if (values.length >= 1) {
+                    FunctionalCb.addItem(values[0]); // Assuming FunctionalCb is your combo box
+                    schoolwisedataList.add(values);
+                } else {
+                    // Log or display a warning message if the line is improperly formatted
+                    System.err.println("Ignoring improperly formatted line: " + line);
+                }
+            }
+        } catch (IOException e) {
+            //return null;
+        }
     }
 
     /**
@@ -40,13 +59,16 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         lecturerContact = new javax.swing.JTextField();
         lecturerName = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        FunctionalCb = new javax.swing.JComboBox<>();
+        groupRegister = new javax.swing.JButton();
+        attachFileLink = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/register_background.png"))); // NOI18N
         jLabel6.setText("register_background.png");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -68,7 +90,7 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 32)); // NOI18N
         jLabel2.setText("Register Lecturer Page");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, -1, -1));
 
         cancelBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         cancelBt.setText("Cancel");
@@ -77,7 +99,7 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
                 cancelBtMouseClicked(evt);
             }
         });
-        getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 450, 90, 40));
+        getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 480, 90, 40));
 
         registerBt.setBackground(new java.awt.Color(0, 102, 102));
         registerBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -88,21 +110,41 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
                 registerBtMouseClicked(evt);
             }
         });
-        getContentPane().add(registerBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 450, 110, 40));
+        getContentPane().add(registerBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, 110, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Contact");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, -1, -1));
+        jLabel3.setText("Functional Area");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Full Name");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, -1));
 
         lecturerContact.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        getContentPane().add(lecturerContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 440, 40));
+        getContentPane().add(lecturerContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 440, 40));
 
         lecturerName.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        getContentPane().add(lecturerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 440, 40));
+        getContentPane().add(lecturerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 440, 40));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Contact");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, -1, -1));
+
+        FunctionalCb.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        getContentPane().add(FunctionalCb, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 440, 40));
+
+        groupRegister.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        groupRegister.setForeground(new java.awt.Color(0, 0, 153));
+        groupRegister.setText("Register from a school wise list");
+        groupRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                groupRegisterMouseClicked(evt);
+            }
+        });
+        getContentPane().add(groupRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 400, 210, 30));
+
+        attachFileLink.setText("Attach File.");
+        getContentPane().add(attachFileLink, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 410, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -114,17 +156,28 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelBtMouseClicked
 
     private void registerBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtMouseClicked
-        String name = lecturerName.getText();
+        String name = capitalizeInitials(lecturerName.getText());
         String contact = lecturerContact.getText();
+        String schooloffield = (String)FunctionalCb.getSelectedItem();
+        String filePath = attachFileLink.getText();
         
-        if (name.isEmpty() || contact.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill in all fields", "Error", JOptionPane.ERROR_MESSAGE);
+        if (name.isEmpty() && contact.isEmpty() && filePath.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields or select a file", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        String capitalizedName = capitalizeInitials(name);
+        if ((name.isEmpty() || contact.isEmpty()) && filePath.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields or select a file", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
-        registerLecturer(capitalizedName,contact);
+        if (filePath.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a text file", "Error", JOptionPane.ERROR_MESSAGE);
+            registerLecturer(name,contact,schooloffield);
+            return;
+        }  
+        
+        registerLecturerFromFile(filePath,schooloffield);
         
         JOptionPane.showMessageDialog(this, "Lecturer registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
     
@@ -135,6 +188,17 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         AdminDashboard obj = new AdminDashboard();
         obj.setVisible(true);
     }//GEN-LAST:event_registerBtMouseClicked
+
+    private void groupRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupRegisterMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            java.io.File selectedFile = fileChooser.getSelectedFile();
+            String filePath = selectedFile.getAbsolutePath();
+            attachFileLink.setText(filePath);
+        }
+    }//GEN-LAST:event_groupRegisterMouseClicked
 
     /**
      * @param args the command line arguments
@@ -173,10 +237,14 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> FunctionalCb;
+    private javax.swing.JLabel attachFileLink;
     private javax.swing.JButton cancelBt;
+    private javax.swing.JButton groupRegister;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField lecturerContact;
@@ -197,7 +265,7 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         return capitalized.toString().trim();
     }
 
-    private void registerLecturer(String Name, String contact) {
+    private void registerLecturer(String Name, String contact, String schooloffield) {
         String lecturerRecordfile = "src/textfiles/Lecturer.txt";
         
         var lecturerID = generateLecturerID();
@@ -205,7 +273,7 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         var email = generateEmail(Name);
         String role = "Lecturer";
         
-        String lecturerRecord = lecturerID + ";" + Name + ";" + password + ";" + email + ";" + contact + ";" + role;
+        String lecturerRecord = lecturerID + ";" + Name + ";" + password + ";" + email + ";" + contact + ";" + role + ";" + schooloffield;
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(lecturerRecordfile, true))) {
             writer.write(lecturerRecord);
@@ -248,5 +316,22 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
             e.printStackTrace();
         }
         return nextID + 1;
+    }
+
+    private void registerLecturerFromFile(String filePath, String schooloffield) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Assuming each line contains student name and contact separated by a delimiter, like ","
+                String[] parts = line.split(",");
+                String name = capitalizeInitials(parts[0]);
+                String contact = parts[1];
+
+                // Register the student under the selected intake
+                registerLecturer(name, contact, schooloffield);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -55,7 +55,6 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/ForgetPassword.png"))); // NOI18N
         jLabel2.setText("ForgetPassword.png");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 115));
 
