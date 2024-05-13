@@ -9,9 +9,11 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -141,7 +143,7 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, -1));
 
         roleCb.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        roleCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<null>", "Student", "Lecturer, Supervisor, Second Marker" }));
+        roleCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<null>", "Student", "Lecturer" }));
         roleCb.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 roleCbItemStateChanged(evt);
@@ -166,6 +168,11 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
 
             }
         ));
+        infoTb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                infoTbMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(infoTb);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 750, 260));
@@ -184,12 +191,22 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
         removeBt.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         removeBt.setForeground(new java.awt.Color(255, 255, 102));
         removeBt.setText("Remove");
+        removeBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeBtMouseClicked(evt);
+            }
+        });
         getContentPane().add(removeBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 540, 100, 30));
 
         editLecturerBt.setBackground(new java.awt.Color(153, 153, 0));
         editLecturerBt.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         editLecturerBt.setForeground(new java.awt.Color(255, 255, 204));
         editLecturerBt.setText("Edit");
+        editLecturerBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editLecturerBtMouseClicked(evt);
+            }
+        });
         getContentPane().add(editLecturerBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 540, 100, 30));
 
         studentIntake.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -270,9 +287,29 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtMouseClicked
 
     private void editStudentBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editStudentBtMouseClicked
-        this.dispose();
-        AdminEditStudentLecturer obj = new AdminEditStudentLecturer();
-        obj.setVisible(true);
+        DefaultTableModel stList = (DefaultTableModel)infoTb.getModel();
+        int selectedRow = infoTb.getSelectedRow();
+        
+        if (selectedRow != -1 && selectedRow < stList.getRowCount()) {
+            int columnCount = stList.getColumnCount();
+            if (columnCount >= 5) { // Check if there are at least 7 columns
+                String id = stList.getValueAt(selectedRow, 0).toString();
+                String name = stList.getValueAt(selectedRow, 1).toString();
+                String password = stList.getValueAt(selectedRow, 2).toString();
+                String email = stList.getValueAt(selectedRow, 3).toString();
+                String contact = stList.getValueAt(selectedRow, 4).toString();
+                String intake = stList.getValueAt(selectedRow, 5).toString();
+
+                AdminEditStudent editStudentPage = new AdminEditStudent(id, name, password, email, contact, intake);
+                editStudentPage.setVisible(true);
+
+                this.dispose();
+            } else {
+                System.err.println("Not enough columns in the table to retrieve intake data.");
+            }
+        }else {
+            System.err.println("No row selected or invalid selected row index.");
+        }
     }//GEN-LAST:event_editStudentBtMouseClicked
 
     private void roleCbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roleCbMouseClicked
@@ -312,7 +349,7 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
 
                 infoTb.setModel(classTypeTableModel);
             }
-        } else if (selectedRole.equals("Lecturer, Supervisor, Second Marker")) {
+        } else if (selectedRole.equals("Lecturer")) {
             studentIntake.setVisible(false);
             intakeCb.setVisible(false);
 
@@ -429,7 +466,7 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
             } else{
                 roleCbItemStateChanged(null);
             }
-        } else if (selectedRole.equals("Lecturer, Supervisor, Second Marker")){
+        } else if (selectedRole.equals("Lecturer")){
             String filePath = "src/textfiles/Lecturer.txt";
             int[] columnIndices = {0, 1, 2, 3, 4, 5, 6};
             if(!searchText.isEmpty()){
@@ -447,6 +484,84 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
             infoTb.setModel(model);
         }
     }//GEN-LAST:event_searchTfCaretUpdate
+
+    private void editLecturerBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editLecturerBtMouseClicked
+        DefaultTableModel stList = (DefaultTableModel)infoTb.getModel();
+        int selectedRow = infoTb.getSelectedRow();
+        
+        if (selectedRow != -1 && selectedRow < stList.getRowCount()) {
+            int columnCount = stList.getColumnCount();
+            if (columnCount >= 5) { // Check if there are at least 7 columns
+                String id = stList.getValueAt(selectedRow, 0).toString();
+                String name = stList.getValueAt(selectedRow, 1).toString();
+                String password = stList.getValueAt(selectedRow, 2).toString();
+                String email = stList.getValueAt(selectedRow, 3).toString();
+                String contact = stList.getValueAt(selectedRow, 4).toString();
+                String role = stList.getValueAt(selectedRow, 5).toString();
+                String functionalField = stList.getValueAt(selectedRow, 6).toString();
+
+                AdminEditLecturer obj = new AdminEditLecturer(id, name, password, email, contact, role, functionalField);
+                obj.setVisible(true);
+
+                this.dispose();
+            } else {
+                System.err.println("Not enough columns in the table to retrieve intake data.");
+            }
+        }else {
+            System.err.println("No row selected or invalid selected row index.");
+        }
+    }//GEN-LAST:event_editLecturerBtMouseClicked
+
+    private void removeBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeBtMouseClicked
+        String selectedIntake = intakeCb.getSelectedItem().toString();
+        String selectedRole = roleCb.getSelectedItem().toString();
+        
+        DefaultTableModel model = (DefaultTableModel) infoTb.getModel();
+        int selectedRow = infoTb.getSelectedRow();
+
+        if (selectedRow != -1) {
+            String tp = model.getValueAt(infoTb.getSelectedRow(),0).toString();
+
+            model.removeRow(selectedRow);
+            
+            if(selectedRole.equals("Student")){
+                String studentfilePath = "src/textfiles/Students.txt";
+                String delimiter = ";";
+                UpdateTextFile(studentfilePath, tp, delimiter);
+            } else if (selectedRole.equals("Lecturer")){
+                String lecturerfilePath = "src/textfiles/Lecturer.txt";
+                String delimiter = ";";
+                UpdateTextFile(lecturerfilePath, tp, delimiter);
+            }
+        }
+    }//GEN-LAST:event_removeBtMouseClicked
+
+    private void infoTbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_infoTbMouseClicked
+        DefaultTableModel stList = (DefaultTableModel)infoTb.getModel();
+        String selectedRole = roleCb.getSelectedItem().toString();
+        int selectedRow = infoTb.getSelectedRow();
+        
+        if(selectedRole.equals("Student")){
+            if(selectedRow != -1){
+                editStudentBt.setVisible(true);
+                editLecturerBt.setVisible(false);
+            } else{
+                editStudentBt.setVisible(false);
+                editLecturerBt.setVisible(false);
+            }
+        } else if (selectedRole.equals("Lecturer")){
+            if(selectedRow != -1){
+                editStudentBt.setVisible(false);
+                editLecturerBt.setVisible(true);
+            } else{
+                editStudentBt.setVisible(false);
+                editLecturerBt.setVisible(false);
+            }
+        } else {
+            editStudentBt.setVisible(false);
+            editLecturerBt.setVisible(false);
+        }
+    }//GEN-LAST:event_infoTbMouseClicked
 
     /**
      * @param args the command line arguments
@@ -583,6 +698,33 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
             infoTb.setModel(model);
         } catch (IOException e) {
             e.printStackTrace(); 
+        }
+    }
+
+    private void UpdateTextFile(String filePath, String tp, String delimiter) {
+        try {
+        // Read the content of the file and store it in a list
+            File file = new File(filePath);
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            StringBuilder content = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                // Split the line by the delimiter to check if it contains the specified 'tp'
+                String[] parts = line.split(delimiter);
+                if (!parts[0].equals(tp)) { // If the 'tp' doesn't match, keep the line
+                    content.append(line).append(System.lineSeparator());
+                }
+            }
+            reader.close();
+
+            // Write the updated content back to the file
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            writer.write(content.toString());
+            writer.close();
+
+            System.out.println("Entry with tp '" + tp + "' removed from the file.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -188,12 +188,6 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                     case "Lecturer":
                         JOptionPane.showMessageDialog(null, "Welcome to Lecturer Page.", "Lecturer Page", JOptionPane.INFORMATION_MESSAGE);
                         break;
-                    case "Supervisor":
-                        JOptionPane.showMessageDialog(null, "Welcome to Lecturer Page.", "Lecturer Page", JOptionPane.INFORMATION_MESSAGE);
-                        break;
-                    case "SecondMarker":
-                        JOptionPane.showMessageDialog(null, "Welcome to Lecturer Page.", "Lecturer Page", JOptionPane.INFORMATION_MESSAGE);
-                        break;
                     case "Project Manager":
                         JOptionPane.showMessageDialog(null, "Welcome to Project manager Page.", "PM Page", JOptionPane.INFORMATION_MESSAGE);
                         break;

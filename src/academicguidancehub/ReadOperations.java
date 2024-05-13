@@ -22,7 +22,7 @@ public class ReadOperations {
                 String contact = parts[4];
                 String role = parts[5];
                 String UserPassword = parts[2]; 
-                userList.add(new User(UserId,name,UserPassword,email,contact,role));
+                userList.add(new User(UserId,name,UserPassword,email,contact,role) {});
             }
         } catch (IOException e) {
             e.printStackTrace();

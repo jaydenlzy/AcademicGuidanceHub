@@ -8,7 +8,7 @@ package academicguidancehub;
  *
  * @author New HP
  */
-public class User {
+public abstract class User {
     private String UserId;
     private String name;
     private String password;

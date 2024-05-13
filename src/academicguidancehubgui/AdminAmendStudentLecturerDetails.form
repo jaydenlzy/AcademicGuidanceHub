@@ -114,7 +114,7 @@
           <StringArray count="3">
             <StringItem index="0" value="&lt;null&gt;"/>
             <StringItem index="1" value="Student"/>
-            <StringItem index="2" value="Lecturer, Supervisor, Second Marker"/>
+            <StringItem index="2" value="Lecturer"/>
           </StringArray>
         </Property>
       </Properties>
@@ -168,6 +168,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="infoTbMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -203,6 +206,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Remove"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="removeBtMouseClicked"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="470" y="540" width="100" height="30"/>
@@ -222,6 +228,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Edit"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="editLecturerBtMouseClicked"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="210" y="540" width="100" height="30"/>
