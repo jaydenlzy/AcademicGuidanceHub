@@ -117,6 +117,7 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
         });
         getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, 90, 40));
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/register_student_Background.png"))); // NOI18N
         jLabel3.setText("register_student_Background.png");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

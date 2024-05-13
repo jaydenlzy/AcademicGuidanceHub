@@ -69,6 +69,7 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/register_background.png"))); // NOI18N
         jLabel6.setText("register_background.png");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

@@ -108,6 +108,7 @@ public class AdminEditStudent extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/EditStudentPage.png"))); // NOI18N
         jLabel2.setText("EditStudentPage.png");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);

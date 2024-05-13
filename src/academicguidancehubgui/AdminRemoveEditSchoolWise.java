@@ -69,11 +69,12 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 26)); // NOI18N
         jLabel3.setText("Edit/Remove School Wise Page");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
         jSeparator1.setForeground(new java.awt.Color(51, 51, 255));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 360, 10));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 360, 10));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/RemoveItakePage.png"))); // NOI18N
         jLabel1.setText("RemoveItakePage.png");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -81,19 +82,18 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(447, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, 240, 510));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, -40, 300, 590));
 
         swiseTb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,18 +110,18 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(swiseTb);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, 160));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 160));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setText("School Wises Table:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         enameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         enameLabel.setText("Edit Name:");
-        getContentPane().add(enameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
+        getContentPane().add(enameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
         changedName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        getContentPane().add(changedName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 450, 30));
+        getContentPane().add(changedName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 450, 30));
 
         cancelBt.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         cancelBt.setText("Cancel");

@@ -80,6 +80,7 @@ public class AdminEditRemoveProjectManager extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/EditRemovePM.png"))); // NOI18N
         jLabel2.setText("EditRemovePM.png");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
