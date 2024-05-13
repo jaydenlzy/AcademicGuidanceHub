@@ -20,6 +20,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.Line;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -196,7 +197,7 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
                 removeBtMouseClicked(evt);
             }
         });
-        getContentPane().add(removeBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 540, 100, 30));
+        getContentPane().add(removeBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 540, 100, 30));
 
         editLecturerBt.setBackground(new java.awt.Color(153, 153, 0));
         editLecturerBt.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
@@ -207,7 +208,7 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
                 editLecturerBtMouseClicked(evt);
             }
         });
-        getContentPane().add(editLecturerBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 540, 100, 30));
+        getContentPane().add(editLecturerBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 540, 100, 30));
 
         studentIntake.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         studentIntake.setText("Student Intake:");
@@ -229,7 +230,7 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
                 editStudentBtMouseClicked(evt);
             }
         });
-        getContentPane().add(editStudentBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, 100, 30));
+        getContentPane().add(editStudentBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 540, 100, 30));
 
         jLabel7.setText("edit_backgrnd.png");
 
@@ -528,10 +529,13 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
                 String studentfilePath = "src/textfiles/Students.txt";
                 String delimiter = ";";
                 UpdateTextFile(studentfilePath, tp, delimiter);
+                JOptionPane.showMessageDialog(null, "Student deleted successfully!", "DELETE STUDENT SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                
             } else if (selectedRole.equals("Lecturer")){
                 String lecturerfilePath = "src/textfiles/Lecturer.txt";
                 String delimiter = ";";
                 UpdateTextFile(lecturerfilePath, tp, delimiter);
+                JOptionPane.showMessageDialog(null, "Lecturer deleted successfully!", "DELETE LECTURER SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_removeBtMouseClicked

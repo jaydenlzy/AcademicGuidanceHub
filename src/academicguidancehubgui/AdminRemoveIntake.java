@@ -4,6 +4,16 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileReaderUtils;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author New HP
@@ -17,6 +27,8 @@ public class AdminRemoveIntake extends javax.swing.JFrame {
         initComponents();
         setSize(900,600);
         setResizable(false);
+        
+        intakesTableContent();
     }
 
     /**
@@ -33,15 +45,16 @@ public class AdminRemoveIntake extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        intakesTable = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        removeBt = new javax.swing.JButton();
+        cancelBt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/RemoveItakePage.png"))); // NOI18N
+        jLabel1.setText("RemoveItakePage.png");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -70,35 +83,64 @@ public class AdminRemoveIntake extends javax.swing.JFrame {
         jLabel2.setText("Intakes Table:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        intakesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(intakesTable);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 510, 320));
 
         jSeparator1.setForeground(new java.awt.Color(51, 51, 255));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 250, 10));
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 0));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton1.setText("Remove");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 480, 110, 40));
+        removeBt.setBackground(new java.awt.Color(255, 0, 0));
+        removeBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        removeBt.setText("Remove");
+        removeBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(removeBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 480, 110, 40));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton2.setText("Cancel");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, 100, 40));
+        cancelBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        cancelBt.setText("Cancel");
+        cancelBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, 100, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancelBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtMouseClicked
+        dispose();
+        AdminDashboard obj = new AdminDashboard();
+        obj.setVisible(true);
+    }//GEN-LAST:event_cancelBtMouseClicked
+
+    private void removeBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeBtMouseClicked
+        DefaultTableModel model = (DefaultTableModel) intakesTable.getModel();
+        int selectedRow = intakesTable.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            String intakecode = model.getValueAt(intakesTable.getSelectedRow(),0).toString();
+
+            model.removeRow(selectedRow);
+            
+            String intakesfilePath = "src/textfiles/intakesType.txt";
+            String delimiter = ";";
+            UpdateTextFile(intakesfilePath, intakecode, delimiter);
+            JOptionPane.showMessageDialog(null, "Intake deleted successfully!", "INTAKE DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_removeBtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -137,14 +179,61 @@ public class AdminRemoveIntake extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelBt;
+    private javax.swing.JTable intakesTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton removeBt;
     // End of variables declaration//GEN-END:variables
+
+    private void intakesTableContent() {
+        String filePathClassType = "src/textfiles/intakesType.txt";
+        String delimiter = ";";
+        int[] classTypeColumnIndices = {0, 1, 2};
+        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+        if (classTypeData != null) {
+            DefaultTableModel classTypeTableModel = new DefaultTableModel();
+            classTypeTableModel.addColumn("Intake Code");
+            classTypeTableModel.addColumn("Name");
+            classTypeTableModel.addColumn("Start Date");
+
+            for (String[] row : classTypeData) {
+                classTypeTableModel.addRow(row);
+            }
+
+            intakesTable.setModel(classTypeTableModel);
+        }
+    }
+
+    private void UpdateTextFile(String intakesfilePath, String intakecode, String delimiter) {
+        try {
+        // Read the content of the file and store it in a list
+            File file = new File(intakesfilePath);
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            StringBuilder content = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                // Split the line by the delimiter to check if it contains the specified 'tp'
+                String[] parts = line.split(delimiter);
+                if (!parts[0].equals(intakecode)) { // If the 'tp' doesn't match, keep the line
+                    content.append(line).append(System.lineSeparator());
+                }
+            }
+            reader.close();
+
+            // Write the updated content back to the file
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            writer.write(content.toString());
+            writer.close();
+
+            System.out.println("Entry with intake code '" + intakecode + "' removed from the file.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

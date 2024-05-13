@@ -4,6 +4,11 @@
  */
 package academicguidancehubgui;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author New HP
@@ -15,6 +20,8 @@ public class AdminCreateNewSchoolWise extends javax.swing.JFrame {
      */
     public AdminCreateNewSchoolWise() {
         initComponents();
+        setSize(610,450);
+        setResizable(false);
     }
 
     /**
@@ -26,21 +33,137 @@ public class AdminCreateNewSchoolWise extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        schoolwiseTf = new javax.swing.JTextArea();
+        createBt = new javax.swing.JButton();
+        cancelBt = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 26)); // NOI18N
+        jLabel3.setText("Create New School Wise Page");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(jLabel3)
+                .addContainerGap(138, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(35, 35, 35))
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel2.setText("CreateNewIntake1");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addGap(0, 163, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(501, 104, -1, -1));
+
+        jLabel1.setText("CreateNewIntake1");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 104, -1, 338));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabel4.setText("School Wise Name:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
+
+        schoolwiseTf.setColumns(20);
+        schoolwiseTf.setRows(5);
+        jScrollPane1.setViewportView(schoolwiseTf);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 320, 140));
+
+        createBt.setBackground(new java.awt.Color(255, 0, 0));
+        createBt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        createBt.setForeground(new java.awt.Color(255, 255, 255));
+        createBt.setText("Create");
+        createBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                createBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(createBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 80, 30));
+
+        cancelBt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cancelBt.setText("Cancel");
+        cancelBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 360, 80, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancelBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtMouseClicked
+        this.dispose();
+        AdminDashboard obj = new AdminDashboard();
+        obj.setVisible(true);
+    }//GEN-LAST:event_cancelBtMouseClicked
+
+    private void createBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createBtMouseClicked
+        String schoolwiseName = schoolwiseTf.getText();
+        
+        if(schoolwiseName.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please fill in the fields", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        createNewField(schoolwiseName);
+        
+        JOptionPane.showMessageDialog(this, "New school wise created successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+    
+        schoolwiseTf.setText("");
+        
+        this.dispose();
+        AdminDashboard obj = new AdminDashboard();
+        obj.setVisible(true);
+    }//GEN-LAST:event_createBtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -78,5 +201,29 @@ public class AdminCreateNewSchoolWise extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelBt;
+    private javax.swing.JButton createBt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea schoolwiseTf;
     // End of variables declaration//GEN-END:variables
+
+    private void createNewField(String schoolwiseName) {
+        String intakeRecordfile = "src/textfiles/SchoolWiseList.txt";
+        
+        String intakeRecord = schoolwiseName;
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(intakeRecordfile, true))) {
+            writer.write(intakeRecord);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -70,9 +70,6 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/picture/CreateNewIntake1.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="CreateNewIntake1.png"/>
           </Properties>
         </Component>
@@ -238,9 +235,6 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/picture/CreateNewIntake2.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="CreateNewIntake2.png"/>
           </Properties>
         </Component>

@@ -49,4 +49,8 @@ public abstract class User {
     public String getRole() {
         return role;
     }
+
+    void setPassword(String newPassword) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

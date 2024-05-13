@@ -12,10 +12,7 @@ import javax.swing.JOptionPane;
 
 
 public class AdminCreateNewIntake extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CreateNewIntake
-     */
+    
     public AdminCreateNewIntake() {
         initComponents();
         setSize(800,600);
@@ -63,7 +60,6 @@ public class AdminCreateNewIntake extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/CreateNewIntake1.png"))); // NOI18N
         jLabel8.setText("CreateNewIntake1.png");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -143,14 +139,13 @@ public class AdminCreateNewIntake extends javax.swing.JFrame {
         });
         getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 480, 100, 40));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/CreateNewIntake2.png"))); // NOI18N
         jLabel9.setText("CreateNewIntake2.png");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 160, Short.MAX_VALUE)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -4,6 +4,16 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileReaderUtils;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author New HP
@@ -17,6 +27,8 @@ public class AdminEditRemoveProjectManager extends javax.swing.JFrame {
         initComponents();
         setSize(900,640);
         setResizable(false);
+        
+        projectManagerTableContent();
     }
 
     /**
@@ -34,10 +46,10 @@ public class AdminEditRemoveProjectManager extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        pmTable = new javax.swing.JTable();
+        removeBt = new javax.swing.JButton();
+        editBt = new javax.swing.JButton();
+        cancelBt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,7 +80,7 @@ public class AdminEditRemoveProjectManager extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/EditRemovePM.png"))); // NOI18N
+        jLabel2.setText("EditRemovePM.png");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -91,39 +103,108 @@ public class AdminEditRemoveProjectManager extends javax.swing.JFrame {
         jLabel3.setText("Project Manager Table:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        pmTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(pmTable);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 670, 280));
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Remove");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 530, 110, 40));
+        removeBt.setBackground(new java.awt.Color(255, 51, 51));
+        removeBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        removeBt.setForeground(new java.awt.Color(255, 255, 255));
+        removeBt.setText("Remove");
+        removeBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(removeBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 530, 110, 40));
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 255));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Edit");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 530, 110, 40));
+        editBt.setBackground(new java.awt.Color(0, 0, 255));
+        editBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        editBt.setForeground(new java.awt.Color(255, 255, 255));
+        editBt.setText("Edit");
+        editBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(editBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 530, 110, 40));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton3.setText("Cancel");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 530, 100, 40));
+        cancelBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        cancelBt.setText("Cancel");
+        cancelBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 530, 100, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancelBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtMouseClicked
+        this.dispose();
+        AdminDashboard obj = new AdminDashboard();
+        obj.setVisible(true);
+    }//GEN-LAST:event_cancelBtMouseClicked
+
+    private void removeBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeBtMouseClicked
+        DefaultTableModel lecturerList = (DefaultTableModel)pmTable.getModel();
+        int selectedRow = pmTable.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            String id = lecturerList.getValueAt(selectedRow,0).toString();
+            String name = lecturerList.getValueAt(selectedRow, 1).toString();
+            String password = lecturerList.getValueAt(selectedRow, 2).toString();
+            String email = lecturerList.getValueAt(selectedRow, 3).toString();
+            String contact = lecturerList.getValueAt(selectedRow, 4).toString();
+            String field = lecturerList.getValueAt(selectedRow, 6).toString();
+            
+            String lecturerfilePath = "src/textfiles/Lecturer.txt";
+            String pmfilePath = "src/textfiles/ProjectManager.txt";
+            String delimiter = ";";
+            
+            UpdateLecturerFile(lecturerfilePath,delimiter,id,name,password,email,contact,field);
+            UpdatePMFile(pmfilePath,id,delimiter);
+            JOptionPane.showMessageDialog(null, "Remove successfully!", "REMOVE PROJECT MANAGER ROLE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            
+            projectManagerTableContent();
+        }
+    }//GEN-LAST:event_removeBtMouseClicked
+
+    private void editBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBtMouseClicked
+        DefaultTableModel stList = (DefaultTableModel)pmTable.getModel();
+        int selectedRow = pmTable.getSelectedRow();
+        
+        if (selectedRow != -1 && selectedRow < stList.getRowCount()) {
+            int columnCount = stList.getColumnCount();
+            if (columnCount >= 5) { // Check if there are at least 7 columns
+                String id = stList.getValueAt(selectedRow, 0).toString();
+                String name = stList.getValueAt(selectedRow, 1).toString();
+                String password = stList.getValueAt(selectedRow, 2).toString();
+                String email = stList.getValueAt(selectedRow, 3).toString();
+                String contact = stList.getValueAt(selectedRow, 4).toString();
+                String role = stList.getValueAt(selectedRow, 5).toString();
+                String functionalField = stList.getValueAt(selectedRow, 6).toString();
+        
+                AdminEditProjectManager obj = new AdminEditProjectManager(id, name, password, email, contact, role, functionalField);
+                obj.setVisible(true);
+                
+                this.dispose();
+            } else {
+                System.err.println("Not enough columns in the table to retrieve intake data.");
+            }
+        }else {
+            System.err.println("No row selected or invalid selected row index.");
+        }
+    }//GEN-LAST:event_editBtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -162,15 +243,79 @@ public class AdminEditRemoveProjectManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton cancelBt;
+    private javax.swing.JButton editBt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable pmTable;
+    private javax.swing.JButton removeBt;
     // End of variables declaration//GEN-END:variables
+
+    private void projectManagerTableContent() {
+        String filePathClassType = "src/textfiles/ProjectManager.txt";
+        String delimiter = ";";
+        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 6};
+        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+        if (classTypeData != null) {
+            DefaultTableModel classTypeTableModel = new DefaultTableModel();
+            classTypeTableModel.addColumn("PM ID");
+            classTypeTableModel.addColumn("PM Name");
+            classTypeTableModel.addColumn("PM Password");
+            classTypeTableModel.addColumn("PM Email");
+            classTypeTableModel.addColumn("PM Contact");
+            classTypeTableModel.addColumn("Role");
+            classTypeTableModel.addColumn("PM Functional Area(s)");
+
+            for (String[] row : classTypeData) {
+                classTypeTableModel.addRow(row);
+            }
+
+            pmTable.setModel(classTypeTableModel);
+        }
+    }
+
+    private void UpdateLecturerFile(String lecturerfilePath, String delimiter, String id, String name, String password, String email, String contact, String field) {
+        String role = "Lecturer";
+        
+        String pmRecord = id + ";" + name + ";" + password + ";" + email + ";" + contact + ";" + role + ";" + field;
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(lecturerfilePath, true))) {
+            writer.write(pmRecord);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void UpdatePMFile(String pmfilePath, String id, String delimiter) {
+        try {
+            // Read the content of the file and store it in a list
+            File file = new File(pmfilePath);
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            StringBuilder content = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                // Split the line by the delimiter to check if it contains the specified 'tp'
+                String[] parts = line.split(delimiter);
+                if (!parts[0].equals(id)) { // If the 'tp' doesn't match, keep the line
+                    content.append(line).append(System.lineSeparator());
+                }
+            }
+            reader.close();
+
+            // Write the updated content back to the file
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            writer.write(content.toString());
+            writer.close();
+
+            System.out.println("Entry with tp '" + id + "' removed from the file.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

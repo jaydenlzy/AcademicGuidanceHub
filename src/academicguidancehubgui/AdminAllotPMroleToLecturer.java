@@ -4,6 +4,16 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileReaderUtils;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author New HP
@@ -17,6 +27,9 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
         initComponents();
         setSize(910, 640);
         setResizable(false);
+        
+        lecturerTableContent();
+        projectManagerTableContent();
     }
 
     /**
@@ -32,21 +45,16 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        lecturerTable = new javax.swing.JTable();
+        allotBt = new javax.swing.JButton();
+        cancelBt = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        projectManagerTb = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -77,91 +85,126 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Assessments/Projects Available:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, -1));
+        jLabel3.setText("Project Manager:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        lecturerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        lecturerTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lecturerTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lecturerTable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 640, 170));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 640, 160));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Allot To (Lecturer):");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, -1, -1));
+        allotBt.setBackground(new java.awt.Color(255, 51, 51));
+        allotBt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        allotBt.setForeground(new java.awt.Color(255, 255, 255));
+        allotBt.setText("Allot");
+        allotBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                allotBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(allotBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 550, 100, 40));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 240, 30));
+        cancelBt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cancelBt.setText("Cancel");
+        cancelBt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelBtMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cancelBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 550, 100, 40));
 
-        jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
-        jSeparator1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 670, 10));
-
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Allot");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 370, 110, 30));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
-        jLabel5.setText("Allot Details");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel6.setText("Allot to ->");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 460, 160, 40));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jLabel7.setText("Lecturer Name:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 470, -1, 30));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jLabel8.setText("Assessment/Project:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, -1, -1));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 460, 160, 40));
-
-        jButton2.setBackground(new java.awt.Color(204, 0, 0));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Confirm");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, 120, 40));
-
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Cancel");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 530, 100, 40));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/AllotPMRole.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("AllotPMRole.png");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 508, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 180, 520));
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel9.setText("Allot to ");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel10.setText("|");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, 30, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setText("Lecturer Available:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, -1, -1));
+
+        projectManagerTb.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        projectManagerTb.setEnabled(false);
+        jScrollPane2.setViewportView(projectManagerTb);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 640, 110));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancelBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtMouseClicked
+        this.dispose();
+        AdminDashboard obj = new AdminDashboard();
+        obj.setVisible(true);
+    }//GEN-LAST:event_cancelBtMouseClicked
+
+    private void lecturerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lecturerTableMouseClicked
+        
+    }//GEN-LAST:event_lecturerTableMouseClicked
+
+    private void allotBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allotBtMouseClicked
+        DefaultTableModel lecturerList = (DefaultTableModel)lecturerTable.getModel();
+        int selectedRow = lecturerTable.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            String id = lecturerList.getValueAt(selectedRow,0).toString();
+            String name = lecturerList.getValueAt(selectedRow, 1).toString();
+            String password = lecturerList.getValueAt(selectedRow, 2).toString();
+            String email = lecturerList.getValueAt(selectedRow, 3).toString();
+            String contact = lecturerList.getValueAt(selectedRow, 4).toString();
+            String field = lecturerList.getValueAt(selectedRow, 6).toString();
+            
+            String lecturerfilePath = "src/textfiles/Lecturer.txt";
+            String pmfilePath = "src/textfiles/ProjectManager.txt";
+            String delimiter = ";";
+            UpdateLecturerFile(lecturerfilePath, id, delimiter);
+            UpdatePMFile(pmfilePath,delimiter,id,name,password,email,contact,field);
+            JOptionPane.showMessageDialog(null, "Allot successfully!", "ALLOT PROJECT MANAGER SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            
+            lecturerTableContent();
+            projectManagerTableContent();
+        } else{
+            JOptionPane.showMessageDialog(this, "Please select a lecturer from lecturer available table.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_allotBtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -199,24 +242,107 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton allotBt;
+    private javax.swing.JButton cancelBt;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable lecturerTable;
+    private javax.swing.JTable projectManagerTb;
     // End of variables declaration//GEN-END:variables
+
+    private void lecturerTableContent() {
+        String filePathClassType = "src/textfiles/Lecturer.txt";
+        String delimiter = ";";
+        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 6};
+        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+        if (classTypeData != null) {
+            DefaultTableModel classTypeTableModel = new DefaultTableModel();
+            classTypeTableModel.addColumn("Lecturer ID");
+            classTypeTableModel.addColumn("Lecturer Name");
+            classTypeTableModel.addColumn("Lecturer Password");
+            classTypeTableModel.addColumn("Lecturer Email");
+            classTypeTableModel.addColumn("Lecturer Contact");
+            classTypeTableModel.addColumn("Role");
+            classTypeTableModel.addColumn("Lecturer Functional Area(s)");
+
+            for (String[] row : classTypeData) {
+                classTypeTableModel.addRow(row);
+            }
+
+            lecturerTable.setModel(classTypeTableModel);
+        }
+    }
+
+    private void projectManagerTableContent() {
+        String filePathClassType = "src/textfiles/ProjectManager.txt";
+        String delimiter = ";";
+        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 6};
+        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+
+        if (classTypeData != null) {
+            DefaultTableModel classTypeTableModel = new DefaultTableModel();
+            classTypeTableModel.addColumn("PM ID");
+            classTypeTableModel.addColumn("PM Name");
+            classTypeTableModel.addColumn("PM Password");
+            classTypeTableModel.addColumn("PM Email");
+            classTypeTableModel.addColumn("PM Contact");
+            classTypeTableModel.addColumn("Role");
+            classTypeTableModel.addColumn("PM Functional Area(s)");
+
+            for (String[] row : classTypeData) {
+                classTypeTableModel.addRow(row);
+            }
+
+            projectManagerTb.setModel(classTypeTableModel);
+        }
+    }
+
+    private void UpdateLecturerFile(String studentfilePath, String id, String delimiter) {
+        try {
+            // Read the content of the file and store it in a list
+            File file = new File(studentfilePath);
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            StringBuilder content = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                // Split the line by the delimiter to check if it contains the specified 'tp'
+                String[] parts = line.split(delimiter);
+                if (!parts[0].equals(id)) { // If the 'tp' doesn't match, keep the line
+                    content.append(line).append(System.lineSeparator());
+                }
+            }
+            reader.close();
+
+            // Write the updated content back to the file
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            writer.write(content.toString());
+            writer.close();
+
+            System.out.println("Entry with tp '" + id + "' removed from the file.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void UpdatePMFile(String pmfilePath, String delimiter, String id, String name, String password, String email, String contact, String field) {
+        String role = "Project Manager";
+        
+        String pmRecord = id + ";" + name + ";" + password + ";" + email + ";" + contact + ";" + role + ";" + field;
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(pmfilePath, true))) {
+            writer.write(pmRecord);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

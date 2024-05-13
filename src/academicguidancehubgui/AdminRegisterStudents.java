@@ -299,7 +299,9 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
     }
 
     private String generateStudentID() {
-        return "ST" + String.format("%06d", getNextStudentID());
+        int highestID = getHighestStudentID();
+        
+        return "ST" + String.format("%06d", highestID + 1);
     }
 
     private String generatePassword(String studentID, String name) {
@@ -354,5 +356,25 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private int getHighestStudentID() {
+        int highestID = 0;
+        String studentRecordfile = "src/textfiles/Students.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(studentRecordfile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                String lecturerID = parts[0].trim(); // Assuming the lecturer ID is the first field
+                String number = lecturerID.substring(2); // Extract the numeric part of the ID
+                int id = Integer.parseInt(number);
+                if (id > highestID) {
+                    highestID = id;
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return highestID;
     }
 }

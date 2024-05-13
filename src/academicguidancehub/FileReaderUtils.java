@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -41,5 +42,9 @@ public class FileReaderUtils {
         } catch (IOException e) {
             return null;
         }
+    }
+
+    public static boolean writeData(String filePathSchoolWiseList, DefaultTableModel stList, String delimiter, int[] schoolWiseListColumnIndices) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

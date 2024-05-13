@@ -142,8 +142,6 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
             }
         });
         getContentPane().add(groupRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 400, 210, 30));
-
-        attachFileLink.setText("Attach File.");
         getContentPane().add(attachFileLink, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 410, -1, -1));
 
         pack();
@@ -161,23 +159,20 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         String schooloffield = (String)FunctionalCb.getSelectedItem();
         String filePath = attachFileLink.getText();
         
-        if (name.isEmpty() && contact.isEmpty() && filePath.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill in all fields or select a file", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
         if ((name.isEmpty() || contact.isEmpty()) && filePath.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields or select a file", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         if (filePath.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please select a text file", "Error", JOptionPane.ERROR_MESSAGE);
             registerLecturer(name,contact,schooloffield);
+            JOptionPane.showMessageDialog(this, "Lecturer registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             return;
         }  
         
-        registerLecturerFromFile(filePath,schooloffield);
+        if(name.isEmpty() || contact.isEmpty()){
+            registerLecturerFromFile(filePath,schooloffield);
+        }
         
         JOptionPane.showMessageDialog(this, "Lecturer registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
     
@@ -192,11 +187,11 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
     private void groupRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupRegisterMouseClicked
         JFileChooser fileChooser = new JFileChooser();
         int returnValue = fileChooser.showOpenDialog(null);
-        
+
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             java.io.File selectedFile = fileChooser.getSelectedFile();
             String filePath = selectedFile.getAbsolutePath();
-            attachFileLink.setText(filePath);
+            attachFileLink.setText(filePath); // Set the selected file path in the JLabel
         }
     }//GEN-LAST:event_groupRegisterMouseClicked
 
@@ -285,7 +280,18 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
     }
 
     private String generateLecturerID() {
-        return "LC" + String.format("%06d", getNextLecturerID());
+        String lecturerFile = "src/textfiles/Lecturer.txt";
+        String projectManagerFile = "src/textfiles/ProjectManager.txt";
+
+        int highestLecturerID = getHighestID(lecturerFile);
+        int highestProjectManagerID = getHighestID(projectManagerFile);
+        
+        int nextLecturerID = highestLecturerID + 1;
+        int nextProjectManagerID = highestProjectManagerID + 1;
+
+        int nextID = Math.max(nextLecturerID, nextProjectManagerID);
+        
+        return "LC" + String.format("%06d", nextID);
     }
 
     private String generatePassword(String lecturerID, String Name) {
@@ -333,5 +339,24 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private int getHighestID(String filePath) {
+        int highestID = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                String recordID = parts[0].trim(); // Assuming the ID is the first field
+                String number = recordID.substring(2); // Extract the numeric part of the ID
+                int id = Integer.parseInt(number);
+                if (id > highestID) {
+                    highestID = id;
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return highestID;
     }
 }
