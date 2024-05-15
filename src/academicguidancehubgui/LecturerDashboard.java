@@ -21,32 +21,31 @@ public class LecturerDashboard extends javax.swing.JFrame {
      */
     public LecturerDashboard() {
         initComponents();
-                displayLecturerName();
+        displayLecturerName();
 
     }
 
     private void displayLecturerName() {
-    String lecturerName = getLecturerNameFromFile("lecturer.txt", "LC000001"); // Pass the actual lecturer ID you need
-    WelcomeUser.setText("Hi " + lecturerName);
-}
-
-private String getLecturerNameFromFile(String fileName, String lecturerID) {
-    String lecturerName = "User";
-    try (BufferedReader br = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"))) {
-        String line;
-        while ((line = br.readLine()) != null) {
-            String[] details = line.split(";");
-            if (details[0].equals(lecturerID)) {
-                lecturerName = details[1];
-                break;
-            }
-        }
-    } catch (IOException ex) {
-        Logger.getLogger(LecturerDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        String lecturerName = getLecturerNameFromFile("lecturer.txt", "LC000001"); // Pass the actual lecturer ID you need
+        WelcomeUser.setText("Hi " + lecturerName);
     }
-    return lecturerName;
-}
 
+    private String getLecturerNameFromFile(String fileName, String lecturerID) {
+        String lecturerName = "User";
+        try (BufferedReader br = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] details = line.split(";");
+                if (details[0].equals(lecturerID)) {
+                    lecturerName = details[1];
+                    break;
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(LecturerDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lecturerName;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -55,7 +54,6 @@ private String getLecturerNameFromFile(String fileName, String lecturerID) {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         PreReqPage = new javax.swing.JLabel();
-        HomePage = new javax.swing.JButton();
         ConPresPage = new javax.swing.JLabel();
         ViewSuperPage1 = new javax.swing.JLabel();
         ReportPage = new javax.swing.JLabel();
@@ -63,6 +61,7 @@ private String getLecturerNameFromFile(String fileName, String lecturerID) {
         DashPage = new javax.swing.JLabel();
         UploadPage = new javax.swing.JLabel();
         ManageAcademiPage = new javax.swing.JLabel();
+        Dashboard = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -77,17 +76,10 @@ private String getLecturerNameFromFile(String fileName, String lecturerID) {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         PreReqPage.setText("View Presentation Request");
-
-        HomePage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Home.png"))); // NOI18N
-        HomePage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                HomePageMouseClicked(evt);
-            }
-        });
 
         ConPresPage.setText("Confirm Date For Presentation");
 
@@ -103,16 +95,19 @@ private String getLecturerNameFromFile(String fileName, String lecturerID) {
 
         ManageAcademiPage.setText("Manage Academic Resources");
 
+        Dashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Home.png"))); // NOI18N
+        Dashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DashboardMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(ConPresPage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(PreReqPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(HomePage)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(ViewSuperPage1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,13 +122,17 @@ private String getLecturerNameFromFile(String fileName, String lecturerID) {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(UploadPage, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(Dashboard)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(HomePage)
-                .addGap(34, 34, 34)
+                .addGap(27, 27, 27)
+                .addComponent(Dashboard)
+                .addGap(29, 29, 29)
                 .addComponent(ViewSuperPage1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PreReqPage, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -295,10 +294,10 @@ private String getLecturerNameFromFile(String fileName, String lecturerID) {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void HomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomePageMouseClicked
-LecturerHomePage lecturerHomePage = new LecturerHomePage();
-this.setVisible(false);  
-lecturerHomePage.setVisible(true);      }//GEN-LAST:event_HomePageMouseClicked
+    private void DashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardMouseClicked
+    LecturerDashboard lecturerDashboard = new LecturerDashboard();
+    this.setVisible(false);
+    lecturerDashboard.setVisible(true);    }//GEN-LAST:event_DashboardMouseClicked
 
     /**
      * @param args the command line arguments
@@ -338,7 +337,7 @@ lecturerHomePage.setVisible(true);      }//GEN-LAST:event_HomePageMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ConPresPage;
     private javax.swing.JLabel DashPage;
-    private javax.swing.JButton HomePage;
+    private javax.swing.JButton Dashboard;
     private javax.swing.JLabel ManageAcademiPage;
     private javax.swing.JLabel PreReqPage;
     private javax.swing.JLabel ReportPage;
