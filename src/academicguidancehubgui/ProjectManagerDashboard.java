@@ -231,8 +231,8 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(153, 255, 255));
 
-        jLabel14.setFont(new java.awt.Font("Segoe Print", 0, 24)); // NOI18N
-        jLabel14.setText("Project Manager Dashboard");
+        jLabel14.setFont(new java.awt.Font("Segoe Print", 0, 22)); // NOI18N
+        jLabel14.setText("Project Manager - Dashboard");
 
         jLabel15.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
