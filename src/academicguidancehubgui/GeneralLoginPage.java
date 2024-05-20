@@ -186,6 +186,9 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                 switch (user.getRole()) {
                     case "Student":
                         JOptionPane.showMessageDialog(null, "Welcome to Student Page.", "Student Page", JOptionPane.INFORMATION_MESSAGE);
+                        StudentMainPage SMP = new StudentMainPage();
+                        SMP.setVisible(true);
+                        this.dispose();
                         break;
                     case "Lecturer":
                         JOptionPane.showMessageDialog(null, "Welcome to Lecturer Page.", "Lecturer Page", JOptionPane.INFORMATION_MESSAGE);
