@@ -28,10 +28,7 @@ public class StudentDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        logoutLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jlStudentName = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -50,22 +47,8 @@ public class StudentDashboard extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
 
-        logoutLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        logoutLabel.setForeground(new java.awt.Color(255, 255, 255));
-        logoutLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/logout.png"))); // NOI18N
-        logoutLabel.setText("      LOGOUT");
-        logoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                logoutLabelMouseClicked(evt);
-            }
-        });
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel3.setText("Academic Guidance Hub (AGH)");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -282,28 +265,6 @@ public class StudentDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
-        int ans = JOptionPane.showConfirmDialog(null, "Confirm to logout?","Are you sure?",JOptionPane.YES_NO_CANCEL_OPTION);
-        if (ans == JOptionPane.YES_OPTION){
-            dispose();
-            GeneralLoginPage obj = new GeneralLoginPage();
-            obj.setVisible(true);
-        } else{
-            this.setVisible(true);
-        }
-    }//GEN-LAST:event_logoutLabelMouseClicked
-
-    private void logoutLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabel1MouseClicked
-        int ans = JOptionPane.showConfirmDialog(null, "Confirm to logout?","Are you sure?",JOptionPane.YES_NO_CANCEL_OPTION);
-        if (ans == JOptionPane.YES_OPTION){
-            dispose();
-            GeneralLoginPage obj = new GeneralLoginPage();
-            obj.setVisible(true);
-        } else{
-            this.setVisible(true);
-        }
-    }//GEN-LAST:event_logoutLabel1MouseClicked
-
     private void jlSubmitAssignmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSubmitAssignmentMouseClicked
         StudentSubmitAssignment stSA = new StudentSubmitAssignment();
                         stSA.setVisible(true);
@@ -315,6 +276,17 @@ public class StudentDashboard extends javax.swing.JFrame {
                         stRP.setVisible(true);
                         this.dispose();
     }//GEN-LAST:event_jlPresentationDateMouseClicked
+
+    private void logoutLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabel1MouseClicked
+        int ans = JOptionPane.showConfirmDialog(null, "Confirm to logout?","Are you sure?",JOptionPane.YES_NO_CANCEL_OPTION);
+        if (ans == JOptionPane.YES_OPTION){
+            dispose();
+            GeneralLoginPage obj = new GeneralLoginPage();
+            obj.setVisible(true);
+        } else{
+            this.setVisible(true);
+        }
+    }//GEN-LAST:event_logoutLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -365,13 +337,10 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel jlPresentationDate;
     private javax.swing.JLabel jlStudentName;
     private javax.swing.JLabel jlSubmitAssignment;
-    private javax.swing.JLabel logoutLabel;
     private javax.swing.JLabel logoutLabel1;
     // End of variables declaration//GEN-END:variables
 }
