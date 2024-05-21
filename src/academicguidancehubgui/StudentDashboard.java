@@ -38,7 +38,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jlSubmitAssignment = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jlPresentationDate = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         logoutLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
@@ -101,24 +101,19 @@ public class StudentDashboard extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(153, 255, 255));
 
-        jlPresentationDate.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        jlPresentationDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Presentation.png"))); // NOI18N
-        jlPresentationDate.setText("View Presentation Date");
-        jlPresentationDate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlPresentationDateMouseClicked(evt);
-            }
-        });
+        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Presentation.png"))); // NOI18N
+        jLabel5.setText("View Presentation Date");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlPresentationDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlPresentationDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
         );
 
         logoutLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -169,7 +164,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 384, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("OODJ", jPanel6);
@@ -182,7 +177,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 384, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("PFDA", jPanel7);
@@ -195,7 +190,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 384, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("SDM", jPanel8);
@@ -208,7 +203,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 384, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("SRE", jPanel9);
@@ -221,7 +216,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 384, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("SNA", jPanel10);
@@ -270,12 +265,6 @@ public class StudentDashboard extends javax.swing.JFrame {
                         stSA.setVisible(true);
                         this.dispose();
     }//GEN-LAST:event_jlSubmitAssignmentMouseClicked
-
-    private void jlPresentationDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlPresentationDateMouseClicked
-        StudentRequestPresentation stRP = new StudentRequestPresentation();
-                        stRP.setVisible(true);
-                        this.dispose();
-    }//GEN-LAST:event_jlPresentationDateMouseClicked
 
     private void logoutLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabel1MouseClicked
         int ans = JOptionPane.showConfirmDialog(null, "Confirm to logout?","Are you sure?",JOptionPane.YES_NO_CANCEL_OPTION);
@@ -327,6 +316,7 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -338,7 +328,6 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel jlPresentationDate;
     private javax.swing.JLabel jlStudentName;
     private javax.swing.JLabel jlSubmitAssignment;
     private javax.swing.JLabel logoutLabel1;
