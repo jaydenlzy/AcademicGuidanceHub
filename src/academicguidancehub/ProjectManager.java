@@ -8,6 +8,9 @@ package academicguidancehub;
  *
  * @author Lzy
  */
-public class ProjectManager {
+public class ProjectManager extends User {
     
+        public ProjectManager(String userId, String name, String password, String email, String contact, String role) {
+        super(userId, name, password, email, contact, role);
+    }
 }

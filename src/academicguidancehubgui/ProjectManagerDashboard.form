@@ -65,7 +65,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel8" max="32767" attributes="0"/>
-                  <Component id="jPanel9" alignment="1" max="32767" attributes="0"/>
+                  <Component id="pnlQuickButtons" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -73,7 +73,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
+                      <Component id="pnlQuickButtons" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -120,7 +120,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel9">
+            <Container class="javax.swing.JPanel" name="pnlQuickButtons">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -133,11 +133,11 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" pref="170" max="32767" attributes="0"/>
+                              <Component id="lblViewProject" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblProjectEnrollment" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblViewSupervisors" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblViewPrjStatusIntake" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblViewPrjStatusIndi" alignment="0" pref="170" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -146,45 +146,45 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="lblViewProject" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="lblProjectEnrollment" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="lblViewSupervisors" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="lblViewPrjStatusIntake" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="lblViewPrjStatusIndi" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace pref="80" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel5">
+                <Component class="javax.swing.JLabel" name="lblViewProject">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="View / Add Projects"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel1">
+                <Component class="javax.swing.JLabel" name="lblProjectEnrollment">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Project Enrollment"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel1MouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblProjectEnrollmentMouseClicked"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel2">
+                <Component class="javax.swing.JLabel" name="lblViewSupervisors">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="View Supervisors List"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel3">
+                <Component class="javax.swing.JLabel" name="lblViewPrjStatusIntake">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="View Project Status (Intake)"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel4">
+                <Component class="javax.swing.JLabel" name="lblViewPrjStatusIndi">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="View Project Status (Individual)"/>
                   </Properties>
@@ -206,19 +206,12 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jPanel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jPanel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPanel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Component id="jPanel10" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -249,14 +242,14 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel6" pref="201" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel7" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="lblCurrentPrj" min="-2" pref="150" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel7" alignment="0" pref="72" max="32767" attributes="0"/>
+                      <Component id="lblCurrentPrj" alignment="0" pref="72" max="32767" attributes="0"/>
                       <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
@@ -267,7 +260,7 @@
                     <Property name="text" type="java.lang.String" value="Current Ongoing Project(s) :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel7">
+                <Component class="javax.swing.JLabel" name="lblCurrentPrj">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Num of Prj Current"/>
                   </Properties>
@@ -282,7 +275,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel8" pref="201" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel9" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="lblCommonPrj" min="-2" pref="150" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -291,7 +284,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" pref="72" max="32767" attributes="0"/>
-                          <Component id="jLabel9" alignment="3" pref="72" max="32767" attributes="0"/>
+                          <Component id="lblCommonPrj" alignment="3" pref="72" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -302,7 +295,7 @@
                     <Property name="text" type="java.lang.String" value="Most Common Ongoing Project :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel9">
+                <Component class="javax.swing.JLabel" name="lblCommonPrj">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Common Project (num)"/>
                   </Properties>
@@ -317,14 +310,14 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel10" pref="201" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel11" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="lblPrjDone" min="-2" pref="150" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel11" alignment="0" pref="72" max="32767" attributes="0"/>
+                      <Component id="lblPrjDone" alignment="0" pref="72" max="32767" attributes="0"/>
                       <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
@@ -335,7 +328,7 @@
                     <Property name="text" type="java.lang.String" value="Total Project(s) Done  :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel11">
+                <Component class="javax.swing.JLabel" name="lblPrjDone">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Num of Prj Done"/>
                   </Properties>
@@ -350,14 +343,14 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel12" pref="201" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel13" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="lblActiveSupervisors" min="-2" pref="150" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel13" alignment="0" pref="72" max="32767" attributes="0"/>
+                      <Component id="lblActiveSupervisors" alignment="0" pref="72" max="32767" attributes="0"/>
                       <Component id="jLabel12" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
@@ -368,7 +361,7 @@
                     <Property name="text" type="java.lang.String" value="Number of Supervisor(s) Active :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel13">
+                <Component class="javax.swing.JLabel" name="lblActiveSupervisors">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Num of Active Supervisors"/>
                   </Properties>
@@ -389,7 +382,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel14" min="-2" pref="351" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel15" min="-2" pref="374" max="-2" attributes="0"/>
+                          <Component id="lblUsername" min="-2" pref="374" max="-2" attributes="0"/>
                           <EmptySpace pref="14" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -399,7 +392,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel14" pref="102" max="32767" attributes="0"/>
-                              <Component id="jLabel15" max="32767" attributes="0"/>
+                              <Component id="lblUsername" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -415,7 +408,7 @@
                     <Property name="text" type="java.lang.String" value="Project Manager - Dashboard"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel15">
+                <Component class="javax.swing.JLabel" name="lblUsername">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI Black" size="14" style="0"/>
