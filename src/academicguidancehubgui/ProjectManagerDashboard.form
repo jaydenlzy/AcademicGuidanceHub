@@ -165,6 +165,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="View / Add Projects"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblViewProjectMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblProjectEnrollment">
                   <Properties>
@@ -178,16 +181,25 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="View Supervisors List"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblViewSupervisorsMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblViewPrjStatusIntake">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="View Project Status (Intake)"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblViewPrjStatusIntakeMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblViewPrjStatusIndi">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="View Project Status (Individual)"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblViewPrjStatusIndiMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

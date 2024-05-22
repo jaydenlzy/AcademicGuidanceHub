@@ -4,6 +4,8 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.ProjectManager;
+
 /**
  *
  * @author Lzy
@@ -15,6 +17,7 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
      */
     public ProjectManagerDashboard() {
         initComponents();
+        lblUsername.setText("lmao");
     }
 
     /**
@@ -87,6 +90,11 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
         pnlQuickButtons.setBackground(new java.awt.Color(204, 204, 204));
 
         lblViewProject.setText("View / Add Projects");
+        lblViewProject.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblViewProjectMouseClicked(evt);
+            }
+        });
 
         lblProjectEnrollment.setText("Project Enrollment");
         lblProjectEnrollment.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -96,10 +104,25 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
         });
 
         lblViewSupervisors.setText("View Supervisors List");
+        lblViewSupervisors.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblViewSupervisorsMouseClicked(evt);
+            }
+        });
 
         lblViewPrjStatusIntake.setText("View Project Status (Intake)");
+        lblViewPrjStatusIntake.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblViewPrjStatusIntakeMouseClicked(evt);
+            }
+        });
 
         lblViewPrjStatusIndi.setText("View Project Status (Individual)");
+        lblViewPrjStatusIndi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblViewPrjStatusIndiMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlQuickButtonsLayout = new javax.swing.GroupLayout(pnlQuickButtons);
         pnlQuickButtons.setLayout(pnlQuickButtonsLayout);
@@ -320,12 +343,38 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblProjectEnrollmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProjectEnrollmentMouseClicked
-        // TODO add your handling code here:
+        dispose();
+        ProjectManagerProjectEnrollment obj = new ProjectManagerProjectEnrollment();
+        obj.setVisible(true);
     }//GEN-LAST:event_lblProjectEnrollmentMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void lblViewProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewProjectMouseClicked
+        dispose();
+        ProjectManagerViewProject obj = new ProjectManagerViewProject();
+        obj.setVisible(true);
+    }//GEN-LAST:event_lblViewProjectMouseClicked
+
+    private void lblViewSupervisorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewSupervisorsMouseClicked
+        dispose();
+        ProjectManagerViewSupervisors obj = new ProjectManagerViewSupervisors();
+        obj.setVisible(true);
+    }//GEN-LAST:event_lblViewSupervisorsMouseClicked
+
+    private void lblViewPrjStatusIntakeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewPrjStatusIntakeMouseClicked
+        dispose();
+        ProjectManagerViewPrjStatusIntake obj = new ProjectManagerViewPrjStatusIntake();
+        obj.setVisible(true);
+    }//GEN-LAST:event_lblViewPrjStatusIntakeMouseClicked
+
+    private void lblViewPrjStatusIndiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewPrjStatusIndiMouseClicked
+        dispose();
+        ProjectManagerViewPrjStatusStudent obj = new ProjectManagerViewPrjStatusStudent();
+        obj.setVisible(true);
+    }//GEN-LAST:event_lblViewPrjStatusIndiMouseClicked
 
     /**
      * @param args the command line arguments

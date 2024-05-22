@@ -4,6 +4,10 @@
  */
 package academicguidancehub;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  * @author Lzy
@@ -13,4 +17,17 @@ public class ProjectManager extends User {
         public ProjectManager(String userId, String name, String password, String email, String contact, String role) {
         super(userId, name, password, email, contact, role);
     }
+
+
+    private void createProjectTypeFile() {
+        File file = new File("/src/ProjectType.txt");
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            } 
+       } catch (IOException e) {
+            System.err.println("An error occurred while creating the file: " + e.getMessage());
+        }
+    }
+
 }
