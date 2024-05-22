@@ -4,6 +4,8 @@
  */
 package academicguidancehub;
 
+import academicguidancehubgui.GeneralLoginPage;
+
 /**
  *
  * @author Lzy
@@ -14,7 +16,8 @@ public class AcademicGuidanceHub {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("hello");
+        GeneralLoginPage loginPage = new GeneralLoginPage();
+        loginPage.setVisible(true);
     }
     
 }

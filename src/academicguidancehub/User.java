@@ -8,7 +8,8 @@ package academicguidancehub;
  *
  * @author New HP
  */
-public abstract class User {
+public class User {
+
     private String UserId;
     private String name;
     private String password;
@@ -24,6 +25,14 @@ public abstract class User {
         this.email = email;
         this.contact = contact;
         this.role = role;
+    }
+
+    public User() {
+        
+    }
+    
+    public User(String userId, String name, String password) {
+        this(userId, name, password, "defaultEmail", "defaultContact", "defaultRole");
     }
 
     public String getUserId() {

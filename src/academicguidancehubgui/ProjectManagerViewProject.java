@@ -5,6 +5,13 @@
 package academicguidancehubgui;
 
 import academicguidancehub.ProjectManager;
+import academicguidancehub.User;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,8 +22,12 @@ public class ProjectManagerViewProject extends javax.swing.JFrame {
     /**
      * Creates new form ProjectManagerViewProject
      */
-    public ProjectManagerViewProject() {
+    ProjectManager pm = null;
+
+    public ProjectManagerViewProject(ProjectManager pm) {
+        this.pm = pm;
         initComponents();
+        loadSchoolList();
     }
 
     /**
@@ -28,6 +39,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -105,6 +117,11 @@ public class ProjectManagerViewProject extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(204, 255, 255));
 
         btnClearAll.setText("Clear All");
+        btnClearAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearAllActionPerformed(evt);
+            }
+        });
 
         btnConfirm.setText("Confirm");
         btnConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -140,9 +157,14 @@ public class ProjectManagerViewProject extends javax.swing.JFrame {
 
         lblRequirePresentation.setText("Require Presentation :");
 
-        rdBtnYes.setText("jRadioButton1");
+        rdBtnYes.setBackground(new java.awt.Color(204, 255, 255));
+        buttonGroup1.add(rdBtnYes);
+        rdBtnYes.setText("Yes");
 
-        rdBtnNo.setText("jRadioButton2");
+        rdBtnNo.setBackground(new java.awt.Color(204, 255, 255));
+        buttonGroup1.add(rdBtnNo);
+        rdBtnNo.setText("No");
+        rdBtnNo.setToolTipText("");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -171,8 +193,6 @@ public class ProjectManagerViewProject extends javax.swing.JFrame {
         jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 420, 40));
 
         jPanel7.setBackground(new java.awt.Color(204, 255, 255));
-
-        txtProjectCategory.setText("jTextField1");
 
         lblProjectCategory.setText("Project Category :");
 
@@ -283,53 +303,89 @@ public class ProjectManagerViewProject extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
-        // TODO add your handling code here:
+        String projectCategory = txtProjectCategory.getText();
+        String school = (String) cmbBoxPreferredSchool.getSelectedItem();
+        String requirePresentation = rdBtnYes.isSelected() ? "Yes" : "No";
+
+        if (projectCategory.isEmpty() || school == null) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter("src/textfiles/ProjectType.txt", true))) {
+            writer.println(projectCategory + ", " + school + ", " + requirePresentation);
+            JOptionPane.showMessageDialog(this, "Data written to file successfully.");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnConfirmActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         dispose();
-        ProjectManagerDashboard obj = new ProjectManagerDashboard();
+        ProjectManagerDashboard obj = new ProjectManagerDashboard(pm);
         obj.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProjectManagerViewProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProjectManagerViewProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProjectManagerViewProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProjectManagerViewProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnClearAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAllActionPerformed
+        txtProjectCategory.setText("");
+        cmbBoxPreferredSchool.setSelectedIndex(-1);
+        rdBtnYes.setSelected(false);
+        rdBtnNo.setSelected(false);
+    }//GEN-LAST:event_btnClearAllActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ProjectManagerViewProject().setVisible(true);
+    private void loadSchoolList() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/SchoolWiseList.txt"))) {
+            String line;
+            cmbBoxPreferredSchool.removeAllItems(); // Clear existing items
+            while ((line = reader.readLine()) != null) {
+                cmbBoxPreferredSchool.addItem(line);
+                cmbBoxPreferredSchool.setSelectedIndex(-1);
             }
-        });
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error loading school list: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
+
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ProjectManagerViewProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ProjectManagerViewProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ProjectManagerViewProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ProjectManagerViewProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ProjectManagerViewProject().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearAll;
     private javax.swing.JButton btnConfirm;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbBoxPreferredSchool;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

@@ -21,8 +21,9 @@ public class ReadOperations {
                 String email = parts[3];
                 String contact = parts[4];
                 String role = parts[5];
-                String UserPassword = parts[2]; 
-                userList.add(new User(UserId,name,UserPassword,email,contact,role) {});
+                String UserPassword = parts[2];
+                User u = new User(UserId,name,UserPassword,email,contact,role);
+                userList.add(u);
             }
         } catch (IOException e) {
             e.printStackTrace();

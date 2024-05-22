@@ -1,3 +1,3 @@
 LC000003;Minnu Helen Joseph;LC000003#Minnu;minnuhelenjoseph@gmail.com;0179856230;Project Manager;School of Business, Management, Operations & Research
 LC000006;CHANG ZHENG FANG;LC000006#Chang;changzhengfang@gmail.com;0189808878;Project Manager;School of Technology, Networks, Security, Forensics
-1;Lee;1;lee@gmail.com;0123456789;Project Manager;School of Business
+LC1;Lee;1;lee@gmail.com;0123456789;Project Manager;School of Business

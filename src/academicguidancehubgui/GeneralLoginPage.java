@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.ProjectManager;
 import academicguidancehub.User;
 import academicguidancehub.ReadOperations;
 import java.util.ArrayList;
@@ -195,7 +196,8 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                         break;
                     case "Project Manager":
                         JOptionPane.showMessageDialog(null, "Welcome to Project manager Page.", "PM Page", JOptionPane.INFORMATION_MESSAGE);
-                        ProjectManagerDashboard pmD = new ProjectManagerDashboard();
+                        ProjectManager pm = new ProjectManager(user.getUserId(), user.getName(), user.getPassword(), user.getEmail(), user.getContact(), user.getRole());
+                        ProjectManagerDashboard pmD = new ProjectManagerDashboard(pm);
                         pmD.setVisible(true);
                         this.dispose();
                         break;

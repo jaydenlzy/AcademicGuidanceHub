@@ -13,19 +13,29 @@ import java.io.IOException;
  * @author Lzy
  */
 public class ProjectManager extends User {
-    
-        public ProjectManager(String userId, String name, String password, String email, String contact, String role) {
+
+    public ProjectManager(String userId, String name, String password, String email, String contact, String role) {
         super(userId, name, password, email, contact, role);
     }
 
-
-    private void createProjectTypeFile() {
-        File file = new File("/src/ProjectType.txt");
+    public void createProjectTypeFile() {
+        File file = new File("src/textfiles/ProjectType.txt");
         try {
             if (!file.exists()) {
                 file.createNewFile();
-            } 
-       } catch (IOException e) {
+            }
+        } catch (IOException e) {
+            System.err.println("An error occurred while creating the file: " + e.getMessage());
+        }
+    }
+
+    public void createProjectsFile() {
+        File file = new File("src/textfiles/Projects.txt");
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
             System.err.println("An error occurred while creating the file: " + e.getMessage());
         }
     }

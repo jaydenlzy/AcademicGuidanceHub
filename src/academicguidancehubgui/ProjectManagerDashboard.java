@@ -5,6 +5,7 @@
 package academicguidancehubgui;
 
 import academicguidancehub.ProjectManager;
+import academicguidancehub.User;
 
 /**
  *
@@ -15,9 +16,14 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
     /**
      * Creates new form ProjectManagerDashboard
      */
-    public ProjectManagerDashboard() {
+    ProjectManager pm = null;
+
+    public ProjectManagerDashboard(ProjectManager pm) {
+        this.pm = pm;
+        pm.createProjectTypeFile();
+        pm.createProjectsFile();
         initComponents();
-        lblUsername.setText("lmao");
+        lblUsername.setText(pm.getName());
     }
 
     /**
@@ -259,7 +265,7 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
 
         lblUsername.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblUsername.setText("Username");
+        lblUsername.setText("User");
         lblUsername.setToolTipText("");
         lblUsername.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblUsername.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -344,7 +350,7 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
 
     private void lblProjectEnrollmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProjectEnrollmentMouseClicked
         dispose();
-        ProjectManagerProjectEnrollment obj = new ProjectManagerProjectEnrollment();
+        ProjectManagerProjectEnrollment obj = new ProjectManagerProjectEnrollment(pm);
         obj.setVisible(true);
     }//GEN-LAST:event_lblProjectEnrollmentMouseClicked
 
@@ -354,62 +360,62 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
 
     private void lblViewProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewProjectMouseClicked
         dispose();
-        ProjectManagerViewProject obj = new ProjectManagerViewProject();
+        ProjectManagerViewProject obj = new ProjectManagerViewProject(pm);
         obj.setVisible(true);
     }//GEN-LAST:event_lblViewProjectMouseClicked
 
     private void lblViewSupervisorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewSupervisorsMouseClicked
         dispose();
-        ProjectManagerViewSupervisors obj = new ProjectManagerViewSupervisors();
+        ProjectManagerViewSupervisors obj = new ProjectManagerViewSupervisors(pm);
         obj.setVisible(true);
     }//GEN-LAST:event_lblViewSupervisorsMouseClicked
 
     private void lblViewPrjStatusIntakeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewPrjStatusIntakeMouseClicked
         dispose();
-        ProjectManagerViewPrjStatusIntake obj = new ProjectManagerViewPrjStatusIntake();
+        ProjectManagerViewPrjStatusIntake obj = new ProjectManagerViewPrjStatusIntake(pm);
         obj.setVisible(true);
     }//GEN-LAST:event_lblViewPrjStatusIntakeMouseClicked
 
     private void lblViewPrjStatusIndiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewPrjStatusIndiMouseClicked
         dispose();
-        ProjectManagerViewPrjStatusStudent obj = new ProjectManagerViewPrjStatusStudent();
+        ProjectManagerViewPrjStatusStudent obj = new ProjectManagerViewPrjStatusStudent(pm);
         obj.setVisible(true);
     }//GEN-LAST:event_lblViewPrjStatusIndiMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProjectManagerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProjectManagerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProjectManagerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProjectManagerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ProjectManagerDashboard().setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ProjectManagerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ProjectManagerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ProjectManagerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ProjectManagerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ProjectManagerDashboard().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
