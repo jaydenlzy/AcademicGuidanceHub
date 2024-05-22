@@ -6,18 +6,11 @@ package academicguidancehubgui;
 
 import academicguidancehub.ProjectManager;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -136,6 +129,11 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(204, 255, 255));
 
         btnClearAll.setText("Clear All");
+        btnClearAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearAllActionPerformed(evt);
+            }
+        });
 
         btnConfirm.setText("Confirm");
         btnConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -364,7 +362,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
 
         jLabel5.setText("Due Date");
 
-        spinnerDueDate.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, new java.util.Date(4073558340000L), java.util.Calendar.DAY_OF_MONTH));
+        spinnerDueDate.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1704081540000L), null, null, java.util.Calendar.DAY_OF_MONTH));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -454,14 +452,42 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
         String supervisorID = getLecturerID(supervisorName);
         String secondMarkerID = getLecturerID(secondMarkerName);
 
-        if (projectCategory == null || projectTitle.isEmpty()) {
+        if (projectCategory == null || projectTitle.isEmpty() || projectDueDate == null
+                || (rdBtnIntake.isSelected() && (studentIntake == null || studentIntake.isEmpty()))
+                || (rdBtnIndividual.isSelected() && (studentId == null || studentId.isEmpty()))
+                || supervisorName == null || supervisorName.isEmpty()
+                || secondMarkerName == null || secondMarkerName.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        StringBuilder projectDetails = new StringBuilder();
-        if (!studentIntake.isEmpty()) {
+        boolean isStudentIntakeValid = studentIntake != null && !studentIntake.isEmpty();
+        boolean isStudentIdValid = studentId != null && !studentId.isEmpty();
+
+        if (isStudentIdValid) {
+            if (!isValidStudentId(studentId)) {
+                JOptionPane.showMessageDialog(this, "Invalid Student ID format", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!studentExists(studentId)) {
+                JOptionPane.showMessageDialog(this, "Student ID does not exist", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (studentIntake == null || studentIntake.isEmpty()) {
+                studentIntake = getIntakeByStudentId(studentId);
+            }
+            String projectDetails = formatProjectDetails(
+                    projectID, projectCategory, projectTitle, projectDueDate,
+                    projectRequirePresentation, studentIntake, studentId, supervisorID, secondMarkerID
+            );
+            writeProjectDetailsToFile(projectDetails);
+        } else if (isStudentIntakeValid) {
             List<String> studentIDs = getStudentIDsByIntake(studentIntake);
+            if (studentIDs.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No students found for the provided intake code", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            StringBuilder projectDetails = new StringBuilder();
             for (String id : studentIDs) {
                 projectDetails.append(formatProjectDetails(
                         projectID, projectCategory, projectTitle, projectDueDate,
@@ -469,21 +495,19 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
                 ));
                 projectDetails.append(System.lineSeparator());
             }
-        } else if (!studentId.isEmpty()) {
-            projectDetails.append(formatProjectDetails(
-                    projectID, projectCategory, projectTitle, projectDueDate,
-                    projectRequirePresentation, studentIntake, studentId, supervisorID, secondMarkerID
-            ));
+            writeProjectDetailsToFile(projectDetails.toString());
+            rdBtnIntake.setSelected(false);
+            rdBtnIndividual.setSelected(false);
+            txtStudentId.setText("");
+            cmbBoxIntake.setSelectedIndex(-1);
+            cmbBoxPrjCategory.setSelectedIndex(-1);
+            txtProjectTitle.setText("");
+            spinnerDueDate.setValue(new Date());
+            cmbBoxSupervisor.setSelectedIndex(-1);
+            cmbBoxSecMarker.setSelectedIndex(-1);
+
         } else {
             JOptionPane.showMessageDialog(this, "Please provide either intake or student ID", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        try (PrintWriter writer = new PrintWriter(new FileWriter("src/textfiles/Projects.txt", true))) {
-            writer.println(projectDetails.toString());
-            JOptionPane.showMessageDialog(this, "Data written to file successfully.");
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnConfirmActionPerformed
 
@@ -529,6 +553,18 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
 //        boolean markerSchoolMismatch = checkSchoolMismatch(selectedProjectCategory, selectedSecondMarker);
 //        lblSecondSchool.setVisible(markerSchoolMismatch);
     }//GEN-LAST:event_cmbBoxSecMarkerActionPerformed
+
+    private void btnClearAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAllActionPerformed
+        rdBtnIntake.setSelected(false);
+        rdBtnIndividual.setSelected(false);
+        txtStudentId.setText("");
+        cmbBoxIntake.setSelectedIndex(-1);
+        cmbBoxPrjCategory.setSelectedIndex(-1);
+        txtProjectTitle.setText("");
+        spinnerDueDate.setValue(new Date());
+        cmbBoxSupervisor.setSelectedIndex(-1);
+        cmbBoxSecMarker.setSelectedIndex(-1);
+    }//GEN-LAST:event_btnClearAllActionPerformed
 
     private void loadIntakeList() {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/intakesType.txt"))) {
@@ -612,6 +648,49 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error checking if presentation is required: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         return false;
+    }
+
+    private String getIntakeByStudentId(String studentId) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Students.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] studentDetails = line.split(";");
+                if (studentDetails.length == 7 && studentDetails[0].equals(studentId)) {
+                    return studentDetails[6]; // Return the intake code
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private boolean isValidStudentId(String studentId) {
+        return studentId.matches("ST\\d{6}");
+    }
+
+    private boolean studentExists(String studentId) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Students.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] studentDetails = line.split(";");
+                if (studentDetails.length == 7 && studentDetails[0].equals(studentId)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void writeProjectDetailsToFile(String projectDetails) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("src/textfiles/Projects.txt", true))) {
+            writer.print(projectDetails);
+            JOptionPane.showMessageDialog(this, "Data written to file successfully.");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private String generateNewProjectID() {
@@ -721,40 +800,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
 //            return false; // Schools match, return false
 //        }
 //    }
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(ProjectManagerProjectEnrollment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(ProjectManagerProjectEnrollment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(ProjectManagerProjectEnrollment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(ProjectManagerProjectEnrollment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ProjectManagerProjectEnrollment().setVisible(true);
-//            }
-//        });
-//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearAll;
