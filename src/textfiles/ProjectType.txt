@@ -1,3 +1,5 @@
-FYP, School of Business, Law, Economics & International Relations, Yes
-Internship, Library, Yes
-RMCP, Operations Management, Yes
+FYP;School of Business, Law, Economics & International Relations;Yes
+Internship;Library;Yes
+RMCP;Operations Management;Yes
+IR Report (School of Media);School of Media, Art and Design;Yes
+RMCP SoB;School of Business, Law, Economics & International Relations;No

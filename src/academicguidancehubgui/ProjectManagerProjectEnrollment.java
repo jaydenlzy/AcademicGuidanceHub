@@ -5,6 +5,23 @@
 package academicguidancehubgui;
 
 import academicguidancehub.ProjectManager;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,6 +37,16 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
     public ProjectManagerProjectEnrollment(ProjectManager pm) {
         this.pm = pm;
         initComponents();
+        loadIntakeList();
+        loadProjectCategoryList();
+        loadSupervisorList();
+        loadSecondMarkerList();
+
+        cmbBoxIntake.setVisible(false);
+        txtStudentId.setVisible(false);
+        lblNotePresentation.setVisible(false);
+        lblSuperSchool.setVisible(false);
+        lblSecondSchool.setVisible(false);
     }
 
     /**
@@ -31,38 +58,39 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnExit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnClearAll = new javax.swing.JButton();
+        btnConfirm = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField1 = new javax.swing.JTextField();
+        rdBtnIntake = new javax.swing.JRadioButton();
+        cmbBoxIntake = new javax.swing.JComboBox<>();
+        rdBtnIndividual = new javax.swing.JRadioButton();
+        txtStudentId = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        lblNotePresentation = new javax.swing.JLabel();
+        cmbBoxPrjCategory = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cmbBoxSupervisor = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        cmbBoxSecMarker = new javax.swing.JComboBox<>();
+        lblSuperSchool = new javax.swing.JLabel();
+        lblSecondSchool = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtProjectTitle = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spinnerDueDate = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -107,12 +135,12 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(204, 255, 255));
 
-        jButton4.setText("Clear All");
+        btnClearAll.setText("Clear All");
 
-        jButton5.setText("Confirm");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirm.setText("Confirm");
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnConfirmActionPerformed(evt);
             }
         });
 
@@ -122,9 +150,9 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnClearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -132,8 +160,8 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnConfirm, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(btnClearAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -144,18 +172,25 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
 
         jLabel2.setText("Enroll by:");
 
-        jRadioButton1.setText("Intake");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        rdBtnIntake.setBackground(new java.awt.Color(204, 255, 255));
+        buttonGroup1.add(rdBtnIntake);
+        rdBtnIntake.setText("Intake");
+        rdBtnIntake.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rdBtnIntakeActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbBoxIntake.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jRadioButton2.setText("Individual Student");
-
-        jTextField1.setText("jTextField1");
+        rdBtnIndividual.setBackground(new java.awt.Color(204, 255, 255));
+        buttonGroup1.add(rdBtnIndividual);
+        rdBtnIndividual.setText("Individual Student");
+        rdBtnIndividual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdBtnIndividualActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -164,16 +199,14 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rdBtnIntake, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(239, 239, 239)
-                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                    .addComponent(cmbBoxIntake, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rdBtnIndividual, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtStudentId, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(157, 157, 157))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,13 +214,13 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdBtnIntake)
+                    .addComponent(rdBtnIndividual))
                 .addGap(6, 6, 6)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbBoxIntake, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtStudentId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -195,9 +228,14 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(204, 255, 255));
 
-        jLabel7.setText("Note");
+        lblNotePresentation.setText("Current Project Requires Presentation");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbBoxPrjCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbBoxPrjCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbBoxPrjCategoryActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Project Category");
 
@@ -210,9 +248,9 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbBoxPrjCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(85, 85, 85)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblNotePresentation, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -222,10 +260,10 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbBoxPrjCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jLabel7)))
+                        .addComponent(lblNotePresentation)))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -235,15 +273,25 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
 
         jLabel6.setText("Supervisor");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbBoxSupervisor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbBoxSupervisor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbBoxSupervisorActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Second Marker");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbBoxSecMarker.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbBoxSecMarker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbBoxSecMarkerActionPerformed(evt);
+            }
+        });
 
-        jLabel9.setText("Note");
+        lblSuperSchool.setText("*note* Supervisor is not from preferred school");
 
-        jLabel10.setText("Note2");
+        lblSecondSchool.setText("*note* SecondMarker is not from preferred school");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -252,22 +300,18 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSuperSchool, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbBoxSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 21, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblSecondSchool, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbBoxSecMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 21, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,12 +322,12 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbBoxSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbBoxSecMarker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel9))
+                    .addComponent(lblSecondSchool)
+                    .addComponent(lblSuperSchool))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -293,8 +337,6 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
 
         jLabel4.setText("Project Title / Name");
 
-        jTextField2.setText("jTextField2");
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -302,7 +344,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProjectTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(204, Short.MAX_VALUE))
         );
@@ -312,7 +354,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtProjectTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -322,7 +364,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
 
         jLabel5.setText("Due Date");
 
-        jSpinner1.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, new java.util.Date(4073558340000L), java.util.Calendar.DAY_OF_MONTH));
+        spinnerDueDate.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, new java.util.Date(4073558340000L), java.util.Calendar.DAY_OF_MONTH));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -331,7 +373,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinnerDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(427, Short.MAX_VALUE))
         );
@@ -341,7 +383,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spinnerDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -399,13 +441,59 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExitActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+        String projectCategory = (String) cmbBoxPrjCategory.getSelectedItem();
+        String projectTitle = txtProjectTitle.getText();
+        Date projectDueDate = (Date) spinnerDueDate.getValue();
+        String studentIntake = (String) cmbBoxIntake.getSelectedItem();
+        String studentId = txtStudentId.getText();
+        String supervisorName = (String) cmbBoxSupervisor.getSelectedItem();
+        String secondMarkerName = (String) cmbBoxSecMarker.getSelectedItem();
+        String projectID = generateNewProjectID();
+        String projectRequirePresentation = getProjectRequirePresentation(projectCategory);
+        String supervisorID = getLecturerID(supervisorName);
+        String secondMarkerID = getLecturerID(secondMarkerName);
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+        if (projectCategory == null || projectTitle.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        StringBuilder projectDetails = new StringBuilder();
+        if (!studentIntake.isEmpty()) {
+            List<String> studentIDs = getStudentIDsByIntake(studentIntake);
+            for (String id : studentIDs) {
+                projectDetails.append(formatProjectDetails(
+                        projectID, projectCategory, projectTitle, projectDueDate,
+                        projectRequirePresentation, studentIntake, id, supervisorID, secondMarkerID
+                ));
+                projectDetails.append(System.lineSeparator());
+            }
+        } else if (!studentId.isEmpty()) {
+            projectDetails.append(formatProjectDetails(
+                    projectID, projectCategory, projectTitle, projectDueDate,
+                    projectRequirePresentation, studentIntake, studentId, supervisorID, secondMarkerID
+            ));
+        } else {
+            JOptionPane.showMessageDialog(this, "Please provide either intake or student ID", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter("src/textfiles/Projects.txt", true))) {
+            writer.println(projectDetails.toString());
+            JOptionPane.showMessageDialog(this, "Data written to file successfully.");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnConfirmActionPerformed
+
+    private void rdBtnIntakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnIntakeActionPerformed
+        if (rdBtnIntake.isSelected()) {
+            txtStudentId.setVisible(false);
+            cmbBoxIntake.setVisible(true);
+            cmbBoxIntake.setSelectedIndex(-1);
+        }
+    }//GEN-LAST:event_rdBtnIntakeActionPerformed
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         dispose();
@@ -413,6 +501,226 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
         obj.setVisible(true);
     }//GEN-LAST:event_btnExitMouseClicked
 
+    private void rdBtnIndividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnIndividualActionPerformed
+        if (rdBtnIndividual.isSelected()) {
+            cmbBoxIntake.setVisible(false);
+            txtStudentId.setVisible(true);
+            txtStudentId.setText("");
+        }
+    }//GEN-LAST:event_rdBtnIndividualActionPerformed
+
+    private void cmbBoxPrjCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxPrjCategoryActionPerformed
+        String selectedProjectCategory = (String) cmbBoxPrjCategory.getSelectedItem();
+        boolean requiresPresentation = checkIfPresentationRequired(selectedProjectCategory);
+        lblNotePresentation.setVisible(requiresPresentation);
+    }//GEN-LAST:event_cmbBoxPrjCategoryActionPerformed
+
+    private void cmbBoxSupervisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxSupervisorActionPerformed
+//        String selectedProjectCategory = (String) cmbBoxPrjCategory.getSelectedItem();
+//        String selectedSupervisor = (String) cmbBoxSupervisor.getSelectedItem();
+//        boolean supervisorSchoolMismatch = checkSchoolMismatch(selectedProjectCategory, selectedSupervisor);
+//        lblSuperSchool.setVisible(supervisorSchoolMismatch);
+    }//GEN-LAST:event_cmbBoxSupervisorActionPerformed
+
+    private void cmbBoxSecMarkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxSecMarkerActionPerformed
+//        String selectedProjectCategory = (String) cmbBoxPrjCategory.getSelectedItem();
+//        System.out.println(selectedProjectCategory);
+//        String selectedSecondMarker = (String) cmbBoxSecMarker.getSelectedItem();
+//        boolean markerSchoolMismatch = checkSchoolMismatch(selectedProjectCategory, selectedSecondMarker);
+//        lblSecondSchool.setVisible(markerSchoolMismatch);
+    }//GEN-LAST:event_cmbBoxSecMarkerActionPerformed
+
+    private void loadIntakeList() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/intakesType.txt"))) {
+            String line;
+            cmbBoxIntake.removeAllItems();
+            while ((line = reader.readLine()) != null) {
+                String[] intakeItems = line.split(";");
+                if (intakeItems.length > 0) {
+                    cmbBoxIntake.addItem(intakeItems[0]);
+                }
+            }
+            cmbBoxIntake.setSelectedIndex(-1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error loading school list: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void loadProjectCategoryList() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/ProjectType.txt"))) {
+            String line;
+            cmbBoxPrjCategory.removeAllItems();
+            while ((line = reader.readLine()) != null) {
+                String[] PrjCategoryItems = line.split(";");
+                if (PrjCategoryItems.length > 0) {
+                    cmbBoxPrjCategory.addItem(PrjCategoryItems[0]);
+                }
+            }
+            cmbBoxPrjCategory.setSelectedIndex(-1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error loading school list: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void loadSupervisorList() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"))) {
+            String line;
+            cmbBoxSupervisor.removeAllItems();
+            while ((line = reader.readLine()) != null) {
+                String[] SupevisorItems = line.split(";");
+                if (SupevisorItems.length > 0) {
+                    cmbBoxSupervisor.addItem(SupevisorItems[1]);
+                }
+            }
+            cmbBoxSupervisor.setSelectedIndex(-1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error loading school list: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void loadSecondMarkerList() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"))) {
+            String line;
+            cmbBoxSecMarker.removeAllItems();
+            while ((line = reader.readLine()) != null) {
+                String[] SecondItems = line.split(";");
+                if (SecondItems.length > 0) {
+                    cmbBoxSecMarker.addItem(SecondItems[1]);
+                }
+            }
+            cmbBoxSecMarker.setSelectedIndex(-1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error loading school list: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private boolean checkIfPresentationRequired(String projectCategory) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/ProjectType.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] projectTypeItems = line.split(";");
+                if (projectTypeItems.length >= 3 && projectTypeItems[0].equals(projectCategory)) {
+                    return projectTypeItems[2].trim().equalsIgnoreCase("Yes");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error checking if presentation is required: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
+
+    private String generateNewProjectID() {
+        String lastProjectID = "PRJ00000";
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Projects.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    String[] parts = line.split(",");
+                    if (parts.length > 0) {
+                        lastProjectID = parts[0];
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String prefix = "PRJ";
+        int newIDNumber = 1;
+
+        if (lastProjectID.startsWith(prefix) && lastProjectID.length() > 3) {
+            try {
+                newIDNumber = Integer.parseInt(lastProjectID.substring(3)) + 1;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return String.format("%s%05d", prefix, newIDNumber);
+    }
+
+    private List<String> getStudentIDsByIntake(String intakeCode) {
+        List<String> studentIDs = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Students.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] studentDetails = line.split(";");
+                if (studentDetails[6].equals(intakeCode)) {
+                    studentIDs.add(studentDetails[0]);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return studentIDs;
+    }
+
+    private String getProjectRequirePresentation(String category) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/ProjectType.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] projectTypeDetails = line.split(";");
+                if (projectTypeDetails[0].equals(category)) {
+                    return projectTypeDetails[2];
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "No";
+    }
+
+    private String getLecturerID(String lecturerName) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] lecturerDetails = line.split(";");
+                if (lecturerDetails[1].equals(lecturerName)) {
+                    return lecturerDetails[0];
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    private String formatProjectDetails(String projectID, String projectCategory, String projectTitle, Date dueDate, String requirePresentation, String studentIntake, String studentID, String supervisorID, String secondMarkerID) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,Pending",
+                projectID, projectCategory, projectTitle, sdf.format(dueDate),
+                requirePresentation, studentIntake, studentID, supervisorID, secondMarkerID);
+    }
+
+//    private boolean checkSchoolMismatch(String projectCategory, String marker) {
+//        String markerSchool = "";
+//
+//        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"))) {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                String[] lecturerItems = line.split(";");
+//                if (lecturerItems.length >= 7 && lecturerItems[1].equalsIgnoreCase(marker)) {
+//                    markerSchool = lecturerItems[6].trim();
+//                    break; // Found the marker, exit the loop
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            JOptionPane.showMessageDialog(this, "Error checking school mismatch: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//
+//        // Check if the marker's school matches the project category
+//        if (!markerSchool.equalsIgnoreCase(projectCategory)) {
+//            return true; // Schools don't match, return true
+//        } else {
+//            return false; // Schools match, return false
+//        }
+//    }
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -449,23 +757,21 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClearAll;
+    private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cmbBoxIntake;
+    private javax.swing.JComboBox<String> cmbBoxPrjCategory;
+    private javax.swing.JComboBox<String> cmbBoxSecMarker;
+    private javax.swing.JComboBox<String> cmbBoxSupervisor;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -476,10 +782,13 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblNotePresentation;
+    private javax.swing.JLabel lblSecondSchool;
+    private javax.swing.JLabel lblSuperSchool;
+    private javax.swing.JRadioButton rdBtnIndividual;
+    private javax.swing.JRadioButton rdBtnIntake;
+    private javax.swing.JSpinner spinnerDueDate;
+    private javax.swing.JTextField txtProjectTitle;
+    private javax.swing.JTextField txtStudentId;
     // End of variables declaration//GEN-END:variables
 }

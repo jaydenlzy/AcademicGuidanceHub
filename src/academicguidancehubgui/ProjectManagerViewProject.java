@@ -313,7 +313,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame {
         }
 
         try (PrintWriter writer = new PrintWriter(new FileWriter("src/textfiles/ProjectType.txt", true))) {
-            writer.println(projectCategory + ", " + school + ", " + requirePresentation);
+            writer.println(projectCategory + ";" + school + ";" + requirePresentation);
             JOptionPane.showMessageDialog(this, "Data written to file successfully.");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
