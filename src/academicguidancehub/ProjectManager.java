@@ -12,14 +12,14 @@ import java.io.IOException;
  *
  * @author Lzy
  */
-public class ProjectManager extends User {
+public class ProjectManager extends User implements FileLocationInterface {
 
     public ProjectManager(String userId, String name, String password, String email, String contact, String role) {
         super(userId, name, password, email, contact, role);
     }
 
     public void createProjectTypeFile() {
-        File file = new File("src/textfiles/ProjectType.txt");
+        File file = new File(projectTypePath);
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -30,7 +30,7 @@ public class ProjectManager extends User {
     }
 
     public void createProjectsFile() {
-        File file = new File("src/textfiles/Projects.txt");
+        File file = new File(projectsFilePath);
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -40,4 +40,15 @@ public class ProjectManager extends User {
         }
     }
 
+        public void createResultFile() {
+        File file = new File(resultsFilePath);
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            System.err.println("An error occurred while creating the file: " + e.getMessage());
+        }
+    }
+    
 }

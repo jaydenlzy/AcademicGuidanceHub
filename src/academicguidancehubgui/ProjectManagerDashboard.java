@@ -22,6 +22,7 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
         this.pm = pm;
         pm.createProjectTypeFile();
         pm.createProjectsFile();
+        pm.createResultFile();
         initComponents();
         lblUsername.setText(pm.getName());
     }

@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import academicguidancehub.ProjectManager;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -20,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author Lzy
  */
-public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
+public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implements FileLocationInterface {
 
     /**
      * Creates new form ProjectManagerProjectEnrollment
@@ -464,6 +465,9 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
         boolean isStudentIntakeValid = studentIntake != null && !studentIntake.isEmpty();
         boolean isStudentIdValid = studentId != null && !studentId.isEmpty();
 
+        StringBuilder projectDetails = new StringBuilder();
+        StringBuilder resultDetails = new StringBuilder();
+
         if (isStudentIdValid) {
             if (!isValidStudentId(studentId)) {
                 JOptionPane.showMessageDialog(this, "Invalid Student ID format", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -476,39 +480,37 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
             if (studentIntake == null || studentIntake.isEmpty()) {
                 studentIntake = getIntakeByStudentId(studentId);
             }
-            String projectDetails = formatProjectDetails(
+            projectDetails.append(formatProjectDetails(
                     projectID, projectCategory, projectTitle, projectDueDate,
                     projectRequirePresentation, studentIntake, studentId, supervisorID, secondMarkerID
-            );
-            writeProjectDetailsToFile(projectDetails);
+            ));
+            resultDetails.append(formatResultDetails(projectID, studentId, supervisorID, secondMarkerID));
+
         } else if (isStudentIntakeValid) {
             List<String> studentIDs = getStudentIDsByIntake(studentIntake);
             if (studentIDs.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No students found for the provided intake code", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            StringBuilder projectDetails = new StringBuilder();
             for (String id : studentIDs) {
                 projectDetails.append(formatProjectDetails(
                         projectID, projectCategory, projectTitle, projectDueDate,
                         projectRequirePresentation, studentIntake, id, supervisorID, secondMarkerID
-                ));
-                projectDetails.append(System.lineSeparator());
+                )).append(System.lineSeparator());
+
+                resultDetails.append(formatResultDetails(projectID, id, supervisorID, secondMarkerID)).append(System.lineSeparator());
             }
-            writeProjectDetailsToFile(projectDetails.toString());
-            rdBtnIntake.setSelected(false);
-            rdBtnIndividual.setSelected(false);
-            txtStudentId.setText("");
-            cmbBoxIntake.setSelectedIndex(-1);
-            cmbBoxPrjCategory.setSelectedIndex(-1);
-            txtProjectTitle.setText("");
-            spinnerDueDate.setValue(new Date());
-            cmbBoxSupervisor.setSelectedIndex(-1);
-            cmbBoxSecMarker.setSelectedIndex(-1);
 
         } else {
             JOptionPane.showMessageDialog(this, "Please provide either intake or student ID", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
         }
+
+        writeProjectDetailsToFile("Projects.txt", projectDetails.toString().trim());
+        writeProjectDetailsToFile("Results.txt", resultDetails.toString().trim());
+        JOptionPane.showMessageDialog(this, "Data written successfully.");
+
+        resetForm();
     }//GEN-LAST:event_btnConfirmActionPerformed
 
     private void rdBtnIntakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnIntakeActionPerformed
@@ -555,19 +557,11 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbBoxSecMarkerActionPerformed
 
     private void btnClearAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAllActionPerformed
-        rdBtnIntake.setSelected(false);
-        rdBtnIndividual.setSelected(false);
-        txtStudentId.setText("");
-        cmbBoxIntake.setSelectedIndex(-1);
-        cmbBoxPrjCategory.setSelectedIndex(-1);
-        txtProjectTitle.setText("");
-        spinnerDueDate.setValue(new Date());
-        cmbBoxSupervisor.setSelectedIndex(-1);
-        cmbBoxSecMarker.setSelectedIndex(-1);
+        resetForm();
     }//GEN-LAST:event_btnClearAllActionPerformed
 
     private void loadIntakeList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/intakesType.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(intakeListPath))) {
             String line;
             cmbBoxIntake.removeAllItems();
             while ((line = reader.readLine()) != null) {
@@ -584,7 +578,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
     }
 
     private void loadProjectCategoryList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/ProjectType.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(projectTypePath))) {
             String line;
             cmbBoxPrjCategory.removeAllItems();
             while ((line = reader.readLine()) != null) {
@@ -601,7 +595,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
     }
 
     private void loadSupervisorList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(lecturerFilePath))) {
             String line;
             cmbBoxSupervisor.removeAllItems();
             while ((line = reader.readLine()) != null) {
@@ -618,7 +612,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
     }
 
     private void loadSecondMarkerList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(lecturerFilePath))) {
             String line;
             cmbBoxSecMarker.removeAllItems();
             while ((line = reader.readLine()) != null) {
@@ -635,7 +629,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
     }
 
     private boolean checkIfPresentationRequired(String projectCategory) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/ProjectType.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(projectTypePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] projectTypeItems = line.split(";");
@@ -651,7 +645,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
     }
 
     private String getIntakeByStudentId(String studentId) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Students.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(studentFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] studentDetails = line.split(";");
@@ -670,7 +664,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
     }
 
     private boolean studentExists(String studentId) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Students.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(studentFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] studentDetails = line.split(";");
@@ -684,18 +678,9 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
         return false;
     }
 
-    private void writeProjectDetailsToFile(String projectDetails) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("src/textfiles/Projects.txt", true))) {
-            writer.print(projectDetails);
-            JOptionPane.showMessageDialog(this, "Data written to file successfully.");
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
     private String generateNewProjectID() {
         String lastProjectID = "PRJ00000";
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Projects.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(projectsFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (!line.trim().isEmpty()) {
@@ -725,7 +710,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
 
     private List<String> getStudentIDsByIntake(String intakeCode) {
         List<String> studentIDs = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Students.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(studentFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] studentDetails = line.split(";");
@@ -740,7 +725,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
     }
 
     private String getProjectRequirePresentation(String category) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/ProjectType.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(projectTypePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] projectTypeDetails = line.split(";");
@@ -755,7 +740,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
     }
 
     private String getLecturerID(String lecturerName) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(lecturerFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] lecturerDetails = line.split(";");
@@ -769,17 +754,41 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
         return "";
     }
 
-    private String formatProjectDetails(String projectID, String projectCategory, String projectTitle, Date dueDate, String requirePresentation, String studentIntake, String studentID, String supervisorID, String secondMarkerID) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private String formatProjectDetails(String projectID, String projectCategory, String projectTitle, Date projectDueDate,
+            String projectRequirePresentation, String studentIntake, String studentId,
+            String supervisorID, String secondMarkerID) {
         return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,Pending",
-                projectID, projectCategory, projectTitle, sdf.format(dueDate),
-                requirePresentation, studentIntake, studentID, supervisorID, secondMarkerID);
+                projectID, projectCategory, projectTitle, new SimpleDateFormat("yyyy-MM-dd").format(projectDueDate),
+                projectRequirePresentation, studentIntake, studentId, supervisorID, secondMarkerID);
     }
 
+    private String formatResultDetails(String projectID, String studentID, String supervisorID, String secondMarkerID) {
+        return String.format("%s,%s,%s,%s,Pending", projectID, studentID, supervisorID, secondMarkerID);
+    }
+
+    private void writeProjectDetailsToFile(String fileName, String content) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(path + fileName, true))) {
+            writer.println(content);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void resetForm() {
+        rdBtnIntake.setSelected(false);
+        rdBtnIndividual.setSelected(false);
+        cmbBoxPrjCategory.setSelectedIndex(-1);
+        txtProjectTitle.setText("");
+        spinnerDueDate.setValue(new Date());
+        cmbBoxIntake.setSelectedIndex(-1);
+        txtStudentId.setText("");
+        cmbBoxSupervisor.setSelectedIndex(-1);
+        cmbBoxSecMarker.setSelectedIndex(-1);
+    }
 //    private boolean checkSchoolMismatch(String projectCategory, String marker) {
 //        String markerSchool = "";
 //
-//        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"))) {
+//        try (BufferedReader reader = new BufferedReader(new FileReader(lecturerFilePath))) {
 //            String line;
 //            while ((line = reader.readLine()) != null) {
 //                String[] lecturerItems = line.split(";");
@@ -800,7 +809,6 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame {
 //            return false; // Schools match, return false
 //        }
 //    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearAll;

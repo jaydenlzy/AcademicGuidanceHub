@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import academicguidancehub.ProjectManager;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author Lzy
  */
-public class ProjectManagerViewProject extends javax.swing.JFrame {
+public class ProjectManagerViewProject extends javax.swing.JFrame implements FileLocationInterface {
 
     /**
      * Creates new form ProjectManagerViewProject
@@ -311,13 +312,10 @@ public class ProjectManagerViewProject extends javax.swing.JFrame {
             return;
         }
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter("src/textfiles/ProjectType.txt", true))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(projectTypePath, true))) {
             writer.println(projectCategory + ";" + school + ";" + requirePresentation);
             JOptionPane.showMessageDialog(this, "Data written to file successfully.");
-            txtProjectCategory.setText("");
-            cmbBoxPreferredSchool.setSelectedIndex(-1);
-            rdBtnYes.setSelected(false);
-            rdBtnNo.setSelected(false);
+            resetForm();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -330,14 +328,11 @@ public class ProjectManagerViewProject extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void btnClearAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAllActionPerformed
-        txtProjectCategory.setText("");
-        cmbBoxPreferredSchool.setSelectedIndex(-1);
-        rdBtnYes.setSelected(false);
-        rdBtnNo.setSelected(false);
+        resetForm();
     }//GEN-LAST:event_btnClearAllActionPerformed
 
     private void loadSchoolList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/SchoolWiseList.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(schoolListPath))) {
             String line;
             cmbBoxPreferredSchool.removeAllItems(); // Clear existing items
             while ((line = reader.readLine()) != null) {
@@ -348,6 +343,13 @@ public class ProjectManagerViewProject extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error loading school list: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void resetForm() {
+        txtProjectCategory.setText("");
+        cmbBoxPreferredSchool.setSelectedIndex(-1);
+        rdBtnYes.setSelected(false);
+        rdBtnNo.setSelected(false);
     }
 
 
