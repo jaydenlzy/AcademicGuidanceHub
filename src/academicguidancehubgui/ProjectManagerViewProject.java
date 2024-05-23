@@ -5,9 +5,8 @@
 package academicguidancehubgui;
 
 import academicguidancehub.FileLocationInterface;
+import academicguidancehub.FileReaderUtils;
 import academicguidancehub.ProjectManager;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -332,17 +331,14 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
     }//GEN-LAST:event_btnClearAllActionPerformed
 
     private void loadSchoolList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(schoolListPath))) {
-            String line;
-            cmbBoxPreferredSchool.removeAllItems(); // Clear existing items
-            while ((line = reader.readLine()) != null) {
-                cmbBoxPreferredSchool.addItem(line);
-                cmbBoxPreferredSchool.setSelectedIndex(-1);
+        String[][] schoolData = FileReaderUtils.readData(schoolListPath, ";", new int[]{0});
+        cmbBoxPreferredSchool.removeAllItems();
+        if (schoolData != null) {
+            for (String[] school : schoolData) {
+                cmbBoxPreferredSchool.addItem(school[0]);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error loading school list: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        cmbBoxPreferredSchool.setSelectedIndex(-1);
     }
 
     private void resetForm() {

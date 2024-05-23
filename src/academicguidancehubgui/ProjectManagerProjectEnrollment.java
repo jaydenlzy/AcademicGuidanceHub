@@ -5,9 +5,8 @@
 package academicguidancehubgui;
 
 import academicguidancehub.FileLocationInterface;
+import academicguidancehub.FileReaderUtils;
 import academicguidancehub.ProjectManager;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -560,101 +559,94 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         resetForm();
     }//GEN-LAST:event_btnClearAllActionPerformed
 
-    private void loadIntakeList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(intakeListPath))) {
-            String line;
-            cmbBoxIntake.removeAllItems();
-            while ((line = reader.readLine()) != null) {
-                String[] intakeItems = line.split(";");
-                if (intakeItems.length > 0) {
-                    cmbBoxIntake.addItem(intakeItems[0]);
+    private String getProjectRequirePresentation(String category) {
+        String[][] projectTypeData = FileReaderUtils.readData(projectTypePath, ";", new int[]{0, 2});
+        if (projectTypeData != null) {
+            for (String[] projectType : projectTypeData) {
+                if (projectType[0].equals(category)) {
+                    return projectType[1];
                 }
             }
-            cmbBoxIntake.setSelectedIndex(-1);
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error loading school list: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        return "No";
+    }
+
+    private String getLecturerID(String lecturerName) {
+        String[][] lecturerData = FileReaderUtils.readData(lecturerFilePath, ";", new int[]{0, 1});
+        if (lecturerData != null) {
+            for (String[] lecturer : lecturerData) {
+                if (lecturer[1].equals(lecturerName)) {
+                    return lecturer[0];
+                }
+            }
+        }
+        return "";
+    }
+
+    private void loadIntakeList() {
+        String[][] intakeData = FileReaderUtils.readData(intakeListPath, ";", new int[]{0});
+        cmbBoxIntake.removeAllItems();
+        if (intakeData != null) {
+            for (String[] intake : intakeData) {
+                cmbBoxIntake.addItem(intake[0]);
+            }
+        }
+        cmbBoxIntake.setSelectedIndex(-1);
     }
 
     private void loadProjectCategoryList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(projectTypePath))) {
-            String line;
-            cmbBoxPrjCategory.removeAllItems();
-            while ((line = reader.readLine()) != null) {
-                String[] PrjCategoryItems = line.split(";");
-                if (PrjCategoryItems.length > 0) {
-                    cmbBoxPrjCategory.addItem(PrjCategoryItems[0]);
-                }
+        String[][] categoryData = FileReaderUtils.readData(projectTypePath, ";", new int[]{0});
+        cmbBoxPrjCategory.removeAllItems();
+        if (categoryData != null) {
+            for (String[] category : categoryData) {
+                cmbBoxPrjCategory.addItem(category[0]);
             }
-            cmbBoxPrjCategory.setSelectedIndex(-1);
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error loading school list: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        cmbBoxPrjCategory.setSelectedIndex(-1);
     }
 
     private void loadSupervisorList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(lecturerFilePath))) {
-            String line;
-            cmbBoxSupervisor.removeAllItems();
-            while ((line = reader.readLine()) != null) {
-                String[] SupevisorItems = line.split(";");
-                if (SupevisorItems.length > 0) {
-                    cmbBoxSupervisor.addItem(SupevisorItems[1]);
-                }
+        String[][] supervisorData = FileReaderUtils.readData(lecturerFilePath, ";", new int[]{1});
+        cmbBoxSupervisor.removeAllItems();
+        if (supervisorData != null) {
+            for (String[] supervisor : supervisorData) {
+                cmbBoxSupervisor.addItem(supervisor[0]);
             }
-            cmbBoxSupervisor.setSelectedIndex(-1);
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error loading school list: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        cmbBoxSupervisor.setSelectedIndex(-1);
     }
 
     private void loadSecondMarkerList() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(lecturerFilePath))) {
-            String line;
-            cmbBoxSecMarker.removeAllItems();
-            while ((line = reader.readLine()) != null) {
-                String[] SecondItems = line.split(";");
-                if (SecondItems.length > 0) {
-                    cmbBoxSecMarker.addItem(SecondItems[1]);
-                }
+        String[][] secondMarkerData = FileReaderUtils.readData(lecturerFilePath, ";", new int[]{1});
+        cmbBoxSecMarker.removeAllItems();
+        if (secondMarkerData != null) {
+            for (String[] marker : secondMarkerData) {
+                cmbBoxSecMarker.addItem(marker[0]);
             }
-            cmbBoxSecMarker.setSelectedIndex(-1);
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error loading school list: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        cmbBoxSecMarker.setSelectedIndex(-1);
     }
 
     private boolean checkIfPresentationRequired(String projectCategory) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(projectTypePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] projectTypeItems = line.split(";");
-                if (projectTypeItems.length >= 3 && projectTypeItems[0].equals(projectCategory)) {
-                    return projectTypeItems[2].trim().equalsIgnoreCase("Yes");
+        String[][] projectTypeData = FileReaderUtils.readData(projectTypePath, ";", new int[]{0, 2});
+        if (projectTypeData != null) {
+            for (String[] projectType : projectTypeData) {
+                if (projectType[0].equals(projectCategory)) {
+                    return projectType[1].trim().equalsIgnoreCase("Yes");
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error checking if presentation is required: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
 
     private String getIntakeByStudentId(String studentId) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(studentFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] studentDetails = line.split(";");
-                if (studentDetails.length == 7 && studentDetails[0].equals(studentId)) {
-                    return studentDetails[6]; // Return the intake code
+        String[][] studentData = FileReaderUtils.readData(studentFilePath, ";", new int[]{0, 6});
+        if (studentData != null) {
+            for (String[] student : studentData) {
+                if (student[0].equals(studentId)) {
+                    return student[1];
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return null;
     }
@@ -664,34 +656,22 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
     }
 
     private boolean studentExists(String studentId) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(studentFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] studentDetails = line.split(";");
-                if (studentDetails.length == 7 && studentDetails[0].equals(studentId)) {
+        String[][] studentData = FileReaderUtils.readData(studentFilePath, ";", new int[]{0});
+        if (studentData != null) {
+            for (String[] student : studentData) {
+                if (student[0].equals(studentId)) {
                     return true;
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return false;
     }
 
     private String generateNewProjectID() {
         String lastProjectID = "PRJ00000";
-        try (BufferedReader reader = new BufferedReader(new FileReader(projectsFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (!line.trim().isEmpty()) {
-                    String[] parts = line.split(",");
-                    if (parts.length > 0) {
-                        lastProjectID = parts[0];
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        String[][] projectData = FileReaderUtils.readData(projectsFilePath, ",", new int[]{0});
+        if (projectData != null && projectData.length > 0) {
+            lastProjectID = projectData[projectData.length - 1][0];
         }
 
         String prefix = "PRJ";
@@ -710,48 +690,15 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
 
     private List<String> getStudentIDsByIntake(String intakeCode) {
         List<String> studentIDs = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(studentFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] studentDetails = line.split(";");
-                if (studentDetails[6].equals(intakeCode)) {
-                    studentIDs.add(studentDetails[0]);
+        String[][] studentData = FileReaderUtils.readData(studentFilePath, ";", new int[]{0, 6});
+        if (studentData != null) {
+            for (String[] student : studentData) {
+                if (student[1].equals(intakeCode)) {
+                    studentIDs.add(student[0]);
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return studentIDs;
-    }
-
-    private String getProjectRequirePresentation(String category) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(projectTypePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] projectTypeDetails = line.split(";");
-                if (projectTypeDetails[0].equals(category)) {
-                    return projectTypeDetails[2];
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "No";
-    }
-
-    private String getLecturerID(String lecturerName) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(lecturerFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] lecturerDetails = line.split(";");
-                if (lecturerDetails[1].equals(lecturerName)) {
-                    return lecturerDetails[0];
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
     }
 
     private String formatProjectDetails(String projectID, String projectCategory, String projectTitle, Date projectDueDate,
@@ -785,6 +732,8 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         cmbBoxSupervisor.setSelectedIndex(-1);
         cmbBoxSecMarker.setSelectedIndex(-1);
     }
+    
+    
 //    private boolean checkSchoolMismatch(String projectCategory, String marker) {
 //        String markerSchool = "";
 //
