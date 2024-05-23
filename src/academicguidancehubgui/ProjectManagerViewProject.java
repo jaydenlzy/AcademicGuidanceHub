@@ -21,7 +21,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
     /**
      * Creates new form ProjectManagerViewProject
      */
-    ProjectManager pm = null;
+    ProjectManager pm;
 
     public ProjectManagerViewProject(ProjectManager pm) {
         this.pm = pm;

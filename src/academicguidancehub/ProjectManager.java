@@ -17,6 +17,10 @@ public class ProjectManager extends User implements FileLocationInterface {
         super(userId, name, password, email, contact, role);
     }
 
+    public ProjectManager(User user) {
+        super(user.getUserId(), user.getName(), user.getPassword(), user.getEmail(), user.getContact(), user.getRole());
+    }
+
     public void createProjectTypeFile() {
         File file = new File(projectTypePath);
         try {
@@ -39,7 +43,7 @@ public class ProjectManager extends User implements FileLocationInterface {
         }
     }
 
-        public void createResultFile() {
+    public void createResultFile() {
         File file = new File(resultsFilePath);
         try {
             if (!file.exists()) {
@@ -49,5 +53,5 @@ public class ProjectManager extends User implements FileLocationInterface {
             System.err.println("An error occurred while creating the file: " + e.getMessage());
         }
     }
-    
+
 }

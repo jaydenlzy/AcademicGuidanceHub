@@ -196,7 +196,7 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                         break;
                     case "Project Manager":
                         JOptionPane.showMessageDialog(null, "Welcome to Project manager Page.", "PM Page", JOptionPane.INFORMATION_MESSAGE);
-                        ProjectManager pm = new ProjectManager(user.getUserId(), user.getName(), user.getPassword(), user.getEmail(), user.getContact(), user.getRole());
+                        ProjectManager pm = new ProjectManager(user);
                         ProjectManagerDashboard pmD = new ProjectManagerDashboard(pm);
                         pmD.setVisible(true);
                         this.dispose();
