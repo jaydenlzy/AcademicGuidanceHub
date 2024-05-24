@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import aghDataLoader.ProjectTableDataLoader;
 import academicguidancehub.FileLocationInterface;
 import academicguidancehub.FileReaderUtils;
 import academicguidancehub.ProjectManager;
@@ -27,8 +28,14 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         this.pm = pm;
         initComponents();
         loadSchoolList();
+        loadProjectData();
     }
 
+        private void loadProjectData() {
+        ProjectTableDataLoader dataLoader = new ProjectTableDataLoader(tblViewProject);
+        dataLoader.loadData();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

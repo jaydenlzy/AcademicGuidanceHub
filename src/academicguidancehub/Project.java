@@ -8,14 +8,16 @@ package academicguidancehub;
  *
  * @author Lzy
  */
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Project {
+
     private String projectID;
     private String projectCategory;
     private String projectTitle;
@@ -99,4 +101,21 @@ public class Project {
         reader.close();
         return projects;
     }
+
+    public static Map<String, String> loadProjectTypesFromFile(String filePath) throws IOException {
+        Map<String, String> projectTypes = new HashMap<>();
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] data = line.split(",");
+            if (data.length == 2) {
+                projectTypes.put(data[0], data[1]);
+            } else {
+                System.err.println("Skipping line due to incorrect number of fields: " + line);
+            }
+        }
+        reader.close();
+        return projectTypes;
+    }
+
 }
