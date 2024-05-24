@@ -156,7 +156,7 @@ public class LecturerDashboard extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(51, 51, 255));
         jLabel1.setText("Welcome back");
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel2.setText("Upcoming Task ");
 
@@ -295,8 +295,8 @@ public class LecturerDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardMouseClicked
-    LecturerDashboard lecturerDashboard = new LecturerDashboard();
-    this.setVisible(false);
+        LecturerDashboard lecturerDashboard = new LecturerDashboard();
+        this.setVisible(false);
     lecturerDashboard.setVisible(true);    }//GEN-LAST:event_DashboardMouseClicked
 
     /**
