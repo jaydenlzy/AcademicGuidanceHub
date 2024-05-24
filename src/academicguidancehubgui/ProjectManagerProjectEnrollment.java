@@ -704,13 +704,13 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
     private String formatProjectDetails(String projectID, String projectCategory, String projectTitle, Date projectDueDate,
             String projectRequirePresentation, String studentIntake, String studentId,
             String supervisorID, String secondMarkerID) {
-        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,Pending",
+        return String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;Pending",
                 projectID, projectCategory, projectTitle, new SimpleDateFormat("yyyy-MM-dd").format(projectDueDate),
                 projectRequirePresentation, studentIntake, studentId, supervisorID, secondMarkerID);
     }
 
     private String formatResultDetails(String projectID, String studentID, String supervisorID, String secondMarkerID) {
-        return String.format("%s,%s,%s,%s,Pending", projectID, studentID, supervisorID, secondMarkerID);
+        return String.format("%s;%s;%s;%s;Pending", projectID, studentID, supervisorID, secondMarkerID);
     }
 
     private void writeProjectDetailsToFile(String fileName, String content) {

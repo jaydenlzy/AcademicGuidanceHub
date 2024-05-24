@@ -90,7 +90,7 @@ public class Project {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         String line;
         while ((line = reader.readLine()) != null) {
-            String[] data = line.split(",");
+            String[] data = line.split(";");
             if (data.length == 10) {
                 boolean requirePresentation = "Yes".equalsIgnoreCase(data[4]);
                 projects.add(new Project(data[0], data[1], data[2], data[3], requirePresentation, data[5], data[6], data[7], data[8], data[9]));
@@ -107,8 +107,8 @@ public class Project {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         String line;
         while ((line = reader.readLine()) != null) {
-            String[] data = line.split(",");
-            if (data.length == 2) {
+            String[] data = line.split(";");
+            if (data.length >= 2) {
                 projectTypes.put(data[0], data[1]);
             } else {
                 System.err.println("Skipping line due to incorrect number of fields: " + line);

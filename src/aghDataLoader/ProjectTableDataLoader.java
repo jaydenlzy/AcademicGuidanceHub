@@ -14,26 +14,25 @@ import academicguidancehub.FileLocationInterface;
 import academicguidancehub.Project;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProjectTableDataLoader extends TableDataLoader {
+public class ProjectTableDataLoader extends TableDataLoader implements FileLocationInterface {
 
     public ProjectTableDataLoader(JTable table) {
-        super(FileLocationInterface.projectsFilePath, table);
+        super(projectsFilePath, table);
     }
 
     @Override
     protected String[] getTableHeaders() {
-        return new String[]{"Project Category", "Preferred School", "Total Count", "Ongoing Project", "Done Project", "Require Presentation", "Edit"};
+        return new String[]{"Project Category", "Preferred School", "Total Count", "Ongoing Project", "Done Project", "Require Presentation", "Delete"};
     }
 
     @Override
     protected int[] getColumnIndices() {
-        return new int[]{0, 1}; // We don't need column indices here since we'll process all columns
+        return new int[]{0, 1}; 
     }
 
     @Override
@@ -43,7 +42,7 @@ public class ProjectTableDataLoader extends TableDataLoader {
             Map<String, String> projectTypes = Project.loadProjectTypesFromFile(projectTypePath);
 
             // Load projects
-            List<Project> projects = Project.loadProjectsFromFile(FileLocationInterface.projectsFilePath);
+            List<Project> projects = Project.loadProjectsFromFile(projectsFilePath);
 
             // Statistics maps
             Map<String, ProjectStatistics> statisticsMap = new HashMap<>();
@@ -79,7 +78,7 @@ public class ProjectTableDataLoader extends TableDataLoader {
                 tableData[index][3] = String.valueOf(stats.ongoingProject);
                 tableData[index][4] = String.valueOf(stats.doneProject);
                 tableData[index][5] = String.valueOf(stats.requirePresentation);
-                tableData[index][6] = "Edit"; // Placeholder for the Edit button
+                tableData[index][6] = "Delete"; // Placeholder for the Edit button
                 index++;
             }
 
@@ -119,4 +118,3 @@ public class ProjectTableDataLoader extends TableDataLoader {
         }
     }
 }
-
