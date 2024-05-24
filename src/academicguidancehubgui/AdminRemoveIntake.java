@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import academicguidancehub.FileReaderUtils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -135,9 +136,8 @@ public class AdminRemoveIntake extends javax.swing.JFrame {
 
             model.removeRow(selectedRow);
             
-            String intakesfilePath = "src/textfiles/intakesType.txt";
             String delimiter = ";";
-            UpdateTextFile(intakesfilePath, intakecode, delimiter);
+            UpdateTextFile(FileLocationInterface.intakeListPath, intakecode, delimiter);
             JOptionPane.showMessageDialog(null, "Intake deleted successfully!", "INTAKE DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_removeBtMouseClicked
@@ -191,10 +191,9 @@ public class AdminRemoveIntake extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void intakesTableContent() {
-        String filePathClassType = "src/textfiles/intakesType.txt";
         String delimiter = ";";
         int[] classTypeColumnIndices = {0, 1, 2};
-        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+        String[][] classTypeData = FileReaderUtils.readData(FileLocationInterface.intakeListPath, delimiter, classTypeColumnIndices);
 
         if (classTypeData != null) {
             DefaultTableModel classTypeTableModel = new DefaultTableModel();

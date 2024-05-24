@@ -9,6 +9,7 @@ import academicguidancehub.User;
 import academicguidancehub.ReadOperations;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import academicguidancehub.FileLocationInterface;
 
 public class GeneralLoginPage extends javax.swing.JFrame {
 
@@ -292,7 +293,7 @@ public class GeneralLoginPage extends javax.swing.JFrame {
     private User findUserByID(String enteredID) {
         ReadOperations reader = new ReadOperations();
         if (enteredID.startsWith("ST")) {
-            userList = reader.readUserData("src/textfiles/Students.txt");
+            userList = reader.readUserData(FileLocationInterface.studentFilePath);
             System.out.println("User List Size: " + userList.size()); // Debugging
             for (User user : userList) {
                 System.out.println("User ID: " + user.getUserId()); // Debugging
@@ -302,7 +303,7 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                 }
             }
         } else if (enteredID.startsWith("LC")) {
-            userList = reader.readUserData("src/textfiles/Lecturer.txt");
+            userList = reader.readUserData(FileLocationInterface.lecturerFilePath);
             System.out.println("User List Size: " + userList.size()); // Debugging
             for (User user : userList) {
                 System.out.println("User ID: " + user.getUserId()); // Debugging
@@ -310,7 +311,7 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                     System.out.println("User Found!"); // Debugging
                     return user;
                 } else{
-                    userList = reader.readUserData("src/textfiles/ProjectManager.txt");
+                    userList = reader.readUserData(FileLocationInterface.projectManagerPath);
                     System.out.println("User List Size: " + userList.size()); // Debugging
                     for (User pm : userList) {
                         System.out.println("User ID: " + pm.getUserId()); // Debugging
@@ -322,7 +323,7 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                 }
             }
         } else if (enteredID.startsWith("AD")) {
-            userList = reader.readUserData("src/textfiles/Admin.txt");
+            userList = reader.readUserData(FileLocationInterface.adminFilePath);
             System.out.println("User List Size: " + userList.size()); // Debugging
             for (User user : userList) {
                 System.out.println("User ID: " + user.getUserId()); // Debugging

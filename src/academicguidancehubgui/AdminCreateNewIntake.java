@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -262,11 +263,9 @@ public class AdminCreateNewIntake extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void createNewIntake(String intakeC, String intakeN, String intakeD) {
-        String intakeRecordfile = "src/textfiles/intakesType.txt";
-        
         String intakeRecord = intakeC + ";" + intakeN + ";" + intakeD;
         
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(intakeRecordfile, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileLocationInterface.intakeListPath, true))) {
             writer.write(intakeRecord);
             writer.newLine();
         } catch (IOException e) {

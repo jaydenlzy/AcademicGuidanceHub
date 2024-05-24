@@ -5,6 +5,7 @@
 package academicguidancehubgui;
 
 import academicguidancehub.FileReaderUtils;
+import academicguidancehub.FileLocationInterface;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,7 +50,7 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
         intakeCb.addItem("All");
         
         // Read items from the text file and populate combo box
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/intakesType.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.intakeListPath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(";");
@@ -332,10 +333,9 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
             searchLabel.setVisible(true);
             searchTf.setVisible(true);
 
-            String filePathClassType = "src/textfiles/Students.txt";
             String delimiter = ";";
             int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 6};
-            String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+            String[][] classTypeData = FileReaderUtils.readData(FileLocationInterface.studentFilePath, delimiter, classTypeColumnIndices);
 
             if (classTypeData != null) {
                 DefaultTableModel classTypeTableModel = new DefaultTableModel();
@@ -359,10 +359,9 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
             searchLabel.setVisible(true);
             searchTf.setVisible(true);
 
-            String filePathClassType = "src/textfiles/Lecturer.txt";
             String delimiter = ";";
             int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 6};
-            String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+            String[][] classTypeData = FileReaderUtils.readData(FileLocationInterface.lecturerFilePath, delimiter, classTypeColumnIndices);
 
             if (classTypeData != null) {
                 DefaultTableModel classTypeTableModel = new DefaultTableModel();
@@ -396,11 +395,10 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
         String selectedIntake = intakeCb.getSelectedItem().toString();
         String selectedRole = roleCb.getSelectedItem().toString();
         
-        String filePathStudents = "src/textfiles/Students.txt";
         String delimiter = ";";
         int[] studentColumnIndices = {0, 1, 2, 3, 4, 6};    
         
-        String[][] allStudentsData = FileReaderUtils.readData(filePathStudents, delimiter, studentColumnIndices);
+        String[][] allStudentsData = FileReaderUtils.readData(FileLocationInterface.studentFilePath, delimiter, studentColumnIndices);
         
         if (selectedRole.equals("Student")) {
             if(selectedIntake.equals("All")){
@@ -456,7 +454,7 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
         
         if (selectedRole.equals("Student")) {
             String selectedIntake = intakeCb.getSelectedItem().toString();
-            String filePathStudents = "src/textfiles/Students.txt";
+            String filePathStudents = FileLocationInterface.studentFilePath;
             String delimiter = ";";
             int[] studentColumnIndices = {0, 1, 2, 3, 4, 6};
             String[][] allStudentsData = FileReaderUtils.readData(filePathStudents, delimiter, studentColumnIndices);
@@ -470,10 +468,9 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
                 roleCbItemStateChanged(null);
             }
         } else if (selectedRole.equals("Lecturer")){
-            String filePath = "src/textfiles/Lecturer.txt";
             int[] columnIndices = {0, 1, 2, 3, 4, 5, 6};
             if(!searchText.isEmpty()){
-                staffPerformSearchAndUpdateTable(searchText, filePath, columnIndices);
+                staffPerformSearchAndUpdateTable(searchText, FileLocationInterface.lecturerFilePath, columnIndices);
             }else{
                 roleCbItemStateChanged(null);
             }
@@ -528,15 +525,13 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
             model.removeRow(selectedRow);
             
             if(selectedRole.equals("Student")){
-                String studentfilePath = "src/textfiles/Students.txt";
                 String delimiter = ";";
-                UpdateTextFile(studentfilePath, tp, delimiter);
+                UpdateTextFile(FileLocationInterface.studentFilePath, tp, delimiter);
                 JOptionPane.showMessageDialog(null, "Student deleted successfully!", "DELETE STUDENT SUCCESS", JOptionPane.INFORMATION_MESSAGE);
                 
             } else if (selectedRole.equals("Lecturer")){
-                String lecturerfilePath = "src/textfiles/Lecturer.txt";
                 String delimiter = ";";
-                UpdateTextFile(lecturerfilePath, tp, delimiter);
+                UpdateTextFile(FileLocationInterface.lecturerFilePath, tp, delimiter);
                 JOptionPane.showMessageDialog(null, "Lecturer deleted successfully!", "DELETE LECTURER SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             }
         }

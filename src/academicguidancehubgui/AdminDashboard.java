@@ -5,6 +5,7 @@
 package academicguidancehubgui;
 
 import academicguidancehub.FileHandler;
+import academicguidancehub.FileLocationInterface;
 import java.io.IOException;
 import academicguidancehub.FileReaderUtils;
 import java.awt.Color;
@@ -972,11 +973,11 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     private void updateCounts() {
         try {
-            int numOfLecturerCount = FileHandler.countRecords("src/textfiles/Lecturer.txt");
-            int numOfProjectManagerCount = FileHandler.countRecords("src/textfiles/ProjectManager.txt");
-            int numOfStudentCount = FileHandler.countRecords("src/textfiles/Students.txt");
-            int numOfIntakeCount = FileHandler.countRecords("src/textfiles/intakesType.txt");
-            int numOfSchoolWiseListCount = FileHandler.countRecords("src/textfiles/SchoolWiseList.txt");
+            int numOfLecturerCount = FileHandler.countRecords(FileLocationInterface.lecturerFilePath);
+            int numOfProjectManagerCount = FileHandler.countRecords(FileLocationInterface.projectManagerPath);
+            int numOfStudentCount = FileHandler.countRecords(FileLocationInterface.studentFilePath);
+            int numOfIntakeCount = FileHandler.countRecords(FileLocationInterface.intakeListPath);
+            int numOfSchoolWiseListCount = FileHandler.countRecords(FileLocationInterface.schoolListPath);
 
             numOfLecturer.setText(Integer.toString(numOfLecturerCount));
             numOfProjectManager.setText(Integer.toString(numOfProjectManagerCount));
@@ -989,10 +990,9 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     private void lecturerTableContent() {
-        String filePathClassType = "src/textfiles/Lecturer.txt";
         String delimiter = ";";
         int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
-        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+        String[][] classTypeData = FileReaderUtils.readData(FileLocationInterface.lecturerFilePath, delimiter, classTypeColumnIndices);
 
         if (classTypeData != null) {
             DefaultTableModel classTypeTableModel = new DefaultTableModel();
@@ -1012,10 +1012,9 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     private void studentTableContent() {
-        String filePathClassType = "src/textfiles/Students.txt";
         String delimiter = ";";
         int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 6};
-        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+        String[][] classTypeData = FileReaderUtils.readData(FileLocationInterface.studentFilePath, delimiter, classTypeColumnIndices);
 
         if (classTypeData != null) {
             DefaultTableModel classTypeTableModel = new DefaultTableModel();
@@ -1035,10 +1034,9 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     private void intakesTableContent() {
-        String filePathClassType = "src/textfiles/intakesType.txt";
         String delimiter = ";";
         int[] classTypeColumnIndices = {0, 1, 2};
-        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+        String[][] classTypeData = FileReaderUtils.readData(FileLocationInterface.intakeListPath, delimiter, classTypeColumnIndices);
 
         if (classTypeData != null) {
             DefaultTableModel classTypeTableModel = new DefaultTableModel();
@@ -1055,10 +1053,9 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     private void pManagerTableContent() {
-        String filePathClassType = "src/textfiles/ProjectManager.txt";
         String delimiter = ";";
         int[] classTypeColumnIndices = {0, 1, 2, 3, 4};
-        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+        String[][] classTypeData = FileReaderUtils.readData(FileLocationInterface.projectManagerPath, delimiter, classTypeColumnIndices);
 
         if (classTypeData != null) {
             DefaultTableModel classTypeTableModel = new DefaultTableModel();

@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import academicguidancehub.ReadOperations;
 import academicguidancehub.User;
 import java.io.BufferedReader;
@@ -194,7 +195,7 @@ public class AdminEditProjectManager extends javax.swing.JFrame {
             String rec;
             BufferedReader br;
             try {
-                br = new BufferedReader(new FileReader("src/textfiles/ProjectManager.txt"));
+                br = new BufferedReader(new FileReader(FileLocationInterface.projectManagerPath));
                 while ((rec = br.readLine()) != null) {
                     String[] record = rec.strip().split(";");
                     System.out.println("" + record[0]);
@@ -281,7 +282,7 @@ public class AdminEditProjectManager extends javax.swing.JFrame {
 
     private void loadFieldData() {
         ArrayList<String[]> intakesdataList = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/SchoolWiseList.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.schoolListPath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(";");
@@ -303,7 +304,7 @@ public class AdminEditProjectManager extends javax.swing.JFrame {
     private User findProjectManagerByID(String enteredID) {
         ReadOperations reader = new ReadOperations();
         if (enteredID.startsWith("LC")) {
-            pmList = reader.readUserData("src/textfiles/ProjectManager.txt");
+            pmList = reader.readUserData(FileLocationInterface.projectManagerPath);
             System.out.println("User List Size: " + pmList.size()); // Debugging
             for (User user : pmList) {
                 System.out.println("User ID: " + user.getUserId()); // Debugging
@@ -331,7 +332,7 @@ public class AdminEditProjectManager extends javax.swing.JFrame {
     }
 
     private void UpdateProjectManager(String enteredID, String newName, String newPassword, String newEmail, String newContact, String newField) {
-        String filePath = "src/textfiles/ProjectManager.txt";
+        String filePath = FileLocationInterface.projectManagerPath;
         try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
             String currentLine;
             ArrayList<String> updatedLines = new ArrayList<>();

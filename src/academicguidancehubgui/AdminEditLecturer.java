@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import academicguidancehub.ReadOperations;
 import academicguidancehub.User;
 import java.io.BufferedReader;
@@ -196,7 +197,7 @@ public class AdminEditLecturer extends javax.swing.JFrame {
             String rec;
             BufferedReader br;
             try {
-                br = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"));
+                br = new BufferedReader(new FileReader(FileLocationInterface.lecturerFilePath));
                 while ((rec = br.readLine()) != null) {
                     String[] record = rec.strip().split(";");
                     System.out.println("" + record[0]);
@@ -283,7 +284,7 @@ public class AdminEditLecturer extends javax.swing.JFrame {
 
     private void loadFieldData() {
         ArrayList<String[]> intakesdataList = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/SchoolWiseList.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.schoolListPath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(";");
@@ -305,7 +306,7 @@ public class AdminEditLecturer extends javax.swing.JFrame {
     private User findLecturerByID(String enteredID) {
         ReadOperations reader = new ReadOperations();
         if (enteredID.startsWith("LC")) {
-            lecturerList = reader.readUserData("src/textfiles/Lecturer.txt");
+            lecturerList = reader.readUserData(FileLocationInterface.lecturerFilePath);
             System.out.println("User List Size: " + lecturerList.size()); // Debugging
             for (User user : lecturerList) {
                 System.out.println("User ID: " + user.getUserId()); // Debugging
@@ -320,7 +321,7 @@ public class AdminEditLecturer extends javax.swing.JFrame {
     }
 
     private void UpdateLecturer(String enteredID, String newName, String newPassword, String newEmail, String newContact, String newField) {
-        String filePath = "src/textfiles/Lecturer.txt";
+        String filePath = FileLocationInterface.lecturerFilePath;
         try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
             String currentLine;
             ArrayList<String> updatedLines = new ArrayList<>();
