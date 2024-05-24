@@ -67,7 +67,7 @@ public class SupervisorTableDataLoader extends TableDataLoader {
                     statisticsMap.get(secondMarkerID).incrementSecondMarkerOf();
                 }
                 // Increment projects completed for supervisor and second marker
-                if ("done".equalsIgnoreCase(status)) {
+                if ("Completed".equalsIgnoreCase(status)) {
                     if (statisticsMap.containsKey(supervisorID)) {
                         statisticsMap.get(supervisorID).incrementProjectsCompleted();
                     }

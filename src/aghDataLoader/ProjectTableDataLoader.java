@@ -8,8 +8,6 @@ package aghDataLoader;
  *
  * @author Lzy
  */
-
-
 import academicguidancehub.FileLocationInterface;
 import academicguidancehub.Project;
 
@@ -27,35 +25,42 @@ public class ProjectTableDataLoader extends TableDataLoader implements FileLocat
 
     @Override
     protected String[] getTableHeaders() {
-        return new String[]{"Project Category", "Preferred School", "Total Count", "Ongoing Project", "Done Project", "Require Presentation", "Delete"};
+        return new String[]{"Project Category", "Preferred School", "Total Count", "Ongoing Project", "Done Project", "Require Presentation"};
     }
 
     @Override
     protected int[] getColumnIndices() {
-        return new int[]{0, 1}; 
+        return new int[]{0, 1};
     }
 
     @Override
     public void loadData() {
         try {
-            // Load project types
             Map<String, String> projectTypes = Project.loadProjectTypesFromFile(projectTypePath);
 
-            // Load projects
             List<Project> projects = Project.loadProjectsFromFile(projectsFilePath);
 
-            // Statistics maps
             Map<String, ProjectStatistics> statisticsMap = new HashMap<>();
 
+            // Populate statistics map with project types even if they don't have corresponding projects
+            for (Map.Entry<String, String> entry : projectTypes.entrySet()) {
+                String category = entry.getKey();
+                String preferredSchool = entry.getValue();
+                statisticsMap.put(category, new ProjectStatistics(category, preferredSchool));
+            }
+
+            // Update statistics for existing projects
             for (Project project : projects) {
                 String category = project.getProjectCategory();
                 boolean requirePresentation = project.isRequirePresentation();
                 String status = project.getStatus();
 
-                String preferredSchool = projectTypes.getOrDefault(category, "Unknown");
-                statisticsMap.putIfAbsent(category, new ProjectStatistics(category, preferredSchool));
-
                 ProjectStatistics stats = statisticsMap.get(category);
+                if (stats == null) { // In case the project type is not in the projectTypes file
+                    stats = new ProjectStatistics(category, "Unknown");
+                    statisticsMap.put(category, stats);
+                }
+
                 stats.incrementTotalCount();
                 if (requirePresentation) {
                     stats.setRequirePresentation(true);
@@ -67,7 +72,6 @@ public class ProjectTableDataLoader extends TableDataLoader implements FileLocat
                 }
             }
 
-            // Prepare data for the table
             String[][] tableData = new String[statisticsMap.size()][7];
             int index = 0;
             for (Map.Entry<String, ProjectStatistics> entry : statisticsMap.entrySet()) {
@@ -78,17 +82,17 @@ public class ProjectTableDataLoader extends TableDataLoader implements FileLocat
                 tableData[index][3] = String.valueOf(stats.ongoingProject);
                 tableData[index][4] = String.valueOf(stats.doneProject);
                 tableData[index][5] = String.valueOf(stats.requirePresentation);
-                tableData[index][6] = "Delete"; // Placeholder for the Edit button
                 index++;
             }
 
             populateTable(tableData);
         } catch (IOException e) {
-            e.printStackTrace(); // Print stack trace for any exceptions
+            e.printStackTrace();
         }
     }
 
     private static class ProjectStatistics {
+
         String category;
         String preferredSchool;
         int totalCount = 0;

@@ -11,7 +11,12 @@ import academicguidancehub.ProjectManager;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,11 +36,11 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         loadProjectData();
     }
 
-        private void loadProjectData() {
+    private void loadProjectData() {
         ProjectTableDataLoader dataLoader = new ProjectTableDataLoader(tblViewProject);
         dataLoader.loadData();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,6 +73,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblViewProject = new javax.swing.JTable();
+        btnDltProjectType = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -260,17 +266,17 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
 
         tblViewProject.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Project Category", "Preferred School", "Total Count", "Ongoing Project(s)", "Done Project(s)", "Require Presentation", "Edit"
+                "Project Category", "Preferred School", "Total Count", "Ongoing Project(s)", "Done Project(s)", "Require Presentation"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -280,6 +286,13 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         tblViewProject.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblViewProject);
 
+        btnDltProjectType.setText("Delete");
+        btnDltProjectType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDltProjectTypeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -288,16 +301,22 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDltProjectType, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDltProjectType, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 720, 220));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 720, 240));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 720, 450));
 
@@ -322,6 +341,8 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
             writer.println(projectCategory + ";" + school + ";" + requirePresentation);
             JOptionPane.showMessageDialog(this, "Data written to file successfully.");
             resetForm();
+            DefaultTableModel model = (DefaultTableModel) tblViewProject.getModel();
+            model.addRow(new Object[]{projectCategory, school, "0", "0", "0", requirePresentation});
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -336,6 +357,26 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
     private void btnClearAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAllActionPerformed
         resetForm();
     }//GEN-LAST:event_btnClearAllActionPerformed
+
+    private void btnDltProjectTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDltProjectTypeActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tblViewProject.getModel();
+        int selectedRow = tblViewProject.getSelectedRow();
+
+        if (selectedRow != -1) {
+            String projectCategory = model.getValueAt(selectedRow, 0).toString();
+
+            model.removeRow(selectedRow);
+
+            String delimiter = ";"; // Change the delimiter if necessary
+            try {
+                removeEntryFromFile(projectTypePath, projectCategory, delimiter);
+                JOptionPane.showMessageDialog(null, "Project deleted successfully!", "PROJECT DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Failed to delete project!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnDltProjectTypeActionPerformed
 
     private void loadSchoolList() {
         String[][] schoolData = FileReaderUtils.readData(schoolListPath, ";", new int[]{0});
@@ -355,10 +396,23 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         rdBtnNo.setSelected(false);
     }
 
-
+    private void removeEntryFromFile(String filePath, String entryToRemove, String delimiter) throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(filePath));
+        Iterator<String> iterator = lines.iterator();
+        while (iterator.hasNext()) {
+            String line = iterator.next();
+            String[] parts = line.split(delimiter);
+            if (parts.length > 0 && parts[0].equals(entryToRemove)) {
+                iterator.remove();
+                break; // Assuming each entry is unique, so we can stop after finding the first match
+            }
+        }
+        Files.write(Paths.get(filePath), lines);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearAll;
     private javax.swing.JButton btnConfirm;
+    private javax.swing.JButton btnDltProjectType;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbBoxPreferredSchool;
     private javax.swing.JButton jButton1;

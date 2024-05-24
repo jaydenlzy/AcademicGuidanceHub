@@ -4,6 +4,5 @@ RMCP;Operations Management;Yes
 IR Report (School of Media);School of Media, Art and Design;Yes
 RMCP SoB;School of Business, Law, Economics & International Relations;No
 RMCP 2;Student Services and Marketing;Yes
-FInal Assignment;Library;No
-Final Assignment;School of Business, Law, Economics & International Relations;Yes
 Assingment;School of Technology, Networks, Security, Forensics;Yes
+Internship 2.0;Regulatory Compliance;Yes
