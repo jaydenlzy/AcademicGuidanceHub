@@ -13,9 +13,7 @@ import academicguidancehub.Project;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ProjectTableDataLoader extends TableDataLoader implements FileLocationInterface {
 
@@ -25,63 +23,33 @@ public class ProjectTableDataLoader extends TableDataLoader implements FileLocat
 
     @Override
     protected String[] getTableHeaders() {
-        return new String[]{"Project Category", "Preferred School", "Total Count", "Ongoing Project", "Done Project", "Require Presentation"};
+        return new String[]{
+            "Project ID", "Project Category", "Project Title", "Project Due Date","Require Presentation", "Student Intake", "Student ID", "Supervisor ID","Second Marker ID", "Status"};
     }
 
     @Override
     protected int[] getColumnIndices() {
-        return new int[]{0, 1};
+        return new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     }
 
     @Override
     public void loadData() {
         try {
-            Map<String, String> projectTypes = Project.loadProjectTypesFromFile(projectTypePath);
-
             List<Project> projects = Project.loadProjectsFromFile(projectsFilePath);
 
-            Map<String, ProjectStatistics> statisticsMap = new HashMap<>();
-
-            // Populate statistics map with project types even if they don't have corresponding projects
-            for (Map.Entry<String, String> entry : projectTypes.entrySet()) {
-                String category = entry.getKey();
-                String preferredSchool = entry.getValue();
-                statisticsMap.put(category, new ProjectStatistics(category, preferredSchool));
-            }
-
-            // Update statistics for existing projects
-            for (Project project : projects) {
-                String category = project.getProjectCategory();
-                boolean requirePresentation = project.isRequirePresentation();
-                String status = project.getStatus();
-
-                ProjectStatistics stats = statisticsMap.get(category);
-                if (stats == null) { // In case the project type is not in the projectTypes file
-                    stats = new ProjectStatistics(category, "Unknown");
-                    statisticsMap.put(category, stats);
-                }
-
-                stats.incrementTotalCount();
-                if (requirePresentation) {
-                    stats.setRequirePresentation(true);
-                }
-                if ("done".equalsIgnoreCase(status)) {
-                    stats.incrementDoneProject();
-                } else {
-                    stats.incrementOngoingProject();
-                }
-            }
-
-            String[][] tableData = new String[statisticsMap.size()][7];
+            String[][] tableData = new String[projects.size()][10];
             int index = 0;
-            for (Map.Entry<String, ProjectStatistics> entry : statisticsMap.entrySet()) {
-                ProjectStatistics stats = entry.getValue();
-                tableData[index][0] = stats.category;
-                tableData[index][1] = stats.preferredSchool;
-                tableData[index][2] = String.valueOf(stats.totalCount);
-                tableData[index][3] = String.valueOf(stats.ongoingProject);
-                tableData[index][4] = String.valueOf(stats.doneProject);
-                tableData[index][5] = String.valueOf(stats.requirePresentation);
+            for (Project project : projects) {
+                tableData[index][0] = project.getProjectID();
+                tableData[index][1] = project.getProjectCategory();
+                tableData[index][2] = project.getProjectTitle();
+                tableData[index][3] = project.getProjectDueDate();
+                tableData[index][4] = String.valueOf(project.isRequirePresentation());
+                tableData[index][5] = project.getStudentIntake();
+                tableData[index][6] = project.getStudentID();
+                tableData[index][7] = project.getSupervisorID();
+                tableData[index][8] = project.getSecondMarkerID();
+                tableData[index][9] = project.getStatus();
                 index++;
             }
 
@@ -90,35 +58,5 @@ public class ProjectTableDataLoader extends TableDataLoader implements FileLocat
             e.printStackTrace();
         }
     }
-
-    private static class ProjectStatistics {
-
-        String category;
-        String preferredSchool;
-        int totalCount = 0;
-        int ongoingProject = 0;
-        int doneProject = 0;
-        boolean requirePresentation = false;
-
-        ProjectStatistics(String category, String preferredSchool) {
-            this.category = category;
-            this.preferredSchool = preferredSchool;
-        }
-
-        void incrementTotalCount() {
-            totalCount++;
-        }
-
-        void incrementOngoingProject() {
-            ongoingProject++;
-        }
-
-        void incrementDoneProject() {
-            doneProject++;
-        }
-
-        void setRequirePresentation(boolean requirePresentation) {
-            this.requirePresentation = requirePresentation;
-        }
-    }
 }
+

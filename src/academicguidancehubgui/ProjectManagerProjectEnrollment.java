@@ -38,8 +38,10 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         cmbBoxIntake.setVisible(false);
         txtStudentId.setVisible(false);
         lblNotePresentation.setVisible(false);
+        lblNoteSecondMarker.setVisible(false);
         lblSuperSchool.setVisible(false);
         lblSecondSchool.setVisible(false);
+        cmbBoxSecMarker.setVisible(false);
     }
 
     /**
@@ -71,10 +73,11 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         lblNotePresentation = new javax.swing.JLabel();
         cmbBoxPrjCategory = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        lblNoteSecondMarker = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         cmbBoxSupervisor = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
+        lblSecondMarker = new javax.swing.JLabel();
         cmbBoxSecMarker = new javax.swing.JComboBox<>();
         lblSuperSchool = new javax.swing.JLabel();
         lblSecondSchool = new javax.swing.JLabel();
@@ -226,6 +229,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
 
         jPanel8.setBackground(new java.awt.Color(204, 255, 255));
 
+        lblNotePresentation.setForeground(new java.awt.Color(255, 102, 102));
         lblNotePresentation.setText("Current Project Requires Presentation");
 
         cmbBoxPrjCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -237,6 +241,9 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
 
         jLabel3.setText("Project Category");
 
+        lblNoteSecondMarker.setForeground(new java.awt.Color(255, 102, 102));
+        lblNoteSecondMarker.setText("Current Project Requires Second Marker");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -245,22 +252,26 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
                 .addGap(14, 14, 14)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(cmbBoxPrjCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
-                        .addComponent(lblNotePresentation, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                    .addComponent(cmbBoxPrjCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNotePresentation, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNoteSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbBoxPrjCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbBoxPrjCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNoteSecondMarker)))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
                         .addComponent(lblNotePresentation)))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
@@ -278,7 +289,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
             }
         });
 
-        jLabel8.setText("Second Marker");
+        lblSecondMarker.setText("Second Marker");
 
         cmbBoxSecMarker.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbBoxSecMarker.addActionListener(new java.awt.event.ActionListener() {
@@ -303,7 +314,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                    .addComponent(lblSecondMarker, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblSecondSchool, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,7 +328,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(lblSecondMarker))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbBoxSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -455,9 +466,13 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         if (projectCategory == null || projectTitle.isEmpty() || projectDueDate == null
                 || (rdBtnIntake.isSelected() && (studentIntake == null || studentIntake.isEmpty()))
                 || (rdBtnIndividual.isSelected() && (studentId == null || studentId.isEmpty()))
-                || supervisorName == null || supervisorName.isEmpty()
-                || secondMarkerName == null || secondMarkerName.isEmpty()) {
+                || supervisorName == null || supervisorName.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (supervisorID.equals(secondMarkerID)) {
+            JOptionPane.showMessageDialog(this, "Supervisor and Second Marker cannot be the same person", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -536,23 +551,21 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
 
     private void cmbBoxPrjCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxPrjCategoryActionPerformed
         String selectedProjectCategory = (String) cmbBoxPrjCategory.getSelectedItem();
-        boolean requiresPresentation = checkIfPresentationRequired(selectedProjectCategory);
+        boolean requiresPresentation = checkPresentationRequired(selectedProjectCategory);
         lblNotePresentation.setVisible(requiresPresentation);
+
+        boolean requiresSecondMarker = checkSecondMarkerRequired(selectedProjectCategory);
+        lblSecondMarker.setVisible(requiresSecondMarker);
+        lblNoteSecondMarker.setVisible(requiresSecondMarker);
+        cmbBoxSecMarker.setVisible(requiresSecondMarker);
     }//GEN-LAST:event_cmbBoxPrjCategoryActionPerformed
 
     private void cmbBoxSupervisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxSupervisorActionPerformed
-//        String selectedProjectCategory = (String) cmbBoxPrjCategory.getSelectedItem();
-//        String selectedSupervisor = (String) cmbBoxSupervisor.getSelectedItem();
-//        boolean supervisorSchoolMismatch = checkSchoolMismatch(selectedProjectCategory, selectedSupervisor);
-//        lblSuperSchool.setVisible(supervisorSchoolMismatch);
+
     }//GEN-LAST:event_cmbBoxSupervisorActionPerformed
 
     private void cmbBoxSecMarkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxSecMarkerActionPerformed
-//        String selectedProjectCategory = (String) cmbBoxPrjCategory.getSelectedItem();
-//        System.out.println(selectedProjectCategory);
-//        String selectedSecondMarker = (String) cmbBoxSecMarker.getSelectedItem();
-//        boolean markerSchoolMismatch = checkSchoolMismatch(selectedProjectCategory, selectedSecondMarker);
-//        lblSecondSchool.setVisible(markerSchoolMismatch);
+
     }//GEN-LAST:event_cmbBoxSecMarkerActionPerformed
 
     private void btnClearAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAllActionPerformed
@@ -627,12 +640,24 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         cmbBoxSecMarker.setSelectedIndex(-1);
     }
 
-    private boolean checkIfPresentationRequired(String projectCategory) {
-        String[][] projectTypeData = FileReaderUtils.readData(projectTypePath, ";", new int[]{0, 2});
+    private boolean checkPresentationRequired(String projectCategory) {
+        String[][] projectTypeData = FileReaderUtils.readData(projectTypePath, ";", new int[]{0, 1, 2, 3});
         if (projectTypeData != null) {
             for (String[] projectType : projectTypeData) {
-                if (projectType[0].equals(projectCategory)) {
-                    return projectType[1].trim().equalsIgnoreCase("Yes");
+                if (projectType.length == 4 && projectType[0].equals(projectCategory)) {
+                    return projectType[3].trim().equalsIgnoreCase("Yes");
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean checkSecondMarkerRequired(String projectCategory) {
+        String[][] projectTypeData = FileReaderUtils.readData(projectTypePath, ";", new int[]{0, 1, 2, 3});
+        if (projectTypeData != null) {
+            for (String[] projectType : projectTypeData) {
+                if (projectType.length == 4 && projectType[0].equals(projectCategory)) {
+                    return projectType[2].trim().equalsIgnoreCase("Yes");
                 }
             }
         }
@@ -668,24 +693,26 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
     }
 
     private String generateNewProjectID() {
-        String lastProjectID = "PRJ00000";
-        String[][] projectData = FileReaderUtils.readData(projectsFilePath, ",", new int[]{0});
+        String lastProjectID = "00000";
+        String[][] projectData = FileReaderUtils.readData(projectsFilePath, ";", new int[]{0});
+
         if (projectData != null && projectData.length > 0) {
-            lastProjectID = projectData[projectData.length - 1][0];
-        }
-
-        String prefix = "PRJ";
-        int newIDNumber = 1;
-
-        if (lastProjectID.startsWith(prefix) && lastProjectID.length() > 3) {
-            try {
-                newIDNumber = Integer.parseInt(lastProjectID.substring(3)) + 1;
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
+            int maxID = 0;
+            for (String[] project : projectData) {
+                String projectIDString = project[0];
+                try {
+                    int projectID = Integer.parseInt(projectIDString);
+                    if (projectID > maxID) {
+                        maxID = projectID;
+                    }
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
             }
+            lastProjectID = String.valueOf(maxID + 1);
         }
 
-        return String.format("%s%05d", prefix, newIDNumber);
+        return String.format("%05d", Integer.parseInt(lastProjectID));
     }
 
     private List<String> getStudentIDsByIntake(String intakeCode) {
@@ -704,9 +731,14 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
     private String formatProjectDetails(String projectID, String projectCategory, String projectTitle, Date projectDueDate,
             String projectRequirePresentation, String studentIntake, String studentId,
             String supervisorID, String secondMarkerID) {
-        return String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;Pending",
-                projectID, projectCategory, projectTitle, new SimpleDateFormat("yyyy-MM-dd").format(projectDueDate),
-                projectRequirePresentation, studentIntake, studentId, supervisorID, secondMarkerID);
+        String secondMarker = secondMarkerID;
+        if (!checkSecondMarkerRequired(projectCategory)) {
+            secondMarker = "NA";
+        }
+
+        String projectDetails = String.format("%s;%s;%s;%tF;%s;%s;%s;%s;%s;%s",
+                projectID, projectCategory, projectTitle, projectDueDate, projectRequirePresentation, studentIntake,studentId, supervisorID, secondMarker, "Pending");
+        return projectDetails;
     }
 
     private String formatResultDetails(String projectID, String studentID, String supervisorID, String secondMarkerID) {
@@ -731,9 +763,13 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         txtStudentId.setText("");
         cmbBoxSupervisor.setSelectedIndex(-1);
         cmbBoxSecMarker.setSelectedIndex(-1);
+        lblNotePresentation.setVisible(false);
+        lblNoteSecondMarker.setVisible(false);
+        lblSuperSchool.setVisible(false);
+        lblSecondSchool.setVisible(false);
+        lblSecondMarker.setVisible(false);
     }
-    
-    
+
 //    private boolean checkSchoolMismatch(String projectCategory, String marker) {
 //        String markerSchool = "";
 //
@@ -774,7 +810,6 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -786,6 +821,8 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel lblNotePresentation;
+    private javax.swing.JLabel lblNoteSecondMarker;
+    private javax.swing.JLabel lblSecondMarker;
     private javax.swing.JLabel lblSecondSchool;
     private javax.swing.JLabel lblSuperSchool;
     private javax.swing.JRadioButton rdBtnIndividual;

@@ -1,8 +1,7 @@
-FYP;School of Business, Law, Economics & International Relations;Yes
-Internship;Library;Yes
-RMCP;Operations Management;Yes
-IR Report (School of Media);School of Media, Art and Design;Yes
-RMCP SoB;School of Business, Law, Economics & International Relations;No
-RMCP 2;Student Services and Marketing;Yes
-Assingment;School of Technology, Networks, Security, Forensics;Yes
-Internship 2.0;Regulatory Compliance;Yes
+Internship;General;NA;No
+Investigation Report;General;Yes;Yes
+Capstone Project 1;General;Yes;No
+Capstone Project 2;General;Yes;No
+RMCP;General;Yes;Yes
+FYP;General;Yes;Yes
+Final Assignment;School of Business, Law, Economics & International Relations;Yes;Yes

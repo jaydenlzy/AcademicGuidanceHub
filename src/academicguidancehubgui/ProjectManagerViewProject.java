@@ -51,6 +51,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -70,6 +71,10 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         jPanel8 = new javax.swing.JPanel();
         lblPreferredSchool = new javax.swing.JLabel();
         cmbBoxPreferredSchool = new javax.swing.JComboBox<>();
+        jPanel9 = new javax.swing.JPanel();
+        lblRequireSecondMarker = new javax.swing.JLabel();
+        rdBtnYesMarker = new javax.swing.JRadioButton();
+        rdBtnNoMarker = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblViewProject = new javax.swing.JTable();
@@ -124,7 +129,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Add Project");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 6, 73, 26));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 73, 26));
 
         jPanel5.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -193,16 +198,16 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRequirePresentation, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdBtnYes)
                     .addComponent(rdBtnNo))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 420, 40));
+        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 420, 40));
 
         jPanel7.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -223,10 +228,12 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(8, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtProjectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProjectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtProjectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblProjectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 510, 40));
@@ -259,6 +266,45 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         );
 
         jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 510, 40));
+
+        jPanel9.setBackground(new java.awt.Color(204, 255, 255));
+
+        lblRequireSecondMarker.setText("Require SecondMarker :");
+
+        rdBtnYesMarker.setBackground(new java.awt.Color(204, 255, 255));
+        buttonGroup2.add(rdBtnYesMarker);
+        rdBtnYesMarker.setText("Yes");
+
+        rdBtnNoMarker.setBackground(new java.awt.Color(204, 255, 255));
+        buttonGroup2.add(rdBtnNoMarker);
+        rdBtnNoMarker.setText("No");
+        rdBtnNoMarker.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblRequireSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(rdBtnYesMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rdBtnNoMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRequireSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdBtnYesMarker)
+                    .addComponent(rdBtnNoMarker))
+                .addContainerGap())
+        );
+
+        jPanel3.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 40));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 180));
 
@@ -331,14 +377,15 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         String projectCategory = txtProjectCategory.getText();
         String school = (String) cmbBoxPreferredSchool.getSelectedItem();
         String requirePresentation = rdBtnYes.isSelected() ? "Yes" : "No";
+        String requireSecondMarker = rdBtnYesMarker.isSelected() ? "Yes" : "NA"; // Modify here
 
-        if (projectCategory.isEmpty() || school == null) {
+        if (projectCategory.isEmpty() || school == null || requirePresentation.isBlank()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(projectTypePath, true))) {
-            writer.println(projectCategory + ";" + school + ";" + requirePresentation);
+            writer.println(projectCategory + ";" + school + ";" + requireSecondMarker + ";" + requirePresentation); 
             JOptionPane.showMessageDialog(this, "Data written to file successfully.");
             resetForm();
             DefaultTableModel model = (DefaultTableModel) tblViewProject.getModel();
@@ -367,7 +414,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
 
             model.removeRow(selectedRow);
 
-            String delimiter = ";"; // Change the delimiter if necessary
+            String delimiter = ";";
             try {
                 removeEntryFromFile(projectTypePath, projectCategory, delimiter);
                 JOptionPane.showMessageDialog(null, "Project deleted successfully!", "PROJECT DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
@@ -380,7 +427,8 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
 
     private void loadSchoolList() {
         String[][] schoolData = FileReaderUtils.readData(schoolListPath, ";", new int[]{0});
-        cmbBoxPreferredSchool.removeAllItems();
+        cmbBoxPreferredSchool.removeAllItems();        
+        cmbBoxPreferredSchool.addItem("General");
         if (schoolData != null) {
             for (String[] school : schoolData) {
                 cmbBoxPreferredSchool.addItem(school[0]);
@@ -404,7 +452,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
             String[] parts = line.split(delimiter);
             if (parts.length > 0 && parts[0].equals(entryToRemove)) {
                 iterator.remove();
-                break; // Assuming each entry is unique, so we can stop after finding the first match
+                break;
             }
         }
         Files.write(Paths.get(filePath), lines);
@@ -414,6 +462,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnDltProjectType;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cmbBoxPreferredSchool;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -426,12 +475,16 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPreferredSchool;
     private javax.swing.JLabel lblProjectCategory;
     private javax.swing.JLabel lblRequirePresentation;
+    private javax.swing.JLabel lblRequireSecondMarker;
     private javax.swing.JRadioButton rdBtnNo;
+    private javax.swing.JRadioButton rdBtnNoMarker;
     private javax.swing.JRadioButton rdBtnYes;
+    private javax.swing.JRadioButton rdBtnYesMarker;
     private javax.swing.JTable tblViewProject;
     private javax.swing.JTextField txtProjectCategory;
     // End of variables declaration//GEN-END:variables

@@ -12,22 +12,25 @@ package aghDataLoader;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public abstract class TableDataLoader extends DataLoader {
+public abstract class TableDataLoader {
+
+    protected String filePath;
     protected JTable table;
 
     public TableDataLoader(String filePath, JTable table) {
-        super(filePath);
+        this.filePath = filePath;
         this.table = table;
     }
-
-    protected abstract String[] getTableHeaders();
-    protected abstract int[] getColumnIndices();
-
-    public abstract void loadData();
 
     protected void populateTable(String[][] data) {
         String[] headers = getTableHeaders();
         DefaultTableModel model = new DefaultTableModel(data, headers);
         table.setModel(model);
     }
+
+    protected abstract String[] getTableHeaders();
+
+    protected abstract int[] getColumnIndices();
+
+    public abstract void loadData();
 }

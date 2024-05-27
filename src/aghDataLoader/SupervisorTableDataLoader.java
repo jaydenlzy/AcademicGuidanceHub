@@ -8,9 +8,10 @@ package aghDataLoader;
  *
  * @author Lzy
  */
-
 import academicguidancehub.FileLocationInterface;
+import academicguidancehub.FileReaderUtils;
 import academicguidancehub.Project;
+
 import javax.swing.JTable;
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,8 +20,11 @@ import java.util.Map;
 
 public class SupervisorTableDataLoader extends TableDataLoader {
 
+    private String projectsFilePath;
+
     public SupervisorTableDataLoader(JTable table) {
         super(FileLocationInterface.lecturerFilePath, table);
+        this.projectsFilePath = FileLocationInterface.projectsFilePath;
     }
 
     @Override
@@ -30,14 +34,14 @@ public class SupervisorTableDataLoader extends TableDataLoader {
 
     @Override
     protected int[] getColumnIndices() {
-        return new int[]{0, 1, 6}; //lecturer ID, name, and school are at indices 0, 1, and 6
+        return new int[]{0, 1, 6}; // lecturer ID, name, and school are at indices 0, 1, and 6
     }
 
     @Override
     public void loadData() {
         try {
             // Read lecturers data
-            String[][] lecturersData = fileReaderUtils.readData(lecturerFilePath, ";", getColumnIndices());
+            String[][] lecturersData = FileReaderUtils.readData(filePath, ";", getColumnIndices());
 
             // Map to hold supervisor statistics
             Map<String, SupervisorStatistics> statisticsMap = new HashMap<>();
@@ -95,6 +99,7 @@ public class SupervisorTableDataLoader extends TableDataLoader {
     }
 
     private static class SupervisorStatistics {
+
         String name;
         String school;
         int supervisorOf = 0;
