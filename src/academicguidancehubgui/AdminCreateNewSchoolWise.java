@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -217,11 +218,9 @@ public class AdminCreateNewSchoolWise extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void createNewField(String schoolwiseName) {
-        String intakeRecordfile = "src/textfiles/SchoolWiseList.txt";
-        
         String intakeRecord = schoolwiseName;
         
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(intakeRecordfile, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileLocationInterface.schoolListPath, true))) {
             writer.write(intakeRecord);
             writer.newLine();
         } catch (IOException e) {

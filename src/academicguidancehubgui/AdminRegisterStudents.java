@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import javax.swing.JOptionPane;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -29,7 +30,7 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
         setResizable(false);
         
         ArrayList<String[]> intakesdataList = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/intakesType.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.intakeListPath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(";");
@@ -281,8 +282,6 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void registerStudent(String name, String contact, String intake) {
-        String studentRecordfile = "src/textfiles/Students.txt";
-        
         String studentID = generateStudentID();
         String password = generatePassword(studentID, name);
         String email = generateEmail(name);
@@ -290,7 +289,7 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
         
         String studentRecord = studentID + ";" + name + ";" + password + ";" + email + ";" + contact + ";" + role + ";" + intake;
         
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(studentRecordfile, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileLocationInterface.studentFilePath, true))) {
             writer.write(studentRecord);
             writer.newLine();
         } catch (IOException e) {
@@ -315,8 +314,7 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
 
     private int getNextStudentID() {
         int nextID = 0;
-        String studentRecordfile = "src/textfiles/Students.txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader(studentRecordfile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.studentFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");
@@ -361,8 +359,7 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
 
     private int getHighestStudentID() {
         int highestID = 0;
-        String studentRecordfile = "src/textfiles/Students.txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader(studentRecordfile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.studentFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");

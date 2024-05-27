@@ -17,18 +17,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author New HP
  */
-public class Admin extends User{
+public class Admin extends User implements FileLocationInterface{
     
     public Admin(String userId, String name, String password, String email, String contact, String role) {
         super(userId, name, password, email, contact, role);
     }
     
     public void removeIntake(String intakeCode) {
-        String intakesfilePath = "src/textfiles/intakesType.txt";
+        File file = new File(intakeListPath);
         String delimiter = ";";
         try {
-            // Read the content of the file and store it in a list
-            File file = new File(intakesfilePath);
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             StringBuilder content = new StringBuilder();
@@ -54,7 +52,7 @@ public class Admin extends User{
     }
 
     public void editSchoolWise(String schoolName, String newName) {
-        String filePath = "src/textfiles/SchoolWiseList.txt";
+        File filePath = new File(schoolListPath);
         String delimiter = ";";
         try {
             // Read the existing data from the file
@@ -92,7 +90,7 @@ public class Admin extends User{
 
     // Example method for managing intakes table content
     public void intakesTableContent(DefaultTableModel tableModel) {
-        String filePathClassType = "src/textfiles/intakesType.txt";
+        File filePathClassType = new File(intakeListPath);
         String delimiter = ";";
         int[] classTypeColumnIndices = {0, 1, 2};
         try {
@@ -111,7 +109,7 @@ public class Admin extends User{
 
     // Example method for managing school wise table content
     public void schoolWiseTableContent(DefaultTableModel tableModel) {
-        String filePathClassType = "src/textfiles/SchoolWiseList.txt";
+        File filePathClassType = new File(schoolListPath);
         String delimiter = ";";
         int[] classTypeColumnIndices = {0};
         try {

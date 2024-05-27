@@ -6,6 +6,7 @@ package academicguidancehubgui;
 
 import academicguidancehub.User;
 import academicguidancehub.ReadOperations;
+import academicguidancehub.FileLocationInterface;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -123,7 +124,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                 String rec;
                 BufferedReader br;
                 try {
-                    br = new BufferedReader(new FileReader("src/textfiles/Students.txt"));
+                    br = new BufferedReader(new FileReader(FileLocationInterface.studentFilePath));
                     while ((rec = br.readLine()) != null) {
                         String[] record = rec.strip().split(";");
                         System.out.println("" + record[0]);
@@ -153,7 +154,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                 String rec;
                 BufferedReader br;
                 try {
-                    br = new BufferedReader(new FileReader("src/textfiles/Lecturer.txt"));
+                    br = new BufferedReader(new FileReader(FileLocationInterface.lecturerFilePath));
                     while ((rec = br.readLine()) != null) {
                         String[] record = rec.strip().split(";");
                         System.out.println("" + record[0]);
@@ -175,7 +176,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                         String recc;
                         BufferedReader brr;
                         try {
-                            brr = new BufferedReader(new FileReader("src/textfiles/ProjectManager.txt"));
+                            brr = new BufferedReader(new FileReader(FileLocationInterface.projectManagerPath));
                             while ((recc = brr.readLine()) != null) {
                                 String[] record = recc.strip().split(";");
                                 System.out.println("" + record[0]);
@@ -209,7 +210,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                 String rec;
                 BufferedReader br;
                 try {
-                    br = new BufferedReader(new FileReader("src/textfiles/Admin.txt"));
+                    br = new BufferedReader(new FileReader(FileLocationInterface.adminFilePath));
                     while ((rec = br.readLine()) != null) {
                         String[] record = rec.strip().split(";");
                         System.out.println("" + record[0]);
@@ -297,7 +298,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
     private User findUserByID(String enteredID) {
         ReadOperations reader = new ReadOperations();
         if (enteredID.startsWith("ST")) {
-            userList = reader.readUserData("src/textfiles/Students.txt");
+            userList = reader.readUserData(FileLocationInterface.studentFilePath);
             System.out.println("User List Size: " + userList.size()); // Debugging
             for (User user : userList) {
                 System.out.println("User ID: " + user.getUserId()); // Debugging
@@ -307,7 +308,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                 }
             }
         } else if (enteredID.startsWith("LC")) {
-            userList = reader.readUserData("src/textfiles/Lecturer.txt");
+            userList = reader.readUserData(FileLocationInterface.lecturerFilePath);
             System.out.println("User List Size: " + userList.size()); // Debugging
             for (User user : userList) {
                 System.out.println("User ID: " + user.getUserId()); // Debugging
@@ -315,7 +316,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                     System.out.println("User Found!"); // Debugging
                     return user;
                 } else{
-                    userList = reader.readUserData("src/textfiles/ProjectManager.txt");
+                    userList = reader.readUserData(FileLocationInterface.projectManagerPath);
                     System.out.println("User List Size: " + userList.size()); // Debugging
                     for (User pm : userList) {
                         System.out.println("User ID: " + pm.getUserId()); // Debugging
@@ -327,7 +328,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
                 }
             }
         } else if (enteredID.startsWith("AD")) {
-            userList = reader.readUserData("src/textfiles/Admin.txt");
+            userList = reader.readUserData(FileLocationInterface.adminFilePath);
             System.out.println("User List Size: " + userList.size()); // Debugging
             for (User user : userList) {
                 System.out.println("User ID: " + user.getUserId()); // Debugging
@@ -343,8 +344,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
     }
 
     private void UpdatePasswordStudent(String enteredID, String enteredPassword) {
-        String filePath = "src/textfiles/Students.txt";
-        try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader buffer = new BufferedReader(new FileReader(FileLocationInterface.studentFilePath))) {
             String currentLine;
             ArrayList<String> updatedLines = new ArrayList<>();
 
@@ -358,7 +358,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
             }
 
             // Write the updated data back to the file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileLocationInterface.studentFilePath))) {
                 for (String updatedLine : updatedLines) {
                     writer.write(updatedLine);
                     writer.newLine();
@@ -372,8 +372,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
     }
 
     private void UpdatePasswordLecturer(String enteredID, String enteredPassword) {
-        String filePath = "src/textfiles/Lecturer.txt";
-        try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader buffer = new BufferedReader(new FileReader(FileLocationInterface.lecturerFilePath))) {
             String currentLine;
             ArrayList<String> updatedLines = new ArrayList<>();
 
@@ -388,7 +387,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
             }
 
             // Write the updated data back to the file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileLocationInterface.lecturerFilePath))) {
                 for (String updatedLine : updatedLines) {
                     writer.write(updatedLine);
                     writer.newLine();
@@ -402,8 +401,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
     }
 
     private void UpdatePasswordAdmin(String enteredID, String enteredPassword) {
-        String filePath = "src/textfiles/Admin.txt";
-        try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader buffer = new BufferedReader(new FileReader(FileLocationInterface.adminFilePath))) {
             String currentLine;
             ArrayList<String> updatedLines = new ArrayList<>();
 
@@ -418,7 +416,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
             }
 
             // Write the updated data back to the file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileLocationInterface.adminFilePath))) {
                 for (String updatedLine : updatedLines) {
                     writer.write(updatedLine);
                     writer.newLine();
@@ -432,8 +430,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
     }
 
     private void UpdatePasswordProjectManager(String enteredID, String enteredPassword) {
-        String filePath = "src/textfiles/ProjectManager.txt";
-        try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader buffer = new BufferedReader(new FileReader(FileLocationInterface.projectManagerPath))) {
             String currentLine;
             ArrayList<String> updatedLines = new ArrayList<>();
 
@@ -448,7 +445,7 @@ public class GeneralForgetPassword extends javax.swing.JFrame {
             }
 
             // Write the updated data back to the file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileLocationInterface.projectManagerPath))) {
                 for (String updatedLine : updatedLines) {
                     writer.write(updatedLine);
                     writer.newLine();

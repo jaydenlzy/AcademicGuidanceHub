@@ -176,8 +176,8 @@ public class LecturerUploadAndReviewAssignment extends javax.swing.JFrame {
     }//GEN-LAST:event_HomePageActionPerformed
 
     private void HomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomePageMouseClicked
-LecturerHomePage lecturerHomePage = new LecturerHomePage();
-this.setVisible(false);  
+        LecturerDashboard lecturerHomePage = new LecturerDashboard();
+        this.setVisible(false);
 lecturerHomePage.setVisible(true);      }//GEN-LAST:event_HomePageMouseClicked
 
     /**

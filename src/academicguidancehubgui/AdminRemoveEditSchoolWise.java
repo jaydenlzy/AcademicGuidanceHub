@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import academicguidancehub.FileReaderUtils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -196,7 +197,7 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
             try {
                 // Read the existing data from the file
                 ArrayList<String> wiseList = new ArrayList<>();
-                BufferedReader br = new BufferedReader(new FileReader("src/textfiles/SchoolWiseList.txt"));
+                BufferedReader br = new BufferedReader(new FileReader(FileLocationInterface.schoolListPath));
                 String rec;
                 while ((rec = br.readLine()) != null) {
                     wiseList.add(rec);
@@ -208,7 +209,7 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
                 wiseList.set(selectedRow, updatedRow);
 
                 // Write the updated data back to the file
-                BufferedWriter bw = new BufferedWriter(new FileWriter("src/textfiles/SchoolWiseList.txt"));
+                BufferedWriter bw = new BufferedWriter(new FileWriter(FileLocationInterface.schoolListPath));
                 for (String line : wiseList) {
                     bw.write(line);
                     bw.newLine();
@@ -240,9 +241,8 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
 
             model.removeRow(selectedRow);
             
-            String intakesfilePath = "src/textfiles/SchoolWiseList.txt";
             String delimiter = ";";
-            UpdateTextFile(intakesfilePath, name, delimiter);
+            UpdateTextFile(FileLocationInterface.schoolListPath, name, delimiter);
             JOptionPane.showMessageDialog(null, "Intake deleted successfully!", "INTAKE DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             editBt.setVisible(false);
         }
@@ -306,10 +306,9 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void schoolWiseTableContent() {
-        String filePathClassType = "src/textfiles/SchoolWiseList.txt";
         String delimiter = ";";
         int[] classTypeColumnIndices = {0};
-        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+        String[][] classTypeData = FileReaderUtils.readData(FileLocationInterface.schoolListPath, delimiter, classTypeColumnIndices);
 
         if (classTypeData != null) {
             DefaultTableModel classTypeTableModel = new DefaultTableModel();

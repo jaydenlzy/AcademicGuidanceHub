@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -24,7 +25,7 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         setResizable(false);
         
         ArrayList<String[]> schoolwisedataList = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/textfiles/SchoolWiseList.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.schoolListPath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(";");
@@ -262,8 +263,6 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
     }
 
     private void registerLecturer(String Name, String contact, String schooloffield) {
-        String lecturerRecordfile = "src/textfiles/Lecturer.txt";
-        
         var lecturerID = generateLecturerID();
         var password = generatePassword(lecturerID, Name);
         var email = generateEmail(Name);
@@ -271,7 +270,7 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         
         String lecturerRecord = lecturerID + ";" + Name + ";" + password + ";" + email + ";" + contact + ";" + role + ";" + schooloffield;
         
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(lecturerRecordfile, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileLocationInterface.lecturerFilePath, true))) {
             writer.write(lecturerRecord);
             writer.newLine();
         } catch (IOException e) {
@@ -281,11 +280,8 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
     }
 
     private String generateLecturerID() {
-        String lecturerFile = "src/textfiles/Lecturer.txt";
-        String projectManagerFile = "src/textfiles/ProjectManager.txt";
-
-        int highestLecturerID = getHighestID(lecturerFile);
-        int highestProjectManagerID = getHighestID(projectManagerFile);
+        int highestLecturerID = getHighestID(FileLocationInterface.lecturerFilePath);
+        int highestProjectManagerID = getHighestID(FileLocationInterface.projectManagerPath);
         
         int nextLecturerID = highestLecturerID + 1;
         int nextProjectManagerID = highestProjectManagerID + 1;
@@ -307,8 +303,7 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
 
     private int getNextLecturerID() {
         int nextID = 0;
-        String lecturerRecordfile = "src/textfiles/Lecturer.txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader(lecturerRecordfile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.lecturerFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");

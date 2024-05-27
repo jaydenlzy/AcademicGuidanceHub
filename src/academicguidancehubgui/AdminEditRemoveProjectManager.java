@@ -4,6 +4,7 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import academicguidancehub.FileReaderUtils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -168,12 +169,10 @@ public class AdminEditRemoveProjectManager extends javax.swing.JFrame {
             String contact = lecturerList.getValueAt(selectedRow, 4).toString();
             String field = lecturerList.getValueAt(selectedRow, 6).toString();
             
-            String lecturerfilePath = "src/textfiles/Lecturer.txt";
-            String pmfilePath = "src/textfiles/ProjectManager.txt";
             String delimiter = ";";
             
-            UpdateLecturerFile(lecturerfilePath,delimiter,id,name,password,email,contact,field);
-            UpdatePMFile(pmfilePath,id,delimiter);
+            UpdateLecturerFile(FileLocationInterface.lecturerFilePath,delimiter,id,name,password,email,contact,field);
+            UpdatePMFile(FileLocationInterface.projectManagerPath,id,delimiter);
             JOptionPane.showMessageDialog(null, "Remove successfully!", "REMOVE PROJECT MANAGER ROLE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             
             projectManagerTableContent();
@@ -257,10 +256,9 @@ public class AdminEditRemoveProjectManager extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void projectManagerTableContent() {
-        String filePathClassType = "src/textfiles/ProjectManager.txt";
         String delimiter = ";";
         int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5, 6};
-        String[][] classTypeData = FileReaderUtils.readData(filePathClassType, delimiter, classTypeColumnIndices);
+        String[][] classTypeData = FileReaderUtils.readData(FileLocationInterface.projectManagerPath, delimiter, classTypeColumnIndices);
 
         if (classTypeData != null) {
             DefaultTableModel classTypeTableModel = new DefaultTableModel();
