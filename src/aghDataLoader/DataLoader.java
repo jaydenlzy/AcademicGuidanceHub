@@ -7,11 +7,6 @@ package aghDataLoader;
 import academicguidancehub.FileLocationInterface;
 import academicguidancehub.FileReaderUtils;
 
-/**
- *
- * @author Lzy
- */
-
 public abstract class DataLoader implements FileLocationInterface {
     protected String filePath;
     protected FileReaderUtils fileReaderUtils;

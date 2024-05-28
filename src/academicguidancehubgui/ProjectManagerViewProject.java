@@ -37,8 +37,14 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
     }
 
     private void loadProjectData() {
-        ProjectTableDataLoader dataLoader = new ProjectTableDataLoader(tblViewProject);
-        dataLoader.loadData();
+        tblViewProject = new javax.swing.JTable();
+        tblViewProject.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "Project Category", "Preferred School", "Total Count", "Ongoing Project", "Done Project", "Require Presentation", "Require Second Marker"
+                }
+        ));
+        jScrollPane1.setViewportView(tblViewProject);
     }
 
     /**
@@ -385,7 +391,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         }
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(projectTypePath, true))) {
-            writer.println(projectCategory + ";" + school + ";" + requireSecondMarker + ";" + requirePresentation); 
+            writer.println(projectCategory + ";" + school + ";" + requireSecondMarker + ";" + requirePresentation);
             JOptionPane.showMessageDialog(this, "Data written to file successfully.");
             resetForm();
             DefaultTableModel model = (DefaultTableModel) tblViewProject.getModel();
@@ -427,7 +433,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
 
     private void loadSchoolList() {
         String[][] schoolData = FileReaderUtils.readData(schoolListPath, ";", new int[]{0});
-        cmbBoxPreferredSchool.removeAllItems();        
+        cmbBoxPreferredSchool.removeAllItems();
         cmbBoxPreferredSchool.addItem("General");
         if (schoolData != null) {
             for (String[] school : schoolData) {
