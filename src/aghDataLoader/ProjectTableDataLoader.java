@@ -8,3 +8,17 @@ package aghDataLoader;
  *
  * @author Lzy
  */
+public class ProjectTableDataLoader {
+
+    // Constructor
+    public ProjectTableDataLoader() {
+        // Initialization code here
+    }
+
+    // Example method to load project data
+    public void loadProjectData() {
+        // Code to load project data
+    }
+
+    // Add more methods as needed
+}

@@ -10,14 +10,15 @@ import academicguidancehub.ReadOperations;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import academicguidancehub.FileLocationInterface;
+import academicguidancehub.Lecturer;
 
 public class GeneralLoginPage extends javax.swing.JFrame {
 
     private ArrayList<User> userList;
-    
+
     public GeneralLoginPage() {
         initComponents();
-        setSize(700,625);
+        setSize(700, 625);
         setResizable(false);
         forgetPw.setVisible(false);
     }
@@ -177,10 +178,10 @@ public class GeneralLoginPage extends javax.swing.JFrame {
         String enteredID = userID.getText();
         String enteredPassword = new String(password.getPassword());
 
-        if(enteredPassword.length()==0){
+        if (enteredPassword.length() == 0) {
             forgetPw.setVisible(true);
         }
-        
+
         User user = findUserByID(enteredID);
 
         if (user != null) {
@@ -194,6 +195,10 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                         break;
                     case "Lecturer":
                         JOptionPane.showMessageDialog(null, "Welcome to Lecturer Page.", "Lecturer Page", JOptionPane.INFORMATION_MESSAGE);
+                        Lecturer lc = new Lecturer(user);
+                        LecturerDashBoard lbd = new LecturerDashBoard(lc);
+                        lbd.setVisible(true);
+                        this.dispose();
                         break;
                     case "Project Manager":
                         JOptionPane.showMessageDialog(null, "Welcome to Project manager Page.", "PM Page", JOptionPane.INFORMATION_MESSAGE);
@@ -310,7 +315,7 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                 if (user.getUserId().equals(enteredID)) {
                     System.out.println("User Found!"); // Debugging
                     return user;
-                } else{
+                } else {
                     userList = reader.readUserData(FileLocationInterface.projectManagerPath);
                     System.out.println("User List Size: " + userList.size()); // Debugging
                     for (User pm : userList) {
@@ -333,7 +338,7 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         System.out.println("User Not Found!"); // Debugging
         return null;
     }
