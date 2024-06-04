@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import academicguidancehub.FileLocationInterface;
 import academicguidancehub.Lecturer;
+import academicguidancehub.Student;
 
 public class GeneralLoginPage extends javax.swing.JFrame {
 
@@ -189,7 +190,8 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                 switch (user.getRole()) {
                     case "Student":
                         JOptionPane.showMessageDialog(null, "Welcome to Student Page.", "Student Page", JOptionPane.INFORMATION_MESSAGE);
-                        StudentDashboard stD = new StudentDashboard();
+                        Student st = new Student(user);
+                        StudentDashboard stD = new StudentDashboard(st);
                         stD.setVisible(true);
                         this.dispose();
                         break;
