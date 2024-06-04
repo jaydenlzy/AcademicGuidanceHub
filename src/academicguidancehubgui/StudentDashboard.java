@@ -41,7 +41,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         jlPresentationDate = new javax.swing.JLabel();
         logoutLabel1 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel11 = new javax.swing.JPanel();
+        jpProject = new javax.swing.JPanel();
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel3.setText("Academic Guidance Hub (AGH)");
@@ -161,18 +161,18 @@ public class StudentDashboard extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jpProjectLayout = new javax.swing.GroupLayout(jpProject);
+        jpProject.setLayout(jpProjectLayout);
+        jpProjectLayout.setHorizontalGroup(
+            jpProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 491, Short.MAX_VALUE)
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpProjectLayout.setVerticalGroup(
+            jpProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 384, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("tab1", jPanel11);
+        jTabbedPane2.addTab("tab1", jpProject);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -280,7 +280,6 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -289,6 +288,7 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jlPresentationDate;
     private javax.swing.JLabel jlStudentName;
     private javax.swing.JLabel jlSubmitAssignment;
+    private javax.swing.JPanel jpProject;
     private javax.swing.JLabel logoutLabel1;
     // End of variables declaration//GEN-END:variables
 }
