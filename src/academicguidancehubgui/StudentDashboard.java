@@ -19,6 +19,8 @@ public class StudentDashboard extends javax.swing.JFrame {
     Student st = null;
     
     public StudentDashboard (Student st) {
+        this.st = st;
+        jlStudentName.setText(st.getName());
         initComponents();
     }
 
