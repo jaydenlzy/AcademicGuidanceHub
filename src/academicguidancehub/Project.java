@@ -16,16 +16,16 @@ import java.util.List;
 
 public class Project {
 
-    private String projectID;
-    private String projectCategory;
-    private String projectTitle;
-    private String projectDueDate;
-    private boolean requirePresentation;
-    private String studentIntake;
-    private String studentID;
-    private String supervisorID;
-    private String secondMarkerID;
-    private String status;
+    private final String projectID;
+    private final String projectCategory;
+    private final String projectTitle;
+    private final String projectDueDate;
+    private final boolean requirePresentation;
+    private final String studentIntake;
+    private final String studentID;
+    private final String supervisorID;
+    private final String secondMarkerID;
+    private final String status;
 
     // Constructor
     public Project(String projectID, String projectCategory, String projectTitle, String projectDueDate, boolean requirePresentation, String studentIntake, String studentID, String supervisorID, String secondMarkerID, String status) {
@@ -89,9 +89,10 @@ public class Project {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(";");
-            if (data.length == 10) {
+            if (data.length == 11) {
                 boolean requirePresentation = "Yes".equalsIgnoreCase(data[4]);
-                projects.add(new Project(data[0], data[1], data[2], data[3], requirePresentation, data[5], data[6], data[7], data[8], data[9]));
+                String status = data[10].equalsIgnoreCase("NA") ? data[9] : data[10];
+                projects.add(new Project(data[0], data[1], data[2], data[3], requirePresentation, data[5], data[6], data[7], data[8], status));
             } else {
                 System.err.println("Skipping line due to incorrect number of fields: " + line);
             }

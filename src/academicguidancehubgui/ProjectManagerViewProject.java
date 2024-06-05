@@ -37,14 +37,8 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
     }
 
     private void loadProjectData() {
-        tblViewProject = new javax.swing.JTable();
-        tblViewProject.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{},
-                new String[]{
-                    "Project Category", "Preferred School", "Total Count", "Ongoing Project", "Done Project", "Require Presentation", "Require Second Marker"
-                }
-        ));
-        jScrollPane1.setViewportView(tblViewProject);
+        ProjectTableDataLoader projectTypeLoader = new ProjectTableDataLoader(FileLocationInterface.projectsFilePath, tblViewProject , "projectType");
+        projectTypeLoader.loadData();
     }
 
     /**
@@ -183,6 +177,11 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         rdBtnYes.setBackground(new java.awt.Color(204, 255, 255));
         buttonGroup1.add(rdBtnYes);
         rdBtnYes.setText("Yes");
+        rdBtnYes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdBtnYesActionPerformed(evt);
+            }
+        });
 
         rdBtnNo.setBackground(new java.awt.Color(204, 255, 255));
         buttonGroup1.add(rdBtnNo);
@@ -195,12 +194,12 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblRequirePresentation, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(lblRequirePresentation, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rdBtnYes, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(rdBtnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,8 +291,8 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblRequireSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(lblRequireSecondMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rdBtnYesMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rdBtnNoMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -430,6 +429,10 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
             }
         }
     }//GEN-LAST:event_btnDltProjectTypeActionPerformed
+
+    private void rdBtnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtnYesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdBtnYesActionPerformed
 
     private void loadSchoolList() {
         String[][] schoolData = FileReaderUtils.readData(schoolListPath, ";", new int[]{0});
