@@ -5,6 +5,7 @@
 package academicguidancehubgui;
 
 import academicguidancehub.Student;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +17,7 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
      * Creates new form StudentRequestPresentation
      */
     Student st = null;
+
     public StudentRequestPresentation(Student st) {
         initComponents();
     }
@@ -37,7 +39,7 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
         jlStudentName1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jbCancel = new javax.swing.JButton();
+        jbBack = new javax.swing.JButton();
         jbSubmit = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -83,10 +85,10 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 153));
 
-        jbCancel.setText("Cancel");
-        jbCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbBack.setText("Back");
+        jbBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbCancelMouseClicked(evt);
+                jbBackMouseClicked(evt);
             }
         });
 
@@ -157,7 +159,7 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
                                     .addGap(97, 97, 97)
                                     .addComponent(jbSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(55, 55, 55)
-                                    .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(247, 247, 247)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -185,7 +187,7 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
                 .addGap(120, 120, 120)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -224,12 +226,9 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelMouseClicked
-
-        StudentDashboard stD = new StudentDashboard(st);
-        stD.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jbCancelMouseClicked
+    private void jbBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbBackMouseClicked
+        
+    }//GEN-LAST:event_jbBackMouseClicked
 
     private void jbSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSubmitMouseClicked
 
@@ -267,7 +266,6 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -283,7 +281,7 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JButton jbCancel;
+    private javax.swing.JButton jbBack;
     private javax.swing.JButton jbSubmit;
     private javax.swing.JLabel jlStudentName;
     private javax.swing.JLabel jlStudentName1;

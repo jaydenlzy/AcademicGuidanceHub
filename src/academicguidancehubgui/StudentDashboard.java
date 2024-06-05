@@ -23,10 +23,9 @@ public class StudentDashboard extends javax.swing.JFrame {
 
     public StudentDashboard(Student st) {
         this.st = st;
-        jlStudentName1.setText(st.getName());
-        jlStudentId.setText(st.getUserId());
-        
         initComponents();
+        jlStudentName1.setText(st.getName());
+        jlStudentId.setText(st.getUserId());    
     }
 
     private void showPendingAssignment(String userId) {
@@ -83,7 +82,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         jlStudentId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jlStudentId.setForeground(new java.awt.Color(255, 255, 255));
         jlStudentId.setText("ST XXX");
-        jPanel1.add(jlStudentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, 30));
+        jPanel1.add(jlStudentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));

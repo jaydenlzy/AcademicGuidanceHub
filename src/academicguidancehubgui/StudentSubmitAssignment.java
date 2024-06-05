@@ -39,7 +39,7 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
         jlStudentName = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jbCancel = new javax.swing.JButton();
+        jbBack = new javax.swing.JButton();
         jbSubmit = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -71,10 +71,10 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
 
-        jbCancel.setText("Cancel");
-        jbCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbBack.setText("Back");
+        jbBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbCancelMouseClicked(evt);
+                jbBackMouseClicked(evt);
             }
         });
 
@@ -161,7 +161,7 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jbSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(55, 55, 55)
-                                        .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(18, 18, 18)
@@ -190,7 +190,7 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -237,12 +237,9 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jbSubmitMouseClicked
 
-    private void jbCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelMouseClicked
+    private void jbBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbBackMouseClicked
 
-        StudentDashboard stD = new StudentDashboard(st);
-            stD.setVisible(true);
-                this.dispose();
-    }//GEN-LAST:event_jbCancelMouseClicked
+    }//GEN-LAST:event_jbBackMouseClicked
 
     /**
      * @param args the command line arguments
@@ -288,7 +285,7 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JButton jbCancel;
+    private javax.swing.JButton jbBack;
     private javax.swing.JButton jbSubmit;
     private javax.swing.JLabel jlStudentName;
     // End of variables declaration//GEN-END:variables
