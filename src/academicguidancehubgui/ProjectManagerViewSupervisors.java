@@ -4,14 +4,15 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import academicguidancehub.ProjectManager;
-import aghDataLoader.SupervisorTableDataLoader;
+import aghDataLoader.LecturerTableDataLoader;
 
 /**
  *
  * @author Lzy
  */
-public class ProjectManagerViewSupervisors extends javax.swing.JFrame {
+public class ProjectManagerViewSupervisors extends javax.swing.JFrame implements FileLocationInterface {
 
     /**
      * Creates new form ProjectManagerViewSupervisors
@@ -25,7 +26,7 @@ public class ProjectManagerViewSupervisors extends javax.swing.JFrame {
     }
     
     private void loadSupervisorsData() {
-        SupervisorTableDataLoader dataLoader = new SupervisorTableDataLoader(jTable1);
+        LecturerTableDataLoader dataLoader = new LecturerTableDataLoader(lecturerFilePath,jTable1);
         dataLoader.loadData();
     }
     

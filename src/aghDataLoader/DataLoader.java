@@ -5,15 +5,12 @@
 package aghDataLoader;
 
 import academicguidancehub.FileLocationInterface;
-import academicguidancehub.FileReaderUtils;
 
 public abstract class DataLoader implements FileLocationInterface {
     protected String filePath;
-    protected FileReaderUtils fileReaderUtils;
 
     public DataLoader(String filePath) {
         this.filePath = filePath;
-        this.fileReaderUtils = new FileReaderUtils();
     }
 
     public abstract void loadData();
