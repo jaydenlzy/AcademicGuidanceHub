@@ -4,11 +4,14 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import academicguidancehub.Student;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,6 +31,34 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
         jlStudentID.setText(st.getUserId());
 
         jFileChooser1.setVisible(false);
+        
+        loadAssignments();
+    }
+        
+        
+    public void loadAssignments() {
+        ArrayList<String[]> selectAssignmentList = new ArrayList<>();
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.projectsFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(";");
+                if (values.length > 6) { // Check if the array has at least 7 elements
+                    if (st.getUserId().equals(values[6])) {
+                        cbSelectAssignment.addItem(values[2]);
+                        selectAssignmentList.add(values);
+                    }
+                } else {
+                    System.out.println("Skipping invalid line with insufficient values: " + line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error processing line: Array index out of bounds", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -119,7 +150,6 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setText("Select Assignment:");
 
-        cbSelectAssignment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbSelectAssignment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSelectAssignmentActionPerformed(evt);
@@ -242,21 +272,21 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
 
     private void cbSelectAssignmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelectAssignmentActionPerformed
         // Check if an item has been selected in the combo box
-        if (cbSelectAssignment.getSelectedIndex() != -1) {
-            // If an item has been selected, show the file chooser
-            int returnVal = jFileChooser1.showOpenDialog(this);
-            if (returnVal == jFileChooser1.APPROVE_OPTION) {
-                // User selected a file
-                // Get the selected file
-                java.io.File file = jFileChooser1.getSelectedFile();
-                // Set the file name to the label
-                jlSelectedFiles.setText(file.getName());
-            } else {
-                // User canceled or closed the file chooser
-                // Clear the label
-                jlSelectedFiles.setText("");
-            }
-        }
+//        if (cbSelectAssignment.getSelectedIndex() != -1) {
+//            // If an item has been selected, show the file chooser
+//            int returnVal = jFileChooser1.showOpenDialog(this);
+//            if (returnVal == jFileChooser1.APPROVE_OPTION) {
+//                // User selected a file
+//                // Get the selected file
+//                java.io.File file = jFileChooser1.getSelectedFile();
+//                // Set the file name to the label
+//                jlSelectedFiles.setText(file.getName());
+//            } else {
+//                // User canceled or closed the file chooser
+//                // Clear the label
+//                jlSelectedFiles.setText("");
+//            }
+//        }
     }//GEN-LAST:event_cbSelectAssignmentActionPerformed
 
     private void jbSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSubmitMouseClicked
