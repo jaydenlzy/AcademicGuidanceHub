@@ -20,8 +20,14 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
      * Creates new form StudentSubmitAssignment
      */
     Student st = null;
+    
     public StudentSubmitAssignment(Student st) {
+        this.st = st;
         initComponents();
+        jlStudentName1.setText(st.getName());
+        jlStudentID.setText(st.getUserId());
+        
+        jFileChooser1.setVisible(false);
     }
     
 
@@ -36,8 +42,9 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jlStudentName = new javax.swing.JLabel();
+        jlStudentID = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jlStudentName1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jbBack = new javax.swing.JButton();
         jbSubmit = new javax.swing.JButton();
@@ -58,16 +65,21 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 80));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jlStudentName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jlStudentName.setForeground(new java.awt.Color(255, 255, 255));
-        jlStudentName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/user.png"))); // NOI18N
-        jlStudentName.setText("Student XXX, STXXXXXX");
-        jPanel2.add(jlStudentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
+        jlStudentID.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlStudentID.setForeground(new java.awt.Color(255, 255, 255));
+        jlStudentID.setText("ST XXX");
+        jPanel2.add(jlStudentID, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Academic Guidance Hub (AGH)");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jlStudentName1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlStudentName1.setForeground(new java.awt.Color(255, 255, 255));
+        jlStudentName1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/user.png"))); // NOI18N
+        jlStudentName1.setText("Student XXX");
+        jPanel2.add(jlStudentName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -230,7 +242,18 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbSelectAssignmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelectAssignmentActionPerformed
-        
+        // Check if an item has been selected in the combo box
+        if (cbSelectAssignment.getSelectedIndex() != -1) {
+            // If an item has been selected, show the file chooser
+            int returnVal = jFileChooser1.showOpenDialog(this); 
+            if (returnVal == jFileChooser1.APPROVE_OPTION) {
+                // User selected a file
+                // Handle the file selection here
+            } else {
+                // User canceled or closed the file chooser
+                // Handle cancellation or closing here
+            }
+        }
     }//GEN-LAST:event_cbSelectAssignmentActionPerformed
 
     private void jbSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSubmitMouseClicked
@@ -287,7 +310,8 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JButton jbBack;
     private javax.swing.JButton jbSubmit;
-    private javax.swing.JLabel jlStudentName;
+    private javax.swing.JLabel jlStudentID;
+    private javax.swing.JLabel jlStudentName1;
     // End of variables declaration//GEN-END:variables
 
     

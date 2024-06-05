@@ -27,21 +27,9 @@ public class StudentDashboard extends javax.swing.JFrame {
         jlStudentName1.setText(st.getName());
         jlStudentId.setText(st.getUserId());    
     }
-
-    private void showPendingAssignment(String userId) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("Projects.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(";");
-                if (parts[6].equals(userId)) { // Check if the username matches
-                    jlPendingAssignment.setText(parts[1]);
-                    break;
-                }
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,7 +56,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jlPendingAssignment = new javax.swing.JLabel();
+        jspPendingAssignment = new javax.swing.JScrollPane();
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel3.setText("Academic Guidance Hub (AGH)");
@@ -193,23 +181,15 @@ public class StudentDashboard extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Pending Assignment");
 
-        jlPendingAssignment.setText("jLabel5");
-
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlPendingAssignment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jspPendingAssignment)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlPendingAssignment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jspPendingAssignment)
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -338,11 +318,11 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JLabel jlPendingAssignment;
     private javax.swing.JLabel jlPresentationDate;
     private javax.swing.JLabel jlStudentId;
     private javax.swing.JLabel jlStudentName1;
     private javax.swing.JLabel jlSubmitAssignment;
+    private javax.swing.JScrollPane jspPendingAssignment;
     private javax.swing.JLabel logoutLabel1;
     // End of variables declaration//GEN-END:variables
 }
