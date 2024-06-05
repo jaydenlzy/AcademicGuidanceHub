@@ -4,7 +4,9 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import academicguidancehub.ProjectManager;
+import aghDataLoader.ProjectDashboardDataLoader;
 
 /**
  *
@@ -24,6 +26,16 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
         pm.createResultFile();
         initComponents();
         lblUsername.setText(pm.getName());
+
+        ProjectDashboardDataLoader dataLoader = new ProjectDashboardDataLoader(
+                FileLocationInterface.projectsFilePath,
+                lblCurrentPrj,
+                lblCommonPrj,
+                lblPrjDone,
+                lblActiveSupervisors
+        );
+
+        dataLoader.loadData();
     }
 
     /**

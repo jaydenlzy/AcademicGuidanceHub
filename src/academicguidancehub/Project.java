@@ -16,16 +16,16 @@ import java.util.List;
 
 public class Project {
 
-    private final String projectID;
-    private final String projectCategory;
-    private final String projectTitle;
-    private final String projectDueDate;
-    private final boolean requirePresentation;
-    private final String studentIntake;
-    private final String studentID;
-    private final String supervisorID;
-    private final String secondMarkerID;
-    private final String status;
+    private String projectID;
+    private String projectCategory;
+    private String projectTitle;
+    private String projectDueDate;
+    private boolean requirePresentation;
+    private String studentIntake;
+    private String studentID;
+    private String supervisorID;
+    private String secondMarkerID;
+    private String status;
 
     // Constructor
     public Project(String projectID, String projectCategory, String projectTitle, String projectDueDate, boolean requirePresentation, String studentIntake, String studentID, String supervisorID, String secondMarkerID, String status) {

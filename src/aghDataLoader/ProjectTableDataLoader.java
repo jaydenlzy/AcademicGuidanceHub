@@ -93,20 +93,29 @@ public class ProjectTableDataLoader extends DataLoader {
 
     private void loadProjectStatusTable(List<Project> projects, boolean isIntake) {
         List<String[]> tableDataList = new ArrayList<>();
-        Set<String> uniqueProjectIDs = new HashSet<>();
+        Map<String, List<Project>> projectGroups = new HashMap<>();
 
         for (Project project : projects) {
-            if (isIntake || uniqueProjectIDs.add(project.getProjectID())) {
-                tableDataList.add(new String[]{
-                        project.getProjectCategory(),
-                        project.getProjectTitle(),
-                        project.getProjectDueDate(),
-                        project.getStudentIntake(),
-                        project.getStudentID(),
-                        project.getSupervisorID(),
-                        project.getSecondMarkerID(),
-                        project.getStatus()
-                });
+            projectGroups.computeIfAbsent(project.getProjectID(), k -> new ArrayList<>()).add(project);
+        }
+
+        for (Map.Entry<String, List<Project>> entry : projectGroups.entrySet()) {
+            String projectID = entry.getKey();
+            List<Project> projectList = entry.getValue();
+
+            if ((isIntake && projectList.size() > 1) || (!isIntake && projectList.size() == 1)) {
+                for (Project project : projectList) {
+                    tableDataList.add(new String[]{
+                            project.getProjectCategory(),
+                            project.getProjectTitle(),
+                            project.getProjectDueDate(),
+                            project.getStudentIntake(),
+                            project.getStudentID(),
+                            project.getSupervisorID(),
+                            project.getSecondMarkerID(),
+                            project.getStatus()
+                    });
+                }
             }
         }
 
