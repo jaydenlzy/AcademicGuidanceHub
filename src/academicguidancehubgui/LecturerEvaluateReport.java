@@ -89,7 +89,7 @@ public class LecturerEvaluateReport extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void HomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomePageMouseClicked
-        LecturerDashBoard lecturerHomePage = new LecturerDashBoard(lc);
+        LecturerDashboard lecturerHomePage = new LecturerDashboard(lc);
         this.setVisible(false);
 lecturerHomePage.setVisible(true);      }//GEN-LAST:event_HomePageMouseClicked
 

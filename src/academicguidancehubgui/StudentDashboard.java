@@ -24,7 +24,6 @@ public class StudentDashboard extends javax.swing.JFrame {
     public StudentDashboard(Student st) {
         this.st = st;
         jlStudentName1.setText(st.getName());
-        String userId = st.getUserId();
         jlStudentId.setText(st.getUserId());
         
         initComponents();
@@ -277,7 +276,7 @@ public class StudentDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlSubmitAssignmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSubmitAssignmentMouseClicked
-        StudentSubmitAssignment stSA = new StudentSubmitAssignment();
+        StudentSubmitAssignment stSA = new StudentSubmitAssignment(st);
         stSA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jlSubmitAssignmentMouseClicked
@@ -294,7 +293,7 @@ public class StudentDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutLabel1MouseClicked
 
     private void jlPresentationDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlPresentationDateMouseClicked
-        StudentRequestPresentation stRP = new StudentRequestPresentation();
+        StudentRequestPresentation stRP = new StudentRequestPresentation(st);
         stRP.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jlPresentationDateMouseClicked

@@ -4,6 +4,8 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.Student;
+
 /**
  *
  * @author isaac
@@ -13,7 +15,8 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
     /**
      * Creates new form StudentRequestPresentation
      */
-    public StudentRequestPresentation() {
+    Student st = null;
+    public StudentRequestPresentation(Student st) {
         initComponents();
     }
 
@@ -222,7 +225,7 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelMouseClicked
-        Student st = new Student(user);
+
         StudentDashboard stD = new StudentDashboard(st);
         stD.setVisible(true);
         this.dispose();
@@ -264,11 +267,7 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StudentRequestPresentation().setVisible(true);
-            }
-        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -19,7 +19,8 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
     /**
      * Creates new form StudentSubmitAssignment
      */
-    public StudentSubmitAssignment() {
+    Student st = null;
+    public StudentSubmitAssignment(Student st) {
         initComponents();
     }
     
@@ -237,7 +238,7 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSubmitMouseClicked
 
     private void jbCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCancelMouseClicked
-        Student st = new Student(user);
+
         StudentDashboard stD = new StudentDashboard(st);
             stD.setVisible(true);
                 this.dispose();
@@ -271,11 +272,7 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StudentSubmitAssignment().setVisible(true);
-            }
-        });
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

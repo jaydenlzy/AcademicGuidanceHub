@@ -193,6 +193,7 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                         Student st = new Student(user);
                         StudentDashboard stD = new StudentDashboard(st);
                         stD.setVisible(true);
+                        System.out.println("as");
                         this.dispose();
                         break;
                     case "Lecturer":
