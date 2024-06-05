@@ -5,6 +5,7 @@
 package academicguidancehubgui;
 
 import academicguidancehub.Lecturer;
+import academicguidancehub.Presentation;
 
 /**
  *
@@ -36,10 +37,10 @@ public class LecturerDashboard extends javax.swing.JFrame {
         ViewAssignSup = new javax.swing.JLabel();
         ViewSuperviseeList = new javax.swing.JLabel();
         ViewPendingReport = new javax.swing.JLabel();
-        PresentationReq = new javax.swing.JLabel();
+        Presentation = new javax.swing.JLabel();
         HomePage1 = new javax.swing.JButton();
         CompletedReports = new javax.swing.JLabel();
-        PresentationDate = new javax.swing.JLabel();
+        PresentationReq = new javax.swing.JLabel();
         lblusername = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         PendingReportNo = new javax.swing.JPanel();
@@ -88,10 +89,10 @@ public class LecturerDashboard extends javax.swing.JFrame {
             }
         });
 
-        PresentationReq.setText("View Presentation Request");
-        PresentationReq.addMouseListener(new java.awt.event.MouseAdapter() {
+        Presentation.setText("View Presentation Request");
+        Presentation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PresentationReqMouseClicked(evt);
+                PresentationMouseClicked(evt);
             }
         });
 
@@ -114,10 +115,10 @@ public class LecturerDashboard extends javax.swing.JFrame {
             }
         });
 
-        PresentationDate.setText("View Presentation Date");
-        PresentationDate.addMouseListener(new java.awt.event.MouseAdapter() {
+        PresentationReq.setText("View Presentation Date");
+        PresentationReq.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PresentationDateMouseClicked(evt);
+                PresentationReqMouseClicked(evt);
             }
         });
 
@@ -132,14 +133,13 @@ public class LecturerDashboard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PresentationDate)
+                    .addComponent(PresentationReq)
                     .addComponent(CompletedReports)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(ViewPendingReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ViewAssignSup, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                            .addComponent(ViewSuperviseeList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(PresentationReq, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ViewAssignSup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ViewSuperviseeList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Presentation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
         );
         jPanel2Layout.setVerticalGroup(
@@ -154,9 +154,9 @@ public class LecturerDashboard extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(ViewPendingReport, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(PresentationReq, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Presentation, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(PresentationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PresentationReq, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(CompletedReports, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(108, Short.MAX_VALUE))
@@ -206,6 +206,7 @@ public class LecturerDashboard extends javax.swing.JFrame {
             .addGap(0, 86, Short.MAX_VALUE)
         );
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Reports Completed");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -231,7 +232,7 @@ public class LecturerDashboard extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(ReportCompletedNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,9 +250,8 @@ public class LecturerDashboard extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ReportCompletedNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(PresentationRequestNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(PendingReportNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(PresentationRequestNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PendingReportNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -270,21 +270,21 @@ public class LecturerDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ViewAssignSupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewAssignSupMouseClicked
-    LecturerViewAssignedSupervisees viewAssignedSupervisees = new LecturerViewAssignedSupervisees(lc);
+        LecturerViewAssignedSupervisees viewAssignedSupervisees = new LecturerViewAssignedSupervisees(lc);
         viewAssignedSupervisees.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ViewAssignSupMouseClicked
 
     private void ViewSuperviseeListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewSuperviseeListMouseClicked
-      String selectedLecturerId = lc.getUserId(); 
-    LecturerViewSuperviseeList superviseeListFrame = new LecturerViewSuperviseeList(lc, selectedLecturerId);
-    superviseeListFrame.setVisible(true); 
+        String selectedLecturerId = lc.getUserId();
+        LecturerViewSuperviseeList superviseeListFrame = new LecturerViewSuperviseeList(lc, selectedLecturerId);
+        superviseeListFrame.setVisible(true);
     this.setVisible(false);      this.setVisible(false);      }//GEN-LAST:event_ViewSuperviseeListMouseClicked
 
-    private void PresentationReqMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PresentationReqMouseClicked
+    private void PresentationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PresentationMouseClicked
         LecturerConfirmDateOfPresentation LCDOP = new LecturerConfirmDateOfPresentation(lc);
         LCDOP.setVisible(true);
-        this.dispose();    }//GEN-LAST:event_PresentationReqMouseClicked
+        this.dispose();    }//GEN-LAST:event_PresentationMouseClicked
 
     private void HomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomePageMouseClicked
         LecturerDashboard lecturerHomePage = new LecturerDashboard(lc);
@@ -312,11 +312,11 @@ public class LecturerDashboard extends javax.swing.JFrame {
         LVPR.setVisible(true);
     }//GEN-LAST:event_ViewPendingReportMouseClicked
 
-    private void PresentationDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PresentationDateMouseClicked
-        LecturerViewPrsentationDate LVPD = new LecturerViewPrsentationDate(lc);
+    private void PresentationReqMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PresentationReqMouseClicked
+        LecturerviewPresentationDate LVPD = new LecturerviewPresentationDate(lc);
         this.setVisible(false);
         LVPD.setVisible(true);
-    }//GEN-LAST:event_PresentationDateMouseClicked
+    }//GEN-LAST:event_PresentationReqMouseClicked
 
     private void CompletedReportsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CompletedReportsMouseClicked
         LecturerViewCompletedReports LVCR = new LecturerViewCompletedReports(lc);
@@ -363,7 +363,7 @@ public class LecturerDashboard extends javax.swing.JFrame {
     private javax.swing.JButton HomePage;
     private javax.swing.JButton HomePage1;
     private javax.swing.JPanel PendingReportNo;
-    private javax.swing.JLabel PresentationDate;
+    private javax.swing.JLabel Presentation;
     private javax.swing.JLabel PresentationReq;
     private javax.swing.JPanel PresentationRequestNo;
     private javax.swing.JPanel ReportCompletedNo;

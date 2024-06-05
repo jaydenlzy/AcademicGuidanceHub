@@ -19,34 +19,16 @@ public class LecturerViewSuperviseeList extends javax.swing.JFrame {
     public LecturerViewSuperviseeList(Lecturer lc, String selectedLecturerId) {
         initComponents();
         this.lc = lc;
-        loadLecturerData(selectedLecturerId);
+        populateSuperviseeTable();
     }
 
-    private void loadLecturerData(String selectedLecturerId) {
+    private void populateSuperviseeTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
+        model.setRowCount(0);  // Clear existing rows
 
-        // Get the data of the selected lecturer
-        String[] selectedLecturerData = lc.getLecturerDataById(selectedLecturerId);
-
-        // If the selected lecturer exists, add its data to the table
-        if (selectedLecturerData != null) {
-            model.addRow(new Object[]{selectedLecturerData[0], selectedLecturerData[1], selectedLecturerData[3], selectedLecturerData[4], selectedLecturerData[6]});
-        }
-
-        // Get the data of all lecturers
-        List<String[]> lecturersData = Lecturer.getAllLecturersData();
-
-        // Add each lecturer's data to the table
-        for (String[] lecturerData : lecturersData) {
-            String lecturerId = lecturerData[0];
-            String name = lecturerData[1];
-            String email = lecturerData[3];
-            String phoneNo = lecturerData[4];
-            String school = lecturerData[6];
-
-            // Add the data to the table model
-            model.addRow(new Object[]{lecturerId, name, email, phoneNo, school});
+        List<String[]> supervisees = lc.getDetailedSupervisees();
+        for (String[] supervisee : supervisees) {
+            model.addRow(supervisee);
         }
     }
 
@@ -82,17 +64,17 @@ public class LecturerViewSuperviseeList extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Lecturer ID", " Name", "Email", "Phone no ", "Department"
+                "Student Name", "Project Name", "First Marker", "Second Marker", "Marks from  First marker", "Marks from second marker"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

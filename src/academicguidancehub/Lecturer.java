@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JLabel;
 
 public class Lecturer extends User implements FileLocationInterface {
 
@@ -61,6 +62,33 @@ public class Lecturer extends User implements FileLocationInterface {
         return supervisees;
     }
 
+    public List<String[]> getDetailedSupervisees() {
+        List<String[]> supervisees = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                if (fields.length >= 9) {
+                    String studentId = fields[1];
+                    String firstMarkerId = fields[2];
+                    String secondMarkerId = fields[3];
+                    if (firstMarkerId.equals(this.getUserId()) || secondMarkerId.equals(this.getUserId())) {
+                        String studentName = getStudentNameById(studentId);
+                        String projectName = getProjectNameById(fields[0]);
+                        String firstMarker = getLecturerNameById(firstMarkerId);
+                        String secondMarker = getLecturerNameById(secondMarkerId);
+                        String firstMarkerMarks = fields[4];
+                        String secondMarkerMarks = fields[5];
+                        supervisees.add(new String[]{studentName, projectName, firstMarker, secondMarker, firstMarkerMarks, secondMarkerMarks});
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return supervisees;
+    }
+
     private void loadLecturerData() {
         try (BufferedReader br = new BufferedReader(new FileReader(lecturerFilePath))) {
             String line;
@@ -73,6 +101,21 @@ public class Lecturer extends User implements FileLocationInterface {
                 } else {
                     System.out.println("Unexpected data format: " + line);
                 }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePresentationResultFile(String projectId, String studentId, String status) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(resultsFilePath))) {
+            List<String[]> lines = getAllResultsData();
+            for (String[] fields : lines) {
+                if (fields.length >= 9 && fields[0].equals(projectId) && fields[1].equals(studentId)) {
+                    fields[6] = status; // Update the status in column 7
+                }
+                bw.write(String.join(";", fields));
+                bw.newLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,6 +142,10 @@ public class Lecturer extends User implements FileLocationInterface {
 
     public String getStudentNameById(String studentId) {
         return studentMap.getOrDefault(studentId, "Unknown Student");
+    }
+
+    private String getProjectNameById(String projectId) {
+        return projectMap.getOrDefault(projectId, "Unknown Project");
     }
 
     public static List<String[]> getAllLecturersData() {
@@ -159,17 +206,27 @@ public class Lecturer extends User implements FileLocationInterface {
         return results;
     }
 
-    public void acceptPresentation(String projectId, String studentId) {
-        // Implement logic to accept presentation
-        updateResultFile(projectId, studentId, "accept");
+    public List<String[]> getPresentationData() {
+        List<String[]> presentationData = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                if (fields.length >= 9) {
+                    String studentName = studentMap.getOrDefault(fields[1], "Unknown Student");
+                    String projectName = projectMap.getOrDefault(fields[0], "Unknown Project");
+                    String lecturerName = getLecturerNameById(fields[2]);
+                    String presentationDate = fields[8];
+                    presentationData.add(new String[]{studentName, projectName, lecturerName, presentationDate});
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return presentationData;
     }
 
-    public void rejectPresentation(String projectId, String studentId) {
-        // Implement logic to reject presentation
-        updateResultFile(projectId, studentId, "reject");
-    }
-
-    private void updateResultFile(String projectId, String studentId, String status) {
+    public void updateResultFile(String projectId, String studentId, String status) {
         // Update the result file with the specified status for the given project and student
         try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
             List<String> lines = new ArrayList<>();
@@ -195,4 +252,53 @@ public class Lecturer extends User implements FileLocationInterface {
             e.printStackTrace();
         }
     }
+
+    private List<String[]> getAllResultsData() {
+        List<String[]> resultsData = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                resultsData.add(fields);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resultsData;
+    }
+
+    public String getPresentationDateTime(String projectId, String studentId) {
+        try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                if (fields.length >= 9 && fields[0].equals(projectId) && fields[1].equals(studentId)) {
+                    System.out.println("Found Presentation Date/Time: " + fields[8]); // Debug
+                    return fields[8]; // Field 9 (index 8) contains the Presentation Date and Time
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("No Presentation Date/Time Found"); // Debug
+        return null;
+    }
+
+    public void displayPresentationDetails(String projectId, String studentId, JLabel lblPresentationDateAndTime) {
+        try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                if (fields.length >= 9 && fields[0].equals(projectId) && fields[1].equals(studentId)) {
+                    String presentationDateTime = fields[8]; // Field 9 (index 8) contains the Presentation Date and Time
+                    System.out.println("Setting JLabel to: " + presentationDateTime); // Debug
+                    lblPresentationDateAndTime.setText(presentationDateTime); // Assuming lblPresentationDateAndTime is your JLabel
+                    break; // Break the loop once the Presentation Date and Time is found
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

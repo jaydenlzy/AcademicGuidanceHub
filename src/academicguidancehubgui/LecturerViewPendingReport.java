@@ -37,13 +37,12 @@ public class LecturerViewPendingReport extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 204));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 102, 0));
-        jLabel1.setText("Mark Student Assignment");
+        jLabel1.setText("View Pending Reports");
 
         HomePage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Home.png"))); // NOI18N
         HomePage.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -64,9 +63,9 @@ public class LecturerViewPendingReport extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(HomePage)
-                .addGap(155, 155, 155)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addGap(147, 147, 147))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

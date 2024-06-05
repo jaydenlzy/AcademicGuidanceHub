@@ -80,7 +80,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="216" max="32767" attributes="0"/>
+                  <EmptySpace pref="200" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -101,10 +101,8 @@
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="ReportCompletedNo" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="PresentationRequestNo" max="32767" attributes="0"/>
-                          <Component id="PendingReportNo" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="PresentationRequestNo" max="32767" attributes="0"/>
+                      <Component id="PendingReportNo" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -130,15 +128,13 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="28" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="PresentationDate" min="-2" max="-2" attributes="0"/>
+                          <Component id="PresentationReq" min="-2" max="-2" attributes="0"/>
                           <Component id="CompletedReports" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="ViewPendingReport" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="ViewAssignSup" pref="127" max="32767" attributes="0"/>
-                                  <Component id="ViewSuperviseeList" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="PresentationReq" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ViewAssignSup" max="32767" attributes="0"/>
+                              <Component id="ViewSuperviseeList" max="32767" attributes="0"/>
+                              <Component id="Presentation" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -157,9 +153,9 @@
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="ViewPendingReport" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="PresentationReq" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="Presentation" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="PresentationDate" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="PresentationReq" min="-2" pref="38" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="CompletedReports" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace pref="108" max="32767" attributes="0"/>
@@ -192,12 +188,12 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ViewPendingReportMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="PresentationReq">
+            <Component class="javax.swing.JLabel" name="Presentation">
               <Properties>
                 <Property name="text" type="java.lang.String" value="View Presentation Request"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PresentationReqMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PresentationMouseClicked"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="HomePage1">
@@ -219,12 +215,12 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CompletedReportsMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="PresentationDate">
+            <Component class="javax.swing.JLabel" name="PresentationReq">
               <Properties>
                 <Property name="text" type="java.lang.String" value="View Presentation Date"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PresentationDateMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PresentationReqMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
@@ -307,6 +303,9 @@
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Reports Completed"/>
           </Properties>
         </Component>
