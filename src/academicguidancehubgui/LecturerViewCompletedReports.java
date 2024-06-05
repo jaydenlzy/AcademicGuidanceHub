@@ -5,19 +5,16 @@
 package academicguidancehubgui;
 
 import academicguidancehub.Lecturer;
-import academicguidancehub.User;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author User
  */
-public class LecturerMarkA extends javax.swing.JFrame {
+public class LecturerViewCompletedReports extends javax.swing.JFrame {
 
     Lecturer lc = null;
 
-    public LecturerMarkA(Lecturer lc) {
+    public LecturerViewCompletedReports(Lecturer lc) {
         initComponents();
         this.lc = lc;
     }
@@ -33,27 +30,25 @@ public class LecturerMarkA extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        HomePage = new javax.swing.JButton();
+        HomePage1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel1.setForeground(new java.awt.Color(255, 153, 153));
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 204));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 102, 0));
-        jLabel1.setText("Mark Student Assignment");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("View Students Completed Reports");
 
-        HomePage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Home.png"))); // NOI18N
-        HomePage.addMouseListener(new java.awt.event.MouseAdapter() {
+        HomePage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Home.png"))); // NOI18N
+        HomePage1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                HomePageMouseClicked(evt);
+                HomePage1MouseClicked(evt);
             }
         });
-        HomePage.addActionListener(new java.awt.event.ActionListener() {
+        HomePage1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HomePageActionPerformed(evt);
+                HomePage1ActionPerformed(evt);
             }
         });
 
@@ -61,21 +56,21 @@ public class LecturerMarkA extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(HomePage)
-                .addGap(155, 155, 155)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(HomePage1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(374, 374, 374))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(HomePage))
-                .addContainerGap(431, Short.MAX_VALUE))
+                    .addComponent(HomePage1)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(417, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -92,15 +87,15 @@ public class LecturerMarkA extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void HomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomePageMouseClicked
+    private void HomePage1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomePage1MouseClicked
         LecturerDashboard lecturerHomePage = new LecturerDashboard(lc);
         this.setVisible(false);
         lecturerHomePage.setVisible(true);
-    }//GEN-LAST:event_HomePageMouseClicked
+    }//GEN-LAST:event_HomePage1MouseClicked
 
-    private void HomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomePageActionPerformed
+    private void HomePage1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomePage1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_HomePageActionPerformed
+    }//GEN-LAST:event_HomePage1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,26 +114,25 @@ public class LecturerMarkA extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LecturerMarkA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LecturerViewCompletedReports.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LecturerMarkA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LecturerViewCompletedReports.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LecturerMarkA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LecturerViewCompletedReports.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LecturerMarkA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LecturerViewCompletedReports.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton HomePage;
+    private javax.swing.JButton HomePage1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
