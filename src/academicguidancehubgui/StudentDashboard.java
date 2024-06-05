@@ -5,6 +5,9 @@
 package academicguidancehubgui;
 
 import academicguidancehub.Student;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,11 +20,29 @@ public class StudentDashboard extends javax.swing.JFrame {
      * Creates new form StudentDashboard
      */
     Student st = null;
-    
-    public StudentDashboard (Student st) {
+
+    public StudentDashboard(Student st) {
         this.st = st;
-        jlStudentName.setText(st.getName());
+        jlStudentName1.setText(st.getName());
+        String userId = st.getUserId();
+        jlStudentId.setText(st.getUserId());
+        
         initComponents();
+    }
+
+    private void showPendingAssignment(String userId) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Projects.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                if (parts[6].equals(userId)) { // Check if the username matches
+                    jlPendingAssignment.setText(parts[1]);
+                    break;
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -35,8 +56,9 @@ public class StudentDashboard extends javax.swing.JFrame {
 
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jlStudentName = new javax.swing.JLabel();
+        jlStudentId = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jlStudentName1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -48,7 +70,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        jlPendingAssignment = new javax.swing.JLabel();
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel3.setText("Academic Guidance Hub (AGH)");
@@ -59,16 +81,21 @@ public class StudentDashboard extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 80));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jlStudentName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jlStudentName.setForeground(new java.awt.Color(255, 255, 255));
-        jlStudentName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/user.png"))); // NOI18N
-        jlStudentName.setText("Student XXX, STXXXXXX");
-        jPanel1.add(jlStudentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
+        jlStudentId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlStudentId.setForeground(new java.awt.Color(255, 255, 255));
+        jlStudentId.setText("ST XXX");
+        jPanel1.add(jlStudentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Academic Guidance Hub (AGH)");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jlStudentName1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jlStudentName1.setForeground(new java.awt.Color(255, 255, 255));
+        jlStudentName1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/user.png"))); // NOI18N
+        jlStudentName1.setText("Student XXX");
+        jPanel1.add(jlStudentName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -168,7 +195,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Pending Assignment");
 
-        jLabel5.setText("jLabel5");
+        jlPendingAssignment.setText("jLabel5");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -176,14 +203,14 @@ public class StudentDashboard extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlPendingAssignment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlPendingAssignment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -251,25 +278,25 @@ public class StudentDashboard extends javax.swing.JFrame {
 
     private void jlSubmitAssignmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlSubmitAssignmentMouseClicked
         StudentSubmitAssignment stSA = new StudentSubmitAssignment();
-                        stSA.setVisible(true);
-                        this.dispose();
+        stSA.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jlSubmitAssignmentMouseClicked
 
     private void logoutLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabel1MouseClicked
-        int ans = JOptionPane.showConfirmDialog(null, "Confirm to logout?","Are you sure?",JOptionPane.YES_NO_CANCEL_OPTION);
-        if (ans == JOptionPane.YES_OPTION){
+        int ans = JOptionPane.showConfirmDialog(null, "Confirm to logout?", "Are you sure?", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (ans == JOptionPane.YES_OPTION) {
             dispose();
             GeneralLoginPage obj = new GeneralLoginPage();
             obj.setVisible(true);
-        } else{
+        } else {
             this.setVisible(true);
         }
     }//GEN-LAST:event_logoutLabel1MouseClicked
 
     private void jlPresentationDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlPresentationDateMouseClicked
         StudentRequestPresentation stRP = new StudentRequestPresentation();
-                        stRP.setVisible(true);
-                        this.dispose();
+        stRP.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jlPresentationDateMouseClicked
 
     /**
@@ -306,7 +333,6 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -314,8 +340,10 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JLabel jlPendingAssignment;
     private javax.swing.JLabel jlPresentationDate;
-    private javax.swing.JLabel jlStudentName;
+    private javax.swing.JLabel jlStudentId;
+    private javax.swing.JLabel jlStudentName1;
     private javax.swing.JLabel jlSubmitAssignment;
     private javax.swing.JLabel logoutLabel1;
     // End of variables declaration//GEN-END:variables
