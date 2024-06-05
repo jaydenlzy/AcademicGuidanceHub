@@ -20,16 +20,15 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
      * Creates new form StudentSubmitAssignment
      */
     Student st = null;
-    
+
     public StudentSubmitAssignment(Student st) {
         this.st = st;
         initComponents();
         jlStudentName1.setText(st.getName());
         jlStudentID.setText(st.getUserId());
-        
+
         jFileChooser1.setVisible(false);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,7 +54,7 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
         jFileChooser1 = new javax.swing.JFileChooser();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        jlSelectedFiles = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,7 +129,7 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel3.setText("Selected Files:");
 
-        jLabel5.setText("jLabel5");
+        jlSelectedFiles.setText("jLabel5");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -138,14 +137,14 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
+                .addComponent(jlSelectedFiles)
                 .addContainerGap(112, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
+                .addComponent(jlSelectedFiles)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -245,19 +244,23 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
         // Check if an item has been selected in the combo box
         if (cbSelectAssignment.getSelectedIndex() != -1) {
             // If an item has been selected, show the file chooser
-            int returnVal = jFileChooser1.showOpenDialog(this); 
+            int returnVal = jFileChooser1.showOpenDialog(this);
             if (returnVal == jFileChooser1.APPROVE_OPTION) {
                 // User selected a file
-                // Handle the file selection here
+                // Get the selected file
+                java.io.File file = jFileChooser1.getSelectedFile();
+                // Set the file name to the label
+                jlSelectedFiles.setText(file.getName());
             } else {
                 // User canceled or closed the file chooser
-                // Handle cancellation or closing here
+                // Clear the label
+                jlSelectedFiles.setText("");
             }
         }
     }//GEN-LAST:event_cbSelectAssignmentActionPerformed
 
     private void jbSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSubmitMouseClicked
-        
+
     }//GEN-LAST:event_jbSubmitMouseClicked
 
     private void jbBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbBackMouseClicked
@@ -292,7 +295,6 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -302,7 +304,6 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -310,9 +311,9 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JButton jbBack;
     private javax.swing.JButton jbSubmit;
+    private javax.swing.JLabel jlSelectedFiles;
     private javax.swing.JLabel jlStudentID;
     private javax.swing.JLabel jlStudentName1;
     // End of variables declaration//GEN-END:variables
 
-    
 }
