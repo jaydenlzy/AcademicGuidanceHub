@@ -191,8 +191,8 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                     case "Student":
                         JOptionPane.showMessageDialog(null, "Welcome to Student Page.", "Student Page", JOptionPane.INFORMATION_MESSAGE);
                         Student st = new Student(user);
-                        StudentDashboard stD = new StudentDashboard(st);
-                        stD.setVisible(true);
+                        //StudentDashboard stD = new StudentDashboard(st);
+                        //stD.setVisible(true);
                         this.dispose();
                         break;
                     case "Lecturer":

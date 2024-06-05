@@ -3,7 +3,9 @@ package academicguidancehub;
 import java.util.List; // Correct import for List
 import java.util.ArrayList; // Correct import for ArrayList
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,13 +14,16 @@ public class Lecturer extends User implements FileLocationInterface {
 
     private Map<String, String> lecturerMap; // Changed to proper instance variables
     private Map<String, String> studentMap;
+    private Map<String, String> projectMap;
 
     public Lecturer(String userId, String name, String password, String email, String contact, String role) {
         super(userId, name, password, email, contact, role);
         lecturerMap = new HashMap<>();
         studentMap = new HashMap<>();
+        projectMap = new HashMap<>();
         loadLecturerData();
         loadStudentData();
+        loadProjectData();
     }
 
     // Constructor from an existing User object
@@ -26,8 +31,10 @@ public class Lecturer extends User implements FileLocationInterface {
         super(user.getUserId(), user.getName(), user.getPassword(), user.getEmail(), user.getContact(), user.getRole());
         lecturerMap = new HashMap<>();
         studentMap = new HashMap<>();
+        projectMap = new HashMap<>();
         loadLecturerData();
         loadStudentData();
+        loadProjectData();
     }
 
     public List<String[]> getAssignedSupervisees() {
@@ -118,5 +125,74 @@ public class Lecturer extends User implements FileLocationInterface {
             }
         }
         return null;
+    }
+
+    private void loadProjectData() {
+        try (BufferedReader br = new BufferedReader(new FileReader(projectsFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                if (fields.length >= 2) {
+                    projectMap.put(fields[0], fields[1]); // Assuming project ID is in fields[0] and module name in fields[1]
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<String[]> getResults() {
+        List<String[]> results = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                if (fields.length >= 9 && (fields[2].equals(this.getUserId()) || fields[3].equals(this.getUserId()))) {
+                    String studentName = studentMap.getOrDefault(fields[1], "Unknown Student");
+                    String moduleName = projectMap.getOrDefault(fields[0], "Unknown Module");
+                    results.add(new String[]{fields[0], studentName, moduleName, fields[7], fields[8], fields[6]});
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    public void acceptPresentation(String projectId, String studentId) {
+        // Implement logic to accept presentation
+        updateResultFile(projectId, studentId, "accept");
+    }
+
+    public void rejectPresentation(String projectId, String studentId) {
+        // Implement logic to reject presentation
+        updateResultFile(projectId, studentId, "reject");
+    }
+
+    private void updateResultFile(String projectId, String studentId, String status) {
+        // Update the result file with the specified status for the given project and student
+        try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
+            List<String> lines = new ArrayList<>();
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                if (fields.length >= 9 && fields[0].equals(projectId) && fields[1].equals(studentId)) {
+                    fields[6] = status; // Update the status in column 7
+                    line = String.join(";", fields); // Reconstruct the line with updated status
+                }
+                lines.add(line);
+            }
+            // Write the updated lines back to the result file
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(resultsFilePath))) {
+                for (String updatedLine : lines) {
+                    bw.write(updatedLine);
+                    bw.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

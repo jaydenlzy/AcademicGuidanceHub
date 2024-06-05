@@ -58,6 +58,11 @@ public class LecturerViewAssignedSupervisees extends javax.swing.JFrame {
                 HomePageMouseClicked(evt);
             }
         });
+        HomePage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HomePageActionPerformed(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 204));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -152,6 +157,10 @@ public class LecturerViewAssignedSupervisees extends javax.swing.JFrame {
         LecturerDashBoard lecturerHomePage = new LecturerDashBoard(lc);
         this.setVisible(false);
 lecturerHomePage.setVisible(true);      }//GEN-LAST:event_HomePageMouseClicked
+
+    private void HomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomePageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HomePageActionPerformed
 
     /**
      * @param args the command line arguments

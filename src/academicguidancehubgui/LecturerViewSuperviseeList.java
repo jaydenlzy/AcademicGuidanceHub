@@ -71,6 +71,11 @@ public class LecturerViewSuperviseeList extends javax.swing.JFrame {
                 HomePageMouseClicked(evt);
             }
         });
+        HomePage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HomePageActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel1.setText("View List Of The Supervisees");
@@ -103,10 +108,10 @@ public class LecturerViewSuperviseeList extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(HomePage)
-                .addGap(193, 193, 193)
+                .addGap(180, 180, 180)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(226, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +141,12 @@ public class LecturerViewSuperviseeList extends javax.swing.JFrame {
     private void HomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomePageMouseClicked
         LecturerDashBoard lecturerHomePage = new LecturerDashBoard(lc);
         this.setVisible(false);
+        lecturerHomePage.setVisible(true);
     }//GEN-LAST:event_HomePageMouseClicked
+
+    private void HomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomePageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HomePageActionPerformed
 
     /**
      * @param args the command line arguments
