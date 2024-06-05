@@ -7,7 +7,9 @@ package academicguidancehubgui;
 import academicguidancehub.FileLocationInterface;
 import academicguidancehub.Student;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
@@ -26,19 +28,20 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
 
     public StudentSubmitAssignment(Student st) {
         this.st = st;
+
         initComponents();
         jlStudentName1.setText(st.getName());
         jlStudentID.setText(st.getUserId());
-
+        jlSelectedFiles.setText("No file selected");
         jFileChooser1.setVisible(false);
-        
+
         loadAssignments();
+
     }
-        
-        
+
     public void loadAssignments() {
         ArrayList<String[]> selectAssignmentList = new ArrayList<>();
-        
+
         try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.projectsFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -159,16 +162,14 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel3.setText("Selected Files:");
 
-        jlSelectedFiles.setText("jLabel5");
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlSelectedFiles)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addComponent(jlSelectedFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,27 +192,25 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbSelectAssignment, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(249, 249, 249))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(62, 62, 62)
+                                .addComponent(jbSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(55, 55, 55)
+                                .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(247, 247, 247))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jbSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(55, 55, 55)
-                                        .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(203, 203, 203))))))
+                                    .addComponent(cbSelectAssignment, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(141, 141, 141))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109))
+                .addGap(107, 107, 107))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,17 +221,17 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                     .addComponent(cbSelectAssignment))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(47, 47, 47)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBack, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -271,25 +270,37 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbSelectAssignmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelectAssignmentActionPerformed
-        // Check if an item has been selected in the combo box
-//        if (cbSelectAssignment.getSelectedIndex() != -1) {
-//            // If an item has been selected, show the file chooser
-//            int returnVal = jFileChooser1.showOpenDialog(this);
-//            if (returnVal == jFileChooser1.APPROVE_OPTION) {
-//                // User selected a file
-//                // Get the selected file
-//                java.io.File file = jFileChooser1.getSelectedFile();
-//                // Set the file name to the label
-//                jlSelectedFiles.setText(file.getName());
-//            } else {
-//                // User canceled or closed the file chooser
-//                // Clear the label
-//                jlSelectedFiles.setText("");
-//            }
-//        }
+        int returnValue = jFileChooser1.showOpenDialog(this);
+        if (returnValue == jFileChooser1.APPROVE_OPTION) {
+            // Get the selected file
+            java.io.File file = jFileChooser1.getSelectedFile();
+            // Set the file name to the label
+            jlSelectedFiles.setText(file.getAbsolutePath());
+        } else {
+            jlSelectedFiles.setText("No file selected");
+        }
     }//GEN-LAST:event_cbSelectAssignmentActionPerformed
 
     private void jbSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSubmitMouseClicked
+        String selectedAssignment = (String) cbSelectAssignment.getSelectedItem();
+        String selectedFile = jlSelectedFiles.getText();
+
+        if (selectedFile.equals("No file selected") || selectedFile.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a file before submitting", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            // Logic to handle the file submission
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("Submission.txt", true))) {
+                writer.write(st.getUserId() + ";" + selectedAssignment + ";" + selectedFile);
+                writer.newLine();
+                JOptionPane.showMessageDialog(this, "Assignment " + selectedAssignment + " submitted successfully with file " + selectedFile);
+                this.dispose();
+                StudentDashboard obj = new StudentDashboard(st);
+                obj.setVisible(true);
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error writing to file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
 
     }//GEN-LAST:event_jbSubmitMouseClicked
 

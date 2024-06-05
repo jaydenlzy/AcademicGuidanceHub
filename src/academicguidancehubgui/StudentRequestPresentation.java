@@ -4,10 +4,14 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
 import academicguidancehub.Student;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +32,32 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
         jlStudentId.setText(st.getUserId());
     }
 
+    
+    public void loadSubmissions() {
+        ArrayList<String[]> selectAssignmentList = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.projectsFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(";");
+                if (values.length > 6) { // Check if the array has at least 7 elements
+                    if (st.getUserId().equals(values[6])) {
+                        cbSelectAssignment.addItem(values[2]);
+                        selectAssignmentList.add(values);
+                    }
+                } else {
+                    System.out.println("Skipping invalid line with insufficient values: " + line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error processing line: Array index out of bounds", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
