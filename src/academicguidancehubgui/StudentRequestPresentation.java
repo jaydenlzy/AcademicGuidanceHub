@@ -240,7 +240,9 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbBackMouseClicked
-
+        this.dispose();
+        StudentDashboard obj = new StudentDashboard(st);
+        obj.setVisible(true);
     }//GEN-LAST:event_jbBackMouseClicked
 
     private void jbSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSubmitMouseClicked
