@@ -198,8 +198,8 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                     case "Lecturer":
                         JOptionPane.showMessageDialog(null, "Welcome to Lecturer Page.", "Lecturer Page", JOptionPane.INFORMATION_MESSAGE);
                         Lecturer lc = new Lecturer(user);
-//                        LecturerDashboard lbd = new LecturerDashboard(lc);
-//                        lbd.setVisible(true);
+                        LecturerDashboard lbd = new LecturerDashboard(lc);
+                        lbd.setVisible(true);
                         this.dispose();
                         break;
                     case "Project Manager":
