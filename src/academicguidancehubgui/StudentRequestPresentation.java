@@ -5,6 +5,7 @@
 package academicguidancehubgui;
 
 import academicguidancehub.FileLocationInterface;
+import static academicguidancehub.FileLocationInterface.presentationtimeFilePath;
 import academicguidancehub.Student;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,6 +13,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,19 +33,41 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
         initComponents();
         jlStudentName1.setText(st.getName());
         jlStudentId.setText(st.getUserId());
+        
+        checkSubmissions();
+        
     }
 
-    //Requires Changes
-    public void loadSubmissions() {
+    
+    public void checkSubmissions() {
         ArrayList<String[]> selectAssignmentList = new ArrayList<>();
 
+        // Load submissions into a set for quick lookup
+        Set<String> submissionsSet = new HashSet<>();
+        try (BufferedReader submissionReader = new BufferedReader(new FileReader(presentationtimeFilePath))) {
+            String submissionLine;
+            while ((submissionLine = submissionReader.readLine()) != null) {
+                String[] submissionValues = submissionLine.split(";");
+                if (submissionValues.length > 0) { // Check if the array has at least 2 elements
+                    submissionsSet.add(submissionValues[0] + ";" + submissionValues[2]);
+                } else {
+                    System.out.println("Skipping invalid line in Submission.txt with insufficient values: " + submissionLine);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error reading Submission.txt file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    
         try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.submissionFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(";");
-                if (values.length > 6) { // Check if the array has at least 7 elements
-                    if (st.getUserId().equals(values[6])) {
-                        cbSelectAssignment.addItem(values[2]);
+                if (values.length > 0) { // Check if the array has at least 7 elements
+                    String projectKey = values[0] + ";" + values[1];
+                    if (st.getUserId().equals(values[0]) && !submissionsSet.contains(projectKey)) {
+                        cbSelectAssignment.addItem(values[1]);
                         selectAssignmentList.add(values);
                     }
                 } else {
@@ -57,6 +82,7 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error processing line: Array index out of bounds", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,7 +160,6 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setText("Select Assignment:");
 
-        cbSelectAssignment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbSelectAssignment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSelectAssignmentActionPerformed(evt);
@@ -168,8 +193,8 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addGap(18, 18, 18)
-                                    .addComponent(cbSelectAssignment, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(249, 249, 249))
+                                    .addComponent(cbSelectAssignment, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(164, 164, 164))
                                 .addGroup(jPanel4Layout.createSequentialGroup()
                                     .addGap(97, 97, 97)
                                     .addComponent(jbSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,6 +304,7 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
 // Get the text from jtDate and jtTime fields
         String date = jtDate.getText();
         String time = jtTime.getText();
+        String selectedAssignment = (String) cbSelectAssignment.getSelectedItem();
 
         // Check if jtDate or jtTime is blank
         if (date.isEmpty() || time.isEmpty()) {
@@ -288,20 +314,23 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
             // Both fields are not empty, so store them in the file
             try {
                 // Create a FileWriter object with append mode
-                FileWriter fileWriter = new FileWriter("PresentationTime.txt", true);
+                FileWriter fileWriter = new FileWriter(presentationtimeFilePath, true);
 
                 // Create a BufferedWriter object to write to the file
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
                 // Write student ID, name, date, and time to the file
-                bufferedWriter.write("Student ID: " + st.getUserId() + ", Student Name: " + st.getName() + ", Date: " + date + ", Time: " + time);
+                bufferedWriter.write(st.getUserId() + ";" + st.getName() + ";" + selectedAssignment + ";" + date + ";" + time);
                 bufferedWriter.newLine(); // Add a new line
 
                 // Close the bufferedWriter
                 bufferedWriter.close();
 
                 // Show success message
-                JOptionPane.showMessageDialog(null, "Data successfully stored in file.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Presentation Time Request Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                StudentDashboard obj = new StudentDashboard(st);
+                obj.setVisible(true);
             } catch (IOException e) {
                 // Show error message if an exception occurs while writing to the file
                 JOptionPane.showMessageDialog(null, "Error occurred while writing to file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

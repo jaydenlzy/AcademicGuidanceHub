@@ -4,11 +4,14 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.FileLocationInterface;
+import academicguidancehub.FileReaderUtils;
 import academicguidancehub.Student;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,10 +28,31 @@ public class StudentDashboard extends javax.swing.JFrame {
         this.st = st;
         initComponents();
         jlStudentName1.setText(st.getName());
-        jlStudentId.setText(st.getUserId());    
+        jlStudentId.setText(st.getUserId());   
+        pendingAssignment();
     }
     
-    
+    private void pendingAssignment() {
+        String delimiter = ";";
+        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
+        String[][] classTypeData = FileReaderUtils.readData(FileLocationInterface.lecturerFilePath, delimiter, classTypeColumnIndices);
+
+        if (classTypeData != null) {
+            DefaultTableModel classTypeTableModel = new DefaultTableModel();
+            classTypeTableModel.addColumn("Lecturer ID");
+            classTypeTableModel.addColumn("Name");
+            classTypeTableModel.addColumn("Password");
+            classTypeTableModel.addColumn("Email");
+            classTypeTableModel.addColumn("Contact");
+            classTypeTableModel.addColumn("Role");
+
+            for (String[] row : classTypeData) {
+                classTypeTableModel.addRow(row);
+            }
+
+            lecturerTable.setModel(classTypeTableModel);
+        }
+    }
     
 
     /**
@@ -56,7 +80,8 @@ public class StudentDashboard extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jspPendingAssignment = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel3.setText("Academic Guidance Hub (AGH)");
@@ -170,7 +195,7 @@ public class StudentDashboard extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutLabel1)
                 .addGap(14, 14, 14))
         );
@@ -181,15 +206,27 @@ public class StudentDashboard extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Pending Assignment");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspPendingAssignment)
+            .addComponent(jScrollPane1)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspPendingAssignment)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -318,11 +355,12 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jlPresentationDate;
     private javax.swing.JLabel jlStudentId;
     private javax.swing.JLabel jlStudentName1;
     private javax.swing.JLabel jlSubmitAssignment;
-    private javax.swing.JScrollPane jspPendingAssignment;
     private javax.swing.JLabel logoutLabel1;
     // End of variables declaration//GEN-END:variables
 }
