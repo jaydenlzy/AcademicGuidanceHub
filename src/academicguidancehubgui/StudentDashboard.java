@@ -10,6 +10,7 @@ import academicguidancehub.Student;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
@@ -41,27 +42,12 @@ public class StudentDashboard extends javax.swing.JFrame {
 
         if (projectData != null) {
             DefaultTableModel projectTableModel = new DefaultTableModel();
-            projectTableModel.addColumn("Project Name");
-            projectTableModel.addColumn("Due Date");
-
-            // Load submitted assignments for the logged-in student
-            Set<String> submittedAssignments = new HashSet<>();
-            try (BufferedReader br = new BufferedReader(new FileReader(FileLocationInterface.submissionFilePath))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    String[] columns = line.split(delimiter);
-                    if (columns.length >= 2 && columns[0].equals(st.getUserId())) {
-                        submittedAssignments.add(columns[1]); // Assuming project name is in the 2nd column
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            projectTableModel.addColumn("Project Name"); // Assuming 3rd column is "Project Name"
+            projectTableModel.addColumn("Project Due Date"); // Assuming 4th column is "Project Due Date"
 
             for (String[] row : projectData) {
-                // Check if the project is not submitted by the logged-in student
-                if (row.length >= 7 && row[6].equals(st.getUserId()) && !submittedAssignments.contains(row[2])) {
-                    projectTableModel.addRow(new Object[]{row[2], row[3]}); // Adding project name (3rd column) and due date (4th column)
+                if (row[2].equals(st.getUserId())) { // Compare with the 7th column (student ID)
+                    projectTableModel.addRow(new String[]{row[0], row[1]});
                 }
             }
 
