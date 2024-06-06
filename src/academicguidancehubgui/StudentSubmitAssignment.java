@@ -13,6 +13,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -34,36 +36,55 @@ public class StudentSubmitAssignment extends javax.swing.JFrame implements FileL
         jlStudentName1.setText(st.getName());
         jlStudentID.setText(st.getUserId());
         jlSelectedFiles.setText("No file selected");
-        //jFileChooser1.setVisible(false);
+        jFileChooser1.setVisible(false);
 
         loadAssignments();
 
     }
 
     public void loadAssignments() {
-        ArrayList<String[]> selectAssignmentList = new ArrayList<>();
+    ArrayList<String[]> selectAssignmentList = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.projectsFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] values = line.split(";");
-                if (values.length > 6) { // Check if the array has at least 7 elements
-                    if (st.getUserId().equals(values[6])) {
-                        cbSelectAssignment.addItem(values[2]);
-                        selectAssignmentList.add(values);
-                    }
-                } else {
-                    System.out.println("Skipping invalid line with insufficient values: " + line);
-                }
+    // Load submissions into a set for quick lookup
+    Set<String> submissionsSet = new HashSet<>();
+    try (BufferedReader submissionReader = new BufferedReader(new FileReader("Submission.txt"))) {
+        String submissionLine;
+        while ((submissionLine = submissionReader.readLine()) != null) {
+            String[] submissionValues = submissionLine.split(";");
+            if (submissionValues.length > 1) { // Check if the array has at least 2 elements
+                submissionsSet.add(submissionValues[0] + ";" + submissionValues[1]);
+            } else {
+                System.out.println("Skipping invalid line in Submission.txt with insufficient values: " + submissionLine);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error processing line: Array index out of bounds", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    } catch (IOException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error reading Submission.txt file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        return;
     }
+
+    try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.projectsFilePath))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] values = line.split(";");
+            if (values.length > 6) { // Check if the array has at least 7 elements
+                String projectKey = values[6] + ";" + values[2];
+                if (st.getUserId().equals(values[6]) && !submissionsSet.contains(projectKey)) {
+                    cbSelectAssignment.addItem(values[2]);
+                    selectAssignmentList.add(values);
+                }
+            } else {
+                System.out.println("Skipping invalid line with insufficient values: " + line);
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (ArrayIndexOutOfBoundsException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error processing line: Array index out of bounds", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
