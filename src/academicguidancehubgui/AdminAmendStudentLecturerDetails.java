@@ -36,6 +36,7 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
         initComponents();
         setSize(1000,630);
         setResizable(false);
+        removeBt.setVisible(false);
         editStudentBt.setVisible(false);
         editLecturerBt.setVisible(false);
         studentIntake.setVisible(false);
@@ -528,11 +529,16 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
                 String delimiter = ";";
                 UpdateTextFile(FileLocationInterface.studentFilePath, tp, delimiter);
                 JOptionPane.showMessageDialog(null, "Student deleted successfully!", "DELETE STUDENT SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-                
+                editStudentBt.setVisible(false);
+                editLecturerBt.setVisible(false);
+                removeBt.setVisible(false);
             } else if (selectedRole.equals("Lecturer")){
                 String delimiter = ";";
                 UpdateTextFile(FileLocationInterface.lecturerFilePath, tp, delimiter);
                 JOptionPane.showMessageDialog(null, "Lecturer deleted successfully!", "DELETE LECTURER SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                editStudentBt.setVisible(false);
+                editLecturerBt.setVisible(false);
+                removeBt.setVisible(false);
             }
         }
     }//GEN-LAST:event_removeBtMouseClicked
@@ -546,21 +552,26 @@ public class AdminAmendStudentLecturerDetails extends javax.swing.JFrame {
             if(selectedRow != -1){
                 editStudentBt.setVisible(true);
                 editLecturerBt.setVisible(false);
+                removeBt.setVisible(true);
             } else{
                 editStudentBt.setVisible(false);
                 editLecturerBt.setVisible(false);
+                removeBt.setVisible(false);
             }
         } else if (selectedRole.equals("Lecturer")){
             if(selectedRow != -1){
                 editStudentBt.setVisible(false);
                 editLecturerBt.setVisible(true);
+                removeBt.setVisible(true);
             } else{
                 editStudentBt.setVisible(false);
                 editLecturerBt.setVisible(false);
+                removeBt.setVisible(false);
             }
         } else {
             editStudentBt.setVisible(false);
             editLecturerBt.setVisible(false);
+            removeBt.setVisible(false);
         }
     }//GEN-LAST:event_infoTbMouseClicked
 
