@@ -211,6 +211,7 @@ public class GeneralLoginPage extends javax.swing.JFrame {
                         this.dispose();
                         break;
                     case "Admin":
+                        JOptionPane.showMessageDialog(null, "Welcome to Admin Page.", "Admin Page", JOptionPane.INFORMATION_MESSAGE);
                         AdminDashboard adD = new AdminDashboard();
                         adD.setVisible(true);
                         this.dispose();
