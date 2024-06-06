@@ -33,7 +33,9 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         this.pm = pm;
         initComponents();
         loadSchoolList();
-        loadProjectData();
+        loadProjectData();        
+        lblUsername.setText(pm.getName());
+
     }
 
     private void loadProjectData() {
@@ -55,6 +57,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        lblUsername = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -101,6 +104,13 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
             }
         });
 
+        lblUsername.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblUsername.setText("User");
+        lblUsername.setToolTipText("");
+        lblUsername.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblUsername.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -110,6 +120,11 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(344, Short.MAX_VALUE)
+                    .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(130, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,6 +133,11 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 110));
@@ -490,6 +510,7 @@ public class ProjectManagerViewProject extends javax.swing.JFrame implements Fil
     private javax.swing.JLabel lblProjectCategory;
     private javax.swing.JLabel lblRequirePresentation;
     private javax.swing.JLabel lblRequireSecondMarker;
+    private javax.swing.JLabel lblUsername;
     private javax.swing.JRadioButton rdBtnNo;
     private javax.swing.JRadioButton rdBtnNoMarker;
     private javax.swing.JRadioButton rdBtnYes;

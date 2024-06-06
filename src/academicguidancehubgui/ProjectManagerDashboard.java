@@ -59,6 +59,7 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
         lblViewPrjStatusIntake = new javax.swing.JLabel();
         lblViewPrjStatusIndi = new javax.swing.JLabel();
         logoutLabel = new javax.swing.JLabel();
+        lblChgPw = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -134,11 +135,20 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
             }
         });
 
+        lblChgPw.setBackground(new java.awt.Color(204, 255, 255));
+        lblChgPw.setForeground(new java.awt.Color(0, 204, 0));
+        lblChgPw.setText("Change Password?");
+        lblChgPw.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblChgPwMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlQuickButtonsLayout = new javax.swing.GroupLayout(pnlQuickButtons);
         pnlQuickButtons.setLayout(pnlQuickButtonsLayout);
         pnlQuickButtonsLayout.setHorizontalGroup(
             pnlQuickButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlQuickButtonsLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuickButtonsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlQuickButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblViewProject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -148,6 +158,10 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
                     .addComponent(lblViewPrjStatusIndi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoutLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuickButtonsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblChgPw, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
         pnlQuickButtonsLayout.setVerticalGroup(
             pnlQuickButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +176,9 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
                 .addComponent(lblViewPrjStatusIntake, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblViewPrjStatusIndi, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(lblChgPw, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logoutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59))
         );
@@ -424,15 +440,27 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_lblViewPrjStatusIndiMouseClicked
 
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
-        int ans = JOptionPane.showConfirmDialog(null, "Confirm to logout?","Are you sure?",JOptionPane.YES_NO_CANCEL_OPTION);
-        if (ans == JOptionPane.YES_OPTION){
+        int ans = JOptionPane.showConfirmDialog(null, "Confirm to logout?", "Are you sure?", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (ans == JOptionPane.YES_OPTION) {
             dispose();
             GeneralLoginPage obj = new GeneralLoginPage();
             obj.setVisible(true);
-        } else{
+        } else {
             this.setVisible(true);
         }
     }//GEN-LAST:event_logoutLabelMouseClicked
+
+    private void lblChgPwMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblChgPwMouseClicked
+        int ans = JOptionPane.showConfirmDialog(null, "Change Password? This will make you leave the current page immediately", "Are you sure?", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (ans == JOptionPane.YES_OPTION) {
+            dispose();
+            GeneralForgetPassword obj = new GeneralForgetPassword();
+            obj.setVisible(true);
+        } else {
+            this.setVisible(true);
+        }
+
+    }//GEN-LAST:event_lblChgPwMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -453,6 +481,7 @@ public class ProjectManagerDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel lblActiveSupervisors;
+    private javax.swing.JLabel lblChgPw;
     private javax.swing.JLabel lblCommonPrj;
     private javax.swing.JLabel lblCurrentPrj;
     private javax.swing.JLabel lblPrjDone;

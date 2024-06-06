@@ -30,6 +30,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
     public ProjectManagerProjectEnrollment(ProjectManager pm) {
         this.pm = pm;
         initComponents();
+        lblUsername.setText(pm.getName());
         loadIntakeList();
         loadProjectCategoryList();
         loadSupervisorList();
@@ -56,6 +57,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         jPanel2 = new javax.swing.JPanel();
         btnExit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         btnClearAll = new javax.swing.JButton();
@@ -105,6 +107,13 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         jLabel1.setFont(new java.awt.Font("Segoe Print", 0, 20)); // NOI18N
         jLabel1.setText("Project Manager - Project Enrollment");
 
+        lblUsername.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblUsername.setText("User");
+        lblUsername.setToolTipText("");
+        lblUsername.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblUsername.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -114,6 +123,11 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(441, 441, 441)
+                    .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(119, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,6 +136,11 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 255));
@@ -872,6 +891,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
     private javax.swing.JLabel lblNotePresentation;
     private javax.swing.JLabel lblNoteSecondMarker;
     private javax.swing.JLabel lblSecondMarker;
+    private javax.swing.JLabel lblUsername;
     private javax.swing.JRadioButton rdBtnIndividual;
     private javax.swing.JRadioButton rdBtnIntake;
     private javax.swing.JSpinner spinnerDueDate;
