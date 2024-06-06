@@ -4,8 +4,4 @@ LC000004;Kanagi Rajandran;LC000004#Kanagi;kanagirajandran@gmail.com;0136489532;L
 LC000005;Vishnu Ram A/L Rajan;LC000005#Vishnu;vishnuramalrajan@gmail.com;0101111000;Lecturer;Student Services and Marketing
 LC000007;Preethi Subramanian;LC000007#Preethi;preethisubramanian@gmail.com;0389961000;Lecturer;School of Business, Law, Economics & International Relations
 LC000008;Nor Firdaus Md Yusofs;LC000008#Nor;norfirdausmdyusof@gmail.com;0389961000;Lecturer;Library
-LC000011;Koh Tse Wei;LC000011#Koh;kohtsewei@gmail.com;011231231;Lecturer;School of Business, Law, Economics & International Relations
-LC000012;Teo Hern Whei;LC000012#Teo;teohernwhei@gmail.com;0123151351;Lecturer;School of Business, Law, Economics & International Relations
-LC000013;Soon Jun Yu;LC000013#Soon;soonjunyu@gmail.com;0136542314;Lecturer;School of Business, Law, Economics & International Relations
 LC000009;Samira Ali;LC000009#Samira;samiraali@gmail.com;0117953613;Lecturer;Student Services and Marketing
-LC1;Why Lee;noooo;whywhy@gmail.com;0136898532;Lecturer;School of Technology, Networks, Security, Forensics

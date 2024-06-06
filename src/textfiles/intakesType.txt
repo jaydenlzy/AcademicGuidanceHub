@@ -1,2 +1,2 @@
-UCDF2111ICT(DI);Diploma in Information Communication Technology specialist in Data Informatics;29 November 2021
-APD2F2402CS(DA);Bachelor of Science (Honours) in Computer Science specialist in Data Analysis;20 February 2024
+UCDF2111ICT(DI);DIPLOMA IN INFORMATION COMMUNICATION TECHNOLOGY SPECIALIST IN DATA INFORMATICS;29 November 2021
+APD2F2402CS(DA);BACHELOR OF SCIENCE (HONOURS) IN COMPUTER SCIENCE SPECIALIST IN DATA ANALYSIS;20 February 2024
