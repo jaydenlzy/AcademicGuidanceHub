@@ -188,23 +188,18 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
         if (name.isEmpty() && contact.isEmpty() && filePath.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields or select a file", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-        }
-        
-        if ((name.isEmpty() || contact.isEmpty()) && filePath.isEmpty()) {
+        } else if ((name.isEmpty() || contact.isEmpty()) && filePath.isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill in all fields or select a file", "Error", JOptionPane.ERROR_MESSAGE);
             return;
+        } else if (!name.isEmpty() && !contact.isEmpty() && filePath.isEmpty()){
+            registerStudent(name,contact,intake);
+            JOptionPane.showMessageDialog(this, "Student registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else if (!filePath.isEmpty()){
+            registerStudentsFromFile(filePath,intake);
+            JOptionPane.showMessageDialog(this, "Student registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
         
-        if (filePath.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please select a text file", "Error", JOptionPane.ERROR_MESSAGE);
-            registerStudent(name,contact,intake);
-            return;
-        } 
         
-        registerStudentsFromFile(filePath,intake);
-        
-        JOptionPane.showMessageDialog(this, "Student registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-    
         studentName.setText("");
         studentContact.setText("");
         
