@@ -20,6 +20,7 @@ public interface FileLocationInterface {
     public final String projectTypePath = path + "ProjectType.txt";
     public final String projectsFilePath = path + "Projects.txt";
     public final String resultsFilePath = path + "Results.txt";
+    public final String submissionFilePath= path + "Submission.txt";
     
 }   
  

@@ -5,6 +5,7 @@
 package academicguidancehubgui;
 
 import academicguidancehub.FileLocationInterface;
+
 import academicguidancehub.Student;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author isaac
  */
-public class StudentSubmitAssignment extends javax.swing.JFrame {
+public class StudentSubmitAssignment extends javax.swing.JFrame implements FileLocationInterface {
 
     /**
      * Creates new form StudentSubmitAssignment
@@ -33,7 +34,7 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
         jlStudentName1.setText(st.getName());
         jlStudentID.setText(st.getUserId());
         jlSelectedFiles.setText("No file selected");
-        jFileChooser1.setVisible(false);
+        //jFileChooser1.setVisible(false);
 
         loadAssignments();
 
@@ -289,7 +290,7 @@ public class StudentSubmitAssignment extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select a file before submitting", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             // Logic to handle the file submission
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("Submission.txt", true))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(submissionFilePath, true))) {
                 writer.write(st.getUserId() + ";" + selectedAssignment + ";" + selectedFile);
                 writer.newLine();
                 JOptionPane.showMessageDialog(this, "Assignment " + selectedAssignment + " submitted successfully with file " + selectedFile);
