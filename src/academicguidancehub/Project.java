@@ -93,9 +93,7 @@ public class Project {
                 boolean requirePresentation = "Yes".equalsIgnoreCase(data[4]);
                 String status = data[10].equalsIgnoreCase("NA") ? data[9] : data[10];
                 projects.add(new Project(data[0], data[1], data[2], data[3], requirePresentation, data[5], data[6], data[7], data[8], status));
-            } else {
-                System.err.println("Skipping line due to incorrect number of fields: " + line);
-            }
+            } else {}
         }
         reader.close();
         return projects;

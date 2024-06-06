@@ -183,7 +183,7 @@
                       </Group>
                       <EmptySpace pref="123" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jPanel10" alignment="0" pref="522" max="32767" attributes="0"/>
+                  <Component id="jPanel10" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -352,7 +352,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel14" min="-2" pref="351" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblUsername" min="-2" pref="156" max="-2" attributes="0"/>
+                          <Component id="lblUsername" min="-2" pref="142" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>

@@ -78,9 +78,7 @@ public class LecturerTableDataLoader extends DataLoader {
                 String lecturerName = data[1];
                 String school = data[6];
                 lecturers.put(lecturerID, new Lecturer(lecturerID, lecturerName, school));
-            } else {
-                System.err.println("Skipping line due to incorrect number of fields: " + line);
-            }
+            } else {}
         }
         reader.close();
         return lecturers;

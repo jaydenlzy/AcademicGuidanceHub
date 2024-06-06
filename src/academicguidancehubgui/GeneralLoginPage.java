@@ -303,29 +303,20 @@ public class GeneralLoginPage extends javax.swing.JFrame {
         ReadOperations reader = new ReadOperations();
         if (enteredID.startsWith("ST")) {
             userList = reader.readUserData(FileLocationInterface.studentFilePath);
-            System.out.println("User List Size: " + userList.size()); // Debugging
             for (User user : userList) {
-                System.out.println("User ID: " + user.getUserId()); // Debugging
                 if (user.getUserId().equals(enteredID)) {
-                    System.out.println("User Found!"); // Debugging
                     return user;
                 }
             }
         } else if (enteredID.startsWith("LC")) {
             userList = reader.readUserData(FileLocationInterface.lecturerFilePath);
-            System.out.println("User List Size: " + userList.size()); // Debugging
             for (User user : userList) {
-                System.out.println("User ID: " + user.getUserId()); // Debugging
                 if (user.getUserId().equals(enteredID)) {
-                    System.out.println("User Found!"); // Debugging
                     return user;
                 } else {
                     userList = reader.readUserData(FileLocationInterface.projectManagerPath);
-                    System.out.println("User List Size: " + userList.size()); // Debugging
                     for (User pm : userList) {
-                        System.out.println("User ID: " + pm.getUserId()); // Debugging
                         if (pm.getUserId().equals(enteredID)) {
-                            System.out.println("User Found!"); // Debugging
                             return pm;
                         }
                     }
@@ -333,11 +324,8 @@ public class GeneralLoginPage extends javax.swing.JFrame {
             }
         } else if (enteredID.startsWith("AD")) {
             userList = reader.readUserData(FileLocationInterface.adminFilePath);
-            System.out.println("User List Size: " + userList.size()); // Debugging
             for (User user : userList) {
-                System.out.println("User ID: " + user.getUserId()); // Debugging
                 if (user.getUserId().equals(enteredID)) {
-                    System.out.println("User Found!"); // Debugging
                     return user;
                 }
             }

@@ -11,8 +11,6 @@ package aghDataLoader;
 import academicguidancehub.FileLocationInterface;
 import academicguidancehub.Project;
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,10 +20,10 @@ import java.util.Set;
 
 public class ProjectDashboardDataLoader extends DataLoader {
 
-    private JLabel lblCurrentProj;
-    private JLabel lblCommonProj;
-    private JLabel lblDoneProj;
-    private JLabel lblActiveSupervisors;
+    private final JLabel lblCurrentProj;
+    private final JLabel lblCommonProj;
+    private final JLabel lblDoneProj;
+    private final JLabel lblActiveSupervisors;
 
     public ProjectDashboardDataLoader(String filePath, JLabel lblCurrentProj, JLabel lblCommonProj, JLabel lblDoneProj, JLabel lblActiveSupervisors) {
         super(filePath);
@@ -38,7 +36,7 @@ public class ProjectDashboardDataLoader extends DataLoader {
     @Override
     public void loadData() {
         try {
-            List<Project> projects = Project.loadProjectsFromFile(FileLocationInterface.projectsFilePath);
+            List<Project> projects = Project.loadProjectsFromFile(projectsFilePath);
 
             int currentOngoingProjects = 0;
             int totalDoneProjects = 0;
