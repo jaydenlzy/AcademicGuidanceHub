@@ -10,6 +10,8 @@ import academicguidancehub.Student;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,32 +30,44 @@ public class StudentDashboard extends javax.swing.JFrame {
         this.st = st;
         initComponents();
         jlStudentName1.setText(st.getName());
-        jlStudentId.setText(st.getUserId());   
+        jlStudentId.setText(st.getUserId());
         pendingAssignment();
     }
-    
+
     private void pendingAssignment() {
         String delimiter = ";";
-        int[] classTypeColumnIndices = {0, 1, 2, 3, 4, 5};
-        String[][] classTypeData = FileReaderUtils.readData(FileLocationInterface.lecturerFilePath, delimiter, classTypeColumnIndices);
+        int[] projectColumnIndices = {2, 3, 6}; // Indices for 3rd, 4th, and 7th columns (0-based index)
+        String[][] projectData = FileReaderUtils.readData(FileLocationInterface.projectsFilePath, delimiter, projectColumnIndices);
 
-        if (classTypeData != null) {
-            DefaultTableModel classTypeTableModel = new DefaultTableModel();
-            classTypeTableModel.addColumn("Lecturer ID");
-            classTypeTableModel.addColumn("Name");
-            classTypeTableModel.addColumn("Password");
-            classTypeTableModel.addColumn("Email");
-            classTypeTableModel.addColumn("Contact");
-            classTypeTableModel.addColumn("Role");
+        if (projectData != null) {
+            DefaultTableModel projectTableModel = new DefaultTableModel();
+            projectTableModel.addColumn("Project Name");
+            projectTableModel.addColumn("Due Date");
 
-            for (String[] row : classTypeData) {
-                classTypeTableModel.addRow(row);
+            // Load submitted assignments for the logged-in student
+            Set<String> submittedAssignments = new HashSet<>();
+            try (BufferedReader br = new BufferedReader(new FileReader(FileLocationInterface.submissionFilePath))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] columns = line.split(delimiter);
+                    if (columns.length >= 2 && columns[0].equals(st.getUserId())) {
+                        submittedAssignments.add(columns[1]); // Assuming project name is in the 2nd column
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
-            lecturerTable.setModel(classTypeTableModel);
+            for (String[] row : projectData) {
+                // Check if the project is not submitted by the logged-in student
+                if (row.length >= 7 && row[6].equals(st.getUserId()) && !submittedAssignments.contains(row[2])) {
+                    projectTableModel.addRow(new Object[]{row[2], row[3]}); // Adding project name (3rd column) and due date (4th column)
+                }
+            }
+
+            jtPendingAssignment.setModel(projectTableModel);
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,7 +95,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtPendingAssignment = new javax.swing.JTable();
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel3.setText("Academic Guidance Hub (AGH)");
@@ -206,7 +220,7 @@ public class StudentDashboard extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Pending Assignment");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtPendingAssignment.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -214,7 +228,7 @@ public class StudentDashboard extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtPendingAssignment);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -356,11 +370,11 @@ public class StudentDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jlPresentationDate;
     private javax.swing.JLabel jlStudentId;
     private javax.swing.JLabel jlStudentName1;
     private javax.swing.JLabel jlSubmitAssignment;
+    private javax.swing.JTable jtPendingAssignment;
     private javax.swing.JLabel logoutLabel1;
     // End of variables declaration//GEN-END:variables
 }
