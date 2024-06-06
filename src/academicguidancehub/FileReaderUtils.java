@@ -14,8 +14,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author New HP
  */
-
 public class FileReaderUtils {
+
     public static String[][] readData(String filePath, String delimiter, int[] columnIndices) {
         ArrayList<String[]> dataList = new ArrayList<>();
 
@@ -25,11 +25,19 @@ public class FileReaderUtils {
                 String[] values = line.split(delimiter);
                 if (values.length >= columnIndices.length) {
                     String[] selectedValues = new String[columnIndices.length];
+                    boolean isValidLine = true;
                     for (int i = 0; i < columnIndices.length; i++) {
                         int columnIndex = columnIndices[i];
-                        selectedValues[i] = values[columnIndex];
+                        if (columnIndex < values.length) {
+                            selectedValues[i] = values[columnIndex];
+                        } else {
+                            isValidLine = false;
+                            break;
+                        }
                     }
-                    dataList.add(selectedValues);
+                    if (isValidLine) {
+                        dataList.add(selectedValues);
+                    }
                 }
             }
 
@@ -41,6 +49,7 @@ public class FileReaderUtils {
 
             return data;
         } catch (IOException e) {
+            e.printStackTrace();
             return null;
         }
     }

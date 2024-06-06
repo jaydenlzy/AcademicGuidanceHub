@@ -416,7 +416,6 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblSuperSchool" min="-2" pref="263" max="-2" attributes="0"/>
                                   <Component id="cmbBoxSupervisor" min="-2" pref="325" max="-2" attributes="0"/>
                                   <Component id="jLabel6" min="-2" pref="103" max="-2" attributes="0"/>
                               </Group>
@@ -424,14 +423,16 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblSecondMarker" pref="346" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="lblSecondSchool" alignment="1" min="-2" pref="319" max="-2" attributes="0"/>
-                                          <Component id="cmbBoxSecMarker" min="-2" pref="325" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="cmbBoxSecMarker" min="-2" pref="325" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="309" max="-2" attributes="0"/>
+                              <Component id="BtnAutoAssign" min="-2" pref="103" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -449,11 +450,8 @@
                                   <Component id="cmbBoxSecMarker" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblSecondSchool" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblSuperSchool" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="26" max="32767" attributes="0"/>
+                              <Component id="BtnAutoAssign" min="-2" pref="35" max="-2" attributes="0"/>
+                              <EmptySpace pref="7" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -505,15 +503,13 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lblSuperSchool">
+                    <Component class="javax.swing.JButton" name="BtnAutoAssign">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="*note* Supervisor is not from preferred school"/>
+                        <Property name="text" type="java.lang.String" value="Auto Assign"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblSecondSchool">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="*note* SecondMarker is not from preferred school"/>
-                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAutoAssignActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

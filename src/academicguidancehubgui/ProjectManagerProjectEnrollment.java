@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,8 +39,6 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         txtStudentId.setVisible(false);
         lblNotePresentation.setVisible(false);
         lblNoteSecondMarker.setVisible(false);
-        lblSuperSchool.setVisible(false);
-        lblSecondSchool.setVisible(false);
         cmbBoxSecMarker.setVisible(false);
     }
 
@@ -78,8 +77,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         cmbBoxSupervisor = new javax.swing.JComboBox<>();
         lblSecondMarker = new javax.swing.JLabel();
         cmbBoxSecMarker = new javax.swing.JComboBox<>();
-        lblSuperSchool = new javax.swing.JLabel();
-        lblSecondSchool = new javax.swing.JLabel();
+        BtnAutoAssign = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtProjectTitle = new javax.swing.JTextField();
@@ -297,9 +295,12 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
             }
         });
 
-        lblSuperSchool.setText("*note* Supervisor is not from preferred school");
-
-        lblSecondSchool.setText("*note* SecondMarker is not from preferred school");
+        BtnAutoAssign.setText("Auto Assign");
+        BtnAutoAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAutoAssignActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -308,18 +309,19 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSuperSchool, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbBoxSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSecondMarker, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblSecondSchool, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbBoxSecMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbBoxSecMarker, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 21, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(309, 309, 309)
+                .addComponent(BtnAutoAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,10 +335,8 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
                     .addComponent(cmbBoxSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbBoxSecMarker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSecondSchool)
-                    .addComponent(lblSuperSchool))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(BtnAutoAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 322, -1, 110));
@@ -560,16 +560,53 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
     }//GEN-LAST:event_cmbBoxPrjCategoryActionPerformed
 
     private void cmbBoxSupervisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxSupervisorActionPerformed
-
     }//GEN-LAST:event_cmbBoxSupervisorActionPerformed
 
     private void cmbBoxSecMarkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBoxSecMarkerActionPerformed
-
     }//GEN-LAST:event_cmbBoxSecMarkerActionPerformed
 
     private void btnClearAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAllActionPerformed
         resetForm();
     }//GEN-LAST:event_btnClearAllActionPerformed
+
+    private void BtnAutoAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAutoAssignActionPerformed
+        String selectedProjectCategory = (String) cmbBoxPrjCategory.getSelectedItem();
+        if (selectedProjectCategory == null) {
+            JOptionPane.showMessageDialog(this, "Please select a project category first.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String preferredSchool = getPreferredSchoolByProjectCategory(selectedProjectCategory);
+
+        List<String> supervisors = getAvailableSupervisors(preferredSchool);
+        List<String> secondMarkers = getAvailableSecondMarkers(preferredSchool);
+
+        Random random = new Random();
+
+        String assignedSupervisor;
+        if (!supervisors.isEmpty()) {
+            assignedSupervisor = supervisors.get(random.nextInt(supervisors.size()));
+        } else {
+            JOptionPane.showMessageDialog(this, "No preferred lecturer, randomly assigned", "Information", JOptionPane.INFORMATION_MESSAGE);
+            supervisors = getAvailableSupervisors("General");
+            assignedSupervisor = supervisors.get(random.nextInt(supervisors.size()));
+        }
+        cmbBoxSupervisor.setSelectedItem(assignedSupervisor);
+
+        String assignedSecondMarker;
+        if (!secondMarkers.isEmpty()) {
+            do {
+                assignedSecondMarker = secondMarkers.get(random.nextInt(secondMarkers.size()));
+            } while (assignedSecondMarker.equals(assignedSupervisor));
+        } else {
+            JOptionPane.showMessageDialog(this, "No preferred lecturer, randomly assigned", "Information", JOptionPane.INFORMATION_MESSAGE);
+            secondMarkers = getAvailableSecondMarkers("General");
+            do {
+                assignedSecondMarker = secondMarkers.get(random.nextInt(secondMarkers.size()));
+            } while (assignedSecondMarker.equals(assignedSupervisor));
+        }
+        cmbBoxSecMarker.setSelectedItem(assignedSecondMarker);
+    }//GEN-LAST:event_BtnAutoAssignActionPerformed
 
     private String getProjectRequirePresentation(String category) {
         String[][] projectTypeData = FileReaderUtils.readData(projectTypePath, ";", new int[]{0, 2});
@@ -736,7 +773,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         }
 
         String projectDetails = String.format("%s;%s;%s;%tF;%s;%s;%s;%s;%s;%s",
-                projectID, projectCategory, projectTitle, projectDueDate, projectRequirePresentation, studentIntake,studentId, supervisorID, secondMarker, "Pending");
+                projectID, projectCategory, projectTitle, projectDueDate, projectRequirePresentation, studentIntake, studentId, supervisorID, secondMarker, "Pending");
         return projectDetails;
     }
 
@@ -764,37 +801,50 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         cmbBoxSecMarker.setSelectedIndex(-1);
         lblNotePresentation.setVisible(false);
         lblNoteSecondMarker.setVisible(false);
-        lblSuperSchool.setVisible(false);
-        lblSecondSchool.setVisible(false);
         lblSecondMarker.setVisible(false);
     }
 
-//    private boolean checkSchoolMismatch(String projectCategory, String marker) {
-//        String markerSchool = "";
-//
-//        try (BufferedReader reader = new BufferedReader(new FileReader(lecturerFilePath))) {
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                String[] lecturerItems = line.split(";");
-//                if (lecturerItems.length >= 7 && lecturerItems[1].equalsIgnoreCase(marker)) {
-//                    markerSchool = lecturerItems[6].trim();
-//                    break; // Found the marker, exit the loop
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(this, "Error checking school mismatch: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//
-//        // Check if the marker's school matches the project category
-//        if (!markerSchool.equalsIgnoreCase(projectCategory)) {
-//            return true; // Schools don't match, return true
-//        } else {
-//            return false; // Schools match, return false
-//        }
-//    }
+    private String getPreferredSchoolByProjectCategory(String projectCategory) {
+        String[][] projectTypeData = FileReaderUtils.readData(projectTypePath, ";", new int[]{0, 1});
+        if (projectTypeData != null) {
+            for (String[] projectType : projectTypeData) {
+                if (projectType[0].equals(projectCategory)) {
+                    return projectType[1];
+                }
+            }
+        }
+        return "General";
+    }
+
+    private List<String> getAvailableSupervisors(String preferredSchool) {
+        List<String> supervisors = new ArrayList<>();
+        String[][] lecturerData = FileReaderUtils.readData(lecturerFilePath, ";", new int[]{0, 1, 6});
+        if (lecturerData != null) {
+            for (String[] lecturer : lecturerData) {
+                if (preferredSchool.equals("General") || lecturer[2].equals(preferredSchool)) {
+                    supervisors.add(lecturer[1]);
+                }
+            }
+        }
+        return supervisors;
+    }
+
+    private List<String> getAvailableSecondMarkers(String preferredSchool) {
+        List<String> secondMarkers = new ArrayList<>();
+        String[][] lecturerData = FileReaderUtils.readData(lecturerFilePath, ";", new int[]{0, 1, 6});
+        if (lecturerData != null) {
+            for (String[] lecturer : lecturerData) {
+                if (preferredSchool.equals("General") || lecturer[2].equals(preferredSchool)) {
+                    secondMarkers.add(lecturer[1]);
+                }
+            }
+        }
+        return secondMarkers;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAutoAssign;
     private javax.swing.JButton btnClearAll;
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnExit;
@@ -822,8 +872,6 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
     private javax.swing.JLabel lblNotePresentation;
     private javax.swing.JLabel lblNoteSecondMarker;
     private javax.swing.JLabel lblSecondMarker;
-    private javax.swing.JLabel lblSecondSchool;
-    private javax.swing.JLabel lblSuperSchool;
     private javax.swing.JRadioButton rdBtnIndividual;
     private javax.swing.JRadioButton rdBtnIntake;
     private javax.swing.JSpinner spinnerDueDate;
