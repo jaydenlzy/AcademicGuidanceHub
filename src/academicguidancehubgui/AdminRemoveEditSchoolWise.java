@@ -36,6 +36,7 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
         
         editBt.setVisible(false);
         saveBt.setVisible(false);
+        removeBt.setVisible(false);
         
         changedName.setVisible(false);
         enameLabel.setVisible(false);
@@ -125,7 +126,7 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
         getContentPane().add(changedName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 450, 30));
 
         cancelBt.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        cancelBt.setText("Cancel");
+        cancelBt.setText("Back");
         cancelBt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cancelBtMouseClicked(evt);
@@ -174,6 +175,7 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
         
         if(selectedRow != -1){
             editBt.setVisible(true);
+            removeBt.setVisible(true);
             String name = stList.getValueAt(swiseTb.getSelectedRow(),0).toString();
             changedName.setText(name);
         }
@@ -182,6 +184,7 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
     private void editBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBtMouseClicked
         swiseTb.setEnabled(false);
         changedName.setVisible(true);
+        removeBt.setVisible(false);
         enameLabel.setVisible(true);
         editBt.setVisible(false);
         saveBt.setVisible(true);
@@ -224,7 +227,7 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
                 changedName.setVisible(false);
                 enameLabel.setVisible(false);
                 swiseTb.setEnabled(true);
-                removeBt.setVisible(true);
+                removeBt.setVisible(false);
             } catch (IOException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error editing school wise!", "MODIFY ERROR", JOptionPane.ERROR_MESSAGE);
@@ -245,6 +248,7 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
             UpdateTextFile(FileLocationInterface.schoolListPath, name, delimiter);
             JOptionPane.showMessageDialog(null, "Intake deleted successfully!", "INTAKE DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             editBt.setVisible(false);
+            removeBt.setVisible(false);
         }
     }//GEN-LAST:event_removeBtMouseClicked
 

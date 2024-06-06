@@ -28,6 +28,8 @@ public class AdminEditRemoveProjectManager extends javax.swing.JFrame {
         initComponents();
         setSize(900,640);
         setResizable(false);
+        removeBt.setVisible(false);
+        editBt.setVisible(false);
         
         projectManagerTableContent();
     }
@@ -113,6 +115,11 @@ public class AdminEditRemoveProjectManager extends javax.swing.JFrame {
 
             }
         ));
+        pmTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pmTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(pmTable);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 670, 280));
@@ -176,6 +183,9 @@ public class AdminEditRemoveProjectManager extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Remove successfully!", "REMOVE PROJECT MANAGER ROLE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             
             projectManagerTableContent();
+            
+            removeBt.setVisible(false);
+            editBt.setVisible(false);
         }
     }//GEN-LAST:event_removeBtMouseClicked
 
@@ -205,6 +215,11 @@ public class AdminEditRemoveProjectManager extends javax.swing.JFrame {
             System.err.println("No row selected or invalid selected row index.");
         }
     }//GEN-LAST:event_editBtMouseClicked
+
+    private void pmTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmTableMouseClicked
+        removeBt.setVisible(true);
+        editBt.setVisible(true);
+    }//GEN-LAST:event_pmTableMouseClicked
 
     /**
      * @param args the command line arguments

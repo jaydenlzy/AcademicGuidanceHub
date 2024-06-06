@@ -28,6 +28,7 @@ public class AdminRemoveIntake extends javax.swing.JFrame {
         initComponents();
         setSize(900,600);
         setResizable(false);
+        removeBt.setVisible(false);
         
         intakesTableContent();
     }
@@ -92,6 +93,11 @@ public class AdminRemoveIntake extends javax.swing.JFrame {
 
             }
         ));
+        intakesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                intakesTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(intakesTable);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 510, 320));
@@ -110,7 +116,7 @@ public class AdminRemoveIntake extends javax.swing.JFrame {
         getContentPane().add(removeBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 480, 110, 40));
 
         cancelBt.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        cancelBt.setText("Cancel");
+        cancelBt.setText("Back");
         cancelBt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cancelBtMouseClicked(evt);
@@ -139,8 +145,14 @@ public class AdminRemoveIntake extends javax.swing.JFrame {
             String delimiter = ";";
             UpdateTextFile(FileLocationInterface.intakeListPath, intakecode, delimiter);
             JOptionPane.showMessageDialog(null, "Intake deleted successfully!", "INTAKE DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            
+            removeBt.setVisible(false);
         }
     }//GEN-LAST:event_removeBtMouseClicked
+
+    private void intakesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_intakesTableMouseClicked
+        removeBt.setVisible(true);
+    }//GEN-LAST:event_intakesTableMouseClicked
 
     /**
      * @param args the command line arguments

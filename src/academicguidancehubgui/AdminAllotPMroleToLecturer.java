@@ -28,6 +28,7 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
         initComponents();
         setSize(910, 640);
         setResizable(false);
+        allotBt.setVisible(false);
         
         lecturerTableContent();
         projectManagerTableContent();
@@ -179,7 +180,7 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelBtMouseClicked
 
     private void lecturerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lecturerTableMouseClicked
-        
+        allotBt.setVisible(true);
     }//GEN-LAST:event_lecturerTableMouseClicked
 
     private void allotBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allotBtMouseClicked
@@ -201,6 +202,8 @@ public class AdminAllotPMroleToLecturer extends javax.swing.JFrame {
             
             lecturerTableContent();
             projectManagerTableContent();
+            
+            allotBt.setVisible(false);
         } else{
             JOptionPane.showMessageDialog(this, "Please select a lecturer from lecturer available table.", "Error", JOptionPane.ERROR_MESSAGE);
         }
