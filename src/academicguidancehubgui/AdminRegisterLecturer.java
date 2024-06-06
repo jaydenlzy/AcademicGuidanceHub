@@ -167,13 +167,11 @@ public class AdminRegisterLecturer extends javax.swing.JFrame {
         } else if (!name.isEmpty() && !contact.isEmpty() && filePath.isEmpty()){
             registerLecturer(name,contact,schooloffield);
             JOptionPane.showMessageDialog(this, "Lecturer registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-            return;
         } else if (!filePath.isEmpty()){
             registerLecturerFromFile(filePath,schooloffield);
-            JOptionPane.showMessageDialog(this, "Lecturer registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Group of Lecturers registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
         
-    
         lecturerName.setText("");
         lecturerContact.setText("");
         

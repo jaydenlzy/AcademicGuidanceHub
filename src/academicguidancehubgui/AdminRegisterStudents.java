@@ -196,7 +196,7 @@ public class AdminRegisterStudents extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Student registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
         } else if (!filePath.isEmpty()){
             registerStudentsFromFile(filePath,intake);
-            JOptionPane.showMessageDialog(this, "Student registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Group of Students registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
         
         
