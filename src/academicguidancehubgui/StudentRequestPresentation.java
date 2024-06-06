@@ -40,48 +40,48 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
 
     
     public void checkSubmissions() {
-        ArrayList<String[]> selectAssignmentList = new ArrayList<>();
+    ArrayList<String[]> selectAssignmentList = new ArrayList<>();
 
-        // Load submissions into a set for quick lookup
-        Set<String> submissionsSet = new HashSet<>();
-        try (BufferedReader submissionReader = new BufferedReader(new FileReader(presentationtimeFilePath))) {
-            String submissionLine;
-            while ((submissionLine = submissionReader.readLine()) != null) {
-                String[] submissionValues = submissionLine.split(";");
-                if (submissionValues.length > 0) { // Check if the array has at least 2 elements
-                    submissionsSet.add(submissionValues[0] + ";" + submissionValues[2]);
-                } else {
-                    System.out.println("Skipping invalid line in Submission.txt with insufficient values: " + submissionLine);
-                }
+    // Load submissions into a set for quick lookup
+    Set<String> submissionsSet = new HashSet<>();
+    try (BufferedReader submissionReader = new BufferedReader(new FileReader(presentationtimeFilePath))) {
+        String submissionLine;
+        while ((submissionLine = submissionReader.readLine()) != null) {
+            String[] submissionValues = submissionLine.split(";");
+            if (submissionValues.length > 2) { // Check if the array has at least 3 elements
+                submissionsSet.add(submissionValues[0] + ";" + submissionValues[2]);
+            } else {
+                System.out.println("Skipping invalid line in Submission.txt with insufficient values: " + submissionLine);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error reading Submission.txt file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            return;
         }
-    
-        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.submissionFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] values = line.split(";");
-                if (values.length > 0) { // Check if the array has at least 7 elements
-                    String projectKey = values[0] + ";" + values[1];
-                    if (st.getUserId().equals(values[0]) && !submissionsSet.contains(projectKey)) {
-                        cbSelectAssignment.addItem(values[1]);
-                        selectAssignmentList.add(values);
-                    }
-                } else {
-                    System.out.println("Skipping invalid line with insufficient values: " + line);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error processing line: Array index out of bounds", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+    } catch (IOException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error reading Submission.txt file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        return;
     }
+
+    try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.submissionFilePath))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] values = line.split(";");
+            if (values.length > 1) { // Check if the array has at least 2 elements
+                String projectKey = values[0] + ";" + values[1];
+                if (st.getUserId().equals(values[0]) && !submissionsSet.contains(projectKey)) {
+                    cbSelectAssignment.addItem(values[1]);
+                    selectAssignmentList.add(values);
+                }
+            } else {
+                System.out.println("Skipping invalid line with insufficient values: " + line);
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (ArrayIndexOutOfBoundsException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error processing line: Array index out of bounds", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
 
     
     /**
