@@ -36,7 +36,8 @@ public class StudentSubmitAssignment extends javax.swing.JFrame implements FileL
         jlStudentName1.setText(st.getName());
         jlStudentID.setText(st.getUserId());
         jlSelectedFiles.setText("No file selected");
-        //jFileChooser1.setVisible(false);
+        cbSelectAssignment.addItem("<NULL>");
+        jFileChooser1.setVisible(false);
 
         loadAssignments();
 
@@ -175,6 +176,11 @@ public class StudentSubmitAssignment extends javax.swing.JFrame implements FileL
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setText("Select Assignment:");
 
+        cbSelectAssignment.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbSelectAssignmentItemStateChanged(evt);
+            }
+        });
         cbSelectAssignment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSelectAssignmentActionPerformed(evt);
@@ -292,22 +298,21 @@ public class StudentSubmitAssignment extends javax.swing.JFrame implements FileL
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbSelectAssignmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelectAssignmentActionPerformed
+        String selectAssignmentList = cbSelectAssignment.getSelectedItem().toString();
         // Check if the combo box is empty
-        if (cbSelectAssignment.getSelectedItem() == null) {
-            jlSelectedFiles.setText("No assignment selected");
-            jFileChooser1.setVisible(false);
-            System.out.println("ComboBox is empty, file chooser will not be shown.");
-            return;
-        }
-
-        int returnValue = jFileChooser1.showOpenDialog(this);
-        if (returnValue == jFileChooser1.APPROVE_OPTION) {
-            // Get the selected file
-            java.io.File file = jFileChooser1.getSelectedFile();
-            // Set the file name to the label
-            jlSelectedFiles.setText(file.getAbsolutePath());
+        if (selectAssignmentList.equals("<NULL>")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select an assignment to submit", "No Assignment Selected", javax.swing.JOptionPane.WARNING_MESSAGE);
         } else {
-            jlSelectedFiles.setText("No file selected");
+            jFileChooser1.setVisible(true);
+            int returnValue = jFileChooser1.showOpenDialog(this);
+            if (returnValue == jFileChooser1.APPROVE_OPTION) {
+                // Get the selected file
+                java.io.File file = jFileChooser1.getSelectedFile();
+                // Set the file name to the label
+                jlSelectedFiles.setText(file.getAbsolutePath());
+            } else {
+                jlSelectedFiles.setText("No file selected");
+            }
         }
     }//GEN-LAST:event_cbSelectAssignmentActionPerformed
 
@@ -323,6 +328,7 @@ public class StudentSubmitAssignment extends javax.swing.JFrame implements FileL
                 writer.write(st.getUserId() + ";" + selectedAssignment + ";" + selectedFile);
                 writer.newLine();
                 JOptionPane.showMessageDialog(this, "Assignment " + selectedAssignment + " submitted successfully with file " + selectedFile);
+                jFileChooser1.setVisible(false);
                 this.dispose();
                 StudentDashboard obj = new StudentDashboard(st);
                 obj.setVisible(true);
@@ -339,6 +345,14 @@ public class StudentSubmitAssignment extends javax.swing.JFrame implements FileL
         StudentDashboard obj = new StudentDashboard(st);
         obj.setVisible(true);
     }//GEN-LAST:event_jbBackMouseClicked
+
+    private void cbSelectAssignmentItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbSelectAssignmentItemStateChanged
+        String selectAssignmentList = cbSelectAssignment.getSelectedItem().toString();
+        if (selectAssignmentList.equals("<NULL>")) {
+            jFileChooser1.setVisible(false);
+        }
+
+    }//GEN-LAST:event_cbSelectAssignmentItemStateChanged
 
     /**
      * @param args the command line arguments
