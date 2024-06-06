@@ -36,7 +36,7 @@ public class StudentRequestPresentation extends javax.swing.JFrame {
     public void loadSubmissions() {
         ArrayList<String[]> selectAssignmentList = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.projectsFilePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FileLocationInterface.submissionFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(";");

@@ -176,6 +176,7 @@ public class StudentSubmitAssignment extends javax.swing.JFrame implements FileL
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setText("Select Assignment:");
 
+        cbSelectAssignment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<NULL>" }));
         cbSelectAssignment.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbSelectAssignmentItemStateChanged(evt);
