@@ -1,2 +1,2 @@
 LC000003;Minnu Helen Joseph;LC000003#Minnu;minnuhelenjoseph@gmail.com;0179856230;Project Manager;School of Business, Management, Operations & Research
-LC000006;CHANG ZHENG FANG;LC000006#Chang;changzhengfang@gmail.com;0189808878;Project Manager;School of Technology, Networks, Security, Forensics
+LC000008;Nor Firdaus Md Yusofs;LC000008#Nor;norfirdausmdyusof@gmail.com;0389961000;Project Manager;Library
