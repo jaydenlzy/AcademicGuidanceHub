@@ -583,6 +583,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
             }
         ));
+        studentTable.setEnabled(false);
         jScrollPane2.setViewportView(studentTable);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 400, 300));
@@ -599,6 +600,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
             }
         ));
+        lecturerTable.setEnabled(false);
         jScrollPane3.setViewportView(lecturerTable);
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 120, 400, 190));
@@ -632,6 +634,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
             }
         ));
+        pmTable.setEnabled(false);
         jScrollPane4.setViewportView(pmTable);
 
         getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, 400, 190));
@@ -648,6 +651,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
             }
         ));
+        intakeTable.setEnabled(false);
         jScrollPane5.setViewportView(intakeTable);
 
         getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 580, 400, 190));
