@@ -7,6 +7,8 @@ package academicguidancehubgui;
 import academicguidancehub.FileLocationInterface;
 import academicguidancehub.FileReaderUtils;
 import academicguidancehub.ProjectManager;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -479,7 +481,9 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         String projectID = generateNewProjectID();
         String projectRequirePresentation = getProjectRequirePresentation(projectCategory);
         String supervisorID = getLecturerID(supervisorName);
-        String secondMarkerID = getLecturerID(secondMarkerName);
+        String secondMarkerID = (secondMarkerName == null || secondMarkerName.isEmpty()) ? "N/A" : getLecturerID(secondMarkerName);
+        String status = "Pending";
+        String secondMarkerStatus = (secondMarkerName != null && !secondMarkerName.isEmpty()) ? "pending" : "NA";
 
         if (projectCategory == null || projectTitle.isEmpty() || projectDueDate == null
                 || (rdBtnIntake.isSelected() && (studentIntake == null || studentIntake.isEmpty()))
@@ -514,7 +518,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
             }
             projectDetails.append(formatProjectDetails(
                     projectID, projectCategory, projectTitle, projectDueDate,
-                    projectRequirePresentation, studentIntake, studentId, supervisorID, secondMarkerID
+                    projectRequirePresentation, studentIntake, studentId, supervisorID, secondMarkerID, status, secondMarkerStatus
             ));
             resultDetails.append(formatResultDetails(projectID, studentId, supervisorID, secondMarkerID));
 
@@ -527,7 +531,7 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
             for (String id : studentIDs) {
                 projectDetails.append(formatProjectDetails(
                         projectID, projectCategory, projectTitle, projectDueDate,
-                        projectRequirePresentation, studentIntake, id, supervisorID, secondMarkerID
+                        projectRequirePresentation, studentIntake, id, supervisorID, secondMarkerID, status, secondMarkerStatus
                 )).append(System.lineSeparator());
 
                 resultDetails.append(formatResultDetails(projectID, id, supervisorID, secondMarkerID)).append(System.lineSeparator());
@@ -748,26 +752,28 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
     }
 
     private String generateNewProjectID() {
-        String lastProjectID = "00000";
-        String[][] projectData = FileReaderUtils.readData(projectsFilePath, ";", new int[]{0});
+        int maxID = 0;
 
-        if (projectData != null && projectData.length > 0) {
-            int maxID = 0;
-            for (String[] project : projectData) {
-                String projectIDString = project[0];
-                try {
-                    int projectID = Integer.parseInt(projectIDString);
-                    if (projectID > maxID) {
-                        maxID = projectID;
+        try (BufferedReader reader = new BufferedReader(new FileReader(projectsFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(";");
+                if (data.length > 0) {
+                    try {
+                        int currentID = Integer.parseInt(data[0]);
+                        if (currentID > maxID) {
+                            maxID = currentID;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.err.println("Skipping invalid project ID: " + data[0]);
                     }
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
                 }
             }
-            lastProjectID = String.valueOf(maxID + 1);
+        } catch (IOException e) {
+            System.err.println("Error reading projects file: " + e.getMessage());
         }
 
-        return String.format("%05d", Integer.parseInt(lastProjectID));
+        return String.format("%05d", maxID + 1);
     }
 
     private List<String> getStudentIDsByIntake(String intakeCode) {
@@ -783,18 +789,12 @@ public class ProjectManagerProjectEnrollment extends javax.swing.JFrame implemen
         return studentIDs;
     }
 
-    private String formatProjectDetails(String projectID, String projectCategory, String projectTitle, Date projectDueDate,
-            String projectRequirePresentation, String studentIntake, String studentId,
-            String supervisorID, String secondMarkerID) {
-        String secondMarker = secondMarkerID;
-        if (!checkSecondMarkerRequired(projectCategory)) {
-            secondMarker = "NA";
-        }
-
-        String projectDetails = String.format("%s;%s;%s;%tF;%s;%s;%s;%s;%s;%s",
-                projectID, projectCategory, projectTitle, projectDueDate, projectRequirePresentation, studentIntake, studentId, supervisorID, secondMarker, "Pending");
-        return projectDetails;
-    }
+private String formatProjectDetails(String projectID, String projectCategory, String projectTitle, Date projectDueDate,
+                                    String projectRequirePresentation, String studentIntake, String studentId,
+                                    String supervisorID, String secondMarkerID, String status, String secondMarkerStatus) {
+    return String.join(";", projectID, projectCategory, projectTitle, projectDueDate.toString(),
+            projectRequirePresentation, studentIntake, studentId, supervisorID, secondMarkerID, status, secondMarkerStatus);
+}
 
     private String formatResultDetails(String projectID, String studentID, String supervisorID, String secondMarkerID) {
         return String.format("%s;%s;%s;%s;Pending", projectID, studentID, supervisorID, secondMarkerID);

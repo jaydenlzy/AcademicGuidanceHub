@@ -6,6 +6,7 @@ package academicguidancehubgui;
 
 import academicguidancehub.Lecturer;
 import academicguidancehub.Presentation;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +20,18 @@ public class LecturerDashboard extends javax.swing.JFrame {
         initComponents();
         this.lc = lc;
         lblusername.setText("Lecturer: " + lc.getName());
+        updateDashboard();
 
+    }
+
+    private void updateDashboard() {
+        int presentationRequestCount = lc.getPresentationRequestCount();
+        int pendingReportCount = lc.getPendingReportCount();
+        int completedReportCount = lc.getCompletedReportCount();
+
+        a.setText(String.valueOf(presentationRequestCount));
+        Pendingreportcount.setText(String.valueOf(pendingReportCount));
+        ReportCompletedcounta.setText(String.valueOf(completedReportCount));
     }
 
     /**
@@ -41,14 +53,20 @@ public class LecturerDashboard extends javax.swing.JFrame {
         HomePage1 = new javax.swing.JButton();
         CompletedReports = new javax.swing.JLabel();
         PresentationReq = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         lblusername = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         PendingReportNo = new javax.swing.JPanel();
+        a = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         PresentationRequestNo = new javax.swing.JPanel();
+        Pendingreportcount = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         ReportCompletedNo = new javax.swing.JPanel();
+        ReportCompletedcounta = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         HomePage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Home.png"))); // NOI18N
         HomePage.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,17 +140,37 @@ public class LecturerDashboard extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Logout ");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+
+        jButton1.setText("Change Password");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(HomePage1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(HomePage1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel5)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
                     .addComponent(PresentationReq)
                     .addComponent(CompletedReports)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -159,7 +197,11 @@ public class LecturerDashboard extends javax.swing.JFrame {
                 .addComponent(PresentationReq, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(CompletedReports, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addGap(17, 17, 17))
         );
 
         lblusername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -167,47 +209,74 @@ public class LecturerDashboard extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Welcome back");
 
+        a.setText("jLabel6");
+
         javax.swing.GroupLayout PendingReportNoLayout = new javax.swing.GroupLayout(PendingReportNo);
         PendingReportNo.setLayout(PendingReportNoLayout);
         PendingReportNoLayout.setHorizontalGroup(
             PendingReportNoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
+            .addGroup(PendingReportNoLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(a)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         PendingReportNoLayout.setVerticalGroup(
             PendingReportNoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(PendingReportNoLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(a)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Pending Report");
 
+        Pendingreportcount.setText("jLabel6");
+
         javax.swing.GroupLayout PresentationRequestNoLayout = new javax.swing.GroupLayout(PresentationRequestNo);
         PresentationRequestNo.setLayout(PresentationRequestNoLayout);
         PresentationRequestNoLayout.setHorizontalGroup(
             PresentationRequestNoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 91, Short.MAX_VALUE)
+            .addGroup(PresentationRequestNoLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(Pendingreportcount)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         PresentationRequestNoLayout.setVerticalGroup(
             PresentationRequestNoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 86, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PresentationRequestNoLayout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(Pendingreportcount)
+                .addGap(34, 34, 34))
         );
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Presentation Request");
 
+        ReportCompletedcounta.setText("jLabel7");
+
         javax.swing.GroupLayout ReportCompletedNoLayout = new javax.swing.GroupLayout(ReportCompletedNo);
         ReportCompletedNo.setLayout(ReportCompletedNoLayout);
         ReportCompletedNoLayout.setHorizontalGroup(
             ReportCompletedNoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 93, Short.MAX_VALUE)
+            .addGroup(ReportCompletedNoLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(ReportCompletedcounta)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         ReportCompletedNoLayout.setVerticalGroup(
             ReportCompletedNoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 86, Short.MAX_VALUE)
+            .addGroup(ReportCompletedNoLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(ReportCompletedcounta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Reports Completed");
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/preview.jpg"))); // NOI18N
+        jLabel6.setText("jLabel6");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -215,24 +284,32 @@ public class LecturerDashboard extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblusername, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(PendingReportNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addGap(210, 210, 210)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PresentationRequestNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(167, 167, 167)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addComponent(PresentationRequestNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(104, 104, 104)
+                                .addComponent(ReportCompletedNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addGap(71, 71, 71)
+                                .addComponent(jLabel4)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(ReportCompletedNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(200, Short.MAX_VALUE))
+                            .addComponent(lblusername, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,14 +329,16 @@ public class LecturerDashboard extends javax.swing.JFrame {
                     .addComponent(ReportCompletedNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PresentationRequestNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PendingReportNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,11 +403,28 @@ public class LecturerDashboard extends javax.swing.JFrame {
         LVCR.setVisible(true);
     }//GEN-LAST:event_CompletedReportsMouseClicked
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        int ans = JOptionPane.showConfirmDialog(null, "Confirm to logout?", "Are you sure?", JOptionPane.YES_NO_CANCEL_OPTION);
+        if (ans == JOptionPane.YES_OPTION) {
+            dispose();
+            GeneralLoginPage obj = new GeneralLoginPage();
+            obj.setVisible(true);
+        } else {
+            this.setVisible(true);
+        }
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        LecturerChangePassword LCP = new LecturerChangePassword(lc);
+        this.setVisible(false);
+        LCP.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -363,17 +459,23 @@ public class LecturerDashboard extends javax.swing.JFrame {
     private javax.swing.JButton HomePage;
     private javax.swing.JButton HomePage1;
     private javax.swing.JPanel PendingReportNo;
+    private javax.swing.JLabel Pendingreportcount;
     private javax.swing.JLabel Presentation;
     private javax.swing.JLabel PresentationReq;
     private javax.swing.JPanel PresentationRequestNo;
     private javax.swing.JPanel ReportCompletedNo;
+    private javax.swing.JLabel ReportCompletedcounta;
     private javax.swing.JLabel ViewAssignSup;
     private javax.swing.JLabel ViewPendingReport;
     private javax.swing.JLabel ViewSuperviseeList;
+    private javax.swing.JLabel a;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblusername;

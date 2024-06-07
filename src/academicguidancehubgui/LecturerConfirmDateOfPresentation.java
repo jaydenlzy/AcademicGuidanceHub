@@ -17,8 +17,7 @@ import javax.swing.JOptionPane;
 public class LecturerConfirmDateOfPresentation extends javax.swing.JFrame {
 
     Lecturer lc = null;
-        List<String[]> supervisees = null;
-
+    List<String[]> supervisees = null;
 
     public LecturerConfirmDateOfPresentation(Lecturer lc) {
         initComponents();
@@ -33,7 +32,7 @@ public class LecturerConfirmDateOfPresentation extends javax.swing.JFrame {
             jComboBox1.addItem(supervisee[0]); // Assuming supervisee[0] contains the student name
         }
         jComboBox1.addActionListener(new ActionListener() {
-            
+
             public void actionPerformed(ActionEvent e) {
                 displaySelectedStudentDetails();
             }
@@ -41,23 +40,23 @@ public class LecturerConfirmDateOfPresentation extends javax.swing.JFrame {
     }
 
     private void displaySelectedStudentDetails() {
-    int selectedIndex = jComboBox1.getSelectedIndex();
-    if (selectedIndex >= 0) {
-        String[] selectedSupervisee = supervisees.get(selectedIndex);
-        StudentName.setText(selectedSupervisee[0]);
-        ProjectName.setText(selectedSupervisee[1]);
-        String projectId = selectedSupervisee[1];
-        String studentId = selectedSupervisee[2];
-        // Call the method to retrieve presentation date and time
-        String presentationDateTime = lc.getPresentationDateTime(projectId, studentId);
-        if (presentationDateTime != null) {
-            PresentationDateAndTime.setText(presentationDateTime);
-        } else {
-            PresentationDateAndTime.setText("No Date/Time Found");
+        int selectedIndex = jComboBox1.getSelectedIndex();
+        if (selectedIndex >= 0) {
+            String[] selectedSupervisee = supervisees.get(selectedIndex);
+            StudentName.setText(selectedSupervisee[0]);
+            ProjectName.setText(selectedSupervisee[1]);
+
+            String studentId = lc.getStudentIdByStudentName(selectedSupervisee[0]); // Assuming student name is at index 0
+
+            // Call the method to retrieve presentation date and time by student ID
+            String presentationDateTime = lc.getPresentationDateTimeByStudentId(studentId);
+            if (presentationDateTime != null) {
+                PresentationDateAndTime.setText(presentationDateTime);
+            } else {
+                PresentationDateAndTime.setText("No Date/Time Found");
+            }
         }
     }
-}
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -231,8 +230,8 @@ public class LecturerConfirmDateOfPresentation extends javax.swing.JFrame {
 lecturerHomePage.setVisible(true);      }//GEN-LAST:event_HomePageMouseClicked
 
     private void AcceptbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptbtnActionPerformed
-       updatePresentationStatus("Accepted");
-    
+        updatePresentationStatus("Accepted");
+
     }//GEN-LAST:event_AcceptbtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -244,11 +243,12 @@ lecturerHomePage.setVisible(true);      }//GEN-LAST:event_HomePageMouseClicked
             String[] selectedSupervisee = supervisees.get(selectedIndex);
             String projectId = selectedSupervisee[1];
             String studentId = selectedSupervisee[2];
-            lc.updateResultFile(projectId, studentId, status);
+            lc.updateResultFileByStudentId(studentId, status);
             JOptionPane.showMessageDialog(this, "Status updated to " + status);
         } else {
             JOptionPane.showMessageDialog(this, "Please select a student first");
         }
+
     }
 
     public static void main(String args[]) {

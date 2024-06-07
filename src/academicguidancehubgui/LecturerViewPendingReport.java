@@ -4,10 +4,20 @@
  */
 package academicguidancehubgui;
 
+import academicguidancehub.IntegerFilter;
 import academicguidancehub.Lecturer;
 import academicguidancehub.User;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.PlainDocument;
 
 /**
  *
@@ -20,6 +30,26 @@ public class LecturerViewPendingReport extends javax.swing.JFrame {
     public LecturerViewPendingReport(Lecturer lc) {
         initComponents();
         this.lc = lc;
+        populateComboBox();
+        AssignMark.setDocument(new PlainDocument());
+        ((AbstractDocument) AssignMark.getDocument()).setDocumentFilter(new IntegerFilter());
+
+    }
+
+    private void populateComboBox() {
+        List<String> studentNames = new ArrayList<>();
+        List<String> projectNames = new ArrayList<>();
+
+        // Logic to populate studentNames and projectNames
+        for (String[] studentData : lc.getPendingStudents()) {
+            studentNames.add(studentData[0]); // Assuming student name is at index 0
+            projectNames.add(studentData[1]); // Assuming project name is at index 1
+        }
+
+        // Populate the ComboBox with student names
+        SelectStudentName.setModel(new DefaultComboBoxModel<>(studentNames.toArray(new String[0])));
+
+        // Display the project name for the first student by default
     }
 
     /**
@@ -34,6 +64,11 @@ public class LecturerViewPendingReport extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         HomePage = new javax.swing.JButton();
+        SelectStudentName = new javax.swing.JComboBox<>();
+        AssignMark = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        Submitbtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,7 +77,7 @@ public class LecturerViewPendingReport extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 204));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("View Pending Reports");
+        jLabel1.setText("Mark Student Assignment");
 
         HomePage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Home.png"))); // NOI18N
         HomePage.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -56,16 +91,52 @@ public class LecturerViewPendingReport extends javax.swing.JFrame {
             }
         });
 
+        SelectStudentName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel2.setText(" Assign Mark To Student :");
+
+        Submitbtn.setText("Submit");
+        Submitbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubmitbtnActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Dowload Project File");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(AssignMark, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(404, 404, 404))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(HomePage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(147, 147, 147))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(SelectStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(364, 364, 364)
+                        .addComponent(Submitbtn))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(327, 327, 327)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -74,7 +145,17 @@ public class LecturerViewPendingReport extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(HomePage))
-                .addContainerGap(431, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(SelectStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AssignMark, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(36, 36, 36)
+                .addComponent(Submitbtn)
+                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -101,6 +182,33 @@ public class LecturerViewPendingReport extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_HomePageActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        downloadFile();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void SubmitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitbtnActionPerformed
+        String selectedStudentName = SelectStudentName.getSelectedItem().toString();
+        String assignedMark = AssignMark.getText(); // Get the mark assigned
+
+        // Update the mark for the selected student
+        lc.assignMarkToStudent(selectedStudentName, assignedMark);
+
+        // Provide feedback to the user (optional)
+        JOptionPane.showMessageDialog(this, "Mark assigned successfully!");    }//GEN-LAST:event_SubmitbtnActionPerformed
+
+    private void downloadFile() {
+        String filePath = "src/submission/report1.txt";
+
+        InputStream inputStream = getClass().getResourceAsStream(filePath); // Handle IO exception
+        if (inputStream != null) {
+            // Proceed with file download
+            // ...
+        } else {
+            System.err.println("File not found: " + filePath);
+            // Provide feedback to the user or log the error
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -122,8 +230,13 @@ public class LecturerViewPendingReport extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AssignMark;
     private javax.swing.JButton HomePage;
+    private javax.swing.JComboBox<String> SelectStudentName;
+    private javax.swing.JButton Submitbtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

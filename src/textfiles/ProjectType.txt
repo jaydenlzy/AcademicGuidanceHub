@@ -4,5 +4,4 @@ Capstone Project 1;General;Yes;No
 Capstone Project 2;General;Yes;No
 RMCP;General;Yes;Yes
 FYP;General;Yes;Yes
-Final Assignment;School of Business, Law, Economics & International Relations;Yes;Yes
-Assessment;School of Technology, Creative Interactive Technology;Yes;No
+Assessment 2;School of Technology, Creative Interactive Technology;Yes;No

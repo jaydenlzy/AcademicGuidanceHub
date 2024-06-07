@@ -1,7 +1,6 @@
-00000;ST000001;LC000001;N/A;80;N/A;Accept;N/A;2024-12-2210:00;pending
-00000;ST000003;LC000001;N/A;70;N/A;Accept;N/A;2024-12-2210:00;pending
-00000;ST000005;LC000001;N/A;Pending;N/A;pending;N/A;N/A;pending
-00000;ST000069;LC000001;N/A;Pending;N/A;Pending;N/A;N/A;pending
-00001;ST000002;LC000004;LC000001;22;pending;Pending;Pending;N/A;pending
-00001;ST000004;LC000004;LC000001;22;Pending;pending;Pending;N/A;pending
-00002;ST000069;LC000002;LC000009;32;Pending;pending;Pending;N/a;pending
+00000;ST000001;LC000001;N/A;pending;N/A;pending;N/A;2024-12-22 12:00 ;completed;70
+00000;ST000003;LC000001;N/A;pending;N/A;pending;N/A;2024-12-22 13:00;pending;70
+00000;ST000005;LC000001;N/A;Pending;N/A;pending;N/A;2024-12-22 12:00;pending;pending
+00001;ST000002;LC000004;LC000001;N/A;pending;Pending;pending;2024-12-22 10:00;N/A;pending
+00001;ST000004;LC000004;LC000001;N/A;Pending;pending;pending;2024-12-24 10:00;N/A;pending
+00002;ST000069;LC000002;LC000009;N/A;Pending;pending;pending;2024-12-23 10:00;N/a;pending

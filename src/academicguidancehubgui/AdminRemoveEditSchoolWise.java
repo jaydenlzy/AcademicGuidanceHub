@@ -246,7 +246,7 @@ public class AdminRemoveEditSchoolWise extends javax.swing.JFrame {
             
             String delimiter = ";";
             UpdateTextFile(FileLocationInterface.schoolListPath, name, delimiter);
-            JOptionPane.showMessageDialog(null, "Intake deleted successfully!", "INTAKE DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "School wise deleted successfully!", "SCHOOL WISE DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             editBt.setVisible(false);
             removeBt.setVisible(false);
         }

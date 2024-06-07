@@ -47,7 +47,6 @@ public class ProjectTableDataLoader extends DataLoader {
     private void loadProjectTypeTable(List<Project> projects) throws IOException {
         Map<String, ProjectStatistics> statisticsMap = new HashMap<>();
 
-        // Read project types and initialize statistics
         try (BufferedReader reader = new BufferedReader(new FileReader(projectTypePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -62,7 +61,6 @@ public class ProjectTableDataLoader extends DataLoader {
             }
         }
 
-        // Update statistics with project data
         for (Project project : projects) {
             ProjectStatistics stats = statisticsMap.get(project.getProjectCategory());
             if (stats != null) {
@@ -106,14 +104,14 @@ public class ProjectTableDataLoader extends DataLoader {
             if ((isIntake && projectList.size() > 1) || (!isIntake && projectList.size() == 1)) {
                 for (Project project : projectList) {
                     tableDataList.add(new String[]{
-                            project.getProjectCategory(),
-                            project.getProjectTitle(),
-                            project.getProjectDueDate(),
-                            project.getStudentIntake(),
-                            project.getStudentID(),
-                            project.getSupervisorID(),
-                            project.getSecondMarkerID(),
-                            project.getStatus()
+                        project.getProjectCategory(),
+                        project.getProjectTitle(),
+                        project.getProjectDueDate(),
+                        project.getStudentIntake(),
+                        project.getStudentID(),
+                        project.getSupervisorID(),
+                        project.getSecondMarkerID(),
+                        project.getStatus() != null ? project.getStatus() : "NA" // Handle cases where status might be missing
                     });
                 }
             }
@@ -129,6 +127,7 @@ public class ProjectTableDataLoader extends DataLoader {
     }
 
     private static class ProjectStatistics {
+
         String category;
         String preferredSchool;
         String requireSecondMarker;

@@ -16,6 +16,7 @@ public class Lecturer extends User implements FileLocationInterface {
     private Map<String, String> lecturerMap; // Changed to proper instance variables
     private Map<String, String> studentMap;
     private Map<String, String> projectMap;
+    private int completedReportCount;
 
     public Lecturer(String userId, String name, String password, String email, String contact, String role) {
         super(userId, name, password, email, contact, role);
@@ -25,6 +26,7 @@ public class Lecturer extends User implements FileLocationInterface {
         loadLecturerData();
         loadStudentData();
         loadProjectData();
+        updateCompletedReportCount();
     }
 
     // Constructor from an existing User object
@@ -36,6 +38,11 @@ public class Lecturer extends User implements FileLocationInterface {
         loadLecturerData();
         loadStudentData();
         loadProjectData();
+        updateCompletedReportCount();
+    }
+
+    public int getCompletedReportCount() {
+        return completedReportCount;
     }
 
     public List<String[]> getAssignedSupervisees() {
@@ -108,14 +115,16 @@ public class Lecturer extends User implements FileLocationInterface {
     }
 
     public void updatePresentationResultFile(String projectId, String studentId, String status) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(resultsFilePath))) {
+        try {
             List<String[]> lines = getAllResultsData();
-            for (String[] fields : lines) {
-                if (fields.length >= 9 && fields[0].equals(projectId) && fields[1].equals(studentId)) {
-                    fields[6] = status; // Update the status in column 7
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(resultsFilePath))) {
+                for (String[] fields : lines) {
+                    if (fields.length >= 9 && fields[0].equals(projectId) && fields[1].equals(studentId)) {
+                        fields[6] = status; // Update the status in column 7
+                    }
+                    bw.write(String.join(";", fields));
+                    bw.newLine();
                 }
-                bw.write(String.join(";", fields));
-                bw.newLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -251,6 +260,7 @@ public class Lecturer extends User implements FileLocationInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // Call updateResultFileByStudentId
     }
 
     private List<String[]> getAllResultsData() {
@@ -267,33 +277,112 @@ public class Lecturer extends User implements FileLocationInterface {
         return resultsData;
     }
 
-    public String getPresentationDateTime(String projectId, String studentId) {
+    public String getPresentationDateTime(String projectId, String studentName) {
+        System.out.println("Searching for Project ID: " + projectId + " and Student Name: " + studentName);
         try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split(";");
-                if (fields.length >= 9 && fields[0].equals(projectId) && fields[1].equals(studentId)) {
-                    System.out.println("Found Presentation Date/Time: " + fields[8]); // Debug
-                    return fields[8]; // Field 9 (index 8) contains the Presentation Date and Time
+                System.out.println("Checking line: " + line);
+                if (fields.length >= 9) {
+                    String fileProjectId = fields[0].trim();
+                    String fileStudentName = fields[1].trim(); // Student name is in the second column
+                    System.out.println("File Project ID: " + fileProjectId + ", File Student Name: " + fileStudentName);
+                    if (fileProjectId.equals(projectId.trim()) && fileStudentName.equals(studentName.trim())) {
+                        String presentationDateTime = fields[8].trim(); // Field 9 (index 8) contains the Presentation Date and Time
+                        System.out.println("Found Presentation Date/Time: " + presentationDateTime);
+                        return presentationDateTime;
+                    }
+                } else {
+                    System.out.println("Skipping invalid line: " + line);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("No Presentation Date/Time Found"); // Debug
+        System.out.println("No Presentation Date/Time Found");
+        return null;
+    }
+
+    public String getPresentationDateTimeByStudentId(String studentId) {
+        System.out.println("Searching for Presentation Date and Time for Student ID: " + studentId);
+        try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                System.out.println("Checking line: " + line);
+                if (fields.length >= 9) {
+                    String fileStudentId = fields[1].trim();
+                    System.out.println("File Student ID: " + fileStudentId);
+                    if (fileStudentId.equals(studentId.trim())) {
+                        String presentationDateTime = fields[8].trim(); // Field 9 (index 8) contains the Presentation Date and Time
+                        System.out.println("Found Presentation Date/Time: " + presentationDateTime);
+                        return presentationDateTime;
+                    }
+                } else {
+                    System.out.println("Skipping invalid line: " + line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("No Presentation Date/Time Found for Student ID: " + studentId);
         return null;
     }
 
     public void displayPresentationDetails(String projectId, String studentId, JLabel lblPresentationDateAndTime) {
+        String presentationDateTime = getPresentationDateTime(projectId, studentId);
+        if (presentationDateTime != null) {
+            lblPresentationDateAndTime.setText(presentationDateTime);
+        } else {
+            lblPresentationDateAndTime.setText("No Presentation Date/Time Found");
+        }
+    }
+
+    public int getPresentationRequestCount() {
+        int count = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split(";");
-                if (fields.length >= 9 && fields[0].equals(projectId) && fields[1].equals(studentId)) {
-                    String presentationDateTime = fields[8]; // Field 9 (index 8) contains the Presentation Date and Time
-                    System.out.println("Setting JLabel to: " + presentationDateTime); // Debug
-                    lblPresentationDateAndTime.setText(presentationDateTime); // Assuming lblPresentationDateAndTime is your JLabel
-                    break; // Break the loop once the Presentation Date and Time is found
+                if (fields.length >= 9 && (fields[2].equals(this.getUserId()) || fields[3].equals(this.getUserId()))) {
+                    if (fields[6].equalsIgnoreCase("pending")) {
+                        count++;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public int getPendingReportCount() {
+        int count = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                if (fields.length >= 9 && (fields[2].equals(this.getUserId()) || fields[3].equals(this.getUserId()))) {
+                    if (fields[4].equalsIgnoreCase("pending")) { // Assuming field 6 contains the report status
+                        count++;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    private void updateCompletedReportCount() {
+        completedReportCount = 0; // Reset count to 0
+        try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                if (fields.length > 0 && fields[fields.length - 2].equalsIgnoreCase("completed")) {
+                    completedReportCount++;
                 }
             }
         } catch (IOException e) {
@@ -301,4 +390,202 @@ public class Lecturer extends User implements FileLocationInterface {
         }
     }
 
+    public List<CompletedReport> getCompletedReports() {
+        List<CompletedReport> completedReports = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                if (fields.length >= 10 && fields[fields.length - 2].equalsIgnoreCase("completed")) {
+                    String studentName = getStudentNameById(fields[1]);
+                    String projectName = getProjectNameById(fields[0]);
+
+                    // Parse the first marker mark (column 5)
+                    int firstMarkerMark = parseValidInt(fields[4]);
+
+                    // Handle second marker mark (column 6), allowing "N/A"
+                    String secondMarkerMarkStr = fields[5];
+                    String secondMarkerMark;
+                    if (secondMarkerMarkStr.equalsIgnoreCase("N/A")) {
+                        secondMarkerMark = "N/A";
+                    } else {
+                        secondMarkerMark = String.valueOf(parseValidInt(secondMarkerMarkStr));
+                    }
+
+                    // Parse the final mark, allowing "N/A"
+                    String finalMarkStr = fields[fields.length - 1];
+                    int finalMark;
+                    if (finalMarkStr.equalsIgnoreCase("N/A")) {
+                        finalMark = 0; // or some other default value or handling
+                    } else {
+                        finalMark = parseValidInt(finalMarkStr);
+                    }
+
+                    completedReports.add(new CompletedReport(studentName, projectName, firstMarkerMark, secondMarkerMark, finalMark));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return completedReports;
+    }
+
+    private int parseValidInt(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            // Handle the case where the value is not a valid integer
+            System.err.println("Invalid integer value: " + value);
+            return 0; // or some other default value or error handling
+        }
+    }
+
+    public void assignMarkToStudent(String studentName, String mark) {
+        System.out.println("Assigning mark " + mark + " to student " + studentName);
+
+        String studentId = null;
+        for (Map.Entry<String, String> entry : studentMap.entrySet()) {
+            if (entry.getValue().equals(studentName)) {
+                studentId = entry.getKey();
+                break;
+            }
+        }
+
+        if (studentId != null) {
+            String lecturerId = getUserId();
+            boolean isColumn5 = false;
+            boolean isColumn6 = false;
+            if (lecturerId.equals(getSecondMarkerId(studentId))) {
+                isColumn6 = true;
+            } else if (lecturerId.equals(getFirstMarkerId(studentId))) {
+                isColumn5 = true;
+            }
+
+            if (isColumn5 || isColumn6) {
+                updateMarkInResultFile(studentId, mark, isColumn5, isColumn6);
+                System.out.println("Mark assigned successfully.");
+            } else {
+                System.out.println("You are not the marker for this student.");
+            }
+        } else {
+            System.out.println("Student not found.");
+        }
+    }
+
+    private String getFirstMarkerId(String studentId) {
+
+        return "LC000001"; // Placeholder
+    }
+
+    private String getSecondMarkerId(String studentId) {
+
+        return "LC000002"; // Placeholder
+    }
+
+    private void updateMarkInResultFile(String studentId, String mark, boolean isColumn5, boolean isColumn6) {
+        try {
+            List<String[]> lines = getAllResultsData();
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(resultsFilePath))) {
+                for (String[] fields : lines) {
+                    if (fields.length >= 9 && fields[1].equals(studentId)) {
+                        if (isColumn5) {
+                            fields[4] = mark; // Update the mark in column 5
+                        } else if (isColumn6) {
+                            fields[5] = mark; // Update the mark in column 6
+                        }
+                    }
+                    bw.write(String.join(";", fields));
+                    bw.newLine();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<String[]> getPendingStudents() {
+        List<String[]> pendingStudents = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(resultsFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                if (fields.length >= 9 && (fields[2].equals(this.getUserId()) || fields[3].equals(this.getUserId()))) {
+                    // Check if the report status is pending (assuming it's in column 7)
+                    if (fields[6].equalsIgnoreCase("pending")) {
+                        String studentName = getStudentNameById(fields[1]); // Get student name by ID
+                        String projectName = getProjectNameById(fields[0]); // Get project name by ID
+                        pendingStudents.add(new String[]{studentName, projectName});
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return pendingStudents;
+    }
+
+    public void updateResultFileByStudentId(String studentId, String status) {
+        try {
+            List<String[]> lines = getAllResultsData();
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(resultsFilePath))) {
+                for (String[] fields : lines) {
+                    if (fields.length >= 9 && fields[1].equals(studentId)) {
+                        fields[6] = status; // Update the status in column 7
+                    }
+                    bw.write(String.join(";", fields));
+                    bw.newLine();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getStudentIdByStudentName(String studentName) {
+        String studentId = null;
+        try (BufferedReader reader = new BufferedReader(new FileReader(studentFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] studentInfo = line.split(";");
+                if (studentName.equals(studentInfo[1])) { // Assuming student name is at index 1
+                    studentId = studentInfo[0]; // Student ID is at index 0
+                    break; // Exit loop once the matching student is found
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception properly in your application
+        }
+        return studentId;
+    }
+
+    public boolean changePassword(String oldPassword, String newPassword) {
+        boolean passwordChanged = false;
+        try (BufferedReader br = new BufferedReader(new FileReader(lecturerFilePath))) {
+            String line;
+            List<String> updatedLines = new ArrayList<>();
+
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                if (fields.length >= 3 && fields[0].equals(this.getUserId())) {
+                    if (fields[2].equals(oldPassword)) {
+                        fields[2] = newPassword;
+                        passwordChanged = true;
+                    }
+                }
+                updatedLines.add(String.join(";", fields));
+            }
+
+            if (passwordChanged) {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(lecturerFilePath))) {
+                    for (String updatedLine : updatedLines) {
+                        bw.write(updatedLine);
+                        bw.newLine();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return passwordChanged;
+    }
 }

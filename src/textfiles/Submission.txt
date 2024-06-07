@@ -1,1 +1,2 @@
 
+ST000001;Diploma Internship 2111ICTDI;C:\Users\Lzy\Documents\cleaned_data.csv
